@@ -179,6 +179,7 @@ section.blk{padding:80px 0;position:relative}
 .section-t{font-size:clamp(1.4rem,3vw,2rem);color:var(--navy);margin-bottom:8px}
 .section-s{color:#5c6b82;font-size:1.04rem;margin-bottom:28px;max-width:700px}
 .mt56{margin-top:56px}.mt40{margin-top:40px}
+.cbody>.rev:not(:first-child){margin-top:56px}
 /* enrichment components */
 .deep{display:grid;grid-template-columns:1.6fr .9fr;gap:26px;align-items:start}
 .deep .prose p{color:#3c4c66;font-size:1.02rem;margin-bottom:14px}
@@ -294,7 +295,7 @@ section.blk{padding:80px 0;position:relative}
 .chan .row{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--g1);font-size:.86rem}
 .chan .row:last-child{border-bottom:0}
 .chan .row .k{color:#8590a3;font-weight:600}.chan .row .v{color:var(--navy);font-weight:600;text-align:right}
-.deciders{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.deciders{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .dec{display:inline-flex;align-items:center;gap:9px;background:var(--acc-l);border:1.5px solid color-mix(in srgb,var(--acc) 40%,#fff);border-radius:100px;padding:9px 16px;font-weight:600;color:var(--navy);font-size:.9rem}
 .dec .ico{width:var(--ic-sm);height:var(--ic-sm);color:var(--acc-d)}
 
@@ -337,6 +338,8 @@ section.blk{padding:80px 0;position:relative}
 .lineTab .dot{width:12px;height:12px;border-radius:50%}
 .lineTab.active{color:#fff;border-color:transparent}
 .fiche-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.line-block{margin-top:34px}#ficheGrid{margin-top:22px}#ficheGrid .line-block:first-child{margin-top:0}
+.line-head{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy);font-size:1.05rem;margin-bottom:14px}.line-head .dot{width:13px;height:13px;border-radius:50%;flex:none}
 .fiche{background:#fff;border:1.5px solid var(--g2);border-radius:20px;overflow:hidden;transition:.25s;display:none}
 .fiche.show{display:block;animation:fade .4s}
 .fiche:hover{transform:translateY(-5px);box-shadow:var(--shadow-sm)}
@@ -353,7 +356,11 @@ section.blk{padding:80px 0;position:relative}
 /* ===== FLOW / GLOSS archetype (cap4) ===== */
 .flowdiag{background:linear-gradient(160deg,#fff,var(--soft));border:1.5px solid var(--g2);border-radius:24px;padding:28px;box-shadow:var(--shadow-sm)}
 .flowdiag svg{width:100%;height:auto}
-.gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:14px}
+.gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.gcard{background:#fff;border:1.5px solid var(--g2);border-radius:16px;padding:18px 20px}
+.gcard .ico{width:24px;height:24px;color:var(--acc)}
+.gcard b{font-family:var(--serif);color:var(--navy);font-size:1.05rem;display:block;margin:10px 0 6px}
+.gcard p{font-size:.85rem;color:#5a6a84;line-height:1.5}
 .flip{perspective:1000px;height:148px;cursor:pointer}
 .flip-in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
 .flip.on .flip-in{transform:rotateY(180deg)}
@@ -595,6 +602,8 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
 #cap3-body{background:#f6f4ee}#cap4-body{background:#f3f7f5}#cap5-body{background:#fff}#cap6-body{background:#f7f4ed}#cap7-body{background:#eef3dc}#cap8-body{background:#f4f8ee}#cap9-body{background:#f8f7f2}#cap10-body{background:#fff}#cap11-body{background:#f3f6f2}#cap12-body{background:#eef7f3}#cap13-body{background:#fffaf4}#cap14-body{background:#f1f5ec}#cap15-body{background:#082a22;color:#fff}
 #cap15-body h2,#cap15-body h3,#cap15-body h4{color:#fff}#cap15-body p{color:#d6e3dd}
 .product-atlas{margin-bottom:58px}.product-atlas-head{display:flex;justify-content:space-between;gap:28px;align-items:end;margin-bottom:26px}.product-atlas-head h3{font-size:clamp(1.8rem,3vw,2.7rem);margin:6px 0}.product-atlas-head p{max-width:560px;color:#596a64}.product-atlas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.product-atlas-card{background:#fff;border:1px solid #dce1d8;border-radius:16px;padding:16px;min-height:220px;display:flex;flex-direction:column}.product-atlas-card img{height:155px;width:100%;object-fit:contain;background:#f5f4ee;border-radius:10px}.product-atlas-card b{font-family:var(--serif);color:var(--navy);font-size:.95rem;margin-top:12px}.product-atlas-card span{font-size:.72rem;color:#708078;margin-top:3px}
+.pa-cat{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;color:var(--green);margin:34px 0 14px}#atlasGrid .pa-cat:first-child{margin-top:0}
+.pa-ph{height:155px;width:100%;background:#f5f4ee;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2.4rem;font-weight:800;color:#c9d2c5}
 .execution-study{margin:0 0 58px}.execution-study-head{margin-bottom:20px}.execution-study-head h3{font-size:clamp(1.8rem,3vw,2.7rem);margin:6px 0}.execution-study-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.execution-shot{position:relative;border-radius:18px;overflow:hidden;background:#0b382d;min-height:360px}.execution-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.execution-shot b{position:absolute;top:16px;left:16px;background:#082a22dd;color:#fff;padding:8px 12px;border-radius:8px;font-size:.75rem;letter-spacing:.1em}.execution-shot.after b{background:#c7df35;color:#18352c}
 @media(max-width:900px){.product-atlas-grid{grid-template-columns:repeat(2,1fr)}.execution-study-grid{grid-template-columns:1fr}.execution-shot{min-height:300px}.product-atlas-head{display:block}}
 </style></head>
@@ -863,9 +872,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
           </div>
         </div>
       </div>
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Texto institucional oficial</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Missão e valores atuais</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Uso de marcas e portfólio</span></div>
-      </div>
       <div class="ch-foot"><button onclick="goCap(1)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>Cap. 01</button><button onclick="goCap(3)">Cap. 03 · Portfólio <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
   </section>
@@ -891,9 +897,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
     </div>
   </section>
   <section class="chapter" id="cap3-body" style="--acc:#0a94ad;--acc-l:#e4fafe;--acc-d:#0a7d94">
-    <div class="cbody"><div class="product-atlas rev"><div class="product-atlas-head"><div><span class="kick">Atlas visual do portfólio</span><h3>Reconheça antes de organizar</h3></div><p>O capítulo começa pela leitura visual das embalagens e pela função comercial de cada família. A consulta técnica continua sendo feita pelas fontes oficiais.</p></div><div class="product-atlas-grid">
-<article class="product-atlas-card"><img src="assets/neopet.png" alt="Neopet"><b>Neopet</b><span>Antiparasitário</span></article><article class="product-atlas-card"><img src="assets/banni-3.png" alt="Banni 3"><b>Banni 3</b><span>Proteção</span></article><article class="product-atlas-card"><img src="assets/wellpet.png" alt="WellPet"><b>WellPet</b><span>Bem-estar</span></article><article class="product-atlas-card"><img src="assets/top-dog.png" alt="Top Dog"><b>Top Dog</b><span>Cuidado diário</span></article><article class="product-atlas-card"><img src="assets/leevre.png" alt="Leevre"><b>Leevre</b><span>Antiparasitário</span></article><article class="product-atlas-card"><img src="assets/herbalvet.png" alt="Herbalvet"><b>Herbalvet</b><span>Higiene</span></article><article class="product-atlas-card"><img src="assets/maxicam.png" alt="Maxicam"><b>Maxicam</b><span>Dor e inflamação</span></article><article class="product-atlas-card"><img src="assets/aurigen.png" alt="Aurigen"><b>Aurigen</b><span>Saúde auricular</span></article>
-</div></div>
+    <div class="cbody"><div class="product-atlas rev"><div class="product-atlas-head"><div><span class="kick">Atlas visual do portfólio</span><h3>Reconheça antes de organizar</h3></div></div><div id="atlasGrid"></div></div>
       <div class="lead-block rev"><div class="bar"></div><div>
         <div class="obj-lab">Objetivo do capítulo</div>
         <h3>Conhecer para executar, sem virar prescritor</h3>
@@ -928,10 +932,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>Catálogo por linha</div>
         <h4 class="section-t">Seis linhas, seis papéis no PDV</h4>
-        <p class="section-s">Clique numa linha para ver as fichas. As fotos oficiais de produto (C03-01) entram no topo de cada ficha, fornecidas pelo cliente.</p>
-        <div class="lineTabs" id="lineTabs"></div>
-        <div class="fiche-grid" id="ficheGrid"></div>
-        <div class="callout"><div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span></div><div><b>Limite técnico:</b> <p>a ficha diz "o produto ajuda a comunicar uma necessidade", nunca "é indicado para determinado caso". Uso, dose e contraindicação vão para bula, QR Code ou time técnico.</p></div></div>
+        <div id="ficheGrid"></div>
       </div>
 
       <div class="rev opstrip">
@@ -946,9 +947,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
             <div class="cl-item" data-i="3" onclick="toggleCL(3,3)"><div class="cl-box"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div><span>QR Codes levam à fonte oficial?</span></div>
           </div>
         </div>
-      </div>
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Catálogo oficial atualizado</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Top produtos por linha</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Fotos oficiais (C03-01)</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Claims aprovados</span></div>
       </div>
       <div class="ch-foot"><button onclick="goCap(2)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>Cap. 02</button><button onclick="goCap(4)">Cap. 04 · Conceitos <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
@@ -1019,7 +1017,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
 
       <div class="rev mt56">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/><path d="M9 21h6"/></svg></span>Glossário interativo</div>
-        <h4 class="section-t">Toque para virar o card</h4>
+        <h4 class="section-t">Conceitos essenciais</h4>
         <p class="section-s">Dez conceitos aplicados ao pet, cada um com sua implicação de campo.</p>
         <div class="gloss" id="glossGrid"></div>
       </div>
@@ -1035,9 +1033,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
             <div class="cl-item" data-i="2" onclick="toggleCL(4,2)"><div class="cl-box"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div><span>Entendo ponto natural vs. ponto extra?</span></div>
           </div>
         </div>
-      </div>
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Terminologia interna</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Conceitos dos manuais de Trade MKT</span></div>
       </div>
       <div class="ch-foot"><button onclick="goCap(3)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>Cap. 03</button><button onclick="goCap(5)">Cap. 05 · Canais <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
@@ -1122,7 +1117,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="rev mt56">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l1.5-5h15L21 9M4 9v11h16V9M4 9h16"/><path d="M9 20v-6h6v6"/></svg></span>Comparação · 3 formatos de canal</div>
         <h4 class="section-t">Mesmo produto, execução diferente</h4>
-        <p class="section-s">As fotos C05-02 entram no topo de cada card.</p>
+        <p class="section-s">Cada formato de canal pede uma prioridade de execução distinta. Compare os três antes de definir a abordagem.</p>
         <div class="channels3">
           <div class="chan">
             <div class="chan-h"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l1.5-5h15L21 9M4 9v11h16V9"/></svg></span><b>Pet shop</b></div>
@@ -1157,9 +1152,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
             <div class="cl-item" data-i="3" onclick="toggleCL(5,3)"><div class="cl-box"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div><span>Oportunidade principal definida?</span></div>
           </div>
         </div>
-      </div>
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Definições oficiais de canais</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Mapas do anexo GC2</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Top produtos por canal</span></div>
       </div>
       <div class="ch-foot"><button onclick="goCap(4)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>Cap. 04</button><button onclick="goCap(6)">Cap. 06 · Sortimento <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
@@ -1200,7 +1192,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
           <aside><div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div><ul><li>Foco, não cobertura total</li><li>A matriz decide o que preservar</li><li>Tamanho não é o mesmo que potencial</li><li>Proteção para o alto valor</li></ul></aside>
         </div>
       </div>
-      <div class="tipbox rev"><div class="ti2"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span></div><div><b>Em treinamento:</b> <p>Simule três farmácias com espaço limitado e peça ao time para montar o mix prioritário e justificar cada escolha.</p></div></div>
 
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg></span>Simulador · mix mínimo por porte</div>
@@ -1229,9 +1220,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
             <div class="cl-item" data-i="3" onclick="toggleCL(6,3)"><div class="cl-box"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div><span>Rupturas registradas?</span></div>
           </div>
         </div>
-      </div>
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Top 10 produtos</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Quantidade mínima por SKU</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Regras de produtos técnicos</span></div>
       </div>
       <div class="ch-foot"><button onclick="goCap(5)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>Cap. 05</button><button onclick="goCap(7)">Cap. 07 · Execução <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
@@ -1320,9 +1308,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
           </div>
         </div>
       </div>
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Planograma oficial</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Regras de categoria por linha</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Diretrizes de alto valor</span></div>
-      </div>
       <div class="ch-foot"><button onclick="goCap(6)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>Cap. 06</button><button onclick="goCap(8)">Cap. 08 · Cross <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
   </section>
@@ -1400,9 +1385,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
           </div>
         </div>
       </div>
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Produtos aptos a cross</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Materiais de PDV disponíveis</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Regras comerciais por canal</span></div>
-      </div>
       <div class="ch-foot"><button onclick="goCap(7)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>Cap. 07</button><button onclick="goCap(9)">Cap. 09 · Materiais de PDV <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
   </section>
@@ -1462,9 +1444,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
             <div class="cl-item" data-i="3" onclick="toggleCL(9,3)"><div class="cl-box"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div><span>Foto registrada?</span></div>
           </div>
         </div>
-      </div>
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Lista real de MPDVs</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Fotos, medidas e regras</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Campanhas vigentes</span></div>
       </div>
       <div class="ch-foot"><button onclick="goCap(8)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>Cap. 08</button><button onclick="goCap(10)">Cap. 10 · Papel do promotor <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
@@ -1536,9 +1515,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
             <div class="cl-item" data-i="3" onclick="toggleCL(10,3)"><div class="cl-box"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div><span>Limites técnicos respeitados?</span></div>
           </div>
         </div>
-      </div>
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Rotina oficial ProTrade</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Responsabilidades por perfil</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Fluxo de escalonamento</span></div>
       </div>
       <div class="ch-foot"><button onclick="goCap(9)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>Cap. 09</button><button onclick="goCap(11)">Cap. 11 · Rotina ProTrade <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
@@ -1618,9 +1594,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
           </div>
         </div>
       </div>
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Arquivo ROTINA_PROTRADE</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Tempos oficiais</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Sistema de reporte</span></div>
-      </div>
       <div class="ch-foot"><button onclick="goCap(10)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>Cap. 10</button><button onclick="goCap(12)">Cap. 12 · Abordagem <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
   </section>
@@ -1699,9 +1672,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
           </div>
         </div>
       </div>
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Scripts aprovados</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Limites jurídicos/técnicos</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Política de abordagem ao cliente</span></div>
-      </div>
       <div class="ch-foot"><button onclick="goCap(11)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>Cap. 11</button><button onclick="goCap(13)">Cap. 13 · Conduta <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
   </section>
@@ -1773,9 +1743,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
             <div class="cl-item" data-i="3" onclick="toggleCL(13,3)"><div class="cl-box"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div><span>Fotos preservam a privacidade?</span></div>
           </div>
         </div>
-      </div>
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Política de uniforme e jaleco</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Regras de foto</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Política de confidencialidade</span></div>
       </div>
       <div class="ch-foot"><button onclick="goCap(12)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>Cap. 12</button><button onclick="goCap(14)">Cap. 14 · Indicadores <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
@@ -1859,9 +1826,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
           </div>
         </div>
       </div>
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Metas por canal</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Fonte de sell-out</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Responsáveis por revisão</span></div>
-      </div>
       <div class="ch-foot"><button onclick="goCap(13)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>Cap. 13</button><button onclick="goCap(15)">Cap. 15 · Anexos <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
   </section>
@@ -1921,9 +1885,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
             <div class="cl-item" data-i="3" onclick="toggleCL(15,3)"><div class="cl-box"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div><span>Foi testado com promotor?</span></div>
           </div>
         </div>
-      </div>
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Quais anexos entram no PDF</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Quais serão destacáveis</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Periodicidade de atualização</span></div>
       </div>
       <div class="ch-foot"><button onclick="goCap(14)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>Cap. 14</button><button onclick="scrollToId('quiz')">Teste de execução <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
@@ -2024,6 +1985,15 @@ var LINES=[
 {k:'Suplementos',c:'#0c8a27',cd:'#0c8a27',f:[{h:'Suplementos e snacks',r:'Blocar por necessidade',p:'Facilita o argumento',s:['Conhecimento']},{h:'Apoio nutricional',r:'Necessidade do tutor',p:'Necessidade agrupada',s:['Cross']}]},
 {k:'Ambiente',c:'#0a94ad',cd:'#0a7d94',f:[{h:'Desinfecção e ambiente',r:'Gera cross',p:'Perto de areia/tapete',s:['Cross']},{h:'Ambiente / Herbalvet',r:'Lembrado por MPDV',p:'Higiene',s:['Cross']}]},
 {k:'Diagnóstico',c:'#025c90',cd:'#025c90',f:[{h:'Testes diagnósticos',r:'Produto técnico',p:'Área segura, direcionar',s:['Técnico']}]}];
+var ATLAS=[
+{cat:'Antiparasitários e proteção',items:[{n:'NEOPet',d:'Antiparasitário tópico',img:'neopet'},{n:'Combo NEOPet',d:'Combo antiparasitário'},{n:'Banni',d:'Endectocida tópico'},{n:'Banni 3',d:'Endectocida para gatos',img:'banni-3'},{n:'Combo Banni 3',d:'Combo endectocida'},{n:'Leevre',d:'Coleira ectoparasiticida',img:'leevre'},{n:'Top Dog',d:'Vermífugo palatável',img:'top-dog'}]},
+{cat:'Suplementos',items:[{n:'Ativi',d:'Articular · colágeno tipo II'},{n:'Biocanis',d:'Probiótico vitamínico'},{n:'Biocanis PRO',d:'Probiótico com vitamina E'},{n:'Condromax Pet',d:'Articular'},{n:'Energy Pet',d:'Vitamínico aminoácido'},{n:'Imunees Snacks',d:'Suplemento em tablete'},{n:'Kardio',d:'Saúde cardiovascular'},{n:'Kardio Snacks',d:'Cardiovascular em tablete'},{n:'Longil Cães',d:'Cães idosos'},{n:'Longil Snacks',d:'Cães idosos em tablete'},{n:'Metacell Pet',d:'Suplemento'},{n:'Plenipil',d:'Suplemento'},{n:'Plenipil Snacks',d:'Suplemento em tablete'},{n:'Rennaiz Snacks',d:'Suplemento em tablete'},{n:'Revibem',d:'Suplemento'},{n:'Seren',d:'Suplemento'},{n:'Seren Snacks',d:'Suplemento em tablete'},{n:'Uree Snacks',d:'Suplemento em tablete'},{n:'WellPet',d:'Bem-estar',img:'wellpet'}]},
+{cat:'Antibióticos',items:[{n:'Azicox-2',d:'Azitromicina + meloxicam'},{n:'Celesporin',d:'Cefalexina'},{n:'Doxifin Tabs',d:'Doxiciclina'},{n:'Enrotrat Tabs',d:'Enrofloxacina'}]},
+{cat:'Anti-inflamatórios e analgésicos',items:[{n:'Maxicam',d:'Meloxicam',img:'maxicam'},{n:'Maxicam Solução Oral',d:'Meloxicam líquido'},{n:'Maxicam 0,2%',d:'Meloxicam concentrado'},{n:'Maxicam Plus',d:'Meloxicam associado'},{n:'Prediderm',d:'Anti-inflamatório esteroide'},{n:'Beniv',d:'Analgésico · buprenorfina'},{n:'Nulli',d:'Analgésico'}]},
+{cat:'Dermatológicos e otológicos',items:[{n:'Dermotrat',d:'Dermatológico tópico'},{n:'Regepil',d:'Dermatológico'},{n:'Auritop',d:'Otológico'},{n:'Aurigen',d:'Otológico',img:'aurigen'},{n:'Limp & Hidrat',d:'Higiene auricular'},{n:'Limp & Hidrat Plus',d:'Higiene auricular · TRIS-EDTA'}]},
+{cat:'Higiene · linha Bris',items:[{n:'Bris Shampoo',d:'Pele e pelos'},{n:'Bris Spray',d:'Pele seca'},{n:'Bris Sérum',d:'Ceramidas e ômegas'}]},
+{cat:'Ambiente e desinfecção',items:[{n:'EnziClim',d:'Desinfetante biológico'},{n:'Herbalvet T.A.',d:'Desinfetante',img:'herbalvet'}]},
+{cat:'Diagnóstico',items:[{n:'Conclue Cinomose',d:'Kit de diagnóstico'},{n:'Conclue Dirofilariose',d:'Kit de diagnóstico'},{n:'Conclue Erliquiose',d:'Kit de diagnóstico'},{n:'Conclue FeLV',d:'Kit de diagnóstico'},{n:'Conclue Giardíase',d:'Kit de diagnóstico'},{n:'Conclue Panleucopenia',d:'Kit de diagnóstico'}]}];
 var PMG={
 P:{title:'Farmácia P · foco',items:['Proteção e prevenção','Vermifugação','Principais cuidados','Priorizar giro e essenciais'],slot:'C06-01a',txt:'Planograma fotorreal da farmácia P'},
 M:{title:'Farmácia M · complementaridade',items:['Tudo da P +','Suplementos prioritários','Linha de ambiente','Construção de linha'],slot:'C06-01b',txt:'Planograma fotorreal da farmácia M'},
@@ -2075,18 +2045,19 @@ el('drawerList').innerHTML=CHTITLES.map(function(t,i){var n=i+1;return '<div cla
 window.openDrawer=function(){el('drawer').classList.add('open');};
 window.closeDrawer=function(){el('drawer').classList.remove('open');};
 
-/* cap3 catalog */
-var lineTabsEl=el('lineTabs'),ficheEl=el('ficheGrid');
-if(lineTabsEl){
-lineTabsEl.innerHTML=LINES.map(function(l,i){return '<div class="lineTab'+(i===0?' active':'')+'" data-l="'+i+'" onclick="setLine('+i+')" style="'+(i===0?'background:'+l.c+';':'')+'"><span class="dot" style="background:'+l.c+'"></span>'+l.k+'</div>';}).join('');
-window.setLine=function(i){document.querySelectorAll('.lineTab').forEach(function(t,j){t.classList.toggle('active',j===i);t.style.background=j===i?LINES[j].c:'';t.style.color=j===i?'#fff':'';});renderFiches(i);};
-function renderFiches(i){var l=LINES[i];ficheEl.innerHTML=l.f.map(function(f){return '<div class="fiche show" style="--acc-d:'+l.cd+'"><div class="fbar" style="background:'+l.c+'"></div><div class="fpad"><h4>'+f.h+'</h4><div class="frole" style="color:'+l.cd+'">'+f.r+'</div><div class="fseals">'+f.s.map(function(s){return '<span class="fseal">'+s+'</span>';}).join('')+'</div><div class="frow" style="--acc:'+l.c+'"><span class="ico" style="color:'+l.c+';width:16px;height:16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">'+P.pin+'</svg></span>'+f.p+'</div></div></div>';}).join('');}
-renderFiches(0);
+/* cap3 atlas de produtos */
+var atlasEl=el('atlasGrid');
+if(atlasEl){atlasEl.innerHTML=ATLAS.map(function(g){return '<div class="pa-cat">'+g.cat+'</div><div class="product-atlas-grid">'+g.items.map(function(p){var media=p.img?'<img src="assets/'+p.img+'.png" alt="'+p.n+'">':'<div class="pa-ph">'+p.n.charAt(0)+'</div>';return '<article class="product-atlas-card">'+media+'<b>'+p.n+'</b><span>'+p.d+'</span></article>';}).join('')+'</div>';}).join('');}
+
+/* cap3 catalog — todas as linhas empilhadas */
+var ficheEl=el('ficheGrid');
+if(ficheEl){
+ficheEl.innerHTML=LINES.map(function(l){return '<div class="line-block"><div class="line-head"><span class="dot" style="background:'+l.c+'"></span>'+l.k+'</div><div class="fiche-grid">'+l.f.map(function(f){return '<div class="fiche show" style="--acc-d:'+l.cd+'"><div class="fbar" style="background:'+l.c+'"></div><div class="fpad"><h4>'+f.h+'</h4><div class="frole" style="color:'+l.cd+'">'+f.r+'</div><div class="fseals">'+f.s.map(function(s){return '<span class="fseal">'+s+'</span>';}).join('')+'</div><div class="frow" style="--acc:'+l.c+'"><span class="ico" style="color:'+l.c+';width:16px;height:16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">'+P.pin+'</svg></span>'+f.p+'</div></div></div>';}).join('')+'</div></div>';}).join('');
 }
 
-/* cap4 gloss */
+/* cap4 gloss — cards abertos, sem interação */
 var glossEl=el('glossGrid');
-if(glossEl){glossEl.innerHTML=GLOSS.map(function(g){return '<div class="flip" onclick="this.classList.toggle(\'on\')"><div class="flip-in"><div class="flip-f">'+ic('bulb')+'<b>'+g.t+'</b></div><div class="flip-b"><b>'+g.t+'</b>'+g.d+'</div></div></div>';}).join('');}
+if(glossEl){glossEl.innerHTML=GLOSS.map(function(g){return '<div class="gcard">'+ic('bulb')+'<b>'+g.t+'</b><p>'+g.d+'</p></div>';}).join('');}
 
 /* cap6 pmg */
 window.setPMG=function(btn){document.querySelectorAll('.pmg-tab').forEach(function(t){t.classList.remove('active');});btn.classList.add('active');var k=btn.dataset.pmg,d=PMG[k];el('pmgTitle').textContent=d.title;el('pmgList').innerHTML=d.items.map(function(i){return '<li>'+i+'</li>';}).join('');el('pmgSlotId').textContent=d.slot;el('pmgSlotTxt').textContent=d.txt;};
