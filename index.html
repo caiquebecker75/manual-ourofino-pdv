@@ -196,7 +196,7 @@ section.blk{padding:80px 0;position:relative}
 .statc .sv b{color:var(--green)}
 .statc .sl{color:#9fb2ce;font-size:.9rem;margin-top:6px}
 .statsrc{margin-top:12px;font-size:.78rem;color:var(--g3);font-style:italic}
-.examples{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:16px}
+.examples{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:16px;margin-top:20px}
 .exmp{background:#fff;border:1.5px solid var(--g2);border-radius:16px;padding:18px 20px}
 .exmp .sit{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:8px;display:flex;gap:8px;align-items:flex-start}
 .exmp .sit .ico{width:18px;height:18px;color:var(--acc);margin-top:2px}
@@ -686,24 +686,14 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
     <div class="need-grid rev" id="needGrid"></div>
   </div></section>
 
-  <!-- MATERIAL INTERNO -->
-  <section class="blk"><div class="wrap">
-    <div class="sec-head rev">
-      <span class="kick">Fontes oficiais a incorporar</span>
-      <h2>Material interno citado</h2>
-      <p>Onde os documentos oficiais da Ourofino substituem exemplos genéricos por padrões aprovados.</p>
-    </div>
-    <div class="matint rev" id="matGrid"></div>
-  </div></section>
-
   <!-- ============ CAP 1 · DIVIDER (editorial) ============ -->
   <section class="divider" id="cap1" style="--acc:#10AD31;--acc-l:#e7f8ec;--acc-d:#0c8a27">
     <div class="dgrid"></div><div class="bignum">01</div>
     <div class="dwrap">
       <div class="rev">
         <span class="dkick"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>Capítulo 01 · Introdução</span>
-        <h2>Boas-vindas e como usar</h2>
-        <p class="dsub">Uma ferramenta para reduzir a variação de execução entre regiões, lojas e perfis de promotor, não um material institucional decorativo.</p>
+        <h2>Seja bem-vindo</h2>
+        <p class="dsub">A partir de agora você poderá utilizar esse manual no seu dia a dia sempre que tiver dúvidas de como garantir a execução perfeita. Aqui você terá o direcionamento sobre lojas, produtos e perfis de materiais de ponto de venda.</p>
         <div class="dlabel">Neste capítulo você vai dominar</div>
         <div class="dlist">
           <div class="di"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></span>Quando ler por completo e quando consultar rápido</div>
@@ -781,23 +771,6 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
         </div>
       </div>
 
-      <div class="rev opstrip">
-        <div class="panel"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg></span>Faça em campo</div>
-          <div class="steps"><div class="step"><span>Escolher a trilha certa: onboarding completo ou consulta rápida</span></div><div class="step"><span>Entrar pelo índice por necessidade da sua situação</span></div><div class="step"><span>Seguir a ordem: entender → básico → visibilidade → incrementos</span></div></div>
-        </div>
-        <div class="checklist"><div class="cl-head"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span>Checklist</div><div class="ring" data-ring="1"><i>0%</i></div></div>
-          <div data-cl="1">
-            <div class="cl-item" data-i="0" onclick="toggleCL(1,0)"><div class="cl-box"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div><span>Sei quem é o público do manual?</span></div>
-            <div class="cl-item" data-i="1" onclick="toggleCL(1,1)"><div class="cl-box"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div><span>Entendo quando usar cada capítulo?</span></div>
-            <div class="cl-item" data-i="2" onclick="toggleCL(1,2)"><div class="cl-box"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div><span>Existe rota rápida para execução e MPDV?</span></div>
-            <div class="cl-item" data-i="3" onclick="toggleCL(1,3)"><div class="cl-box"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div><span>Sei o que NÃO é papel do promotor?</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="val-wrap rev"><div class="ph"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>Validações necessárias</div>
-        <div class="vals"><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Públicos oficiais</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Versão para distribuidores</span><span class="val"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Links e QR Codes</span></div>
-      </div>
       <div class="ch-foot"><span></span><button onclick="goCap(2)">Cap. 02 · Cultura e postura <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></button></div>
     </div>
   </section>
@@ -861,7 +834,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
           <div class="exmp"><div class="sit"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span> Um tutor pede indicação técnica</div><div class="act">Direcione ao veterinário ou ao material oficial.</div></div>
         </div>
       </div>
-      <div class="rev">
+      <div class="rev mt56">
         <div class="blocklab" style="color:var(--cyan)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"/></svg></span>Valores em ação</div>
         <div class="triptych">
           <div class="value"><div class="vb"><span class="vlab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.1 8.6 22 9.3 17 14 18.2 21 12 17.6 5.8 21 7 14 2 9.3 8.9 8.6"/></svg></span>Jogar para ganhar</span><h4>Resultado por execução correta</h4><p>Buscar giro através de gôndola limpa, preço visível e produto disponível.</p></div></div>
@@ -2022,7 +1995,7 @@ function icb(n){return '<span class="ico"><svg viewBox="0 0 24 24" fill="none" s
 function el(id){return document.getElementById(id);}
 
 /* ---- DATA ---- */
-var CHTITLES=['Boas-vindas e como usar','Empresa, cultura e postura','Portfólio de produtos','Conceitos de Trade Marketing','Canais, jornadas e segmentações','Sortimento e farmácia P/M/G','Execução, gôndola e planograma','Cross merchandising','Materiais de PDV','Papel do promotor','Rotina operacional ProTrade','Abordagem e scripts','Conduta profissional','Indicadores, score e qualidade','Anexos práticos'];
+var CHTITLES=['Seja bem-vindo','Empresa, cultura e postura','Portfólio de produtos','Conceitos de Trade Marketing','Canais, jornadas e segmentações','Sortimento e farmácia P/M/G','Execução, gôndola e planograma','Cross merchandising','Materiais de PDV','Papel do promotor','Rotina operacional ProTrade','Abordagem e scripts','Conduta profissional','Indicadores, score e qualidade','Anexos práticos'];
 var NEEDS=[
 {ic:'store',h:'Entender a loja',p:'Ler canal, jornada e decisores',ch:5,cap:'Cap. 5'},
 {ic:'grid',h:'Montar o sortimento',p:'Mix por farmácia P/M/G',ch:6,cap:'Cap. 6'},
@@ -2032,11 +2005,6 @@ var NEEDS=[
 {ic:'clock',h:'Registrar a visita',p:'Rotina ProTrade e evidências',ch:11,cap:'Cap. 11'},
 {ic:'chat',h:'Abordar a loja',p:'Scripts por público',ch:12,cap:'Cap. 12'},
 {ic:'gauge',h:'Medir a execução',p:'Score e indicadores',ch:14,cap:'Cap. 14'}];
-var MATINT=[
-{d:'Manual Trade MKT Ourofino',p:'Substituir exemplos genéricos por padrões oficiais de MPDV, gôndola, linguagem e iconografia aprovados.'},
-{d:'Manual Trade MKT Ourofino 2',p:'Complementar conduta, rotina, materiais, boas práticas e referências de layout.'},
-{d:'OUR_Jornadas_GC2',p:'Inserir mapas oficiais de jornada, fluxo, decisores, áreas quentes e segmentação de canal.'},
-{d:'ROTINA_PROTRADE',p:'Substituir roteiros de visita por rotina oficial, tempos, nomenclaturas, tarefas e evidências.'}];
 var TRILHAS={onb:{desc:'Trilha obrigatória para onboarding e treinamento, leitura completa e na ordem.',chips:[1,2,4,10,11,12,13]},rap:{desc:'Trilha de consulta rápida para o dia de visita, abra direto no que precisa.',chips:[5,6,7,8,9,11,14]}};
 var GLOSS=[
 {t:'Sell-in',d:'Venda da indústria/distribuidor para a loja. Não garante giro.'},
@@ -2098,7 +2066,6 @@ var MV=[
 
 /* ---- RENDER intro ---- */
 el('needGrid').innerHTML=NEEDS.map(function(n){return '<div class="need" onclick="goCap('+n.ch+')"><div class="ic">'+ic(n.ic)+'</div><h4>'+n.h+'</h4><p>'+n.p+'</p><small>'+n.cap+' →</small></div>';}).join('');
-el('matGrid').innerHTML=MATINT.map(function(m){return '<div class="mi-card"><div class="doc">'+ic('doc')+m.d+'</div><p>'+m.p+'</p></div>';}).join('');
 function renderTrilha(k){var t=TRILHAS[k];el('trilhaDesc').textContent=t.desc;el('trilhaChips').innerHTML=CHTITLES.map(function(title,i){var num=i+1;var on=t.chips.indexOf(num)>=0;return '<div class="chip'+(on?' on':'')+'" onclick="goCap('+num+')"><b>'+num+'.</b> '+title+'</div>';}).join('');}
 Array.prototype.forEach.call(document.querySelectorAll('.trilha-btn'),function(b){b.addEventListener('click',function(){document.querySelectorAll('.trilha-btn').forEach(function(x){x.classList.remove('active');});b.classList.add('active');renderTrilha(b.dataset.trilha);});});
 renderTrilha('onb');
