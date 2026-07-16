@@ -586,6 +586,17 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
 .divider .dwrap{grid-template-columns:minmax(0,900px)!important}.divider .dwrap>div:first-child{max-width:900px}.divider .dsub{max-width:760px}.divider .dlist{max-width:820px}.execution-photo{max-width:920px;margin:0 auto 46px;box-shadow:0 22px 60px #0019122b}
 .deep aside{background:#f1f5e7}.chapter{border-top:1px solid #dfe5da}.chapter:nth-of-type(even){background:#fbfaf6}
 @media(max-width:900px){.hero-photo{min-height:460px}.capa-in{grid-template-columns:1fr}.capa-art{max-width:620px}.divider .dwrap{grid-template-columns:1fr!important}}
+</style><style id="chapter-by-chapter">
+/* Remove a estrutura editorial genérica que tornava todos os capítulos iguais. */
+.chapter .lead-block{display:none!important}
+.chapter .rev:has(.deep){display:none!important}
+.chapter .cbody{padding-top:84px}
+#cap1-body{background:#fbfaf5}#cap2-body{background:#082a22;color:#fff}#cap2-body h2,#cap2-body h3,#cap2-body h4{color:#fff}#cap2-body .big,#cap2-body p{color:#d6e3dd}
+#cap3-body{background:#f6f4ee}#cap4-body{background:#f3f7f5}#cap5-body{background:#fff}#cap6-body{background:#f7f4ed}#cap7-body{background:#eef3dc}#cap8-body{background:#f4f8ee}#cap9-body{background:#f8f7f2}#cap10-body{background:#fff}#cap11-body{background:#f3f6f2}#cap12-body{background:#eef7f3}#cap13-body{background:#fffaf4}#cap14-body{background:#f1f5ec}#cap15-body{background:#082a22;color:#fff}
+#cap15-body h2,#cap15-body h3,#cap15-body h4{color:#fff}#cap15-body p{color:#d6e3dd}
+.product-atlas{margin-bottom:58px}.product-atlas-head{display:flex;justify-content:space-between;gap:28px;align-items:end;margin-bottom:26px}.product-atlas-head h3{font-size:clamp(1.8rem,3vw,2.7rem);margin:6px 0}.product-atlas-head p{max-width:560px;color:#596a64}.product-atlas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.product-atlas-card{background:#fff;border:1px solid #dce1d8;border-radius:16px;padding:16px;min-height:220px;display:flex;flex-direction:column}.product-atlas-card img{height:155px;width:100%;object-fit:contain;background:#f5f4ee;border-radius:10px}.product-atlas-card b{font-family:var(--serif);color:var(--navy);font-size:.95rem;margin-top:12px}.product-atlas-card span{font-size:.72rem;color:#708078;margin-top:3px}
+.execution-study{margin:0 0 58px}.execution-study-head{margin-bottom:20px}.execution-study-head h3{font-size:clamp(1.8rem,3vw,2.7rem);margin:6px 0}.execution-study-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.execution-shot{position:relative;border-radius:18px;overflow:hidden;background:#0b382d;min-height:360px}.execution-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.execution-shot b{position:absolute;top:16px;left:16px;background:#082a22dd;color:#fff;padding:8px 12px;border-radius:8px;font-size:.75rem;letter-spacing:.1em}.execution-shot.after b{background:#c7df35;color:#18352c}
+@media(max-width:900px){.product-atlas-grid{grid-template-columns:repeat(2,1fr)}.execution-study-grid{grid-template-columns:1fr}.execution-shot{min-height:300px}.product-atlas-head{display:block}}
 </style></head>
 <body>
 
@@ -907,7 +918,9 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
     </div>
   </section>
   <section class="chapter" id="cap3-body" style="--acc:#0a94ad;--acc-l:#e4fafe;--acc-d:#0a7d94">
-    <div class="cbody">
+    <div class="cbody"><div class="product-atlas rev"><div class="product-atlas-head"><div><span class="kick">Atlas visual do portfólio</span><h3>Reconheça antes de organizar</h3></div><p>O capítulo começa pela leitura visual das embalagens e pela função comercial de cada família. A consulta técnica continua sendo feita pelas fontes oficiais.</p></div><div class="product-atlas-grid">
+<article class="product-atlas-card"><img src="assets/neopet.png" alt="Neopet"><b>Neopet</b><span>Antiparasitário</span></article><article class="product-atlas-card"><img src="assets/banni-3.png" alt="Banni 3"><b>Banni 3</b><span>Proteção</span></article><article class="product-atlas-card"><img src="assets/wellpet.png" alt="WellPet"><b>WellPet</b><span>Bem-estar</span></article><article class="product-atlas-card"><img src="assets/top-dog.png" alt="Top Dog"><b>Top Dog</b><span>Cuidado diário</span></article><article class="product-atlas-card"><img src="assets/leevre.png" alt="Leevre"><b>Leevre</b><span>Antiparasitário</span></article><article class="product-atlas-card"><img src="assets/herbalvet.png" alt="Herbalvet"><b>Herbalvet</b><span>Higiene</span></article><article class="product-atlas-card"><img src="assets/maxicam.png" alt="Maxicam"><b>Maxicam</b><span>Dor e inflamação</span></article><article class="product-atlas-card"><img src="assets/aurigen.png" alt="Aurigen"><b>Aurigen</b><span>Saúde auricular</span></article>
+</div></div>
       <div class="lead-block rev"><div class="bar"></div><div>
         <div class="obj-lab">Objetivo do capítulo</div>
         <h3>Conhecer para executar, sem virar prescritor</h3>
@@ -1272,7 +1285,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
     </div>
   </section>
   <section class="chapter" id="cap7-body" style="--acc:#10AD31;--acc-l:#e7f8ec;--acc-d:#0c8a27">
-    <div class="cbody">
+    <div class="cbody"><div class="execution-study rev"><div class="execution-study-head"><span class="kick">Estudo visual de execução</span><h3>O mesmo espaço. Dois resultados.</h3><p class="section-s">Compare disponibilidade, agrupamento, alinhamento, blocagem, facings e clareza de preço.</p></div><div class="execution-study-grid"><figure class="execution-shot"><img src="assets/before.jpg" alt="Gôndola antes da organização"><b>ANTES: leitura dispersa</b></figure><figure class="execution-shot after"><img src="assets/after.jpg" alt="Gôndola depois da organização"><b>DEPOIS: lógica e consistência</b></figure></div></div>
       <div class="lead-block rev"><div class="bar"></div><div>
         <div class="obj-lab">Objetivo do capítulo</div>
         <h3>Uma hierarquia que resolve venda antes de estética</h3>
