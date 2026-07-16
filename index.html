@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Manual de Execução em PDV · Ourofino Pet</title>
-<meta name="description" content="Manual interativo de Trade Marketing e Execução em PDV — Ourofino Pet. Tá bem cuidado." />
+<meta name="description" content="Manual interativo de Trade Marketing e Execução em PDV, Ourofino Pet. Tá bem cuidado." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-heigh
 h1,h2,h3,h4,h5{font-family:var(--serif);font-weight:700;line-height:1.08;letter-spacing:-.015em;color:var(--navy)}
 a{color:var(--blue);text-decoration:none}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
-.ico{display:inline-flex;align-items:center;justify-content:center;flex:none}
+.ico{display:inline-flex;align-items:center;justify-content:center;flex:none;width:var(--ic-md);height:var(--ic-md);line-height:0}
 .ico svg{width:100%;height:100%;display:block}
 svg{max-width:100%}
 .btn{cursor:pointer;border:0;font-family:var(--sans);font-weight:700;font-size:1rem;padding:15px 28px;border-radius:100px;display:inline-flex;align-items:center;gap:10px;transition:.25s cubic-bezier(.2,.7,.3,1);text-decoration:none}
@@ -179,6 +179,40 @@ section.blk{padding:80px 0;position:relative}
 .section-t{font-size:clamp(1.4rem,3vw,2rem);color:var(--navy);margin-bottom:8px}
 .section-s{color:#5c6b82;font-size:1.04rem;margin-bottom:28px;max-width:700px}
 .mt56{margin-top:56px}.mt40{margin-top:40px}
+/* enrichment components */
+.deep{display:grid;grid-template-columns:1.6fr .9fr;gap:26px;align-items:start}
+.deep .prose p{color:#3c4c66;font-size:1.02rem;margin-bottom:14px}
+.deep .prose p:last-child{margin-bottom:0}
+.deep .prose strong{color:var(--navy);font-weight:600}
+.deep aside{background:linear-gradient(160deg,var(--acc-l),#fff);border:1.5px solid color-mix(in srgb,var(--acc) 30%,#fff);border-radius:20px;padding:22px}
+.deep aside .al{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc-d);font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.deep aside .al .ico{width:18px;height:18px}
+.deep aside li{list-style:none;padding:8px 0 8px 24px;position:relative;font-size:.9rem;color:#40506a;border-bottom:1px solid rgba(0,0,0,.06)}
+.deep aside li:last-child{border-bottom:0}
+.deep aside li::before{content:"";position:absolute;left:0;top:14px;width:12px;height:12px;border-radius:4px;background:var(--acc)}
+.statband{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:8px}
+.statc{background:var(--navy);color:#fff;border-radius:20px;padding:22px}
+.statc .sv{font-family:var(--serif);font-size:2.3rem;line-height:1;color:#fff}
+.statc .sv b{color:var(--green)}
+.statc .sl{color:#9fb2ce;font-size:.9rem;margin-top:6px}
+.statsrc{margin-top:12px;font-size:.78rem;color:var(--g3);font-style:italic}
+.examples{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:16px}
+.exmp{background:#fff;border:1.5px solid var(--g2);border-radius:16px;padding:18px 20px}
+.exmp .sit{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:8px;display:flex;gap:8px;align-items:flex-start}
+.exmp .sit .ico{width:18px;height:18px;color:var(--acc);margin-top:2px}
+.exmp .act{font-size:.9rem;color:#40506a;padding-left:26px;position:relative}
+.exmp .act::before{content:"→";position:absolute;left:6px;color:var(--acc);font-weight:800}
+.mitos{display:grid;gap:12px}
+.myth{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--g2);border-radius:16px;overflow:hidden}
+.myth .mf{padding:16px 18px;font-size:.92rem}
+.myth .m1{background:#fdecec;color:#8a4b4b}
+.myth .m2{background:var(--green-l);color:#2c6b3c}
+.myth .ml{font-weight:800;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:5px}
+.myth .m1 .ml{color:#c0392b}.myth .m2 .ml{color:var(--green-d)}
+.tipbox{background:#fff8e6;border:1.5px solid #f0d78a;border-radius:18px;padding:20px 22px;display:grid;grid-template-columns:auto 1fr;gap:14px;margin-top:24px}
+.tipbox .ti2{width:42px;height:42px;flex:none;border-radius:12px;background:#e6a417;color:#fff;display:flex;align-items:center;justify-content:center}
+.tipbox .ti2 .ico{width:22px;height:22px}
+.tipbox b{color:#7a5a12}.tipbox p{color:#6b5518;font-size:.93rem}
 
 /* pontos grid (generic) */
 .pontos{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
@@ -524,7 +558,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 
 @media(max-width:900px){
-  .capa-in,.divider .dwrap,.channels3,.triptych,.opstrip,.lead-block,.pmg-body,.say,.quad,.visit2,.snwrap{grid-template-columns:1fr}
+  .capa-in,.divider .dwrap,.channels3,.triptych,.opstrip,.lead-block,.pmg-body,.say,.quad,.visit2,.snwrap,.deep,.myth{grid-template-columns:1fr}
   .capa-art{margin-top:10px}
   .divider .bignum{font-size:64vw;opacity:.06}
   .limits{grid-template-columns:1fr}
@@ -604,7 +638,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
         <span class="pid">C00</span><span class="ptype">Foto</span>
         <div class="pslot-in">
           <span class="pcam ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
-          <p>Herói da capa — corredor de pet shop moderno com promotora conferindo a gôndola</p>
+          <p>Herói da capa: corredor de pet shop moderno com promotora conferindo a gôndola</p>
         </div>
       </figure>
     </div>
@@ -657,7 +691,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="rev">
         <span class="dkick"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>Capítulo 01 · Introdução</span>
         <h2>Boas-vindas e como usar</h2>
-        <p class="dsub">Uma ferramenta para reduzir a variação de execução entre regiões, lojas e perfis de promotor — não um material institucional decorativo.</p>
+        <p class="dsub">Uma ferramenta para reduzir a variação de execução entre regiões, lojas e perfis de promotor, não um material institucional decorativo.</p>
         <div class="dlabel">Neste capítulo você vai dominar</div>
         <div class="dlist">
           <div class="di"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></span>Quando ler por completo e quando consultar rápido</div>
@@ -680,10 +714,37 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
         <p class="big">O conteúdo responde a perguntas práticas: o que observar ao entrar na loja, como reconhecer o canal, que produto priorizar, como abordar e como registrar a visita. A leitura completa serve ao onboarding; a consulta pontual, ao campo.</p>
       </div></div>
 
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">Por que este manual existe</h4>
+        <div class="deep">
+          <div class="prose">
+            <p>Este manual padroniza a execução em ponto de venda. Lojas, distribuidores e níveis de maturidade comercial diferentes geram resultados desiguais quando não existe um método comum. O documento reduz essa variação e orienta as decisões de campo.</p>
+            <p>A leitura tem dois modos. No treinamento, a leitura é completa e segue a ordem dos capítulos. Na visita, a consulta é pontual: o profissional abre o capítulo que corresponde à tarefa daquele momento.</p>
+            <p>O público é a equipe que atua na loja: promotores, distribuidores, equipe comercial e balconistas. O médico-veterinário não recebe abordagem ativa de trade. O relacionamento técnico com o veterinário é conduzido pelo time de Demanda.</p>
+          </div>
+          <aside>
+            <div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div>
+            <ul><li>Reduz a variação da execução</li><li>Dois modos de leitura: completa e pontual</li><li>Público de campo bem definido</li><li>Uma ordem que protege a marca</li></ul>
+          </aside>
+        </div>
+      </div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9M4 9v11h16V9M4 9h16"/><path d="M9 20v-6h6v6"/></svg></span> Contexto de mercado</div>
+        <h4 class="section-t">O tamanho da oportunidade</h4>
+        <p class="section-s">O setor pet é grande e segue em crescimento. Uma execução consistente transforma esse potencial em giro dentro da loja.</p>
+        <div class="statband">
+          <div class="statc"><div class="sv">R$ <b>75,4</b> bi</div><div class="sl">Faturamento do setor pet no Brasil em 2024</div></div>
+          <div class="statc"><div class="sv"><b>160,9</b> mi</div><div class="sl">Animais de estimação no país</div></div>
+          <div class="statc"><div class="sv"><b>3º</b> maior</div><div class="sl">Mercado pet do mundo, atrás de EUA e China</div></div>
+        </div>
+        <div class="statsrc">Fonte: ABINPET, 2024. Validar com o dado oficial mais recente antes da publicação.</div>
+      </div>
+
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>A lógica do manual</div>
         <h4 class="section-t">Primeiro entender, depois garantir, então melhorar</h4>
-        <p class="section-s">Essa ordem protege a marca de uma execução cosmética — em que a loja parece ativada, mas segue com ruptura, sem preço ou com categoria confusa.</p>
+        <p class="section-s">Essa ordem protege a marca de uma execução cosmética, em que a loja parece ativada, mas segue com ruptura, sem preço ou com categoria confusa.</p>
         <div class="mapstage">
           <svg viewBox="0 0 900 150" font-family="Poppins">
             <defs><marker id="c1a" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0l7 4.5-7 4.5z" fill="#919AA9"/></marker></defs>
@@ -698,7 +759,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
             </g>
           </svg>
         </div>
-        <div class="callout"><div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span></div><div><b>Público-alvo:</b> <p>promotores, distribuidores, comercial, balconistas e equipe de loja. O médico veterinário <b>não</b> é alvo de trade ativo — o relacionamento técnico é feito pelo time de Demanda.</p></div></div>
+        <div class="callout"><div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span></div><div><b>Público-alvo:</b> <p>promotores, distribuidores, comercial, balconistas e equipe de loja. O médico veterinário <b>não</b> é alvo de trade ativo, o relacionamento técnico é feito pelo time de Demanda.</p></div></div>
       </div>
 
       <div class="rev mt56">
@@ -738,7 +799,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="rev">
         <span class="dkick"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></span>Capítulo 02 · Cultura</span>
         <h2>Empresa, cultura e postura em campo</h2>
-        <p class="dsub">A marca não se expressa só pelo logo — mas por como o produto é exposto e como o promotor se comporta na loja.</p>
+        <p class="dsub">A marca não se expressa só pelo logo, mas por como o produto é exposto e como o promotor se comporta na loja.</p>
         <div class="dlabel">Neste capítulo você vai dominar</div>
         <div class="dlist">
           <div class="di"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></span>Traduzir valores em atitudes observáveis</div>
@@ -766,6 +827,32 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
         <h3>Traduzir cultura em comportamento observável</h3>
         <p class="big">Não basta dizer que a empresa valoriza cuidado. É preciso mostrar o que isso significa numa loja movimentada, com pouco espaço e múltiplos interesses comerciais.</p>
       </div></div>
+
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">Cultura que vira comportamento</h4>
+        <div class="deep">
+          <div class="prose">
+            <p>A confiança na marca se constrói em detalhes: embalagem limpa, validade conferida, produto no lugar certo, material atualizado e postura cordial. Esses elementos parecem apenas operacionais, mas, juntos, formam a reputação.</p>
+            <p>O texto institucional deve ser curto e aplicado. Ele responde a três perguntas: quem somos, qual é o nosso papel no cuidado com o animal e como isso muda a execução na loja.</p>
+            <p>O promotor é o principal ponto de contato da marca dentro do ponto de venda. Uma gôndola desorganizada ou um material vencido prejudicam a percepção da marca tanto quanto uma campanha mal planejada.</p>
+          </div>
+          <aside>
+            <div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div>
+            <ul><li>A marca aparece na execução, não só no logo</li><li>Institucional curto e aplicado</li><li>Postura observável e auditável</li><li>Limite técnico sempre respeitado</li></ul>
+          </aside>
+        </div>
+      </div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg></span> Situações de campo</div>
+        <h4 class="section-t">O que fazer em cada momento</h4>
+        <div class="examples">
+          <div class="exmp"><div class="sit"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span> O balconista está ocupado</div><div class="act">Observe e aguarde o momento adequado para falar.</div></div>
+          <div class="exmp"><div class="sit"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span> O produto está sujo ou desalinhado</div><div class="act">Limpe e reorganize antes de qualquer outra ação.</div></div>
+          <div class="exmp"><div class="sit"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span> A loja resiste ao material de PDV</div><div class="act">Explique o objetivo do material e peça autorização.</div></div>
+          <div class="exmp"><div class="sit"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span> Um tutor pede indicação técnica</div><div class="act">Direcione ao veterinário ou ao material oficial.</div></div>
+        </div>
+      </div>
       <div class="rev">
         <div class="blocklab" style="color:var(--cyan)"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"/></svg></span>Valores em ação</div>
         <div class="triptych">
@@ -779,7 +866,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
         <div class="postgrid">
           <div class="post"><span class="pn"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l1.5-5h15L21 9M4 9v11h16V9"/></svg></span></span><div><b>Na chegada</b><span>Apresentar-se e alinhar a atuação com o responsável.</span></div></div>
           <div class="post"><span class="pn"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 10h18"/></svg></span></span><div><b>Na gôndola</b><span>Respeitar as regras da loja e o processo do responsável.</span></div></div>
-          <div class="post"><span class="pn"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span></span><div><b>Dúvida técnica</b><span>Direcionar ao veterinário ou material oficial — nunca improvisar.</span></div></div>
+          <div class="post"><span class="pn"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span></span><div><b>Dúvida técnica</b><span>Direcionar ao veterinário ou material oficial, nunca improvisar.</span></div></div>
           <div class="post"><span class="pn"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span></span><div><b>Ao encerrar</b><span>Combinar próximo passo e agradecer o tempo da equipe.</span></div></div>
         </div>
       </div>
@@ -809,7 +896,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="rev">
         <span class="dkick"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span>Capítulo 03 · Produtos</span>
         <h2>Portfólio de produtos</h2>
-        <p class="dsub">Reconhecer produto, família, papel de categoria e local de exposição — com fichas comerciais, não mini-bulas.</p>
+        <p class="dsub">Reconhecer produto, família, papel de categoria e local de exposição, com fichas comerciais, não mini-bulas.</p>
         <div class="dlabel">Neste capítulo você vai dominar</div>
         <div class="dlist">
           <div class="di"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></span>Organizar o portfólio por necessidade de compra</div>
@@ -828,17 +915,42 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
     <div class="cbody">
       <div class="lead-block rev"><div class="bar"></div><div>
         <div class="obj-lab">Objetivo do capítulo</div>
-        <h3>Conhecer para executar — sem virar prescritor</h3>
+        <h3>Conhecer para executar, sem virar prescritor</h3>
         <p class="big">O shopper pensa em problema, rotina, cuidado, urgência e prevenção. Organizar o portfólio por necessidade deixa a categoria legível e ajuda a loja a expor melhor. Produtos técnicos ganham alerta e direcionam para a fonte oficial.</p>
       </div></div>
+
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">Conhecer o produto sem virar prescritor</h4>
+        <div class="deep">
+          <div class="prose">
+            <p>O portfólio é um dos capítulos mais sensíveis, porque equilibra profundidade comercial e segurança técnica. O promotor precisa reconhecer o produto, a família, o papel de categoria e o local de exposição, mas não assume o papel de quem indica o uso.</p>
+            <p>A melhor organização parte da necessidade de compra. O shopper pensa em problema, rotina, prevenção, limpeza e bem-estar. Quando a loja expõe o portfólio por necessidade, a categoria fica mais fácil de ler e de recomendar.</p>
+            <p>Produtos de maior complexidade recebem alerta visual. O manual orienta a exposição, mas direciona para a bula, o QR Code ou o time técnico sempre que houver dúvida sobre indicação ou contraindicação.</p>
+          </div>
+          <aside>
+            <div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div>
+            <ul><li>Ficha comercial, não mini-bula</li><li>Organização por necessidade de compra</li><li>Técnico e alto valor em área controlada</li><li>Claims sempre validados</li></ul>
+          </aside>
+        </div>
+      </div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span> Mito e prática</div>
+        <h4 class="section-t">Onde o campo costuma errar</h4>
+        <div class="mitos">
+          <div class="myth"><div class="mf m1"><span class="ml">Mito</span>Quanto mais informação técnica na ficha, melhor.</div><div class="mf m2"><span class="ml">Prática</span>A ficha prioriza reconhecimento, categoria e exposição. O detalhe técnico fica na bula.</div></div>
+          <div class="myth"><div class="mf m1"><span class="ml">Mito</span>Todo produto pode ir para um ponto extra.</div><div class="mf m2"><span class="ml">Prática</span>Produtos técnicos ou de alto valor permanecem em área controlada.</div></div>
+          <div class="myth"><div class="mf m1"><span class="ml">Mito</span>Conhecer o produto já permite recomendá-lo.</div><div class="mf m2"><span class="ml">Prática</span>O promotor comunica a necessidade. A recomendação de uso é do veterinário.</div></div>
+        </div>
+      </div>
 
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>Catálogo por linha</div>
         <h4 class="section-t">Seis linhas, seis papéis no PDV</h4>
-        <p class="section-s">Clique numa linha para ver as fichas. As fotos oficiais de produto (C03-01) entram no topo de cada ficha — fornecidas pelo cliente.</p>
+        <p class="section-s">Clique numa linha para ver as fichas. As fotos oficiais de produto (C03-01) entram no topo de cada ficha, fornecidas pelo cliente.</p>
         <div class="lineTabs" id="lineTabs"></div>
         <div class="fiche-grid" id="ficheGrid"></div>
-        <div class="callout"><div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span></div><div><b>Limite técnico:</b> <p>a ficha diz "o produto ajuda a comunicar uma necessidade" — nunca "é indicado para determinado caso". Uso, dose e contraindicação vão para bula, QR Code ou time técnico.</p></div></div>
+        <div class="callout"><div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span></div><div><b>Limite técnico:</b> <p>a ficha diz "o produto ajuda a comunicar uma necessidade", nunca "é indicado para determinado caso". Uso, dose e contraindicação vão para bula, QR Code ou time técnico.</p></div></div>
       </div>
 
       <div class="rev opstrip">
@@ -868,7 +980,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="rev">
         <span class="dkick"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>Capítulo 04 · Linguagem</span>
         <h2>Conceitos de Trade Marketing</h2>
-        <p class="dsub">A camada que cria a linguagem comum — para promotores, distribuidores, comercial e gestores falarem do mesmo problema com as mesmas palavras.</p>
+        <p class="dsub">A camada que cria a linguagem comum, para promotores, distribuidores, comercial e gestores falarem do mesmo problema com as mesmas palavras.</p>
         <div class="dlabel">Neste capítulo você vai dominar</div>
         <div class="dlist">
           <div class="di"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></span>Por que sell-in não garante sell-out</div>
@@ -878,7 +990,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       </div>
       <div class="rev">
         <figure class="pslot" style="--ar:4/3"><span class="pid">C04-01</span><span class="ptype">Simulação</span>
-          <div class="pslot-in"><span class="pcam ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span><p>Ruptura — gôndola com buracos e sem preço (antes) vs. cheia e com etiquetas (depois)</p></div>
+          <div class="pslot-in"><span class="pcam ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span><p>Ruptura: gôndola com buracos e sem preço (antes) vs. cheia e com etiquetas (depois)</p></div>
         </figure>
       </div>
     </div>
@@ -888,8 +1000,25 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="lead-block rev"><div class="bar"></div><div>
         <div class="obj-lab">Objetivo do capítulo</div>
         <h3>Nivelar a linguagem de execução comercial</h3>
-        <p class="big">Cada conceito em três blocos: definição simples, exemplo no mercado pet e implicação prática. Ruptura não é só falta de produto — é perda de venda, de recomendação, de confiança e possível deslocamento para o concorrente.</p>
+        <p class="big">Cada conceito em três blocos: definição simples, exemplo no mercado pet e implicação prática. Ruptura não é só falta de produto, é perda de venda, de recomendação, de confiança e possível deslocamento para o concorrente.</p>
       </div></div>
+
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">A linguagem comum do trade</h4>
+        <div class="deep">
+          <div class="prose">
+            <p>Trade marketing é a disciplina que transforma a estratégia comercial em execução no ponto de venda. Para a Ourofino Pet, isso significa garantir que o produto esteja disponível, visível, organizado, comunicado e apoiado por uma abordagem correta.</p>
+            <p>Cada conceito deve ser apresentado em três blocos: definição simples, exemplo no mercado pet e implicação prática. Ruptura, por exemplo, não é apenas a falta do produto. É perda de venda, perda de recomendação e possível migração do cliente para o concorrente.</p>
+            <p>Os conceitos se conectam a indicadores. Disponibilidade conversa com ruptura. Visibilidade conversa com o espaço na gôndola e o campo de visão. Organização conversa com o planograma e a blocagem.</p>
+          </div>
+          <aside>
+            <div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div>
+            <ul><li>Execução é estratégia aplicada na loja</li><li>Definição, exemplo e implicação</li><li>Ponto natural antes de ponto extra</li><li>Todo conceito leva a uma ação</li></ul>
+          </aside>
+        </div>
+      </div>
+      <div class="tipbox rev"><div class="ti2"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span></div><div><b>Em treinamento:</b> <p>peça que cada participante explique sell-in, sell-out, ruptura e ponto natural em uma frase simples. A linguagem comum evita que "melhorar a execução" vire um conceito vago.</p></div></div>
 
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span>Infográfico · o conceito central</div>
@@ -965,6 +1094,22 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
         <p class="big">Um pet shop de autosserviço, um pet shop com clínica e uma clínica com pet shop têm fluxos, decisores e permissões diferentes. Observar primeiro evita instalar material sem fluxo, propor cross na categoria errada ou abordar quem não decide.</p>
       </div></div>
 
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">Ler a loja como um ecossistema</h4>
+        <div class="deep">
+          <div class="prose">
+            <p>A segmentação de canais impede que a execução vire uma receita única. Uma loja de bairro com atendimento consultivo, um grande autosserviço e uma clínica com farmácia anexa não oferecem o mesmo espaço, o mesmo fluxo nem o mesmo decisor.</p>
+            <p>A jornada também determina a mensagem. Em áreas de espera, o material educativo funciona melhor. No caixa, a mensagem curta e a oferta de conveniência têm mais efeito. Na gôndola, a comparação e a organização importam mais.</p>
+            <p>Antes de agir, o promotor observa. Uma boa leitura de loja evita instalar material sem fluxo, propor cross na categoria errada ou abordar quem não tem poder de decisão.</p>
+          </div>
+          <aside>
+            <div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div>
+            <ul><li>Cada canal pede uma execução</li><li>A zona da loja define a mensagem</li><li>Observar antes de agir</li><li>Falar com quem decide</li></ul>
+          </aside>
+        </div>
+      </div>
+
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9"/></svg></span>Infográfico · Jornada do shopper</div>
         <h4 class="section-t">Onde o shopper entra, olha, pergunta, espera e paga</h4>
@@ -1016,10 +1161,10 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
           </div>
         </div>
         <div class="deciders">
-          <span class="dec"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span>Dono — autoriza espaço</span>
-          <span class="dec"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span>Gerente — compra e negocia</span>
-          <span class="dec"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span>Balconista — recomenda</span>
-          <span class="dec"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/></svg></span>Veterinário — influência técnica (não é alvo de trade)</span>
+          <span class="dec"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span>Dono: autoriza espaço</span>
+          <span class="dec"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span>Gerente: compra e negocia</span>
+          <span class="dec"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span>Balconista: recomenda</span>
+          <span class="dec"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/></svg></span>Veterinário: influência técnica (não é alvo de trade)</span>
         </div>
       </div>
 
@@ -1072,6 +1217,15 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
         <h3>Uma matriz que decide quando o espaço é limitado</h3>
         <p class="big">A matriz P/M/G responde: quais SKUs são obrigatórios, recomendados e de ampliação; quais exigem visibilidade privilegiada; quais exigem proteção. Farmácia pequena exige disciplina; farmácia grande exige arquitetura.</p>
       </div></div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">Sortimento é uma decisão de foco</h4>
+        <div class="deep">
+          <div class="prose"><p>O objetivo não é colocar todo o portfólio em todo lugar, mas garantir que cada perfil de farmácia tenha o mix adequado para o seu tamanho, fluxo e potencial. Uma farmácia pequena exige disciplina. Uma farmácia grande exige arquitetura.</p><p>A matriz P, M e G funciona como ferramenta de decisão, não como tabela decorativa. Ela responde quais SKUs são obrigatórios, quais são recomendados, quais entram quando há espaço ou campanha e quais exigem proteção.</p><p>É importante separar tamanho físico de potencial comercial. Uma farmácia pequena pode ser estratégica por causa do alto fluxo. Uma farmácia grande pode estar mal explorada quando o mix é disperso.</p></div>
+          <aside><div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div><ul><li>Foco, não cobertura total</li><li>A matriz decide o que preservar</li><li>Tamanho não é o mesmo que potencial</li><li>Proteção para o alto valor</li></ul></aside>
+        </div>
+      </div>
+      <div class="tipbox rev"><div class="ti2"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span></div><div><b>Em treinamento:</b> <p>Simule três farmácias com espaço limitado e peça ao time para montar o mix prioritário e justificar cada escolha.</p></div></div>
 
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg></span>Simulador · mix mínimo por porte</div>
@@ -1137,6 +1291,19 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
         <h3>Uma hierarquia que resolve venda antes de estética</h3>
         <p class="big">Disponibilidade → integridade → preço → validade → categoria → blocagem → facing → comunicação → incremento. Ponto extra, cross e materiais só fazem sentido depois que o ponto natural está minimamente correto.</p>
       </div></div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">A gôndola materializa a estratégia</h4>
+        <div class="deep">
+          <div class="prose"><p>Quando está organizada, a marca parece confiável, a categoria fica compreensível e a recomendação do balconista se torna mais fácil. Quando está confusa, mesmo um bom produto perde a chance de ser escolhido.</p><p>A execução segue uma hierarquia: disponibilidade, integridade, preço, validade, categoria, blocagem, facing, comunicação e, por último, o incremento. Essa ordem evita buscar o detalhe visual antes de resolver o que afeta a venda.</p><p>A organização respeita a lógica de compra. Produto individual ao lado do combo, itens de mesma função próximos e sequência por porte quando fizer sentido. A regra é tornar a escolha mais intuitiva.</p></div>
+          <aside><div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div><ul><li>Disponibilidade em primeiro lugar</li><li>Uma hierarquia clara de execução</li><li>Individual ao lado do combo</li><li>O planograma é direcional</li></ul></aside>
+        </div>
+      </div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg></span> Situações de campo</div>
+        <h4 class="section-t">O que corrigir primeiro</h4>
+        <div class="examples"><div class="exmp"><div class="sit"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span> Produto sem preço</div><div class="act">Reduz a conversão mesmo em bom local. Sinalize e reponha a etiqueta.</div></div><div class="exmp"><div class="sit"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span> Material cobre o preço</div><div class="act">Reposicione. O preço nunca pode ficar coberto.</div></div><div class="exmp"><div class="sit"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span> Categorias misturadas</div><div class="act">Reagrupe por linha para facilitar a leitura.</div></div><div class="exmp"><div class="sit"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span> Espaço vazio na prateleira</div><div class="act">Registre a ruptura e acione a reposição.</div></div></div>
+      </div>
 
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>Interativo · antes e depois</div>
@@ -1214,13 +1381,22 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="lead-block rev"><div class="bar"></div><div>
         <div class="obj-lab">Objetivo do capítulo</div>
         <h3>Venda complementar sem bagunçar a loja</h3>
-        <p class="big">Parta de necessidades: higiene e ambiente, banho e cuidado, proteção e prevenção. Quando houver risco de deslocar produto da farmácia, o cross deve ser feito preferencialmente por MPDV — preserva controle e reduz perda.</p>
+        <p class="big">Parta de necessidades: higiene e ambiente, banho e cuidado, proteção e prevenção. Quando houver risco de deslocar produto da farmácia, o cross deve ser feito preferencialmente por MPDV, preserva controle e reduz perda.</p>
       </div></div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">Cross é construção de relevância</h4>
+        <div class="deep">
+          <div class="prose"><p>A boa associação antecipa uma necessidade do tutor e ajuda a loja a vender uma solução mais completa. A associação ruim desloca produto sem critério, gera risco e confunde a categoria.</p><p>A recomendação parte de necessidades: higiene e ambiente, banho e cuidado, proteção e prevenção, rotina e reposição. Para cada necessidade, o manual indica quais produtos trabalhar, qual material é mais seguro e qual mensagem é aprovada.</p><p>Quando existe risco de deslocar produto da farmácia, o cross deve ser feito por material de PDV. Isso preserva o controle, reduz a perda e lembra a categoria sem tirar o produto do seu ponto natural.</p></div>
+          <aside><div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div><ul><li>Relevância, não repetição</li><li>Parte sempre da necessidade</li><li>Material de PDV quando há risco</li><li>Nunca sem autorização</li></ul></aside>
+        </div>
+      </div>
+      <div class="tipbox rev"><div class="ti2"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span></div><div><b>Em treinamento:</b> <p>Liste as categorias da loja e construa três oportunidades de cross seguras. Avalie também exemplos incorretos para reforçar os limites.</p></div></div>
 
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></span>Pares que fazem sentido</div>
         <h4 class="section-t">Associações que ajudam o shopper</h4>
-        <p class="section-s">A conexão antecipa uma necessidade — não empurra produto.</p>
+        <p class="section-s">A conexão antecipa uma necessidade, não empurra produto.</p>
         <div class="pairs">
           <div class="pair"><div class="pc"><span class="ico" style="margin:0 auto 5px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/></svg></span><b>Higiene</b></div><span class="plus">+</span><div class="pc"><span class="ico" style="margin:0 auto 5px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="8" width="16" height="12" rx="2"/></svg></span><b>Areia / tapete</b></div></div>
           <div class="pair"><div class="pc"><span class="ico" style="margin:0 auto 5px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M8 6l4-4 4 4"/><rect x="5" y="8" width="14" height="12" rx="2"/></svg></span><b>Cuidados</b></div><span class="plus">+</span><div class="pc"><span class="ico" style="margin:0 auto 5px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg></span><b>Banho &amp; tosa</b></div></div>
@@ -1231,7 +1407,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="rev mt56">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span>Matriz de risco do cross</div>
         <h4 class="section-t">Classifique antes de executar</h4>
-        <p class="section-s">Baixo, médio ou alto — o risco define se usa comunicação ou exposição física.</p>
+        <p class="section-s">Baixo, médio ou alto, o risco define se usa comunicação ou exposição física.</p>
         <div class="risk-tabs">
           <div class="risk-tab active" data-r="baixo" onclick="setRisk(this)">Baixo risco</div>
           <div class="risk-tab" data-r="medio" onclick="setRisk(this)">Médio risco</div>
@@ -1267,7 +1443,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="rev">
         <span class="dkick"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l14-7v16L3 13z"/><path d="M3 11v2a2 2 0 0 0 2 2h1l1 5h3l-1-5"/></svg></span>Capítulo 09 · MPDV</span>
         <h2>Materiais de PDV</h2>
-        <p class="dsub">Material não é decoração. Cada peça cumpre uma função — e precisa de um motivo para existir naquele local.</p>
+        <p class="dsub">Material não é decoração. Cada peça cumpre uma função, e precisa de um motivo para existir naquele local.</p>
         <div class="dlabel">Neste capítulo você vai dominar</div>
         <div class="dlist">
           <div class="di"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></span>Escolher o material certo para cada objetivo</div>
@@ -1289,6 +1465,14 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
         <h3>Padronizar objetivo, instalação, uso e retirada</h3>
         <p class="big">A qualidade do MPDV depende de três dimensões: adequação ao objetivo, qualidade física e qualidade de instalação. Um material bom, no local errado, falha. Um material correto, velho ou torto, prejudica a percepção.</p>
       </div></div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">O material orienta o comportamento</h4>
+        <div class="deep">
+          <div class="prose"><p>O MPDV orienta o olhar, reduz a dúvida, destaca a prioridade e convida para uma compra complementar. Usado sem objetivo, vira poluição visual e perde força.</p><p>Cada tipo tem uma regra: material permanente, de campanha, educativo, de preço, de ponto extra e de cross. Cada um tem vida útil, local ideal, forma de instalação e critério de retirada.</p><p>A qualidade depende de três dimensões: adequação ao objetivo, qualidade física e qualidade de instalação. Um material correto, no local errado, falha. Um material bem instalado, mas com produto em falta, gera frustração.</p></div>
+          <aside><div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div><ul><li>Função, não decoração</li><li>Cada tipo tem a sua regra</li><li>Objetivo, física e instalação</li><li>Retirar o material vencido</li></ul></aside>
+        </div>
+      </div>
 
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>Fichas técnicas de material</div>
@@ -1324,7 +1508,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="rev">
         <span class="dkick"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span>Capítulo 10 · Pessoas</span>
         <h2>Papel do promotor</h2>
-        <p class="dsub">Execução, relacionamento e inteligência. O promotor não é mão de obra operacional — é o olhar da marca dentro da loja.</p>
+        <p class="dsub">Execução, relacionamento e inteligência. O promotor não é mão de obra operacional, é o olhar da marca dentro da loja.</p>
         <div class="dlabel">Neste capítulo você vai dominar</div>
         <div class="dlist">
           <div class="di"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></span>Onde a autonomia começa e termina</div>
@@ -1346,6 +1530,19 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
         <h3>Escopo claro protege o promotor e a marca</h3>
         <p class="big">A clareza de responsabilidades reduz atrito: a loja sabe o que esperar, o distribuidor entende o apoio e o gestor avalia com critérios objetivos. A estrutura "faço · apoio · escalo · não faço" ajuda em situações ambíguas.</p>
       </div></div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">Execução, relacionamento e inteligência</h4>
+        <div class="deep">
+          <div class="prose"><p>O promotor não é apenas mão de obra operacional. Ele é o olhar da marca dentro da loja. Ao mesmo tempo, o seu escopo precisa ser protegido para evitar conflitos comerciais e atuação técnica sem respaldo.</p><p>A clareza de responsabilidades reduz o atrito. A loja sabe o que esperar, o distribuidor entende o apoio e o gestor avalia o desempenho com critérios mais objetivos.</p><p>A lógica faço, apoio, escalo e não faço é mais útil do que uma lista genérica de atribuições, porque orienta o promotor nas situações em que a decisão não é óbvia.</p></div>
+          <aside><div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div><ul><li>O olhar da marca na loja</li><li>Escopo protegido</li><li>Reduz o atrito com a loja</li><li>Gera inteligência de campo</li></ul></aside>
+        </div>
+      </div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg></span> Situações de campo</div>
+        <h4 class="section-t">Como agir</h4>
+        <div class="examples"><div class="exmp"><div class="sit"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span> Faltou produto</div><div class="act">Registre a ruptura e acione o canal responsável.</div></div><div class="exmp"><div class="sit"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span> Há oportunidade de ponto extra</div><div class="act">Registre e alinhe com o gestor.</div></div><div class="exmp"><div class="sit"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg></span> O veterinário pede informação técnica</div><div class="act">Direcione para o time de Demanda.</div></div></div>
+      </div>
 
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18M3 12h18"/></svg></span>Quadrante de responsabilidade</div>
@@ -1357,7 +1554,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
           <div class="qcell q3"><h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></span>Escalo</h4><ul><li>Ruptura recorrente e problema de preço</li><li>Conflito com a loja</li><li>Pergunta técnica e ação concorrente</li></ul></div>
           <div class="qcell q4"><h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>Não faço</h4><ul><li>Prescrever ou prometer resultado</li><li>Mexer em área proibida</li><li>Instalar sem autorização ou discutir</li></ul></div>
         </div>
-        <div class="callout"><div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span></div><div><b>Inteligência de campo:</b> <p>ruptura recorrente, resistência de loja, concorrente dominante e oportunidade de sortimento são informações valiosas — o promotor é o olhar da marca no PDV.</p></div></div>
+        <div class="callout"><div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span></div><div><b>Inteligência de campo:</b> <p>ruptura recorrente, resistência de loja, concorrente dominante e oportunidade de sortimento são informações valiosas, o promotor é o olhar da marca no PDV.</p></div></div>
       </div>
 
       <div class="rev opstrip">
@@ -1407,8 +1604,17 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="lead-block rev"><div class="bar"></div><div>
         <div class="obj-lab">Objetivo do capítulo</div>
         <h3>Converter a visita em processo padronizado</h3>
-        <p class="big">Sem rotina, a qualidade depende demais da experiência individual. Cada etapa existe por um motivo: a foto antes é linha de base; o score é melhoria; a pendência é dado para gestão — não burocracia.</p>
+        <p class="big">Sem rotina, a qualidade depende demais da experiência individual. Cada etapa existe por um motivo: a foto antes é linha de base; o score é melhoria; a pendência é dado para gestão, não burocracia.</p>
       </div></div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">A rotina é o sistema operacional da visita</h4>
+        <div class="deep">
+          <div class="prose"><p>A rotina transforma a intenção em sequência e a sequência em padrão mensurável. Sem ela, a qualidade depende demais da experiência individual de cada promotor.</p><p>A rotina é flexível por duração e objetivo. Uma visita de duas horas não tem a mesma profundidade de uma de seis horas, mas ambas seguem a mesma lógica: preparar, diagnosticar, executar, abordar, registrar e fechar.</p><p>O maior risco é a rotina virar burocracia. Por isso, cada etapa é explicada. A foto inicial é a linha de base. O score é instrumento de melhoria. A pendência é dado para a gestão.</p></div>
+          <aside><div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div><ul><li>Gera um padrão mensurável</li><li>Duas e seis horas, mesma lógica</li><li>Evidência, não burocracia</li><li>O reporte gera decisão</li></ul></aside>
+        </div>
+      </div>
+      <div class="tipbox rev"><div class="ti2"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span></div><div><b>Em treinamento:</b> <p>Faça um simulado cronometrado de visita curta: diagnóstico, execução prioritária e reporte. Depois, classifique quais fotos seriam aceitas como evidência.</p></div></div>
 
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></span>Linha do tempo da visita</div>
@@ -1461,7 +1667,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="rev">
         <span class="dkick"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>Capítulo 12 · Abordagem</span>
         <h2>Abordagem e scripts</h2>
-        <p class="dsub">O ponto em que execução encontra relacionamento. Boa abordagem começa por permissão e diagnóstico — não por empurrar mensagem.</p>
+        <p class="dsub">O ponto em que execução encontra relacionamento. Boa abordagem começa por permissão e diagnóstico, não por empurrar mensagem.</p>
         <div class="dlabel">Neste capítulo você vai dominar</div>
         <div class="dlist">
           <div class="di"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg></span>Escutar antes de apresentar</div>
@@ -1483,6 +1689,14 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
         <h3>Conversas comerciais sem invadir o técnico</h3>
         <p class="big">Cada público tem um objetivo: o balconista precisa de argumento simples; o gerente enxerga giro e organização; o cliente é atendido sem invasão. Quando surge dúvida técnica, direcione ao veterinário, à Demanda ou ao material oficial.</p>
       </div></div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">A abordagem une execução e relacionamento</h4>
+        <div class="deep">
+          <div class="prose"><p>A boa abordagem destrava a recomendação, gera colaboração da loja e melhora a qualidade da exposição. A abordagem invasiva, longa ou técnica demais cria resistência.</p><p>Ela começa por permissão e diagnóstico. Antes de falar do produto, o promotor observa, entende o momento e faz uma pergunta útil. Isso muda o tom: de empurrar mensagem para ajudar a loja a vender melhor.</p><p>Os scripts são guias, não textos decorados. Eles dão segurança para a abertura, a pergunta, o argumento, o limite técnico e o fechamento, com frases permitidas e frases a evitar.</p></div>
+          <aside><div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div><ul><li>Escutar antes de apresentar</li><li>Permissão e diagnóstico primeiro</li><li>Guias, não decoreba</li><li>O limite técnico protege a marca</li></ul></aside>
+        </div>
+      </div>
 
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>Abordagem em ação</div>
@@ -1491,7 +1705,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
         <div class="chatwrap">
           <div class="bubble me"><div class="who">Promotor</div>Posso te mostrar rápido como organizamos essa linha?</div>
           <div class="bubble them"><div class="who">Balconista</div>Pode, mas tá corrido hoje.</div>
-          <div class="bubble me"><div class="who">Promotor</div>Tranquilo — em 2 minutos. Quais produtos o time tem mais dificuldade de explicar?</div>
+          <div class="bubble me"><div class="who">Promotor</div>Tranquilo, em 2 minutos. Quais produtos o time tem mais dificuldade de explicar?</div>
           <div class="bubble them"><div class="who">Balconista</div>Os de proteção, o povo pergunta muito.</div>
           <div class="bubble me"><div class="who">Promotor</div>Deixei os principais no campo de visão e com preço. Para uso e dose, o ideal é o cliente falar com o veterinário. Combinado?</div>
         </div>
@@ -1555,9 +1769,17 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
     <div class="cbody">
       <div class="lead-block rev"><div class="bar"></div><div>
         <div class="obj-lab">Objetivo do capítulo</div>
-        <h3>Regras que protegem — não que policiam</h3>
+        <h3>Regras que protegem, não que policiam</h3>
         <p class="big">As regras existem para proteger o promotor, a loja, o tutor, o animal e a marca. Isso torna a conduta mais fácil de aceitar e cumprir. Uma boa postura facilita acesso a espaço, abertura para conversa e confiança no trabalho.</p>
       </div></div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">Conduta é um ativo de trade</h4>
+        <div class="deep">
+          <div class="prose"><p>A conduta protege a relação, a permissão de execução e a reputação. Uma boa postura facilita o acesso ao espaço, a abertura para a conversa e a confiança no trabalho da indústria.</p><p>O capítulo é normativo, mas não policialesco. As regras existem para proteger o promotor, a loja, o tutor, o animal e a marca. Isso torna a conduta mais fácil de aceitar e de cumprir.</p><p>A conduta também trata de situações comuns: loja cheia, responsável ausente, conflito, concorrente presente, uso de celular, fotos, uniforme e confidencialidade.</p></div>
+          <aside><div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div><ul><li>Protege a relação com a loja</li><li>Regras que protegem, não policiam</li><li>Celular e fotos com critério</li><li>Uniforme conforme o perfil</li></ul></aside>
+        </div>
+      </div>
 
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg></span>O código de conduta</div>
@@ -1627,6 +1849,15 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
         <h3>Transformar visita em aprendizado</h3>
         <p class="big">O score precisa ser simples para ser usado em campo e robusto para orientar decisão. Boa execução com baixo giro pede revisão de mix ou preço; baixo score com baixo giro pede correção do básico.</p>
       </div></div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">Indicadores ligam a visita à gestão</h4>
+        <div class="deep">
+          <div class="prose"><p>Sem indicadores, a operação sabe que trabalhou, mas não sabe se melhorou. O capítulo mede o que importa: disponibilidade, visibilidade, organização, material correto, abordagem e evolução.</p><p>O score precisa ser simples para ser usado em campo e robusto para orientar a decisão. Muitos indicadores geram fadiga. Poucos escondem problemas. A recomendação é combinar um score básico com campos qualitativos.</p><p>A leitura separa causa de sintoma. A ruptura pode ser problema de reposição, compra ou demanda. O material ausente pode ser falta de estoque, resistência da loja ou falha de rotina. O manual ajuda a interpretar.</p></div>
+          <aside><div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div><ul><li>A ponte entre visita e gestão</li><li>Simples e significativo</li><li>Separar causa de sintoma</li><li>O dashboard gera ação</li></ul></aside>
+        </div>
+      </div>
+      <div class="tipbox rev"><div class="ti2"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span></div><div><b>Em treinamento:</b> <p>Avalie a mesma foto com todo o time. Cada pessoa pontua e depois vocês calibram o critério para reduzir a subjetividade.</p></div></div>
 
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 15l3-3 2 2 5-5"/></svg></span>Dashboard de execução</div>
@@ -1703,8 +1934,16 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="lead-block rev"><div class="bar"></div><div>
         <div class="obj-lab">Objetivo do capítulo</div>
         <h3>Ferramentas destacáveis para o dia a dia</h3>
-        <p class="big">Checklists, scorecards, fichas de MPDV, scripts e roteiros podem virar materiais independentes. Ao mudar portfólio, campanha ou rotina, basta atualizar o anexo — sem refazer o documento inteiro.</p>
+        <p class="big">Checklists, scorecards, fichas de MPDV, scripts e roteiros podem virar materiais independentes. Ao mudar portfólio, campanha ou rotina, basta atualizar o anexo, sem refazer o documento inteiro.</p>
       </div></div>
+      <div class="rev mt56">
+        <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></span> Conteúdo desenvolvido</div>
+        <h4 class="section-t">Anexos transformam o manual em ferramenta</h4>
+        <div class="deep">
+          <div class="prose"><p>Os anexos são a parte que o usuário imprime, consulta no celular e leva para o campo. Por isso, são desenhados com objetividade, boa hierarquia e o mínimo de texto necessário.</p><p>Nem todo conteúdo precisa ficar preso ao PDF principal. Checklists, scorecards, fichas de MPDV, scripts e roteiros podem virar materiais independentes, especialmente para promotores e distribuidores.</p><p>Os anexos também mantêm o manual vivo. Quando muda o portfólio, a campanha ou a rotina, basta atualizar o anexo correspondente. É também onde os materiais internos da Ourofino são incorporados.</p></div>
+          <aside><div class="al"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Em resumo</div><ul><li>Consulta rápida e impressão</li><li>Materiais independentes</li><li>Mantêm o manual atualizado</li><li>Incorporam GC2 e ProTrade</li></ul></aside>
+        </div>
+      </div>
 
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span>Toolkit de campo</div>
@@ -1754,7 +1993,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <p style="max-width:340px;font-size:.9rem">Manual de Trade Marketing e Execução em PDV. Documento-mestre para treinamento, checklists e scorecard.</p>
       <p class="slog" style="margin-top:14px;font-size:1.1rem">Tá bem cuidado.</p>
     </div>
-    <div><h4>Fontes de apoio</h4><ul><li>Briefing e transcrição de reunião</li><li>Ourofino Pet — site e FAQ</li><li>Ourofino Saúde Animal — cultura</li><li>ABEMPET · MAPA · ABRAS</li></ul></div>
+    <div><h4>Fontes de apoio</h4><ul><li>Briefing e transcrição de reunião</li><li>Ourofino Pet: site e FAQ</li><li>Ourofino Saúde Animal: cultura</li><li>ABEMPET · MAPA · ABRAS</li></ul></div>
     <div><h4>Ações rápidas</h4><ul><li><a onclick="baixarPDF()" style="color:#8ef2a3;cursor:pointer">↓ Baixar PDF (horizontal)</a></li><li><a onclick="openDrawer()" style="color:#c7d4e8;cursor:pointer">Índice de capítulos</a></li><li><a onclick="scrollToId('quiz')" style="color:#c7d4e8;cursor:pointer">Teste de execução</a></li></ul></div>
   </div>
   <div class="fbot"><span>© 2026 Ourofino Pet · Uso interno de trade.</span><span>Identidade visual v2.0 · Desenvolvido por <b style="color:#fff">75&nbsp;LAB</b></span></div>
@@ -1814,10 +2053,10 @@ var MATINT=[
 {d:'Manual Trade MKT Ourofino 2',p:'Complementar conduta, rotina, materiais, boas práticas e referências de layout.'},
 {d:'OUR_Jornadas_GC2',p:'Inserir mapas oficiais de jornada, fluxo, decisores, áreas quentes e segmentação de canal.'},
 {d:'ROTINA_PROTRADE',p:'Substituir roteiros de visita por rotina oficial, tempos, nomenclaturas, tarefas e evidências.'}];
-var TRILHAS={onb:{desc:'Trilha obrigatória para onboarding e treinamento — leitura completa e na ordem.',chips:[1,2,4,10,11,12,13]},rap:{desc:'Trilha de consulta rápida para o dia de visita — abra direto no que precisa.',chips:[5,6,7,8,9,11,14]}};
+var TRILHAS={onb:{desc:'Trilha obrigatória para onboarding e treinamento, leitura completa e na ordem.',chips:[1,2,4,10,11,12,13]},rap:{desc:'Trilha de consulta rápida para o dia de visita, abra direto no que precisa.',chips:[5,6,7,8,9,11,14]}};
 var GLOSS=[
 {t:'Sell-in',d:'Venda da indústria/distribuidor para a loja. Não garante giro.'},
-{t:'Sell-out',d:'Venda da loja para o shopper — o giro real que importa.'},
+{t:'Sell-out',d:'Venda da loja para o shopper: o giro real que importa.'},
 {t:'Ponto natural',d:'Local fixo do produto na categoria. Corrigir primeiro, sempre.'},
 {t:'Ponto extra',d:'Exposição adicional (display, cubo). Só depois do básico ok.'},
 {t:'Ruptura',d:'Falta do produto na gôndola. Perda de venda, recomendação e confiança.'},
@@ -1940,7 +2179,7 @@ handle.addEventListener('mousedown',function(){drag=true;});window.addEventListe
 var qi=0,qScore=0,qA=false;
 function renderQuiz(){var q=QUIZ[qi];qA=false;el('quizCard').innerHTML='<div class="q-count">Pergunta '+(qi+1)+' de '+QUIZ.length+'</div><div class="q-text">'+q.q+'</div><div class="q-opts">'+q.o.map(function(o,i){return '<button class="q-opt" onclick="answerQuiz('+i+')"><span>'+o+'</span><span class="mk" id="mk'+i+'"></span></button>';}).join('')+'</div><div class="q-expl" id="qExpl">'+q.e+'</div><div class="q-foot"><div style="color:#9fb2ce;font-size:.85rem">Acertos: <b style="color:#fff" id="qsc">'+qScore+'</b></div><button class="btn btn-green" id="qNext" style="display:none" onclick="nextQuiz()">Próxima '+ic('arrow')+'</button></div>';}
 window.answerQuiz=function(i){if(qA)return;qA=true;var q=QUIZ[qi],opts=document.querySelectorAll('.q-opt');opts[q.a].classList.add('correct');el('mk'+q.a).textContent='✓';if(i!==q.a){opts[i].classList.add('wrong');el('mk'+i).textContent='✕';}else qScore++;el('qsc').textContent=qScore;el('qExpl').classList.add('show');el('qNext').style.display='inline-flex';};
-window.nextQuiz=function(){qi++;if(qi<QUIZ.length){renderQuiz();scrollToId('quiz');}else{var msg=qScore>=4?'Execução afiada! Tá bem cuidado.':qScore>=3?'Bom caminho — revise os capítulos-chave.':'Vale reler as trilhas de onboarding.';el('quizCard').innerHTML='<div class="q-result"><div class="big">'+qScore+'/'+QUIZ.length+'</div><p style="font-family:var(--serif);font-size:1.4rem;color:#fff;margin:14px 0 6px">'+msg+'</p><p style="color:#c7d4e8;margin-bottom:22px">Você concluiu o teste de execução.</p><button class="btn btn-green" onclick="restartQuiz()">Refazer o teste</button></div>';}};
+window.nextQuiz=function(){qi++;if(qi<QUIZ.length){renderQuiz();scrollToId('quiz');}else{var msg=qScore>=4?'Execução afiada! Tá bem cuidado.':qScore>=3?'Bom caminho, revise os capítulos-chave.':'Vale reler as trilhas de onboarding.';el('quizCard').innerHTML='<div class="q-result"><div class="big">'+qScore+'/'+QUIZ.length+'</div><p style="font-family:var(--serif);font-size:1.4rem;color:#fff;margin:14px 0 6px">'+msg+'</p><p style="color:#c7d4e8;margin-bottom:22px">Você concluiu o teste de execução.</p><button class="btn btn-green" onclick="restartQuiz()">Refazer o teste</button></div>';}};
 window.restartQuiz=function(){qi=0;qScore=0;renderQuiz();};
 renderQuiz();
 
