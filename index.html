@@ -663,10 +663,10 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
 }
 
 @media print{
-  @page{size:A4 landscape;margin:12mm}
+  @page{size:A4 landscape;margin:0}
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;animation:none!important;transition:none!important}
   #loader,#nav,#progress,.fab,.scrollcue,.ch-foot,.menu-toggle,.capa-btns,.blob,#drawer,.nav-pdf{display:none!important}
-  html,body{background:#fff}
+  html,body{background:var(--cream)}
   body{font-size:12px;line-height:1.5}
   .rev{opacity:1!important;transform:none!important}
   p,li{orphans:3;widows:3}
@@ -674,16 +674,16 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
   img,svg{max-width:100%}
 
   /* capa e divisórias de capítulo = páginas próprias, como um livro */
-  #capa{min-height:auto;break-after:page;padding:0}
-  #capa .capa-in{padding:24px 26px}
+  #capa{min-height:100vh;break-after:page;padding:0;display:flex;align-items:center}
+  #capa .capa-in{padding:28px 48px}
   #capa .pslot::before{padding-top:0}
   #capa .pslot{height:360px}
   #capa h1{font-size:2.6rem}
-  .divider{min-height:auto;break-before:page;break-after:page;padding:26px 0;display:flex;align-items:center;min-height:480px}
-  .divider .dwrap{padding:10px 26px;width:100%}
+  .divider{break-before:page;break-after:page;padding:0;display:flex;align-items:center;min-height:100vh}
+  .divider .dwrap{padding:20px 48px;width:100%}
   .chapter{break-before:auto}
-  .cbody{padding:26px 26px}
-  section.blk{padding:22px 0;break-before:page}
+  .cbody{padding:34px 48px}
+  section.blk{padding:30px 20px;break-before:page}
   #indice.blk{break-before:auto}
   #quiz{display:none}
   .pullquote,.pull-sub,.statsrc{break-inside:avoid-page}
