@@ -365,14 +365,24 @@ section.blk{padding:80px 0;position:relative}
 .lineTab.active{color:#fff;border-color:transparent}
 .fiche-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
 #ficheGrid{margin-top:22px}
-.line-block{margin-top:20px;background:#fff;border:1.5px solid var(--g2);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sm)}
-#ficheGrid .line-block:first-child{margin-top:0}
-.line-head{display:flex;align-items:center;gap:14px;padding:16px 24px;background:color-mix(in srgb,var(--lc) 9%,#fff);border-bottom:1.5px solid color-mix(in srgb,var(--lc) 30%,#fff)}
-.line-head b{font-family:var(--serif);font-weight:700;font-size:1.15rem;color:var(--navy)}
-.line-num{width:34px;height:34px;flex:none;border-radius:10px;background:var(--lc);color:#fff;font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;letter-spacing:.03em}
-.line-body{padding:20px 24px 22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
-.line-body .fiche{border:1.5px solid var(--g2);border-left:5px solid var(--lc);border-radius:14px}
-.line-body .fiche:hover{transform:none;box-shadow:none;border-color:var(--lc)}
+.gondola{position:relative;background:linear-gradient(165deg,#fff 0%,var(--soft) 100%);border:1.5px solid var(--g2);border-radius:26px;padding:14px 34px 34px;box-shadow:var(--shadow-sm)}
+.gondola::before,.gondola::after{content:"";position:absolute;top:26px;bottom:26px;width:9px;border-radius:5px;background:linear-gradient(90deg,#dbe2d6,#c2ccbc)}
+.gondola::before{left:13px}.gondola::after{right:13px}
+.shelf-row{display:grid;grid-template-columns:180px 1fr;gap:0 22px;align-items:end;margin-top:30px}
+.shelf-row:first-child{margin-top:14px}
+.shelf-tag{background:var(--lc);color:#fff;border-radius:14px 14px 0 0;padding:16px 18px 14px;box-shadow:inset 0 -14px 24px -16px rgba(0,0,0,.35)}
+.shelf-tag span{display:block;font-size:.68rem;font-weight:800;letter-spacing:.16em;opacity:.8;margin-bottom:3px}
+.shelf-tag b{font-family:var(--serif);font-size:1.18rem;line-height:1.15}
+.shelf-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.shelf-item{position:relative;background:#fff;border:1.5px solid var(--g2);border-bottom:none;border-radius:12px 12px 0 0;padding:16px 18px 14px;transition:.22s}
+.shelf-item::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--lc);border-radius:12px 12px 0 0}
+.shelf-item:hover{transform:translateY(-5px)}
+.shelf-item h4{font-family:var(--sans);font-weight:700;font-size:1rem;color:var(--navy)}
+.shelf-item .frole{color:var(--lcd);font-size:.8rem;font-weight:600;margin:2px 0 9px}
+.shelf-item .fseals{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px}
+.shelf-item .frow{display:flex;align-items:center;gap:7px;font-size:.8rem;color:#6a7891}
+.shelf-base{grid-column:1/-1;height:13px;border-radius:4px;background:linear-gradient(180deg,#e6ebe2,#c5cfbf);box-shadow:0 5px 10px -3px rgba(7,32,71,.22)}
+@media(max-width:700px){.shelf-row{grid-template-columns:1fr;gap:12px}.shelf-tag{border-radius:12px}.shelf-base{display:none}.shelf-item{border-bottom:1.5px solid var(--g2);border-radius:12px}.shelf-item::before{border-radius:12px 12px 0 0}}
 .fiche{background:#fff;border:1.5px solid var(--g2);border-radius:20px;overflow:hidden;transition:.25s;display:none}
 .fiche.show{display:block;animation:fade .4s}
 .fiche:hover{transform:translateY(-5px);box-shadow:var(--shadow-sm)}
@@ -967,6 +977,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
       <div class="rev">
         <div class="blocklab"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>Catálogo por linha</div>
         <h4 class="section-t">Seis linhas, seis papéis no PDV</h4>
+        <p class="section-s">Leia como uma gôndola: cada prateleira é uma linha do portfólio, com o papel que cumpre, os selos de prioridade e o melhor lugar para posicionar.</p>
         <div id="ficheGrid"></div>
       </div>
 
@@ -2056,7 +2067,7 @@ if(atlasEl){atlasEl.innerHTML=ATLAS.map(function(g){return '<div class="pa-cat">
 /* cap3 catalog — todas as linhas empilhadas */
 var ficheEl=el('ficheGrid');
 if(ficheEl){
-ficheEl.innerHTML=LINES.map(function(l,idx){return '<div class="line-block" style="--lc:'+l.c+';--lcd:'+l.cd+'"><div class="line-head"><span class="line-num">'+String(idx+1).padStart(2,'0')+'</span><b>'+l.k+'</b></div><div class="line-body">'+l.f.map(function(f){return '<div class="fiche show"><div class="fpad"><h4>'+f.h+'</h4><div class="frole" style="color:'+l.cd+'">'+f.r+'</div><div class="fseals">'+f.s.map(function(s){return '<span class="fseal" style="background:color-mix(in srgb,'+l.c+' 12%,#fff);color:'+l.cd+';border:1px solid color-mix(in srgb,'+l.c+' 35%,#fff)">'+s+'</span>';}).join('')+'</div><div class="frow"><span class="ico" style="color:'+l.c+';width:16px;height:16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">'+P.pin+'</svg></span>'+f.p+'</div></div></div>';}).join('')+'</div></div>';}).join('');
+ficheEl.innerHTML='<div class="gondola">'+LINES.map(function(l,idx){return '<div class="shelf-row" style="--lc:'+l.c+';--lcd:'+l.cd+'"><div class="shelf-tag"><span>LINHA 0'+(idx+1)+'</span><b>'+l.k+'</b></div><div class="shelf-items">'+l.f.map(function(f){return '<div class="shelf-item"><h4>'+f.h+'</h4><div class="frole">'+f.r+'</div><div class="fseals">'+f.s.map(function(s){return '<span class="fseal" style="background:color-mix(in srgb,'+l.c+' 12%,#fff);color:'+l.cd+';border:1px solid color-mix(in srgb,'+l.c+' 35%,#fff)">'+s+'</span>';}).join('')+'</div><div class="frow"><span class="ico" style="color:'+l.c+';width:16px;height:16px;flex:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">'+P.pin+'</svg></span>'+f.p+'</div></div>';}).join('')+'</div><div class="shelf-base"></div></div>';}).join('')+'</div>';
 }
 
 /* cap4 gloss — cards abertos, sem interação */
