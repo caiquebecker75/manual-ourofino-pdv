@@ -2251,7 +2251,7 @@ window.closeDrawer=function(){el('drawer').classList.remove('open');};
 
 /* cap3 atlas de produtos */
 var atlasEl=el('atlasGrid');
-if(atlasEl){atlasEl.innerHTML=ATLAS.map(function(g){return '<div class="pa-cat">'+g.cat+'</div><div class="product-atlas-grid">'+g.items.map(function(p){var media=p.img?'<img src="assets/'+p.img+'.png" alt="'+p.n+'">':'<div class="pa-ph">'+p.n.charAt(0)+'</div>';return '<article class="product-atlas-card">'+media+'<b>'+p.n+'</b><span>'+p.d+'</span></article>';}).join('')+'</div>';}).join('');}
+if(atlasEl){atlasEl.innerHTML=ATLAS.map(function(g){return '<div class="pa-cat">'+ic(g.ic||'grid')+g.cat+'</div><div class="product-atlas-grid">'+g.items.map(function(p){var media=p.img?'<img src="assets/'+p.img+'.png" alt="'+p.n+'">':'<div class="pa-ph">'+p.n.charAt(0)+'</div>';return '<article class="product-atlas-card">'+media+'<b>'+p.n+'</b><span>'+p.d+'</span></article>';}).join('')+'</div>';}).join('');}
 
 /* cap3 catalog — todas as linhas empilhadas */
 var ficheEl=el('ficheGrid');
