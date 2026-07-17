@@ -720,6 +720,84 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
   .flip-b{position:relative;transform:none;display:none}.flip.on .flip-in{transform:none}
   .fstep:hover,.tool:hover,.chan:hover,.pmg-card:hover,.value:hover,.fiche:hover,.shelf-item:hover{transform:none;box-shadow:none}
 }
+
+/* ============ RESKIN · referência Finovate (forest + lime + cream) ============ */
+:root{--lime:#C7DF35;--lime-d:#7d941c;--lime-l:#f2f7d9;--forest:#0E3B2C;--cream:#FAF9F3;--line:#E5E7DA}
+body{background:var(--cream)}
+h1,h2,h3,h4,h5{letter-spacing:-.02em}
+
+/* micro-labels viram pílulas com ponto lima */
+.kick{background:#fff;border:1px solid var(--line);border-radius:100px;padding:7px 14px 7px 10px;font-size:.68rem;letter-spacing:.14em;color:var(--forest)}
+.kick::before{width:8px;height:8px;border-radius:50%;background:var(--lime)}
+.blocklab{background:#fff;border:1px solid var(--line);border-radius:100px;padding:6px 16px 6px 8px;font-size:.68rem;color:var(--forest)}
+.blocklab .ico{width:24px;height:24px;background:var(--lime);color:var(--forest);border-radius:50%;padding:5px;box-sizing:border-box}
+.manifesto .blocklab,#cap15-body .blocklab{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:#fff}
+.dkick{background:rgba(199,223,53,.12);border-color:rgba(199,223,53,.4);color:#e9f3b8}
+.dkick .ico{color:var(--lime)}
+.dlabel{color:#c9d8a6}
+.di .ico{color:var(--lime)}
+
+/* cards mais redondos e limpos */
+.need,.mi-card,.exmp,.gcard,.tool,.chan,.fiche,.pmg-card,.fstep,.stair,.risk-card,.panel,.checklist,.value,.spec,.visitcard,.ponto,.shelf-item,.sg-steps,.sg-ranges,.product-atlas-card{border-radius:22px}
+.statband{gap:14px}
+.statc{background:#fff;border:1px solid var(--line);border-radius:22px;color:var(--navy)}
+.statc .si{background:var(--lime);color:var(--forest);border-radius:50%;padding:5px;box-sizing:border-box;width:28px;height:28px}
+.statc .sv{color:var(--navy)}
+.statc .sv b{color:var(--forest);background:var(--lime);border-radius:8px;padding:0 8px}
+.statc .sl{color:#68755f;text-transform:uppercase;font-size:.68rem;letter-spacing:.08em;font-weight:700;margin-top:9px}
+
+/* botões em pílula: verde-floresta + círculo-lima */
+.btn{border-radius:100px}
+.btn-green{background:var(--forest)}
+.btn-green:hover{background:#0a2c21}
+.btn-green .ico{background:var(--lime);color:var(--forest);border-radius:50%;padding:4px;box-sizing:border-box;width:24px;height:24px}
+.ch-foot button{background:#fff;border:1px solid var(--line);border-radius:100px;color:var(--navy);font-weight:700;transition:.25s}
+.ch-foot button:hover{border-color:var(--lime);background:var(--lime-l)}
+.ch-foot button .ico{background:var(--lime);color:var(--forest);border-radius:50%;padding:5px;box-sizing:border-box;width:26px;height:26px}
+.nav-pdf{background:var(--lime)!important;color:var(--forest)!important;border-radius:100px}
+
+/* números e selos circulares */
+.fstep .fnum,.pmg-letter,.line-num,.sg-step span,.step::before{border-radius:50%}
+.stair .ico{background:var(--lime-l);color:var(--lime-d);border-radius:50%;padding:5px;box-sizing:border-box;width:30px;height:30px}
+.ponto .pic{box-shadow:0 0 0 5px var(--lime-l)}
+.need .ic{background:var(--lime);color:var(--forest);border-radius:50%}
+.tool .ti{background:var(--lime-l);color:var(--lime-d);border-radius:50%}
+.gcard .ico{background:var(--lime-l);color:var(--lime-d);border-radius:50%;padding:5px;box-sizing:border-box;width:30px;height:30px}
+
+/* seções escuras no verde-floresta com destaques lima */
+.manifesto,#cap2-body{background:var(--forest)!important}
+#cap15-body{background:#0B3327!important}
+.pullquote .hl{color:var(--lime)}
+.manifesto .val,.manifesto .blocklab{color:#e9f3b8}
+footer{background:var(--forest)}
+footer .slog,footer .fmark b{color:var(--lime)}
+
+/* capa hero */
+#capa .capa-badge{background:rgba(199,223,53,.1);border-color:rgba(199,223,53,.4);color:#e9f3b8}
+#capa .hl{color:var(--lime)}
+.slogan{color:var(--lime)}
+
+/* gôndola e prateleiras */
+.shelf-tag{border-radius:18px 18px 0 0}
+.gondola{border-radius:26px}
+
+/* fiche seals e chips */
+.fseal{border-radius:100px}
+.dec{border-radius:100px}
+.val{border-radius:100px}
+
+/* tabela de navegação/índice */
+.need small{color:var(--lime-d);font-weight:800}
+.need:hover{border-color:var(--lime)}
+.fstep:hover,.tool:hover,.chan:hover,.pmg-card:hover,.gcard:hover{border-color:var(--lime)}
+
+/* quiz e caixas escuras */
+.quiz-card{background:var(--forest);border-radius:26px}
+.q-result .big{color:var(--lime)}
+.score-out{background:var(--forest)}
+#scoreVal{color:var(--lime)}
+
+.hl2{color:var(--lime)}
 </style>
 <style id="editorial-upgrade">
 :root{--navy:#0b382d;--navy2:#082a22;--blue:#0d4a38;--green:#86a900;--green-d:#536c00;--green-l:#eef3dc;--cyan:#c7df35;--soft:#f4f3ed}
@@ -838,7 +916,7 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
     <div class="dwrap">
       <div class="rev">
         <span class="dkick"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>Capítulo 01 · Introdução</span>
-        <h2>Seja bem-vindo</h2>
+        <h2>Seja <span class="hl2">bem-vindo</span></h2>
         <p class="dsub">A partir de agora você poderá utilizar esse manual no seu dia a dia sempre que tiver dúvidas de como garantir a execução perfeita. Aqui você terá o direcionamento sobre lojas, produtos e perfis de materiais de ponto de venda.</p>
         <div class="dlabel">Neste capítulo você vai dominar</div>
         <div class="dlist">
