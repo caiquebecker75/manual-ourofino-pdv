@@ -684,7 +684,14 @@ footer .slog{color:var(--cyan);font-family:var(--serif)}
   .chapter{break-before:auto}
   .cbody{padding:34px 48px}
   section.blk{padding:30px 20px;break-before:page}
-  #indice.blk{break-before:auto}
+  #indice.blk{break-before:page;break-inside:avoid-page}
+  #indice .sec-head{margin-bottom:14px}
+  #needGrid{grid-template-columns:repeat(4,1fr);gap:12px}
+  .need{padding:14px 16px}
+  .need .ic{width:34px;height:34px}
+  .need h4{font-size:.88rem}
+  .need p{font-size:.74rem}
+  .need small{font-size:.7rem}
   #quiz{display:none}
   .pullquote,.pull-sub,.statsrc{break-inside:avoid-page}
 
