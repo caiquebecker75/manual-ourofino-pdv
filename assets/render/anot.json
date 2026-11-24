@@ -1,0 +1,136 @@
+{
+ "F-DEPOIS": {
+  "antipulga": [
+   34.04,
+   19.57
+  ],
+  "concorrente": [
+   65.96,
+   19.57
+  ],
+  "vermifugo": [
+   97.88,
+   19.57
+  ],
+  "suplementos": [
+   97.46,
+   46.4
+  ],
+  "concorrente2": [
+   129.8,
+   19.57
+  ]
+ },
+ "F-LOJA": {},
+ "F-ANTES": {
+  "antipulga": [
+   34.04,
+   19.57
+  ],
+  "concorrente": [
+   65.96,
+   19.57
+  ],
+  "vermifugo": [
+   97.88,
+   19.57
+  ],
+  "suplementos": [
+   97.46,
+   46.4
+  ],
+  "concorrente2": [
+   129.8,
+   19.57
+  ]
+ },
+ "F-PONTO-EXTRA-CERTO": {
+  "buraco": [
+   44.09,
+   44.39
+  ],
+  "display": [
+   65.46,
+   58.04
+  ]
+ },
+ "F-MAT-ILHA": {},
+ "F-GONDOLA-ZONAS": {
+  "pes_meio": [
+   79.26,
+   72.51
+  ],
+  "maos_meio": [
+   79.58,
+   49.44
+  ],
+  "olhos_meio": [
+   79.79,
+   33.79
+  ],
+  "lim_080": [
+   79.47,
+   57.19
+  ],
+  "lim_120": [
+   79.69,
+   41.64
+  ],
+  "lim_160": [
+   79.9,
+   25.87
+  ]
+ },
+ "F-PRATELEIRA-IDEAL": {
+  "antipulga": [
+   21.52,
+   31.89
+  ],
+  "concorrente": [
+   40.51,
+   31.89
+  ],
+  "vermifugo": [
+   59.49,
+   31.89
+  ],
+  "suplementos": [
+   59.45,
+   53.13
+  ],
+  "concorrente2": [
+   78.48,
+   31.89
+  ]
+ },
+ "F-MAT-WOBBLER": {},
+ "F-MAT-REGUA": {},
+ "F-MAT-TESTEIRA": {},
+ "F-MAT-CLIPSTRIP": {},
+ "F-MAT-DISPLAY-BALCAO": {},
+ "F-MAT-TAKEONE": {},
+ "F-MAT-CARTAZ": {},
+ "F-PONTO-EXTRA-ERRADO": {
+  "buraco": [
+   44.09,
+   44.39
+  ],
+  "display": [
+   65.46,
+   58.04
+  ]
+ },
+ "F-MAT-DISPLAY-CHAO": {},
+ "F-MAT-STOPPER": {},
+ "F-ERRO-CARNAVAL": {},
+ "F-MAT-ADESIVO-CHAO": {},
+ "F-CROSS-MERCH": {},
+ "F-CAPA": {},
+ "O-ENTRADA": {},
+ "O-BALCAO": {},
+ "O-CORREDOR": {},
+ "O-MACRO": {},
+ "O-ALTO": {},
+ "O-FARMACIA": {},
+ "O-RACAO": {}
+}

@@ -1,0 +1,7 @@
+.DS_Store
+# renders brutos (PNG 16 bits, 5 a 16 MB cada): ficam só no HD; o site usa assets/img/*.webp
+assets/render/*.png
+# texturas geradas pelos scripts de tools/ (regeneráveis)
+assets/tex/
+# originais baixados do site da Ourofino (fonte das texturas 3D)
+assets/produtos/raw/

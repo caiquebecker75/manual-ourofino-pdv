@@ -883,7 +883,7 @@ footer .slog,footer .fmark b{color:var(--lime)}
       </div>
     </div>
     <div class="capa-art">
-      <figure class="pslot hero-photo" style="--ar:4/5"><img src="assets/hero.jpg" alt="Promotora Ourofino em uma loja pet com um cão"><span class="photo-caption">A excelência acontece na loja.</span></figure>
+      <figure class="pslot hero-photo" style="--ar:4/5"><img src="../assets/hero.jpg" alt="Promotora Ourofino em uma loja pet com um cão"><span class="photo-caption">A excelência acontece na loja.</span></figure>
     </div>
   </div>
   <div class="scrollcue">Role para começar<span></span></div>
@@ -1459,7 +1459,7 @@ footer .slog,footer .fmark b{color:var(--lime)}
     </div>
   </section>
   <section class="chapter" id="cap7-body" style="--acc:#10AD31;--acc-l:#e7f8ec;--acc-d:#0c8a27">
-    <div class="cbody"><div class="execution-study rev"><div class="execution-study-head"><span class="kick">Estudo visual de execução</span><h3>O mesmo espaço. Dois resultados.</h3><p class="section-s">Compare disponibilidade, agrupamento, alinhamento, blocagem, facings e clareza de preço.</p></div><div class="execution-study-grid"><figure class="execution-shot"><img src="assets/before.jpg" alt="Gôndola antes da organização"><b>ANTES: leitura dispersa</b></figure><figure class="execution-shot after"><img src="assets/after.jpg" alt="Gôndola depois da organização"><b>DEPOIS: lógica e consistência</b></figure></div></div>
+    <div class="cbody"><div class="execution-study rev"><div class="execution-study-head"><span class="kick">Estudo visual de execução</span><h3>O mesmo espaço. Dois resultados.</h3><p class="section-s">Compare disponibilidade, agrupamento, alinhamento, blocagem, facings e clareza de preço.</p></div><div class="execution-study-grid"><figure class="execution-shot"><img src="../assets/before.jpg" alt="Gôndola antes da organização"><b>ANTES: leitura dispersa</b></figure><figure class="execution-shot after"><img src="../assets/after.jpg" alt="Gôndola depois da organização"><b>DEPOIS: lógica e consistência</b></figure></div></div>
       <div class="lead-block rev"><div class="bar"></div><div>
         <div class="obj-lab">Objetivo do capítulo</div>
         <h3>Uma hierarquia que resolve venda antes de estética</h3>
@@ -2258,7 +2258,7 @@ window.closeDrawer=function(){el('drawer').classList.remove('open');};
 
 /* cap3 atlas de produtos */
 var atlasEl=el('atlasGrid');
-if(atlasEl){atlasEl.innerHTML=ATLAS.map(function(g){return '<div class="pa-cat">'+ic(g.ic||'grid')+g.cat+'</div><div class="product-atlas-grid">'+g.items.map(function(p){var media=p.img?'<img src="assets/'+p.img+'.png" alt="'+p.n+'">':'<div class="pa-ph">'+p.n.charAt(0)+'</div>';return '<article class="product-atlas-card">'+media+'<b>'+p.n+'</b><span>'+p.d+'</span></article>';}).join('')+'</div>';}).join('');}
+if(atlasEl){atlasEl.innerHTML=ATLAS.map(function(g){return '<div class="pa-cat">'+ic(g.ic||'grid')+g.cat+'</div><div class="product-atlas-grid">'+g.items.map(function(p){var media=p.img?'<img src="../assets/'+p.img+'.png" alt="'+p.n+'">':'<div class="pa-ph">'+p.n.charAt(0)+'</div>';return '<article class="product-atlas-card">'+media+'<b>'+p.n+'</b><span>'+p.d+'</span></article>';}).join('')+'</div>';}).join('');}
 
 /* cap3 catalog — todas as linhas empilhadas */
 var ficheEl=el('ficheGrid');

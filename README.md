@@ -1,24 +1,35 @@
-# Manual de Execução em PDV · Ourofino Pet
+# Guia de Execução no PDV · Ourofino Pet
 
-Manual interativo de **Trade Marketing e Execução em Ponto de Venda** da Ourofino Pet — uma página HTML única, sem dependências, alinhada ao guia de marca oficial (v2.0, 2026). *Tá bem cuidado.*
+Guia interativo de execução no ponto de venda para promotores, vendedores do distribuidor e equipes de loja. *Tá bem cuidado.*
 
-## 🔗 Acessar o manual (link ao vivo)
+**Link ao vivo:** https://caiquebecker75.github.io/manual-ourofino-pdv/
 
-**https://caiquebecker75.github.io/manual-ourofino-pdv/**
+Abre no celular e no computador. O botão **PDF** gera a versão impressa em A4 paisagem. O botão **Revisão** mostra as notas que aguardam validação da Ourofino.
 
-> Abre direto no navegador — celular ou desktop. Na capa há o botão **"Baixar em PDF (horizontal)"**.
+## O que tem dentro (versão 2)
 
-## O que tem dentro
+- 13 capítulos em seis partes: entender o trade e a loja, a visita, a gôndola, materiais e cross, produtos e postura.
+- Glossário A a Z com busca, checklist da visita que fica salvo no celular e teste final com dez situações de loja.
+- Loja 3D fotorrealista com cada material de PDV instalado no lugar certo, comparadores de antes e depois e diagramas da operação.
+- Fichas dos sete produtos heróis com CBV, ponto natural, cross e material indicado.
 
-- **15 capítulos** completos: boas-vindas, cultura e postura, portfólio, conceitos de trade, canais e jornadas, sortimento P/M/G, execução de gôndola, cross merchandising, materiais de PDV, papel do promotor, rotina ProTrade, abordagem e scripts, conduta, indicadores e anexos.
-- **Componentes interativos:** índice visual por necessidade, trilhas de leitura, checklists com progresso salvo, glossário em flip-cards, simulador de mix P/M/G, slider antes/depois da gôndola, matriz de risco do cross, calculadora de scorecard e quiz de fixação.
-- **~60 ícones** e **22 ilustrações vetoriais** que tangibilizam a operação de PDV.
-- **Exportação em PDF** no modo horizontal, direto da capa.
+## Como editar
 
-## Uso
+O texto fica em `conteudo/capNN.md` (formato em `conteudo/_ESPEC.md`). Depois de editar:
 
-Não precisa instalar nada. Basta abrir o link acima, ou baixar o `index.html` e abrir com dois cliques.
+```bash
+python3 tools/build.py
+```
+
+O comando gera o `index.html`. Não edite o `index.html` à mão.
+
+- Estilo: `tools/guia.css` · interações: `tools/guia.js` · diagramas: `tools/diagramas.py`
+- Cenas 3D: `tools/render/loja2.py` (Blender 5) → `python3 tools/pos.py --todos` gera as imagens em `assets/img/`
+
+## Versões anteriores
+
+Ficam congeladas em `versoes/`, com o histórico em `versoes/CHANGELOG.md`.
 
 ---
 
-Identidade visual Ourofino v2.0 · Desenvolvido por **75 LAB**.
+Identidade visual Ourofino Saúde Animal · desenvolvido por **75 LAB**.
