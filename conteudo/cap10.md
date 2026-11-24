@@ -83,6 +83,10 @@ Repare na divisão: a característica fala do comprimido, o benefício fala do t
 
 Na loja você fala com pessoas que têm preocupações diferentes. O balconista quer ajudar o tutor e não errar na indicação. O gerente ou o dono quer a categoria organizada e o cliente voltando. O produto é o mesmo, e você muda a parte do CBV que vai na frente.
 
+:::fig I-CONVERSA
+Com a gerente, a conversa é sobre a categoria e o cliente que volta. Mostre a foto do antes e do depois e o que mudou na prateleira.
+:::
+
 | Para o balconista | Para o gerente ou o dono |
 |---|---|
 | Destaque o benefício para o pet e para o tutor | Destaque a categoria organizada e o giro |

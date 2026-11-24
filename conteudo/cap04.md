@@ -20,6 +20,10 @@ Já aconteceu de um lojista ligar para a Ourofino dizendo: "tem uma menina aqui 
 
 Trate a loja como você trataria a casa de alguém que convidou você para almoçar: cumprimente, peça licença, pergunte antes de mexer, deixe tudo arrumado ao sair.
 
+:::fig I-CHEGADA
+Antes de tocar em qualquer produto, procure quem está no balcão, diga seu nome, a empresa e o que veio fazer. Espere a pessoa terminar o atendimento se ela estiver com um cliente.
+:::
+
 ## A chegada, passo a passo
 
 :::passos

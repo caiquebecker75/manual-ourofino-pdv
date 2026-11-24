@@ -84,6 +84,10 @@ O produto com vencimento mais próximo vai para a frente. O lote novo entra atr�
 4. **Monte de novo** · vencimento mais próximo na frente, mais distante atrás.
 :::
 
+:::fig I-FIFO
+Na reposição, as caixas que vencem primeiro vão para a frente e o lote que acabou de chegar entra atrás.
+:::
+
 ## Frente (facing)
 
 :::termo Facing ou frente

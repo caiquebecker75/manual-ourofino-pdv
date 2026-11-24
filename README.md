@@ -6,11 +6,12 @@ Guia interativo de execução no ponto de venda para promotores, vendedores do d
 
 Abre no celular e no computador. O botão **PDF** gera a versão impressa em A4 paisagem. O botão **Revisão** mostra as notas que aguardam validação da Ourofino.
 
-## O que tem dentro (versão 2)
+## O que tem dentro (versão 3)
 
 - 13 capítulos em seis partes: entender o trade e a loja, a visita, a gôndola, materiais e cross, produtos e postura.
 - Glossário A a Z com busca, checklist da visita que fica salvo no celular e teste final com dez situações de loja.
-- Loja 3D fotorrealista com cada material de PDV instalado no lugar certo, comparadores de antes e depois e diagramas da operação.
+- Fotos de shooting de cães e gatos nas aberturas, uma promotora ilustrada que dá as dicas e fotos de loja com as embalagens reais, feitas no ChatGPT.
+- Comparadores de antes e depois, marcações nas fotos e diagramas da operação.
 - Fichas dos sete produtos heróis com CBV, ponto natural, cross e material indicado.
 
 ## Como editar

@@ -12,7 +12,18 @@ No git, cada versão também tem uma tag (`git checkout <tag> -- .` restaura os 
 | Data | Versão | Onde está | Tag | O que era |
 |------|--------|-----------|-----|-----------|
 | 2026-11-24 | v1 | `2026-11-24_v1_pre-reuniao-bianca.html` | `v1-pre-reuniao` | Versão entregue antes da 1ª rodada de feedback da cliente (reunião de 19/11). 15 capítulos, paleta creme + verde-floresta + lima, atlas de produtos, PDF em formato livro. |
-| 2026-11-24 | v2 | `2026-11-24_v2/` | `v2` | Reestruturação pedida na reunião de 19/11 (detalhes abaixo). |
+| 2026-11-24 | v2 | `2026-11-24_v2/` | `v2` | Reestruturação pedida na reunião de 19/11 (detalhes abaixo). Imagens 3D feitas no Blender. |
+| 2026-11-24 | v3 | `2026-11-24_v3/` | `v3` | Visual refeito no estilo do guia de referência mostrado na reunião (detalhes abaixo). |
+
+## v3 · o que mudou em relação à v2
+
+Pedido do Caique em 24/11, depois de ver a v2: trocar as imagens 3D por imagens geradas no ChatGPT, criar as ilustrações e usar fotos de shooting de animais, como no guia mostrado no vídeo da reunião.
+
+- Capa e aberturas de capítulo com fotos de estúdio de cães e gatos recortadas sobre a faixa diagonal azul, número grande e título manuscrito.
+- Personagem ilustrada (promotora de polo verde, em 3D estilizado) em 8 poses: dá as dicas em balão de fala, aparece nos erros comuns, nos testes, no sumário e no checklist. Provisória até chegar a arte da turma do bite.
+- 4 cenas ilustradas com a personagem: chegada ao balcão, reposição com FIFO, conversa com a gerente e o tutor na gôndola.
+- 21 fotos de loja refeitas no ChatGPT a partir das cenas 3D, com as embalagens e o logotipo reais: antes e depois, ponto extra certo e errado (pares alinhados para o comparador), zonas de altura, prateleira ideal e cada material de PDV.
+- Imagens geradas: `tools/imagens_ia.py` (lista e prompts) e `tools/chatgpt_img.py`; recorte de fundo em `tools/recorte.py`.
 
 ## v2 · o que mudou em relação à v1
 

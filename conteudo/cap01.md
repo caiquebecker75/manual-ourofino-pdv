@@ -30,6 +30,10 @@ Ponto de venda. É o lugar onde o tutor compra o produto: o petshop, o petshop c
 Tutor é a pessoa responsável pelo animal. Shopper é quem está comprando na loja naquele momento. Quase sempre é a mesma pessoa, mas nem sempre: o filho pode comprar o vermífugo que a mãe pediu. Na loja, você fala com o shopper. O produto cuida do animal do tutor.
 :::
 
+:::fig I-TUTOR
+O tutor entra com o cão, vai direto à categoria e decide em poucos segundos. Tudo o que você faz na gôndola é para esse momento.
+:::
+
 ## O caminho do produto
 
 Antes de chegar na mão do tutor, o produto passa por várias mãos. Entender esse caminho ajuda você a saber em que ponto está o seu trabalho.

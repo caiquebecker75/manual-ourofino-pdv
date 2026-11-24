@@ -86,19 +86,44 @@ I_REV = svg('<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>', 18)
 
 # ------------------------------------------------------------------ figuras
 FIGN = {}
-def dims(fid):
-    f = os.path.join(ROOT, IMG + fid.lower() + ".webp")
-    if not os.path.exists(f): return (1800, 1200)
+# figuras do texto -> imagens geradas no ChatGPT (v3); se a imagem não existir, cai no render antigo
+IA_MAP = {"F-DEPOIS": "loja-depois", "F-ANTES": "loja-antes", "F-GONDOLA-ZONAS": "loja-zonas", "F-PRATELEIRA-IDEAL": "loja-prateleira-ideal",
+          "F-PONTO-EXTRA-CERTO": "loja-ponto-extra-certo", "F-PONTO-EXTRA-ERRADO": "loja-ponto-extra-errado", "F-MAT-WOBBLER": "loja-wobbler",
+          "F-MAT-STOPPER": "loja-stopper", "F-MAT-TESTEIRA": "loja-testeira", "F-MAT-REGUA": "loja-regua", "F-MAT-DISPLAY-BALCAO": "loja-display-balcao",
+          "F-MAT-TAKEONE": "loja-takeone", "F-MAT-DISPLAY-CHAO": "loja-display-chao", "F-MAT-ILHA": "loja-ilha", "F-MAT-CLIPSTRIP": "loja-clipstrip",
+          "F-MAT-CARTAZ": "loja-cartaz", "F-MAT-ADESIVO-CHAO": "loja-adesivo", "F-CROSS-MERCH": "loja-cross", "F-ERRO-CARNAVAL": "loja-carnaval",
+          "F-CAPA": "loja-capa", "F-LOJA": "loja-geral", "I-CHEGADA": "cena-chegada", "I-FIFO": "cena-gondola", "I-CONVERSA": "cena-conversa", "I-TUTOR": "cena-tutor"}
+def existe(nome): return os.path.exists(os.path.join(ROOT, IMG + nome + ".webp"))
+def fonte(fid):
+    n = IA_MAP.get(fid)
+    return n if n and existe(n) else fid.lower()
+def dims_nome(nome):
+    f = os.path.join(ROOT, IMG + nome + ".webp")
+    if not os.path.exists(f): return (1536, 1024)
     from PIL import Image
     return Image.open(f).size
+def dims(fid): return dims_nome(fonte(fid))
 
 def img_tag(fid, alt, sizes="(min-width: 1100px) 1040px, 100vw", cls="", lazy=True):
-    base = IMG + fid.lower(); w, h = dims(fid)
+    nome = fonte(fid); base = IMG + nome; w, h = dims_nome(nome)
     if fid.startswith("P-"):
         return f'<img class="{cls}" src="{base}.webp" width="{w}" height="{h}" alt="{html.escape(alt)}" loading="lazy" decoding="async">'
     ld = ' loading="lazy"' if lazy else ' fetchpriority="high"'
-    return (f'<img class="{cls}" src="{base}.webp" srcset="{base}-900.webp 900w, {base}.webp 1800w" sizes="{sizes}" '
+    return (f'<img class="{cls}" src="{base}.webp" srcset="{base}-900.webp 900w, {base}.webp {w}w" sizes="{sizes}" '
             f'width="{w}" height="{h}" alt="{html.escape(alt)}"{ld} decoding="async">')
+
+def recorte(nome, alt="", cls="", lazy=True):
+    """pet ou personagem recortado (WebP com transparência)"""
+    w, h = dims_nome(nome); ld = ' loading="lazy"' if lazy else ' fetchpriority="high"'
+    return f'<img class="{cls}" src="{IMG}{nome}.webp" width="{w}" height="{h}" alt="{html.escape(alt)}"{ld} decoding="async">'
+
+# marcações sobre as fotos do ChatGPT: posição em % (x, y) conferida a olho em cada imagem
+PINOS_IA = {
+    "loja-zonas": {"olhos_meio": (86, 35), "maos_meio": (86, 55), "pes_meio": (86, 76)},
+    "loja-prateleira-ideal": {"antipulga": (17, 33), "concorrente": (36, 34), "vermifugo": (60, 31), "suplementos": (76, 59)},
+    "loja-ponto-extra-certo": {"buraco": (43, 42), "display": (68, 56)},
+    "loja-ponto-extra-errado": {"buraco": (43, 42), "display": (68, 56)},
+}
 
 ROTULOS = {  # (âncora, título, detalhe, cor do ponto, posição do texto)
     "F-GONDOLA-ZONAS": [("olhos_meio", "Zona dos olhos", "1,20 m a 1,60 m · zona quente", "q", "esq"),
@@ -108,11 +133,12 @@ ROTULOS = {  # (âncora, título, detalhe, cor do ponto, posição do texto)
                            ("concorrente", "Concorrente ao lado", "na mesma altura", "", "abaixo"),
                            ("vermifugo", "Vermífugos", "Top Dog por faixa de peso", "", "acima"),
                            ("suplementos", "Suplementos", "pele e pelo juntos", "", "abaixo")],
-    "F-PONTO-EXTRA-ERRADO": [("buraco", "Buraco na gôndola", "o produto saiu do ponto natural", "x", "auto"), ("display", "Display cheio", "", "", "auto")],
-    "F-PONTO-EXTRA-CERTO": [("buraco", "Gôndola cheia", "o ponto natural continua abastecido", "ok", "auto"), ("display", "Estoque extra no display", "", "", "auto")],
+    "F-PONTO-EXTRA-ERRADO": [("buraco", "Buraco na gôndola", "o produto saiu do ponto natural", "x", "acima"), ("display", "Display cheio", "", "", "dir")],
+    "F-PONTO-EXTRA-CERTO": [("buraco", "Gôndola cheia", "o ponto natural continua abastecido", "ok", "acima"), ("display", "Estoque extra no display", "", "", "dir")],
 }
 def rotulos(fid):
-    pts = ANOT.get(fid, {}); out = []
+    nome = fonte(fid)
+    pts = PINOS_IA.get(nome, {}) if nome != fid.lower() else ANOT.get(fid, {}); out = []
     for k, t, s, tipo, pos in ROTULOS.get(fid, []):
         if k not in pts: continue
         x, y = pts[k]
@@ -149,16 +175,23 @@ def comparador(cap, a, b, la, lb, ta, tb):
 
 # ------------------------------------------------------------------ blocos
 TESTE_N = [0]
+DICA_N = [0]
+POSES_DICA = ["bia-aponta", "bia-explica", "bia-joinha", "bia-acena"]
 def bloco(cap, nome, arg, buf, ctx):
     txt = [x for x in buf]
     if nome == "dica":
-        return (f'<aside class="dica"><div class="dica-av">{mascote(52)}</div><div class="dica-balao">'
-                f'<span class="rotulo">Dica da turma</span><p>{inline(" ".join(t.strip() for t in txt if t.strip()))}</p></div></aside>')
+        DICA_N[0] += 1; pose = POSES_DICA[DICA_N[0] % len(POSES_DICA)]
+        av = recorte(pose, "", "dica-bia") if existe(pose) else f'<div class="dica-av">{mascote(52)}</div>'
+        return (f'<aside class="dica">{av}<div class="dica-balao">'
+                f'<span class="rotulo">Dica de campo</span><p>{inline(" ".join(t.strip() for t in txt if t.strip()))}</p></div></aside>')
     if nome == "erro":
         j = " ".join(t.strip() for t in txt)
         m = re.match(r"\*\*O que acontece:\*\*(.*?)\*\*Faça assim:\*\*(.*)", j, re.S)
         a, b = (m.group(1).strip(), m.group(2).strip()) if m else (j, "")
-        return (f'<aside class="erro"><div class="erro-lado ruim"><span class="rotulo">{I_ALERTA} Erro comum</span><p>{inline(a)}</p></div>'
+        cap1 = lambda t: t[:1].upper() + t[1:] if t else t
+        a, b = cap1(a), cap1(b)
+        bia = recorte("bia-atencao", "", "erro-bia") if existe("bia-atencao") else ""
+        return (f'<aside class="erro">{bia}<div class="erro-lado ruim"><span class="rotulo">{I_ALERTA} Erro comum</span><p>{inline(a)}</p></div>'
                 f'<div class="erro-lado bom"><span class="rotulo">{I_OK} Faça assim</span><p>{inline(b)}</p></div></aside>')
     if nome == "passos":
         lis = []
@@ -202,7 +235,8 @@ def bloco(cap, nome, arg, buf, ctx):
             elif s.startswith(">"): exp.append(s[1:].strip())
         bts = "".join(f'<button type="button" class="op" data-ok="{1 if ok else 0}"><span class="op-l">{chr(65 + k)}</span><span>{inline(o)}</span></button>'
                       for k, (ok, o) in enumerate(ops))
-        return (f'<div class="teste" data-teste><span class="rotulo">Teste rápido</span><p class="teste-q">{inline(q)}</p>'
+        pensa = recorte("bia-pensa", "", "teste-bia") if existe("bia-pensa") else ""
+        return (f'<div class="teste" data-teste>{pensa}<span class="rotulo">Teste rápido</span><p class="teste-q">{inline(q)}</p>'
                 f'<div class="ops">{bts}</div><div class="teste-exp" hidden><b class="teste-res"></b> {inline(" ".join(exp))}</div></div>')
     if nome == "validar":
         return f'<aside class="validar"><span class="rotulo">Para a Ourofino validar</span><p>{inline(" ".join(t.strip() for t in txt if t.strip()))}</p></aside>'
@@ -267,10 +301,10 @@ def render_nos(cap, nos, ctx, interno=False):
 
 # ------------------------------------------------------------------ capítulos
 ARQS = [f"cap{n:02d}.md" for n in range(13)] + ["glossario.md", "checklist.md", "teste-final.md"]
-ABRE = {0: "F-LOJA", 1: "O-CORREDOR", 2: "O-ENTRADA", 3: "O-BALCAO", 4: "F-MAT-DISPLAY-BALCAO", 5: "O-MACRO", 6: "F-MAT-ILHA",
-        7: "O-FARMACIA", 8: "O-ALTO", 9: "O-RACAO", 10: "F-MAT-TAKEONE", 12: "F-MAT-ADESIVO-CHAO"}
-POS = {0: "50% 60%", 1: "50% 55%", 2: "50% 55%", 3: "50% 45%", 4: "50% 60%", 5: "35% 50%", 6: "50% 55%", 7: "50% 45%",
-       8: "50% 55%", 9: "50% 50%", 10: "50% 55%", 12: "50% 45%"}
+PET = {0: "bia-acena", 1: "pet-01", 2: "pet-02", 3: "pet-03", 4: "pet-04", 5: "pet-05", 6: "pet-06", 7: "pet-07", 8: "pet-08",
+       9: "pet-09", 10: "pet-10", 11: "pet-11", 12: "pet-12", 97: "pet-fim", 98: "bia-tablet", 99: "pet-teste"}
+MANUS = {0: "boas-vindas", 1: "entender", 2: "entender", 3: "a visita", 4: "a visita", 5: "na gôndola", 6: "na gôndola", 7: "na gôndola",
+         8: "materiais e cross", 9: "materiais e cross", 10: "produtos", 11: "produtos", 12: "postura", 97: "consulta rápida", 98: "na loja", 99: "vamos ver?"}
 PARTES = [("Abertura", [0]), ("1 · Entender", [1, 2]), ("2 · A visita", [3, 4]), ("3 · Na gôndola", [5, 6, 7]),
           ("4 · Materiais e cross", [8, 9]), ("5 · Produtos", [10, 11]), ("6 · Postura", [12]), ("Fechamento", [97, 98, 99])]
 TRILHAS = [
@@ -293,22 +327,15 @@ def abertura(m, ctx):
     secs = "".join(f'<li><a href="#{sid}"><span>{n}.{k + 1}</span>{inline(t)}</a></li>' for k, (sid, t) in enumerate(ctx["secoes"]))
     meta = (f'<div class="ab-meta"><span>{I_PESSOA}{html.escape(m.get("publico", ""))}</span>'
             f'<span>{I_RELOGIO}{html.escape(m.get("tempo", ""))}</span></div>')
-    if n in ABRE:
-        vis = (f'<div class="ab-img">{img_tag(ABRE[n], "", sizes="100vw")}</div>')
-        vis = vis.replace("<img ", f'<img style="object-position:{POS.get(n, "50% 50%")}" ', 1)
-        cls = "com-img"
-    elif n == 11:
-        prods = ["P-WELLPET", "P-BANNI3", "P-TOPDOG", "P-LEEVRE", "P-HERBALVET", "P-ENZICLIM", "P-PLENIPIL"]
-        vis = '<div class="ab-img ab-prods">' + "".join("<span>" + img_tag(p, p[2:].title()).replace(' loading="lazy"', "") + "</span>" for p in prods) + "</div>"
-        cls = "com-img prods"
-    else:
-        vis = ""; cls = "tipo"
+    pet = PET.get(n); fig = recorte(pet, "", "ab-pet" + (" bia" if pet.startswith("bia") else "")) if pet and existe(pet) else ""
     num = "" if n >= 97 else f'<span class="ab-num" aria-hidden="true">{nn}</span>'
     kicker = m["parte"] if n >= 97 else f'Capítulo {nn} · {m["parte"]}'
     ind = f'<nav class="ab-secoes" aria-label="Seções do capítulo"><span class="rotulo">Neste capítulo</span><ol>{secs}</ol></nav>' if secs and n < 97 else ""
     voce = f'<div class="ab-voce"><span class="rotulo">Você vai</span><ul>{vv}</ul></div>' if vv else ""
-    return (f'<header class="abertura {cls}">{vis}<div class="ab-txt">{num}<span class="ab-kicker">{html.escape(kicker)}</span>'
-            f'<h1 class="ab-titulo">{inline(m["titulo"])}</h1><p class="ab-frase">{inline(m.get("capa_frase", ""))}</p>{meta}'
+    return (f'<header class="abertura"><div class="ab-palco"><span class="ab-faixa" aria-hidden="true"></span><span class="ab-faixa2" aria-hidden="true"></span>'
+            f'{fig}<div class="ab-capa">{num}<span class="ab-manus" aria-hidden="true">{MANUS.get(n, "")}</span>'
+            f'<span class="ab-kicker">{html.escape(kicker)}</span><h1 class="ab-titulo">{inline(m["titulo"])}</h1></div></div>'
+            f'<div class="ab-txt"><p class="ab-frase">{inline(m.get("capa_frase", ""))}</p>{meta}'
             f'<div class="ab-grade">{voce}{ind}</div></div></header>')
 
 def glossario(m):
@@ -357,7 +384,7 @@ def sumario(caps):
     return (f'<section class="sumario" id="sumario"><div class="sum-cab"><span class="rotulo">Sumário</span>'
             f'<h2>O guia em seis partes</h2><p>Leia em ordem na primeira vez. Depois, use como consulta: cada capítulo funciona sozinho.</p></div>'
             f'<div class="sum-grade"><div class="sum-caps">{"".join(blocos)}</div>'
-            f'<div class="sum-trilhas"><div class="tri-cab"><span class="rotulo">Trilhas de leitura</span><h3>Escolha pelo seu papel</h3></div>{"".join(tri)}</div></div></section>')
+            f'<div class="sum-trilhas"><div class="tri-cab">{recorte("bia-caixa", "", "tri-bia") if existe("bia-caixa") else ""}<span class="rotulo">Trilhas de leitura</span><h3>Escolha pelo seu papel</h3></div>{"".join(tri)}</div></div></section>')
 
 def gaveta(caps):
     num = lambda n: "" if n >= 97 else f"{n:02d}"
@@ -367,14 +394,17 @@ def gaveta(caps):
             f'<ol>{li}</ol><a class="gav-sum" href="#sumario">Ver sumário completo e trilhas</a></nav></div>')
 
 def capa():
-    return (f'<section class="capa" id="inicio"><div class="capa-img">{img_tag("F-CAPA", "Petshop com a farmácia organizada atrás do balcão", sizes="100vw", lazy=False)}</div>'
-            f'<img class="capa-logo-fixo" src="assets/marca/ourofino_negativo_branco.png" alt="Ourofino Saúde Animal"><div class="capa-txt">'
-            f'<span class="capa-kicker">Ourofino Pet · Trade marketing</span>'
+    return (f'<section class="capa" id="inicio"><span class="capa-faixa" aria-hidden="true"></span><span class="capa-faixa2" aria-hidden="true"></span>'
+            f'<div class="capa-foto">{recorte("pet-capa", "Golden retriever e gato tigrado juntos", "capa-pet", lazy=False)}</div>'
+            f'<img class="capa-logo-fixo neg" src="assets/marca/ourofino_negativo_branco.png" alt="Ourofino Saúde Animal">'
+            f'<img class="capa-logo-fixo pos" src="assets/marca/ourofino_positivo.png" alt="">'
+            f'<div class="capa-txt"><span class="capa-kicker">Ourofino Pet · Trade marketing</span>'
+            f'<span class="capa-manus" aria-hidden="true">seu guia dentro da loja</span>'
             f'<h1>Guia de execução no ponto de venda</h1>'
             f'<p>O que fazer antes, durante e depois da visita, da gôndola ao balcão. Para promotores, vendedores do distribuidor e equipes de loja.</p>'
             f'<div class="capa-bts"><a class="bt" href="#cap00">Começar a leitura {I_SETA}</a><a class="bt claro" href="#sumario">Sumário</a>'
             f'<button type="button" class="bt claro" data-pdf>{I_PDF} Baixar PDF</button></div>'
-            f'<span class="capa-ver">Versão 2 · novembro de 2026 · em validação com a Ourofino</span></div></section>')
+            f'<span class="capa-ver">Versão 3 · novembro de 2026 · em validação com a Ourofino</span></div></section>')
 
 def montar():
     caps = ler()
@@ -395,8 +425,8 @@ def montar():
 <meta name="theme-color" content="#072047">
 <link rel="icon" href="assets/marca/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..800,100&family=Figtree:ital,wght@0,400..800;1,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="{IMG}f-capa.webp" imagesrcset="{IMG}f-capa-900.webp 900w, {IMG}f-capa.webp 1800w" imagesizes="100vw">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..800,100&family=Figtree:ital,wght@0,400..800;1,400..600&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="{IMG}pet-capa.webp">
 <style>{css}</style>
 </head>
 <body>
@@ -414,7 +444,7 @@ def montar():
 {corpo}
 </main>
 <footer class="rodape"><img src="assets/marca/ourofino_negativo_branco.png" alt="Ourofino Saúde Animal">
-<p>Guia de execução no ponto de venda · Ourofino Pet · versão 2, novembro de 2026.<br>Material de uso interno da equipe de trade e dos parceiros. As informações de produto seguem o site oficial ourofinopet.com; em caso de dúvida técnica, consulte o veterinário ou o material oficial.</p>
+<p>Guia de execução no ponto de venda · Ourofino Pet · versão 3, novembro de 2026.<br>Material de uso interno da equipe de trade e dos parceiros. As informações de produto seguem o site oficial ourofinopet.com; em caso de dúvida técnica, consulte o veterinário ou o material oficial.</p>
 <a class="bt claro" href="#inicio">Voltar ao início</a></footer>
 <script>{js}</script>
 </body>

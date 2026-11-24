@@ -5,3 +5,7 @@ assets/render/*.png
 assets/tex/
 # originais baixados do site da Ourofino (fonte das texturas 3D)
 assets/produtos/raw/
+# cache e trabalho do gerador do ChatGPT
+assets/ia/cache/
+assets/ia/log.jsonl
+assets/ia/
