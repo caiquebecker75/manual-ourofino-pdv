@@ -4,7 +4,7 @@ Regra do projeto (desde 24/11/2026): antes de qualquer ajuste grande, a versão 
 congelada aqui, para a gente conseguir consultar ou voltar atrás.
 
 Cada versão congelada fica navegável no próprio site:
-`https://caiquebecker75.github.io/manual-ourofino-pdv/versoes/<pasta ou arquivo>`
+`https://projetos.75lab.com.br/manual-ourofino-pdv/versoes/<pasta ou arquivo>`
 
 Como voltar para uma versão: copie o conteúdo dela para a raiz e dê push.
 No git, cada versão também tem uma tag (`git checkout <tag> -- .` restaura os arquivos).

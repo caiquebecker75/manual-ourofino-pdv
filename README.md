@@ -2,7 +2,7 @@
 
 Guia interativo de execução no ponto de venda para promotores, vendedores do distribuidor e equipes de loja. *Tá bem cuidado.*
 
-**Link ao vivo:** https://caiquebecker75.github.io/manual-ourofino-pdv/
+**Link ao vivo:** https://projetos.75lab.com.br/manual-ourofino-pdv/
 
 Abre no celular e no computador. O botão **PDF** gera a versão impressa em A4 paisagem. O botão **Revisão** mostra as notas que aguardam validação da Ourofino.
 
