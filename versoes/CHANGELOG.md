@@ -17,6 +17,19 @@ No git, cada versão também tem uma tag (`git checkout <tag> -- .` restaura os 
 | 2026-11-24 | v4 | `2026-11-24_v4/` | `v4` | Guia em formato de slides, conteúdo reescrito na ordem do guia de referência, marca oficial Ourofino (detalhes abaixo). |
 | 2026-11-24 | v5 | `2026-11-24_v5/` | `v5` | A v4 condensada em 49 slides, o mesmo número de páginas do guia de referência (detalhes abaixo). |
 | 2026-11-24 | v6 | `2026-11-24_v6/` | `v6` | Ensaio fotográfico novo e diagramação de livro, com uma composição diferente em cada slide (detalhes abaixo). |
+| 2026-11-25 | v7 | `2026-11-25_v7/` | `v7` | Capítulo novo com os 10 produtos de cada categoria em fichas CBV: 58 slides (detalhes abaixo). |
+
+## v7 · o que mudou em relação à v6
+
+Pedido do Caique em 25/11: faltava um capítulo com os 10 principais produtos de cada categoria, dentro do conceito CBV, mesmo que o guia ganhasse slides.
+
+- **Capítulo 9 novo, "Os 10 de cada categoria":** 33 produtos da Ourofino Pet nas categorias do site da marca. Prevenção e proteção (6), Suplementos (10), Medicamentos (10), Cuidados (5) e Desinfecção (2). As categorias com menos de dez produtos no portfólio entram completas. Os testes de diagnóstico Conclue ficam de fora porque são de uso na clínica.
+- **Cada produto tem uma ficha CBV** (característica, benefício e vantagem), escrita a partir das páginas oficiais em ourofinopet.com, sem dose e sem promessa de resultado. Selo "herói" liga o produto ao capítulo 8; selo "com receita" marca os medicamentos, que entram com a regra de conferir a receita e encaminhar a dúvida ao veterinário.
+- **Nove páginas, cada uma com composição própria:** capa (schnauzer com sacola), como ler as fichas (ficha de exemplo com chamadas e índice das categorias com página), grade de seis cartões, prateleira da linha Snacks, tabela de suplementos com foto, bula dos medicamentos em duas colunas com carimbo, quadro azul-marinho com as regras do balcão, ritual do banho da linha Bris em três passos e página dupla da desinfecção.
+- **Embalagens oficiais:** 27 fotos baixadas do site da Ourofino Pet (originais no HD em `Downloads/ourofino-referencia/embalagens`), sem o selo "nova embalagem", em `assets/img/pk/`.
+- **Fotos novas:** capa do capítulo, gato na toalha, filhote no piso limpo e cão idoso, no mesmo ensaio da v6 (`tools/v6/ensaio.py`).
+- **Renumeração:** Prateleira ideal passa a ser o capítulo 10 e o fechamento usa `cap11`. O teste final ganhou uma pergunta sobre a ficha CBV (10 perguntas).
+- **Revisão:** duas notas novas para a Ourofino validar (ranking dos 10 de cada categoria e uso dos medicamentos no material do promotor). Total de 14.
 
 ## v6 · o que mudou em relação à v5
 

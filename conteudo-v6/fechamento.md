@@ -1,5 +1,5 @@
 ---
-cap: 10
+cap: 11
 parte: Fechamento
 titulo: Para fechar
 capa: nao
@@ -80,11 +80,16 @@ Quando não souber a resposta, diga que vai ver e volte no dia combinado. Eu fa�
 - [x] Mostra a faixa de peso na embalagem e encaminha a dúvida ao veterinário
 - [ ] Pede ao balconista que calcule a dose
 > Quantidade e uso para um animal específico são assunto do veterinário. Você mostra a embalagem e encaminha. (Capítulo 8)
+? Na ficha do Banni 3, qual destas frases é a vantagem?
+- [ ] É um spot on com praziquantel, moxidectina e fipronil, feito para gatos
+- [ ] Para gato que não aceita comprimido, a proteção vai na pele
+- [x] Um produto só contra vermes redondos e chatos, pulgas, piolhos e sarna de ouvido
+> A primeira frase diz o que o produto é (característica). A segunda diz o que muda para o gato e o tutor (benefício). A vantagem é o motivo para escolher este produto. (Capítulo 9)
 ? A farmácia da clínica tem uma prateleira só. Como você organiza os produtos da Ourofino?
 - [ ] Do jeito que estava, porque não dá para fazer nada
 - [ ] Copia a prateleira ideal do guia, cortando o que não couber
 - [x] Agrupa por necessidade e separa cão de gato
-> Com pouco espaço, valem as regras um e cinco. O balconista acha rápido, e o tutor não leva o produto errado. (Capítulo 9)
+> Com pouco espaço, valem as regras um e cinco. O balconista acha rápido, e o tutor não leva o produto errado. (Capítulo 10)
 
 === contracapa | Tá bem cuidado
 @layout contracapa

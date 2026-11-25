@@ -46,6 +46,15 @@ FOTOS = [
    "Num corredor de petshop, um gato tigrado cinza cheira com curiosidade uma pilha de sacos de areia sanitária e de ração para gatos no chão. Sacos de cores claras, sem nenhuma marca ou texto legível. Luz de loja suave, profundidade de campo rasa. Horizontal."),
   ("v6-gato-olhar", "retrato", "editorial", CHAPA.format(cor="azul-marinho profundo (#072047)") +
    "Retrato de um gato tigrado cinza e branco sentado, olhando diretamente para a câmera, olhos verdes. Corpo inteiro na metade de baixo do quadro vertical. Vertical."),
+  # v7 · capítulo dos 10 de cada categoria
+  ("v6-c-portfolio", "paisagem", "editorial", CHAPA.format(cor="cinza claro e frio (#E0E1E3)") +
+   "Um schnauzer miniatura cinza e prateado sentado, segurando na boca pela alça uma pequena sacola de papel branca e lisa, sem nenhuma marca ou texto, olhando para a câmera, orgulhoso. O cão fica no terço direito do quadro, inteiro, com sombra suave no chão; os dois terços da esquerda ficam vazios, para texto. Horizontal."),
+  ("v6-gato-toalha", "retrato", "editorial", CHAPA.format(cor="branco quente (#F4F4F2)") +
+   "Um gato de pelo longo branco e creme enrolado numa toalha felpuda azul-clara depois do banho, só a cabeça e uma pata para fora, pelo ainda um pouco úmido, olhando para a câmera com cara de paciência. Fica na metade de baixo do quadro vertical. Vertical."),
+  ("v6-piso-limpo", "retrato", "editorial",
+   "Um filhote de labrador amarelo deitado de barriga num piso de porcelanato claro e brilhante, recém-limpo, olhando para a câmera, ao lado de um borrifador branco sem rótulo e de um pano de microfibra verde dobrado. Sala clara de apartamento, luz de janela suave, reflexo leve no piso. O filhote fica na metade de baixo do quadro. Vertical."),
+  ("v6-cao-idoso", "retrato", "editorial", CHAPA.format(cor="verde vivo (#10AD31)") +
+   "Retrato de um cão idoso sem raça definida, pelo preto com o focinho e as sobrancelhas grisalhos, sentado, olhar calmo e atento para a câmera. Corpo inteiro na metade de baixo do quadro vertical, com sombra suave no chão. Vertical."),
 ]
 so = sys.argv[1:]
 for nome, prop, modo, pr in FOTOS:

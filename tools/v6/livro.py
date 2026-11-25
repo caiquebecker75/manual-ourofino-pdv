@@ -42,11 +42,13 @@ def sera(pose, cls="sera"):
     return B.recorte("serafina-" + pose, cls, "Serafina")
 
 # ------------------------------------------------------------------ peças comuns
+ULT = 10   # último capítulo numerado
+FIM = 11   # fechamento (fechamento.md)
 CAPS = {}
 
 def rh(n, claro=False):
     m = CAPS.get(n, {}); t = m.get("titulo", "")
-    dir_ = f"{n} · {esc(t)}" if 1 <= n <= 9 else esc(t)
+    dir_ = f"{n} · {esc(t)}" if 1 <= n <= ULT else esc(t)
     return f'<header class="rh"><span>Guia de execução no PDV</span><span>{dir_}</span></header>'
 
 def folio():
@@ -116,7 +118,8 @@ CAPAS = {
     6: dict(foto="v6-c06", pos="50% 70%", lado="topo-esq", cor="claro", fundo="#0B1F45", numero="gigante"),
     7: dict(foto="v6-c07", pos="50% 50%", lado="esq", cor="claro", fundo="#3a3530", numero="filete"),
     8: dict(foto="v6-c08", pos="50% 50%", lado="esq", cor="escuro", fundo="#18A83A", numero="contorno"),
-    9: dict(foto="v6-c09", pos="50% 50%", lado="esq", cor="claro", fundo="#0A76B9", numero="gigante"),
+    9: dict(foto="v6-c-portfolio", pos="100% 100%", lado="esq", cor="escuro", fundo="#D0D0D4", numero="linha"),
+    10: dict(foto="v6-c09", pos="50% 50%", lado="esq", cor="claro", fundo="#0A76B9", numero="gigante"),
 }
 
 def capa_cap(m):
@@ -140,7 +143,7 @@ def capa_guia():
             f'<p>Da preparação da visita à prateleira ideal. Para promotores, vendedores do distribuidor e equipes de loja da Ourofino Pet.</p>'
             f'<div class="cg-bts"><a class="bt" href="#cap00">Começar {icone("seta")}</a><a class="bt claro" href="#sumario">Sumário</a>'
             f'<button type="button" class="bt claro" data-pdf>Baixar PDF</button></div>'
-            f'<span class="cg-ver">Versão 6 · novembro de 2026 · em validação com a Ourofino</span></div></section>')
+            f'<span class="cg-ver">Versão 7 · novembro de 2026 · em validação com a Ourofino</span></div></section>')
 
 def prefacio(m):
     """capa da abertura: o nome da Serafina gigante, ela na frente das letras"""
@@ -155,12 +158,13 @@ def sumario():
         m = CAPS[n]; d = f"cap{n:02d}"
         return (f'<li><a href="#{d}"><span class="sm-n">{n}</span><span class="sm-t">{inl(m["titulo"])}</span>'
                 f'<i class="sm-dots"></i><span class="sm-p">{{{{PG:{d}}}}}</span></a></li>')
-    ap = [("cap10", "Considerações finais"), ("cap10-2", "Checklist da visita"), ("cap10-3", "Teste final")]
+    f = f"cap{FIM:02d}"
+    ap = [(f, "Considerações finais"), (f + "-2", "Checklist da visita"), (f + "-3", "Teste final")]
     aps = "".join(f'<li><a href="#{d}"><span class="sm-t">{t}</span><i class="sm-dots"></i><span class="sm-p">{{{{PG:{d}}}}}</span></a></li>' for d, t in ap)
     x = dict(n=0, sid="sumario", notas=[])
     inner = (f'<div class="sm-f z zf">{ft("v6-sumario", "ft", "50% 60%", "Border collie olhando para cima")}</div>'
              f'<div class="sm-q z">{kick("o que tem aqui")}<h2 class="h2 sm-h">Sumário</h2>'
-             f'<ol class="sm-l">{"".join(item(n) for n in range(1, 10))}</ol>'
+             f'<ol class="sm-l">{"".join(item(n) for n in range(1, ULT + 1))}</ol>'
              f'<div class="sm-fecha"><b>Para fechar</b><ol>{aps}</ol></div></div>')
     return pagina(x, "L-sumario", inner, sem_rh=True)
 
@@ -468,18 +472,155 @@ def L_reuso(x, tipo):
 
 def L_contracapa(x):
     mk = x["mk"]
-    return (f'<section class="slide lv contracapa" id="fim" data-cap="10" data-cap-nome="{esc(B.cap_nome(CAPS[10]))}" style="--fundo:#0B1F45">'
+    return (f'<section class="slide lv contracapa" id="fim" data-cap="{FIM}" data-cap-nome="{esc(B.cap_nome(CAPS[FIM]))}" style="--fundo:#0B1F45">'
             f'<div class="cg-f z zf">{ft(mk["foto"][0], "ft", "70% 50%", "Filhotes de cão e gato dormindo juntos")}</div>'
             f'<div class="cg-t z"><img class="cg-logo" src="assets/marca/logo-negativo.svg" alt="Ourofino Saúde Animal" width="320" height="54">'
             f'<span class="cg-kick">obrigada pela visita</span><h1>{inl(x["titulo"])}</h1>{B.md(x["corpo"])}'
-            f'<div class="cg-bts"><a class="bt" href="#inicio">Voltar ao início</a><a class="bt claro" href="#cap10-2">Checklist</a>'
+            f'<div class="cg-bts"><a class="bt" href="#inicio">Voltar ao início</a><a class="bt claro" href="#cap{FIM:02d}-2">Checklist</a>'
             f'<button type="button" class="bt claro" data-pdf>Baixar PDF</button></div>'
-            f'<span class="cg-ver">Guia de execução no PDV · Ourofino Pet · versão 6, novembro de 2026</span></div></section>')
+            f'<span class="cg-ver">Guia de execução no PDV · Ourofino Pet · versão 7, novembro de 2026</span></div></section>')
+
+# ------------------------------------------------------------------ capítulo 9: os 10 de cada categoria (fichas CBV)
+PK = "assets/img/pk/"
+CBV3 = (("c", "C", "Característica"), ("b", "B", "Benefício"), ("v", "V", "Vantagem"))
+
+def ficha_l(l):
+    p = [y.strip() for y in l.split("|")]
+    if len(p) < 7: return None
+    return dict(pk=p[0], nome=p[1], esp=p[2], flags=p[3].split(), c=p[4], b=p[5], v=p[6])
+
+def fichas(corpo):
+    """[(grupo, [ficha])]; linhas '## Grupo' abrem grupo"""
+    gr = [[None, []]]
+    for l in corpo:
+        s = l.strip()
+        if s.startswith("## "):
+            gr.append([s[3:].strip(), []]); continue
+        f = ficha_l(s)
+        if f: gr[-1][1].append(f)
+    return [g for g in gr if g[1]]
+
+def pk_img(f, cls="fx-pk"):
+    p = os.path.join(ROOT, PK + f["pk"] + ".webp")
+    if not os.path.exists(p): return f'<span class="{cls} falta">{esc(f["nome"])}</span>'
+    from PIL import Image
+    w, h = Image.open(p).size
+    return f'<img class="{cls}" src="{PK}{f["pk"]}.webp" width="{w}" height="{h}" alt="Embalagem de {esc(f["nome"])}" loading="lazy" decoding="async">'
+
+def selos(f):
+    s = ""
+    if "heroi" in f["flags"]: s += '<span class="fx-heroi" title="Produto herói, capítulo 8">herói</span>'
+    if "receita" in f["flags"]: s += '<span class="fx-rx" title="Medicamento: sai com orientação do veterinário">com receita</span>'
+    return s
+
+def fx_cbv(f, rotulo=False, notas=None):
+    notas = notas or {}
+    return '<dl class="fx-cbv">' + "".join(
+        f'<div class="fx-{k}"><dt title="{t}"><span class="fx-L">{L}</span>{f"<small>{t}</small>" if rotulo else ""}</dt><dd>{inl(f[k])}</dd>{notas.get(k, "")}</div>' for k, L, t in CBV3) + "</dl>"
+
+def ficha(f, cls="fx", notas=None, rotulo=False):
+    notas = notas or {}
+    fl = " ".join("is-" + x for x in f["flags"])
+    return (f'<article class="{cls} {fl}"><div class="fx-img">{pk_img(f)}{notas.get("img", "")}</div>'
+            f'<div class="fx-t"><header class="fx-cab"><b class="fx-n">{esc(f["nome"])}</b><span class="fx-esp">{esc(f["esp"])}</span>{selos(f)}{notas.get("cab", "")}</header>'
+            f'{fx_cbv(f, rotulo, notas)}</div></article>')
+
+def cat_cab(x, n_total, pagina=""):
+    """cabeça de categoria: chamada, título, contagem"""
+    mk = x["mk"]
+    num = (f'<div class="ct-num"><span>{n_total:02d}</span><small>produtos{pagina}</small></div>') if n_total else ""
+    lead = f'<p class="lead">{inl(mk["lead"][0])}</p>' if mk.get("lead") else ""
+    return (kick("categoria") + h2(x["titulo"]) + lead, num)
+
+def linha_extra(mk, cls="fx-linha"):
+    return f'<p class="{cls}">{inl(mk["linha"][0])}</p>' if mk.get("linha") else ""
+
+def L_fichas_guia(x):
+    mk = x["mk"]; ex = ficha_l(mk["exemplo"][0])
+    call = lambda t: f'<i class="fg-c"><b>{t}</b></i>'
+    ex_html = ficha(ex, "fx fx-ex", {"img": call("A embalagem, como está na loja"), "cab": call("Nome, espécie e selo"),
+                                      "c": call("O que o produto é"), "b": call("O que muda para o pet e o tutor"), "v": call("Por que escolher este")}, rotulo=True)
+    cats = []
+    for c in mk.get("cat", []):
+        nome, n, alvo = [y.strip() for y in c.split("|")]
+        cats.append(f'<li><a href="#{alvo}"><span class="fg-k">{int(n):02d}</span><span class="fg-t">{esc(nome)}</span><i class="sm-dots"></i><span class="sm-p">{{{{PG:{alvo}}}}}</span></a></li>')
+    inner = (f'<div class="fg-q z">{kick("antes das fichas")}{h2(x["titulo"])}{txt(x["corpo"])}'
+             f'<ol class="fg-cats">{"".join(cats)}</ol>'
+             f'<p class="fg-selos"><span class="fx-heroi">herói</span> produto do capítulo 8 <span class="fx-rx">com receita</span> medicamento: sai com orientação do veterinário</p></div>'
+             f'<div class="fg-ex z">{ex_html}</div>')
+    return pagina(x, "L-fichas-guia", inner)
+
+def L_fichas_grade(x):
+    g = fichas(x["corpo"]); fs = [f for _, L in g for f in L]
+    cab, num = cat_cab(x, len(fs))
+    inner = (f'<div class="fr-cab z"><div>{cab}{linha_extra(x["mk"])}</div>{num}</div>'
+             f'<div class="fr-l z">{"".join(ficha(f, "fx fx-h") for f in fs)}</div>')
+    return pagina(x, "L-fichas-grade", inner, "n1")
+
+def L_fichas_prateleira(x):
+    g = fichas(x["corpo"]); fs = [f for _, L in g for f in L]
+    cab, num = cat_cab(x, int(x["mk"].get("numero", ["0"])[0]), " · página 1 de 2")
+    potes = "".join(f'<li><div class="fp-img">{pk_img(f)}</div></li>' for f in fs)
+    textos = "".join(f'<li><div class="fx-img fp-mini">{pk_img(f)}</div><div class="fp-tt"><header class="fx-cab"><b class="fx-n">{esc(f["nome"])}</b><span class="fx-esp">{esc(f["esp"])}</span>{selos(f)}</header>{fx_cbv(f)}</div></li>' for f in fs)
+    inner = (f'<div class="fp-cab z"><div>{cab}</div>{num}</div>'
+             f'<ul class="fp-potes z">{potes}</ul><div class="fp-tabua z" aria-hidden="true"></div><ul class="fp-txt z">{textos}</ul>')
+    return pagina(x, "L-fichas-prateleira", inner)
+
+def L_fichas_tabela(x):
+    mk = x["mk"]; g = fichas(x["corpo"]); fs = [f for _, L in g for f in L]
+    cab, _ = cat_cab(x, 0)
+    th = "".join(f'<th scope="col"><span class="tb-l tb-{k}">{L}</span>{t}</th>' for k, L, t in CBV3)
+    linhas = "".join(f'<tr><th scope="row"><div class="tb-p">{pk_img(f)}<div><b class="fx-n">{esc(f["nome"])}</b><span class="fx-esp">{esc(f["esp"])}</span>{selos(f)}</div></div></th>'
+                     + "".join(f'<td>{inl(f[k])}</td>' for k, _, _ in CBV3) + "</tr>" for f in fs)
+    inner = (f'<div class="tb-q z"><span class="tb-pg">Suplementos · página 2 de 2</span>{cab}'
+             f'<table class="tb-t"><thead><tr><th scope="col">Produto</th>{th}</tr></thead><tbody>{linhas}</tbody></table>{linha_extra(mk)}</div>'
+             f'<figure class="tb-f z zf">{ft(mk["foto"][0], "ft", "50% 60%", "Cão idoso de focinho grisalho")}{legenda(mk, x["n"], x["k"], "leg sobre")}</figure>')
+    return pagina(x, "L-fichas-tabela", inner, sem_rh=True)
+
+def L_fichas_bula(x):
+    mk = x["mk"]; g = fichas(x["corpo"])
+    n_tot = sum(len(L) for _, L in g)
+    cols = "".join(f'<section class="bu-col"><h3><span>{i + 1}</span>{esc(nome)}</h3>'
+                   + "".join(ficha(f, "fx fx-bu") for f in L) + "</section>" for i, (nome, L) in enumerate(g))
+    inner = (f'<div class="bu-cab z">{kick("categoria")}{h2(x["titulo"])}<p class="lead">{inl(mk["lead"][0])}</p></div>'
+             f'<div class="bu-selo z" aria-hidden="true"><span>uso com orientação do</span><b>veterinário</b><span>medicamentos · 10 produtos</span></div>'
+             f'<div class="bu-cols z">{cols}</div>')
+    return pagina(x, "L-fichas-bula", inner)
+
+def L_fichas_quadro(x):
+    mk = x["mk"]; g = fichas(x["corpo"])
+    blocos = "".join(f'<section class="qd-g"><h3>{esc(nome)}</h3><div class="qd-l">{"".join(ficha(f, "fx fx-qd") for f in L)}</div></section>' for nome, L in g)
+    regras = "".join(f'<li><span>{i + 1}</span>{inl(r)}</li>' for i, r in enumerate(mk.get("regra", [])))
+    inner = (f'<div class="qd-cab z">{kick("categoria")}{h2(x["titulo"])}</div><div class="qd-q z">{blocos}</div>'
+             f'<aside class="qd-ps z"><b class="qd-pt">No balcão, com receita</b><ol>{regras}</ol>{linha_extra(mk, "qd-linha")}'
+             f'<span class="qd-pg">Medicamentos · página 2 de 2</span></aside>')
+    return pagina(x, "L-fichas-quadro", inner, "navy")
+
+def L_fichas_ritual(x):
+    mk = x["mk"]; g = fichas(x["corpo"]); fs = [f for _, L in g for f in L]
+    bris = [f for f in fs if f["pk"].startswith("bris")]; ouv = [f for f in fs if not f["pk"].startswith("bris")]
+    passos = ("no banho", "depois do banho", "para finalizar")
+    br = "".join(f'<li><span class="ri-n">{i + 1}<small>{passos[i]}</small></span>{ficha(f, "fx fx-rt")}</li>' for i, f in enumerate(bris))
+    ou = "".join(ficha(f, "fx fx-h fx-ou") for f in ouv)
+    cab, num = cat_cab(x, len(fs))
+    inner = (f'<figure class="ri-f z zf">{ft(mk["foto"][0], "ft", "50% 70%", "Gato enrolado na toalha depois do banho")}{legenda(mk, x["n"], x["k"], "leg sobre")}</figure>'
+             f'<div class="ri-q z"><div class="ri-cab"><div>{cab}</div>{num}</div>'
+             f'<h3 class="ri-sub">Pele e pelos: a linha Bris em três passos</h3><ol class="ri-l">{br}</ol>'
+             f'<h3 class="ri-sub">Ouvidos</h3><div class="ri-ou">{ou}</div></div>')
+    return pagina(x, "L-fichas-ritual", inner, sem_rh=True)
+
+def L_fichas_dupla(x):
+    mk = x["mk"]; g = fichas(x["corpo"]); fs = [f for _, L in g for f in L]
+    cab, num = cat_cab(x, len(fs))
+    inner = (f'<figure class="du-f z zf">{ft(mk["foto"][0], "ft", "50% 65%", "Filhote deitado no piso limpo")}{legenda(mk, x["n"], x["k"], "leg sobre")}</figure>'
+             f'<div class="du-q z"><div class="du-cab"><div>{cab}</div>{num}</div>'
+             f'<div class="du-l">{"".join(ficha(f, "fx fx-du", rotulo=True) for f in fs)}</div>{nota_sf(mk, "sf-nota du-sf")}</div>')
+    return pagina(x, "L-fichas-dupla", inner, sem_rh=True)
 
 LAYOUTS = {k[2:]: v for k, v in globals().items() if k.startswith("L_")}
 
 # ------------------------------------------------------------------ montagem
-ORDEM = [f"cap{n:02d}.md" for n in range(10)] + ["fechamento.md"]
+ORDEM = [f"cap{n:02d}.md" for n in range(ULT + 1)] + ["fechamento.md"]
 
 def ler():
     caps = []
@@ -524,7 +665,7 @@ def montar():
            + open(os.path.join(ROOT, "tools/deck/visual.css"), encoding="utf-8").read()
            + open(os.path.join(AQUI, "livro.css"), encoding="utf-8").read())
     js = open(os.path.join(ROOT, "tools/deck/deck.js"), encoding="utf-8").read()
-    indice = "".join(f'<li><a href="#cap{m["n"]:02d}" data-cap="{m["n"]:02d}"><span>{m["n"] if 1 <= m["n"] <= 9 else ""}</span>{inl(m["titulo"])}</a></li>' for m in caps)
+    indice = "".join(f'<li><a href="#cap{m["n"]:02d}" data-cap="{m["n"]:02d}"><span>{m["n"] if 1 <= m["n"] <= ULT else ""}</span>{inl(m["titulo"])}</a></li>' for m in caps)
     return f"""<!doctype html>
 <html lang="pt-BR">
 <head>

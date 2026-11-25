@@ -91,7 +91,8 @@
 .cap-06 .cc-gig{right:70px;top:-70px;color:var(--verde)}.cap-06 .cc-kick{color:var(--verde)}
 .cap-07 .cc-kick{color:var(--verde)}
 .cap-08 .cc-kick{color:#fff}
-.cap-09 .cc-gig{left:60px;bottom:-110px;color:rgba(255,255,255,.14)}.cap-09 .cc-kick{color:var(--ciano)}.cap-09 .cc-t{top:120px}
+.cap-10 .cc-gig{left:60px;bottom:-110px;color:rgba(255,255,255,.14)}.cap-10 .cc-kick{color:var(--ciano)}.cap-10 .cc-t{top:120px}
+.cap-09 .cc-kick{color:var(--azul)}.cap-09 .cc-abre{max-width:34ch}
 
 /* ---------------- abertura: o nome da Serafina gigante, ela na frente das letras */
 .prefacio .pf-nome{left:46px;top:150px;font:400 340px/1 var(--f-tit);letter-spacing:-.045em;color:#fff;white-space:nowrap;z-index:1}
@@ -646,3 +647,214 @@
 .pn-f .ft{object-position:50% 88%}
 .carregando .slide{transition:none!important}
 @media screen{.retrato .cz-a{font-size:72px;height:30px}}
+
+/* =================== capítulo 9 · os 10 de cada categoria: fichas CBV =================== */
+.fx{display:flex;flex-direction:column;background:#fff;color:var(--navy);border-radius:0 28px 28px 28px;padding:18px 20px;position:relative;min-width:0}
+.fx-img{display:flex;align-items:center;justify-content:center;min-height:0}
+.fx-pk{display:block;max-width:100%;max-height:100%;width:auto;height:auto;filter:drop-shadow(0 12px 12px rgba(7,32,71,.16))}
+.fx-t{min-width:0}
+.fx-cab{display:flex;flex-wrap:wrap;align-items:center;gap:5px 6px;margin:0 0 9px}
+.fx-n{display:block;width:100%;font:400 26px/1.05 var(--f-tit);letter-spacing:-.01em}
+.fx-esp,.fx-heroi,.fx-rx{display:inline-block;font:600 12px/1 var(--f-txt);padding:5px 9px 4px;border-radius:0 9px 9px 9px;white-space:nowrap}
+.fx-esp{background:var(--azul);color:#fff}
+.fx-heroi{background:var(--verde);color:#fff}
+.fx-rx{box-shadow:inset 0 0 0 1.5px var(--navy);color:var(--navy)}
+.t-navy .fx-rx{box-shadow:inset 0 0 0 1.5px currentColor}
+.fx-cbv{margin:0;display:grid;gap:7px}
+.fx-cbv>div{display:grid;grid-template-columns:24px 1fr;gap:9px;align-items:start}
+.fx-cbv dt{margin:0;display:flex;align-items:center;gap:8px}
+.fx-L{display:grid;place-items:center;width:24px;height:24px;border-radius:0 8px 8px 8px;font:700 12.5px/1 var(--f-txt);color:#fff;flex:none}
+.fx-c .fx-L{background:#5B6B85}.fx-b .fx-L{background:var(--azul)}.fx-v .fx-L{background:var(--verde)}
+.fx-cbv dt small{font:600 11.5px/1 var(--f-txt);letter-spacing:.07em;text-transform:uppercase;color:#556173}
+.fx-cbv dd{margin:0;font-size:14px;line-height:1.38}
+.fx-v dd{font-weight:600}
+.fx-linha{font-size:14.5px;line-height:1.45;color:#556173;margin:10px 0 0;max-width:80ch}
+.ct-num{flex:none;text-align:right}
+.ct-num span{display:block;font:400 150px/.78 var(--f-tit);letter-spacing:-.045em;color:var(--verde)}
+.ct-num small{display:block;font-size:14px;color:#556173;margin-top:10px}
+
+/* como ler: ficha de exemplo com chamadas */
+.L-fichas-guia .fg-q{left:96px;top:96px;width:690px}
+.fg-q .h2{margin-bottom:20px}
+.fg-q .txt{font-size:18.5px;line-height:1.55}
+.fg-cats{list-style:none;margin:24px 0 0;padding:0;border-top:1.5px solid var(--navy)}
+.fg-cats a{display:flex;align-items:baseline;gap:14px;padding:8px 0 7px;border-bottom:1px solid #D5D9DF;color:inherit;text-decoration:none}
+.fg-cats a:hover .fg-t{color:var(--azul)}
+.fg-k{font:400 32px/1 var(--f-tit);color:var(--verde);width:50px;flex:none}
+.fg-t{font-size:19px;font-weight:500}
+.fg-cats .sm-dots{flex:1;border-bottom:2px dotted #B8BFCA;transform:translateY(-6px)}
+.fg-cats .sm-p{font:400 20px/1 var(--f-tit)}
+.fg-selos{display:flex;flex-wrap:wrap;align-items:center;gap:6px 9px;font-size:14px;color:#3A4A63;margin:18px 0 0}
+.fg-selos .fx-rx{margin-left:14px}
+.L-fichas-guia .fg-ex{left:874px;top:112px;width:396px}
+.fx-ex{padding:24px 24px 26px;box-shadow:0 0 0 1.5px #D5D9DF,0 40px 70px -40px rgba(7,32,71,.45)}
+.fx-ex .fx-img{height:178px;margin-bottom:16px}
+.fx-ex .fx-n{font-size:34px}
+.fx-ex .fx-cbv{gap:12px}
+.fx-ex .fx-cbv>div{grid-template-columns:1fr;gap:5px}
+.fx-ex .fx-cbv dd{font-size:15.5px}
+.fx-ex .fx-img,.fx-ex .fx-cab,.fx-ex .fx-cbv>div{position:relative}
+.fg-c{position:absolute;left:calc(100% + 70px);top:50%;transform:translateY(-50%);width:184px;font-style:normal;font-size:14.5px;line-height:1.3;color:#3A4A63}
+.fg-c b{font-weight:500}
+.fg-c::before{content:"";position:absolute;right:calc(100% + 8px);top:50%;width:38px;border-top:1.5px solid var(--verde)}
+.fg-c::after{content:"";position:absolute;left:-50px;top:50%;width:9px;height:9px;margin-top:-4px;border-radius:50%;background:var(--verde)}
+
+/* grade: prevenção e proteção */
+.fr-cab,.fp-cab{left:96px;right:96px;top:90px;display:flex;justify-content:space-between;align-items:flex-start;gap:40px}
+.fr-cab .h2,.fp-cab .h2{margin-bottom:10px}
+.fr-cab .lead,.fp-cab .lead{font-size:20px;margin:0;max-width:62ch}
+.fr-l{left:96px;right:96px;top:322px;bottom:82px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:20px}
+.fx-h{flex-direction:row;gap:16px;align-items:stretch;padding:18px 20px 16px 12px}
+.fx-h .fx-img{width:126px;flex:none}
+.fx-h .fx-t{flex:1}
+.fx-h .fx-n{font-size:25px}
+
+
+/* prateleira: linha Snacks */
+.fp-potes{left:96px;right:96px;top:300px;height:200px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:24px}
+.fp-potes li{display:flex;align-items:flex-end;justify-content:center}
+.fp-img{height:100%;display:flex;align-items:flex-end;justify-content:center}
+.fp-img .fx-pk{max-height:200px;filter:drop-shadow(0 8px 6px rgba(7,32,71,.2))}
+.fp-tabua{left:64px;right:64px;top:494px;height:20px;background:#E0E1E3;border-radius:3px;box-shadow:inset 0 -6px 0 #CBCED4,0 18px 24px -14px rgba(7,32,71,.4)}
+.fp-txt{left:96px;right:96px;top:544px;bottom:78px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:24px}
+.fp-txt .fx-n{font-size:22px}
+.fp-txt .fx-cbv{gap:6px}
+.fp-txt .fx-cbv>div{grid-template-columns:22px 1fr;gap:7px}
+.fp-txt .fx-L{width:22px;height:22px;font-size:12px}
+.fp-txt .fx-cbv dd{font-size:13.5px;line-height:1.36}
+.fp-mini{display:none}
+
+/* tabela: suplementos, página 2 */
+.L-fichas-tabela .tb-f{right:0;top:0;bottom:0;width:420px}
+.L-fichas-tabela .tb-f .leg.sobre{max-width:340px}
+.L-fichas-tabela.pg-impar .fo{color:#fff}
+.tb-q{left:96px;top:66px;width:984px}
+.tb-pg{display:block;font-size:13px;color:#6B7585;margin-bottom:20px}
+.tb-q .h2{font-size:50px;margin-bottom:22px}
+.tb-t{width:100%;border-collapse:collapse;font-size:14.5px;line-height:1.4;table-layout:fixed}
+.tb-t col.p{width:262px}
+.tb-t thead th{text-align:left;font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#556173;padding:0 14px 10px 0;border-bottom:2px solid var(--navy);vertical-align:bottom}
+.tb-t thead th:first-child{width:262px}
+.tb-l{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:0 7px 7px 7px;color:#fff;font-size:12px;letter-spacing:0;margin-right:8px;vertical-align:middle}
+.tb-c{background:#5B6B85}.tb-b{background:var(--azul)}.tb-v{background:var(--verde)}
+.tb-t tbody th,.tb-t td{padding:14px 16px 14px 0;border-bottom:1px solid #D5D9DF;vertical-align:top;text-align:left;font-weight:400}
+.tb-t td:last-child{font-weight:600}
+.tb-p{display:flex;gap:12px;align-items:center}
+.tb-p .fx-pk{width:86px;height:86px;object-fit:contain;flex:none}
+.tb-p .fx-n{font-size:22px;margin-bottom:5px}
+.tb-p .fx-esp{white-space:normal;line-height:1.25}
+.tb-q .fx-linha{margin-top:14px}
+
+/* bula: medicamentos, página 1 */
+.bu-cab{left:96px;top:90px;width:1060px}
+.bu-cab .h2{font-size:56px;margin-bottom:14px}
+.bu-cab .lead{font-size:20px;max-width:60ch;margin:0}
+.bu-selo{right:110px;top:70px;width:184px;height:184px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transform:rotate(-9deg);font-size:12px;line-height:1.3;letter-spacing:.06em;text-transform:uppercase;color:var(--navy)}
+.bu-selo::before{content:"";position:absolute;inset:9px;border-radius:50%;border:1px dashed rgba(7,32,71,.6)}
+.bu-selo b{font:400 31px/1 var(--f-tit);letter-spacing:0;text-transform:none;margin:5px 0 8px;color:var(--verde)}
+.bu-cols{left:96px;right:96px;top:318px;bottom:70px;display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.bu-col h3{display:flex;align-items:center;gap:12px;font:600 14px/1 var(--f-txt);letter-spacing:.08em;text-transform:uppercase;margin:0;padding-bottom:11px;border-bottom:2px solid var(--navy)}
+.bu-col h3 span{font:400 26px/1 var(--f-tit);color:var(--verde);letter-spacing:0}
+.fx-bu{flex-direction:row;gap:22px;padding:15px 0 14px;border-radius:0;border-bottom:1px solid #D5D9DF;background:none}
+.fx-bu .fx-img{width:146px;flex:none}
+.fx-bu .fx-t{flex:1}
+.fx-bu .fx-cab{margin-bottom:7px}
+.fx-bu .fx-n{width:auto;font-size:24px;margin-right:6px}
+
+/* quadro: medicamentos, página 2 (azul-marinho) */
+.qd-cab{left:96px;top:90px;width:900px}
+.qd-cab .kick{color:var(--ciano)}
+.qd-q{left:96px;right:470px;top:238px;bottom:78px;display:grid;grid-template-rows:auto auto;align-content:start;gap:20px}
+.qd-g h3{font:600 14px/1 var(--f-txt);letter-spacing:.08em;text-transform:uppercase;color:var(--ciano);margin:0 0 10px}
+.qd-l{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.fx-qd{flex-direction:row;gap:14px;padding:16px 20px 16px 12px}
+.fx-qd .fx-img{width:118px;flex:none}
+.fx-qd .fx-t{flex:1}
+.fx-qd .fx-n{width:auto;margin-right:6px}
+.qd-ps{right:96px;top:238px;width:334px;bottom:78px;box-sizing:border-box;background:var(--verde);color:#fff;border-radius:0 32px 32px 32px;padding:30px 30px 60px}
+.qd-pt{display:block;font:400 30px/1.1 var(--f-tit);margin-bottom:20px}
+.qd-ps ol{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.qd-ps li{display:grid;grid-template-columns:34px 1fr;gap:12px;font-size:17px;line-height:1.4;align-items:start}
+.qd-ps li span{width:34px;height:34px;border-radius:50%;background:#fff;color:#0A7F23;display:grid;place-items:center;font:400 18px/1 var(--f-tit)}
+.qd-linha{font-size:14px;line-height:1.45;margin:24px 0 0;padding-top:16px;border-top:1px solid rgba(255,255,255,.45)}
+.qd-pg{position:absolute;left:30px;bottom:24px;font-size:12.5px;opacity:.8}
+
+/* ritual: cuidados */
+.L-fichas-ritual .ri-f{left:0;top:0;bottom:0;width:420px}
+.L-fichas-ritual .ri-f .leg.sobre{max-width:330px}
+.L-fichas-ritual.pg-par .fo{color:#fff}
+.ri-q{left:484px;right:80px;top:58px;bottom:52px}
+.ri-cab{display:flex;justify-content:space-between;align-items:flex-start;gap:30px}
+.ri-cab .kick{margin-bottom:8px}
+.ri-cab .h2{font-size:50px;margin:0}
+.ri-cab .ct-num span{font-size:104px}
+.ri-sub{font:600 13.5px/1 var(--f-txt);letter-spacing:.08em;text-transform:uppercase;color:#0A7F23;margin:14px 0 10px;padding-bottom:9px;border-bottom:1.5px solid #D5D9DF}
+.ri-l{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.ri-l li{position:relative}
+.ri-l li:not(:last-child)::after{content:"";position:absolute;right:-23px;top:92px;width:16px;height:16px;border-top:2.5px solid var(--verde);border-right:2.5px solid var(--verde);transform:rotate(45deg)}
+.ri-n{display:flex;align-items:baseline;gap:8px;font:400 30px/1 var(--f-tit);color:var(--verde);margin-bottom:4px}
+.ri-n small{font:500 13px/1 var(--f-txt);color:#556173}
+.fx-rt{padding:0;background:none;border-radius:0}
+.fx-rt .fx-img{height:150px;justify-content:flex-start;margin-bottom:10px}
+.fx-rt .fx-n{font-size:23px}
+.ri-ou{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fx-ou{background:#F1F2F3;padding:14px 18px 14px 10px}
+.fx-ou .fx-img{width:92px;height:128px;align-self:center}
+.fx-ou .fx-n{width:auto;font-size:22px;margin-right:6px}
+.fx-ou .fx-cab{margin-bottom:7px}
+
+/* dupla: desinfecção */
+.L-fichas-dupla .du-f{left:0;top:0;bottom:0;width:640px}
+.L-fichas-dupla.pg-par .fo{color:#fff}
+.du-q{left:704px;right:96px;top:80px;bottom:88px;display:flex;flex-direction:column}
+.du-cab{display:flex;justify-content:space-between;align-items:flex-start;gap:30px}
+.du-cab .h2{margin-bottom:0}
+.du-cab .ct-num span{font-size:120px}
+.du-l{display:grid;gap:18px;margin-top:24px}
+.fx-du{flex-direction:row;gap:22px;background:#F1F2F3;padding:20px 26px 22px 14px}
+.fx-du .fx-img{width:150px;height:200px;flex:none}
+.fx-du .fx-t{flex:1}
+.fx-du .fx-n{width:auto;font-size:30px;margin-right:8px}
+.fx-du .fx-cbv{gap:10px}
+.fx-du .fx-cbv>div{grid-template-columns:150px 1fr;gap:10px}
+.fx-du .fx-cbv dd{font-size:15px}
+.du-sf{margin-top:auto}
+
+/* celular */
+@media screen{
+.retrato .fr-cab,.retrato .fp-cab,.retrato .ri-cab,.retrato .du-cab{display:block!important}
+.retrato .ct-num{display:none}
+.retrato .fr-l,.retrato .fp-txt,.retrato .bu-cols,.retrato .qd-q,.retrato .qd-l,.retrato .ri-l,.retrato .ri-ou,.retrato .du-l{display:block!important}
+.retrato .fp-potes,.retrato .fp-tabua,.retrato .bu-selo,.retrato .fg-c{display:none!important}
+.retrato .fx{margin:0 0 14px;flex-direction:row!important;gap:14px;padding:14px 16px 14px 10px!important;background:#F1F2F3;border-radius:0 22px 22px 22px}
+.retrato .t-navy .fx{background:#fff}
+.retrato .fx .fx-img{width:76px!important;height:auto!important;flex:none;margin:0!important;align-items:flex-start}
+.retrato .fx-ex .fx-cbv>div{grid-template-columns:24px 1fr}
+.retrato .fx-cbv dt small{display:none}
+.retrato .fx-du .fx-cbv>div{grid-template-columns:24px 1fr}
+.retrato .fx-n{font-size:21px!important;width:auto!important;margin-right:6px}
+.retrato .fx-cbv dd{font-size:14px!important}
+.retrato .fp-txt li{display:flex;gap:14px;background:#F1F2F3;padding:14px 16px 14px 10px;border-radius:0 22px 22px 22px}
+.retrato .fp-mini{display:flex;width:64px;flex:none;align-items:flex-start}
+.retrato .fp-tt{flex:1;min-width:0}
+.retrato .tb-t,.retrato .tb-t tbody,.retrato .tb-t tr,.retrato .tb-t th,.retrato .tb-t td{display:block;width:auto!important}
+.retrato .tb-t thead{display:none}
+.retrato .tb-t tr{padding:12px 0;border-bottom:1px solid #D5D9DF}
+.retrato .tb-t tbody th,.retrato .tb-t td{border:0;padding:3px 0}
+.retrato .tb-t td::before{font-weight:700;margin-right:6px}
+.retrato .tb-t td:nth-child(2)::before{content:"C"}.retrato .tb-t td:nth-child(3)::before{content:"B"}.retrato .tb-t td:nth-child(4)::before{content:"V"}
+.retrato .tb-p .fx-pk{width:64px;height:64px}
+.retrato .qd-ps{padding:22px 22px!important;border-radius:0 24px 24px 24px!important}
+.retrato .qd-pg,.retrato .tb-pg{position:static!important}
+.retrato .ri-l li::after{display:none}
+.retrato .ri-n{font-size:22px}
+.retrato .bu-col h3{margin:10px 0 8px}
+.retrato .fx-bu{border-bottom:0}
+}
+/* capa 9: a foto inteira, encostada à direita, fundida no fundo da mesma cor */
+.cap-09 .cc-f .ft{object-fit:contain;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 140px);mask-image:linear-gradient(to right,transparent 0,#000 140px)}
+.retrato .cap-09 .cc-f .ft{object-fit:cover;-webkit-mask-image:none;mask-image:none}
+.L-sumario .sm-l a{padding:7px 0}
+.L-sumario .sm-l a{padding:6px 0}
+.L-sumario .sm-fecha{margin-top:12px;padding-top:10px}
+.L-sumario .sm-fecha a{padding:2px 0}

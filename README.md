@@ -6,12 +6,13 @@ Guia interativo de execução no ponto de venda para promotores, vendedores do d
 
 Abre no celular e no computador. O botão **PDF** gera a versão impressa em A4 paisagem. O botão **Revisão** mostra as notas que aguardam validação da Ourofino.
 
-## O que tem dentro (versão 6, 49 páginas diagramadas como livro)
+## O que tem dentro (versão 7, 58 páginas diagramadas como livro)
 
 - Abertura com a Serafina, a promotora ilustrada que acompanha o guia, e sumário com as páginas.
-- Nove capítulos, cada um com capa própria: contato no PDV, trade marketing, básico da gôndola, materiais de PDV, cross, ponto natural e ponto extra, relacionamento e postura, CBV e produtos heróis, prateleira ideal.
+- Dez capítulos, cada um com capa própria: contato no PDV, trade marketing, básico da gôndola, materiais de PDV, cross, ponto natural e ponto extra, relacionamento e postura, CBV e produtos heróis, os 10 de cada categoria, prateleira ideal.
+- Fichas CBV de 33 produtos em cinco categorias (prevenção e proteção, suplementos, medicamentos, cuidados e desinfecção), com as embalagens oficiais em `assets/img/pk/`.
 - Galeria dos 11 materiais de PDV, os sete produtos heróis com a frase de balcão, comparadores de antes e depois e diagramas da operação.
-- Checklist da visita que fica salvo no celular e teste final com nove situações de loja, uma pergunta por vez.
+- Checklist da visita que fica salvo no celular e teste final com dez situações de loja, uma pergunta por vez.
 - Ensaio fotográfico próprio de cães e gatos nas cores da Ourofino, fotos de loja com as embalagens reais e ícones animados.
 - Cada página tem composição própria, com cabeço, fólio, legendas e notas de fonte, como num livro.
 
