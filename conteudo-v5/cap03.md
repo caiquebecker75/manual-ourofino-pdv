@@ -1,0 +1,55 @@
+---
+cap: 3
+parte: Na gôndola
+titulo: O básico da gôndola
+manuscrito: na gôndola
+abertura: Antes de qualquer material ou ponto extra, a prateleira precisa estar em ordem. É o que o tutor vê primeiro e o que mais pesa na escolha.
+publico: Promotor, vendedor do distribuidor e balconista
+tempo: 7 min
+---
+
+=== porque | Por que um buraco na prateleira custa mais que uma venda
+Quando o tutor não acha o produto, ele resolve na hora: leva outra marca, compra em outra loja ou desiste. A venda perdida hoje pode virar o hábito de comprar a concorrente amanhã.
+A maior parte das faltas nasce dentro da loja: pedido mal calculado ou caixa esquecida no estoque. Por isso, antes de anotar a falta, pergunte se tem produto guardado. Se tiver, peça licença e reponha. Se não tiver, registre e avise o supervisor.
+@dado Quando o produto falta, 31% dos compradores vão a outra loja, 26% trocam de marca e 9% não compram nada.
+@fonte Gruen, Corsten e Bharadwaj, "Retail Out-of-Stocks", estudo da FMI, GMA e CIES com 71 mil consumidores em 29 países, 2002.
+@icone prateleira
+
+=== cards | Os quatro básicos, nesta ordem
+**1. Disponível** · O produto está na prateleira, na quantidade certa. Quando falta, o nome disso é ruptura.
+**2. Limpo** · Embalagem sem poeira, sem amassado e sem etiqueta velha por cima. Caixa suja parece produto parado.
+**3. Com preço** · Etiqueta embaixo do produto certo, legível de longe. Sem preço, o tutor precisa perguntar, e nem sempre há quem responda.
+**4. Na validade** · Nada vencido na prateleira, e o que vence antes fica na frente.
+@icone caixa
+@icone folha
+@icone etiqueta
+@icone calendario
+@dica Confira os quatro sempre nesta ordem. Se o tempo acabar no meio da visita, o mais importante já ficou pronto.
+
+=== figura | FIFO: a validade mais curta vai na frente
+@fig D-FIFO
+FIFO vem do inglês *first in, first out*: o primeiro que entra é o primeiro que sai. Ao repor, puxe para a frente as caixas que vencem antes e coloque o lote novo atrás.
+Se a caixa nova fica na frente, a antiga vai para o fundo e vence lá. Produto vencido à venda é crime pelo Código de Defesa do Consumidor. Achou um? Tire da prateleira na hora e entregue ao responsável da loja.
+@fonte Lei 8.078/1990 (Código de Defesa do Consumidor), art. 18, § 6º; Lei 8.137/1990, art. 7º, inciso IX.
+
+=== figura | Frente e blocagem: a marca vista de longe
+@fig D-BLOCAGEM
+**Frente** é cada caixa virada para o corredor, com o nome à vista. **Blocagem** é juntar a mesma linha num bloco só, de cima para baixo, em vez de espalhar caixas pela gôndola.
+Um bloco é mais fácil de achar do que cinco caixas soltas. Num teste que rastreou o olhar dos compradores, dobrar as frentes fez a marca ser notada 28% mais vezes.
+@fonte Chandon, Hutchinson, Bradlow e Young, "Does In-Store Marketing Work?", Journal of Marketing, 2009.
+
+=== figura | As três alturas da gôndola
+@fig F-GONDOLA-ZONAS
+O olhar do tutor cai primeiro na faixa entre o peito e os olhos, de 1,20 m a 1,60 m do chão. É a zona quente: ali ficam o que mais sai e a campanha do momento.
+Acima dela, a prateleira ainda é vista. Abaixo de 0,80 m, o tutor precisa se abaixar para ver. Num teste com 348 compradores, a marca nas duas prateleiras de cima foi escolhida 12% mais vezes do que nas duas de baixo.
+@fonte Chandon, Hutchinson, Bradlow e Young, "Does In-Store Marketing Work?", Journal of Marketing, 2009.
+
+=== validar
+As alturas (1,20 m a 1,60 m e 0,80 m) são referência de mercado para gôndola de varejo. Confirmar se a Ourofino usa outra medida no material oficial.
+
+=== figura | A mesma gôndola antes e depois da visita
+@fig F-ANTES
+@fig F-DEPOIS
+Arraste a linha para comparar. Antes: buraco na prateleira, caixas deitadas, preço faltando e marcas misturadas. Depois: cada linha num bloco, frentes viradas para o corredor, preço embaixo de cada produto e a validade mais curta na frente.
+Nenhum material novo entrou na foto de depois. A diferença vem só do básico bem feito.
+@lembre Fotografe antes e depois do mesmo lugar e na mesma altura. É assim que o seu trabalho aparece.

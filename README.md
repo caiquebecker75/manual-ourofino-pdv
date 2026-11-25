@@ -6,17 +6,17 @@ Guia interativo de execução no ponto de venda para promotores, vendedores do d
 
 Abre no celular e no computador. O botão **PDF** gera a versão impressa em A4 paisagem. O botão **Revisão** mostra as notas que aguardam validação da Ourofino.
 
-## O que tem dentro (versão 4, em slides)
+## O que tem dentro (versão 5, 49 slides)
 
-- 13 capítulos em seis partes: entender o trade e a loja, a visita, a gôndola, materiais e cross, produtos e postura.
-- Glossário A a Z com busca, checklist da visita que fica salvo no celular e teste final com dez situações de loja.
-- Fotos de shooting de cães e gatos nas aberturas, uma promotora ilustrada que dá as dicas e fotos de loja com as embalagens reais, feitas no ChatGPT.
-- Comparadores de antes e depois, marcações nas fotos e diagramas da operação.
-- Fichas dos sete produtos heróis com CBV, ponto natural, cross e material indicado.
+- Abertura com a Serafina, a promotora ilustrada que acompanha o guia, e sumário com as páginas.
+- Nove capítulos, cada um com capa própria: contato no PDV, trade marketing, básico da gôndola, materiais de PDV, cross, ponto natural e ponto extra, relacionamento e postura, CBV e produtos heróis, prateleira ideal.
+- Galeria dos 11 materiais de PDV, os sete produtos heróis com a frase de balcão, comparadores de antes e depois e diagramas da operação.
+- Checklist da visita que fica salvo no celular e teste final com nove situações de loja, uma pergunta por vez.
+- Fotos de shooting de cães e gatos, fotos de loja com as embalagens reais e ícones animados.
 
 ## Como editar
 
-O texto fica em `conteudo-v4/capNN.md`, um bloco `===` por slide (formato em `conteudo-v4/_ESPEC.md`). Depois de editar:
+O texto fica em `conteudo-v5/capNN.md`, um bloco `===` por slide (tipos de slide em `conteudo-v4/_ESPEC.md`, mais `galeria`, `produtos`, `checklist`, `quiz` e `contracapa` da v5). Depois de editar:
 
 ```bash
 python3 tools/deck/build_deck.py

@@ -15,6 +15,19 @@ No git, cada versão também tem uma tag (`git checkout <tag> -- .` restaura os 
 | 2026-11-24 | v2 | `2026-11-24_v2/` | `v2` | Reestruturação pedida na reunião de 19/11 (detalhes abaixo). Imagens 3D feitas no Blender. |
 | 2026-11-24 | v3 | `2026-11-24_v3/` | `v3` | Visual refeito no estilo do guia de referência mostrado na reunião (detalhes abaixo). |
 | 2026-11-24 | v4 | `2026-11-24_v4/` | `v4` | Guia em formato de slides, conteúdo reescrito na ordem do guia de referência, marca oficial Ourofino (detalhes abaixo). |
+| 2026-11-24 | v5 | `2026-11-24_v5/` | `v5` | A v4 condensada em 49 slides, o mesmo número de páginas do guia de referência (detalhes abaixo). |
+
+## v5 · o que mudou em relação à v4
+
+Pedido do Caique em 24/11: 348 slides era grande demais para alguém ler. Reduzir para a mesma quantidade de páginas do guia de referência mostrado no vídeo (49).
+
+- **Tamanho:** de 348 para 49 slides. Abertura (capa, Serafina, como usar, sumário), nove capítulos com capa própria e fechamento (considerações da Serafina, checklist, teste final e contracapa).
+- **Capítulos:** 1 contato no PDV (antes, durante e depois, com botões na capa), 2 trade marketing, 3 básico da gôndola, 4 materiais de PDV, 5 cross, 6 ponto natural e ponto extra, 7 relacionamento, postura e quem decide, 8 CBV e produtos heróis, 9 prateleira ideal.
+- **Juntado:** objetivo do guia foi para a abertura; relacionamento, postura e "conhecendo a loja" viraram um capítulo; CBV e heróis viraram um capítulo; glossário virou um slide de palavras do trade; checklist e teste final cabem num slide cada.
+- **Slides novos:** galeria de materiais (11 materiais em 2 slides, com foto de cada um), grade de produtos heróis com a frase de balcão, checklist em 3 colunas, teste final com uma pergunta por vez e placar, contracapa.
+- **Serafina:** continua na capa de abertura, na fala inicial e final, nos erros comuns e na faixa verde "Dica da Serafina" no pé de alguns slides.
+- **Mantido da v4:** marca oficial, ícones animados, capas diferentes por capítulo, fotos do pack, dados com fonte verificada, modo Revisão com as notas para a Ourofino validar.
+- **Gerador:** `python3 tools/deck/build_deck.py`, com texto em `conteudo-v5/`. O texto completo da v4 continua em `conteudo-v4/` e na tag `v4`.
 
 ## v4 · o que mudou em relação à v3
 

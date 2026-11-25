@@ -1,4 +1,4 @@
-"""Gera o deck de slides do guia (v4) a partir de conteudo-v4/*.md.
+"""Gera o deck de slides do guia (v5, 49 slides) a partir de conteudo-v5/*.md.
 Rodar da raiz: python3 tools/deck/build_deck.py  ->  index.html"""
 import html, json, os, re, sys
 AQUI = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(os.path.dirname(AQUI))
@@ -7,7 +7,7 @@ from icones import icone, I as ICONES, CSS as CSS_ICONES
 import diagramas as DG
 import build as V3  # reaproveita mapa de imagens, marcações e utilidades da v3
 
-C = os.environ.get("CONTEUDO_V4", os.path.join(ROOT, "conteudo-v4")); IMG = "assets/img/"; FOTO = "assets/img/foto/"
+C = os.environ.get("CONTEUDO", os.path.join(ROOT, "conteudo-v5")); IMG = "assets/img/"; FOTO = "assets/img/foto/"
 esc = lambda s: html.escape(s or "", quote=True)
 
 # ------------------------------------------------------------------ leitura
@@ -116,7 +116,7 @@ def serafina(pose, cls="sera"):
     return recorte("serafina-" + (pose or "explica"), cls, "Serafina")
 
 def diagrama(fid):
-    s = DG.DIAGRAMAS[fid]()
+    s = DG.DIAGRAMAS[fid]().replace("O argumento oficial de cada produto está no capítulo 11.", "A frase de cada herói está nos próximos slides.")
     return s.replace("Figtree, sans-serif", "Poppins, sans-serif").replace("IBM Plex Mono, monospace", "Poppins, sans-serif")
 
 ILU = {"I-CHEGADA": "cena-chegada-sem-fundo", "I-CONVERSA": "cena-conversa-sem-fundo", "I-TUTOR": "cena-tutor-sem-fundo"}
@@ -151,23 +151,15 @@ def tipo_fig(fids):
 # ------------------------------------------------------------------ capas de capítulo (uma diferente por capítulo)
 CAPAS = {
     0:  dict(v="serafina", cor="navy", img="serafina-acena", animais=True),
-    1:  dict(v="recorte", cor="verde", img="estudio-cao-viralata-caramelo"),
+    1:  dict(v="folha", cor="verde", img="ambiente-petshop-produtos", pos="50% 50%"),
     2:  dict(v="tipografica", cor="n1", img="estudio-cao-dachshund"),
     3:  dict(v="lateral", lado="dir", cor="navy", img="cor-cao-golden-azul", pos="50% 30%"),
     4:  dict(v="espiando", cor="azul", img="estudio-gato-laranja"),
-    5:  dict(v="lateral", lado="esq", cor="branco", img="cor-cao-bulldog-frances-verde", pos="50% 45%"),
-    6:  dict(v="dupla", img="estudio-cao-e-gato-02", img2="estudio-gato-frajola-filhote"),
-    7:  dict(v="lateral", lado="dir", cor="azul", img="cor-cao-jack-russell-rosa", pos="50% 62%"),
-    8:  dict(v="folha", cor="branco", img="cena-tutora-cao-casa", pos="50% 35%"),
-    9:  dict(v="lateral", lado="esq", cor="navy", img="cor-cao-border-collie-laranja", pos="50% 55%"),
-    10: dict(v="folha", cor="n1", img="ambiente-petshop-balcao-gato", pos="40% 50%"),
-    11: dict(v="lateral", lado="dir", cor="verde", img="cor-cao-preto-amarelo", pos="50% 35%"),
-    12: dict(v="geometrica", cor="navy", img="estudio-cao-beagle"),
-    13: dict(v="lateral", lado="dir", cor="navy", img="cor-gato-cinza-amarelo", pos="62% 50%"),
-    14: dict(v="serafina", cor="branco", img="serafina-acena", pet="estudio-filhote-bernese"),
-    97: dict(v="tipografica", cor="branco", img="estudio-cao-shih-tzu"),
-    98: dict(v="recorte", cor="azul", img="serafina-tablet", sera=True),
-    99: dict(v="sangrada", img="cor-gato-frajola-rosa", pos="40% 50%"),
+    5:  dict(v="dupla", img="estudio-cao-e-gato-02", img2="estudio-gato-frajola-filhote"),
+    6:  dict(v="lateral", lado="esq", cor="branco", img="cor-cao-bulldog-frances-verde", pos="50% 45%"),
+    7:  dict(v="folha", cor="branco", img="ambiente-petshop-balcao-gato", pos="40% 50%"),
+    8:  dict(v="geometrica", cor="navy", img="estudio-cao-beagle"),
+    9:  dict(v="lateral", lado="dir", cor="azul", img="cor-cao-jack-russell-rosa", pos="50% 62%"),
 }
 
 def animais_geo(cls="geo", arq="animais-faixa"):
@@ -182,7 +174,10 @@ def capa_cap(m):
     tam = "" if c.get("v") != "tipografica" else ' style="font-size:%dpx"' % (150 if len(m["titulo"]) <= 18 else 118 if len(m["titulo"]) <= 30 else 96)
     tit = f'<h2 class="cc-tit"{tam}>{inline(m["titulo"])}</h2>'
     abre = f'<p class="cc-abre">{inline(m.get("abertura", ""))}</p>' if m.get("abertura") else ""
-    txt = f'<div class="cc-txt" data-e style="--e:1">{num}{kicker}{manus}{tit}{abre}</div>'
+    bts = ""
+    if m.get("botoes"):
+        bts = '<div class="cc-bts">' + "".join(f'<a class="bt" href="#cap{n:02d}-{b.split("|")[1].strip()}">{esc(b.split("|")[0].strip())}{icone("seta")}</a>' for b in m["botoes"]) + "</div>"
+    txt = f'<div class="cc-txt" data-e style="--e:1">{num}{kicker}{manus}{tit}{abre}{bts}</div>'
     if v == "sangrada":
         vis = f'<div class="cc-foto" style="--pos:{c.get("pos", "50% 50%")}">{foto(c["img"], "cc-img")}</div>'
     elif v == "lateral":
@@ -219,6 +214,14 @@ def validar_html(notas):
 def lembre_html(mk):
     return f'<p class="lembre"><b>Lembre-se.</b> {inline(mk["lembre"][0])}</p>' if mk.get("lembre") else ""
 
+def dica_html(mk):
+    if not mk.get("dica"): return ""
+    return (f'<p class="dica"><span class="dica-av" style="background-image:url({IMG}serafina-explica.webp)" aria-hidden="true"></span>'
+            f'<b>Dica da Serafina.</b> {inline(mk["dica"][0])}</p>')
+
+def fonte_html(mk):
+    return f'<p class="fonte-p">Fonte: {inline(mk["fonte"][0])}</p>' if mk.get("fonte") else ""
+
 def icones_html(mk, cls="ic-g"):
     out = ""
     for k, nome in enumerate(mk.get("icone", [])):
@@ -232,7 +235,8 @@ def slide(m, k, tipo, titulo, linhas, notas):
     mk, corpo = separa(linhas); n = m["n"]
     sid = f"cap{n:02d}-{k}"; attrs = f'class="slide s-{tipo}" id="{sid}" data-cap="{n:02d}" data-cap-nome="{esc(cap_nome(m))}"'
     T = f'<h3 class="tit" data-e>{inline(titulo)}</h3>' if titulo else ""
-    figs = mk.get("fig", []); val = validar_html(notas); lem = lembre_html(mk); chrome = cab(m, k, 0)
+    figs = mk.get("fig", []); val = validar_html(notas); lem = lembre_html(mk) + dica_html(mk); chrome = cab(m, k, 0)
+    if k == 1 and m.get("capa") == "nao": attrs = attrs.replace(f'id="{sid}"', f'id="cap{n:02d}"')
     pratica = f'<div class="pratica" data-e style="--e:3"><b>Na prática</b><p>{inline(mk["na-pratica"][0])}</p></div>' if mk.get("na-pratica") else ""
     exemplo = f'<div class="pratica" data-e style="--e:3"><b>Exemplo</b><p>{inline(mk["exemplo"][0])}</p></div>' if mk.get("exemplo") else ""
 
@@ -254,7 +258,7 @@ def slide(m, k, tipo, titulo, linhas, notas):
         if figs:
             tf = tipo_fig(figs)
             vis = visual_fig(figs, titulo)
-            return f'<section {attrs} data-fig="{tf}">{chrome}<div class="col-txt" data-fit>{T}{texto}{pratica}{exemplo}</div><div class="col-vis" data-e style="--e:2">{vis}</div>{lem}{icones_html(mk, "ic-canto")}{val}</section>'
+            return f'<section {attrs} data-fig="{tf}">{chrome}<div class="col-txt" data-fit>{T}{texto}{pratica}{exemplo}{fonte_html(mk)}</div><div class="col-vis" data-e style="--e:2">{vis}</div>{lem}{icones_html(mk, "ic-canto")}{val}</section>'
         if mk.get("pose"):
             return f'<section {attrs} data-vis="sera">{chrome}<div class="col-txt" data-fit>{T}{texto}{pratica}{exemplo}</div><div class="col-vis">{serafina(mk["pose"][0])}</div>{lem}{val}</section>'
         ic = icones_html(mk, "ic-grande") or f'<span class="ic-grande">{icone("folha")}</span>'
@@ -345,6 +349,74 @@ def slide(m, k, tipo, titulo, linhas, notas):
                 + "".join(f'<li data-e style="--e:{i + 1}"><span style="--d:{i * .2}">{icone("certo")}</span>{inline(x)}</li>' for i, x in enumerate(it))
                 + f'</ul></div><div class="rs-img">{petimg}</div>{val}</section>')
 
+    if tipo == "galeria":
+        its = []
+        for l in corpo:
+            if "|" not in l: continue
+            esq, _, dir_ = l.partition("|"); pp = esq.split(); fid = pp[0]; pos = " ".join(pp[1:]) or "50% 50%"
+            mm = re.match(r"\s*\*\*(.+?)\*\*\s*·\s*(.*)", dir_)
+            nome, txt = (mm.group(1), mm.group(2)) if mm else ("", dir_.strip())
+            im = img_fig(fid, nome).replace("<img ", '<img style="object-position:%s" ' % pos, 1)
+            its.append(f'<li data-e style="--e:{len(its) + 1}"><div class="gal-img">{im}</div>'
+                       f'<b>{inline(nome)}</b><p>{inline(txt)}</p></li>')
+        return f'<section {attrs} data-n="{len(its)}">{chrome}{T}<ul class="gal">{"".join(its)}</ul>{lem}{val}</section>'
+
+    if tipo == "produtos":
+        its = []
+        for l in corpo:
+            if l.count("|") < 4: continue
+            fid, nome, tag, desc, frase = [x.strip() for x in l.split("|", 4)]
+            its.append(f'<li data-e style="--e:{len(its) + 1}"><div class="pr-img">{img_fig(fid, re.sub(r"[*]", "", nome))}</div>'
+                       f'<span class="pr-tag">{esc(tag)}</span><b class="pr-nome">{inline(re.sub(r"[*]", "", nome))}</b><p class="pr-desc">{inline(desc)}</p>'
+                       f'<p class="pr-frase"><span>No balcão</span>{inline(frase)}</p></li>')
+        return f'<section {attrs} data-n="{len(its)}">{chrome}{T}<ul class="prods">{"".join(its)}</ul>{lem}{val}</section>'
+
+    if tipo == "checklist":
+        cols = []; kk = 0
+        for l in corpo:
+            t = l.strip()
+            if t.startswith("## "): cols.append([t[3:], []])
+            elif t.startswith("- ") and cols: cols[-1][1].append(re.sub(r"^- (\[[ x]\]\s*)?", "", t))
+        html_cols = ""
+        for nome, itens in cols:
+            lis = ""
+            for x in itens:
+                kk += 1; lis += f'<label class="chk"><input type="checkbox" data-k="c{kk}"><span class="chk-box">{icone("certo")}</span><span>{inline(x)}</span></label>'
+            html_cols += f'<div class="ck-col"><h4>{inline(nome)}</h4>{lis}</div>'
+        return (f'<section {attrs}>{chrome}<div class="ck-cab"><h3 class="tit">{inline(titulo)}</h3>'
+                f'<p class="ck-prog"><span data-chk-txt></span> marcados <i><b data-chk-barra></b></i><button type="button" data-limpar>Limpar</button></p></div>'
+                f'<div class="ck3">{html_cols}</div>{val}</section>')
+
+    if tipo == "quiz":
+        qs = []
+        for l in corpo:
+            t = l.strip()
+            if t.startswith("?"): qs.append([t[1:].strip(), [], []])
+            elif t.startswith("- [x]") and qs: qs[-1][1].append((True, t[5:].strip()))
+            elif t.startswith("- [ ]") and qs: qs[-1][1].append((False, t[5:].strip()))
+            elif t.startswith(">") and qs: qs[-1][2].append(t[1:].strip())
+        itens = ""
+        for i, (q, ops, exp) in enumerate(qs):
+            bts = "".join(f'<button type="button" class="op" data-ok="{1 if ok else 0}"><span class="op-l">{chr(65 + j)}</span><span>{inline(o)}</span></button>' for j, (ok, o) in enumerate(ops))
+            itens += (f'<div class="qz-item" data-i="{i}"><p class="ts-p"><span class="qz-n">{i + 1}.</span> {inline(q)}</p><div class="ops" data-teste>{bts}'
+                      f'<div class="teste-exp" hidden><b class="teste-res"></b> {inline(" ".join(exp))}</div></div></div>')
+        return (f'<section {attrs} data-quiz>{chrome}<div class="qz-q"><div class="qz-cab"><span class="ts-r">{inline(titulo)}</span>'
+                f'<span class="qz-cont">Pergunta <b data-qz-n>1</b> de {len(qs)}</span><span class="qz-dots">{"<i></i>" * len(qs)}</span></div>'
+                f'<div class="qz-lista">{itens}</div><button type="button" class="bt qz-prox" data-qz-prox hidden>Próxima pergunta{icone("seta")}</button>'
+                f'<div class="qz-fim" hidden><span class="qz-fim-r">Seu resultado</span><b data-qz-certas>0</b><span class="qz-fim-t">certas de {len(qs)}</span>'
+                f'<p>Errou alguma? A explicação mostra o capítulo do assunto. Leia de novo antes da próxima visita.</p>'
+                f'<button type="button" class="bt claro" data-qz-refaz>Refazer o teste</button></div></div>'
+                f'<div class="ts-sera">{serafina("pensa")}</div><div class="ts-sera fim">{serafina("joinha")}</div>{val}</section>')
+
+    if tipo == "contracapa":
+        return (f'<section class="slide s-contra" id="fim" data-cap="{n:02d}" data-cap-nome="{esc(cap_nome(m))}">{animais_geo("geo ct-geo")}'
+                f'<div class="ct-sera">{serafina("acena", "ct-sera-img")}</div><div class="ct-pet">{recorte("estudio-filhote-bernese", "ct-pet-img", "", FOTO)}</div>'
+                f'<div class="ct-txt"><img class="cg-logo" src="assets/marca/logo-negativo.svg" alt="Ourofino Saúde Animal" width="320" height="54">'
+                f'<span class="cg-manus">obrigada pela visita</span><h2>{inline(titulo)}</h2><div class="ct-p">{md(corpo)}</div>'
+                f'<div class="cg-bts"><a class="bt" href="#inicio">Voltar ao início</a><a class="bt claro" href="#cap10-2">Checklist</a>'
+                f'<button type="button" class="bt claro" data-pdf>Baixar PDF</button></div>'
+                f'<span class="cg-ver">Guia de execução no PDV · Ourofino Pet · versão 5, novembro de 2026</span></div></section>')
+
     return f'<section {attrs}>{chrome}{T}<div class="txt">{md(corpo)}</div>{val}</section>'
 
 # ------------------------------------------------------------------ apêndices (formato da v3)
@@ -384,7 +456,7 @@ def teste_final(m):
     return "".join(out)
 
 # ------------------------------------------------------------------ capa, sumário e montagem
-ORDEM = [f"cap{n:02d}.md" for n in range(15)] + ["checklist.md", "glossario.md", "teste-final.md"]
+ORDEM = [f"cap{n:02d}.md" for n in range(10)] + ["fechamento.md"]
 TRILHAS = [("Primeiro dia", "Para quem está começando. Leia em ordem antes da primeira visita.", [0, 1, 2, 3, 4, 7, 8, 9, 98]),
            ("Vendedor do distribuidor", "O que o trade espera da loja e como falar de produto.", [3, 4, 6, 10, 11, 12]),
            ("Dia de visita", "Consulta rápida no celular, dentro da loja.", [98, 2, 4, 5, 12]),
@@ -397,21 +469,19 @@ def capa_guia():
             f'<span class="cg-manus">seu guia dentro da loja</span><h1>Guia de execução no ponto de venda</h1>'
             f'<p>Da preparação da visita à prateleira ideal. Para promotores, vendedores do distribuidor e equipes de loja da Ourofino Pet.</p>'
             f'<div class="cg-bts"><a class="bt" href="#cap00">Começar {icone("seta")}</a><a class="bt claro" href="#sumario">Sumário</a><button type="button" class="bt claro" data-pdf>Baixar PDF</button></div>'
-            f'<span class="cg-ver">Versão 4 · novembro de 2026 · em validação com a Ourofino</span></div></section>')
+            f'<span class="cg-ver">Versão 5 · novembro de 2026 · em validação com a Ourofino</span></div></section>')
 
 def sumario(caps):
-    por = {m["n"]: m for m in caps}
-    def item(n):
-        m = por.get(n);
-        if not m: return ""
-        return f'<li><a href="#cap{n:02d}"><span class="sm-n">{n if n < 97 else ""}</span><span class="sm-t">{inline(m["titulo"])}</span><span class="sm-tp">{esc(m.get("tempo", ""))}</span></a></li>'
-    capsn = [m["n"] for m in caps if m["n"] < 97]; meio = (len(capsn) + 1) // 2
-    s1 = (f'<section class="slide s-sumario" id="sumario" data-cap="01" data-cap-nome="Sumário"><h3 class="tit">Sumário</h3>'
-          f'<ol class="sm-col">{"".join(item(n) for n in capsn[:meio])}</ol><ol class="sm-col">{"".join(item(n) for n in capsn[meio:])}</ol>'
-          f'<ol class="sm-ap">{"".join(item(n) for n in (98, 97, 99))}</ol></section>')
-    tri = "".join(f'<div class="tr"><h4>{t}</h4><p>{d}</p><div class="tr-c">' + "".join(f'<a href="#cap{n:02d}">{(str(n) + ". ") if n < 97 else ""}{inline(por[n]["titulo"]) if n in por else ""}</a>' for n in ns) + "</div></div>" for t, d, ns in TRILHAS)
-    s2 = f'<section class="slide s-trilhas" id="trilhas" data-cap="01" data-cap-nome="Trilhas de leitura"><div class="tr-sera">{serafina("aponta")}</div><div class="tr-q"><h3 class="tit">Por onde começar</h3><div class="tr-g">{tri}</div></div></section>'
-    return s1 + s2
+    def item(m):
+        n = m["n"]; dest = f"cap{n:02d}"
+        return (f'<li><a href="#{dest}"><span class="sm-n">{n}</span><span class="sm-t">{inline(m["titulo"])}</span>'
+                f'<span class="sm-tp">pág. {{{{PG:{dest}}}}}</span></a></li>')
+    capsn = [m for m in caps if 1 <= m["n"] <= 9]; meio = (len(capsn) + 1) // 2
+    ap = [("cap10", "Considerações finais"), ("cap10-2", "Checklist da visita"), ("cap10-3", "Teste final")]
+    aps = "".join(f'<li><a href="#{d}"><span class="sm-t">{t}</span><span class="sm-tp">pág. {{{{PG:{d}}}}}</span></a></li>' for d, t in ap)
+    return (f'<section class="slide s-sumario" id="sumario" data-cap="00" data-cap-nome="Sumário">{cab(dict(n=0, titulo="Prazer, Serafina"), 0, 0)}<h3 class="tit">Sumário</h3>'
+            f'<ol class="sm-col">{"".join(item(m) for m in capsn[:meio])}</ol><ol class="sm-col">{"".join(item(m) for m in capsn[meio:])}</ol>'
+            f'<div class="sm-fecha"><b>Para fechar</b><ol class="sm-ap">{aps}</ol></div><div class="sm-sera">{serafina("aponta")}</div></section>')
 
 def ler():
     caps = []
@@ -423,10 +493,7 @@ def ler():
     return caps
 
 def capitulo(m):
-    n = m["n"]; out = [capa_cap(m)]
-    if n == 98: return out[0] + checklist(m)
-    if n == 97: return out[0] + glossario(m)
-    if n == 99: return out[0] + teste_final(m)
+    n = m["n"]; out = [] if m.get("capa") == "nao" else [capa_cap(m)]
     sl = slides_do(m["body"]); k = 0; pend = []
     lista = []
     for tipo, tit, linhas in sl:
@@ -436,7 +503,7 @@ def capitulo(m):
         lista.append([tipo, tit, linhas, []])
     for tipo, tit, linhas, notas in lista:
         k += 1; out.append(slide(m, k, tipo, tit, linhas, notas))
-    if n == 1: out.append(sumario(CAPS_GLOBAL))
+    if n == 0: out.append(sumario(CAPS_GLOBAL))
     return "".join(out)
 
 CAPS_GLOBAL = []
@@ -445,6 +512,9 @@ def montar():
     global CAPS_GLOBAL
     caps = ler(); CAPS_GLOBAL = caps
     corpo = capa_guia() + "".join(capitulo(m) for m in caps)
+    # números de página no sumário
+    ids = re.findall(r'<section class="slide[^"]*"[^>]*?id="([^"]+)"', corpo)
+    corpo = re.sub(r"\{\{PG:([\w-]+)\}\}", lambda x: str(ids.index(x.group(1)) + 1) if x.group(1) in ids else "", corpo)
     nval = corpo.count('class="validar"')
     css = (open(os.path.join(AQUI, "estrutura.css"), encoding="utf-8").read() + CSS_ICONES
            + open(os.path.join(AQUI, "visual.css"), encoding="utf-8").read())
@@ -479,7 +549,7 @@ def montar():
 <button type="button" class="seta-bt" data-prox aria-label="Próximo slide">{icone("seta")}</button>
 </nav>
 <div class="indice" id="indice" hidden><div class="fecha-fundo" data-fecha></div><div class="indice-painel"><button type="button" class="ind-x" data-fecha aria-label="Fechar">×</button>
-<h3>Índice</h3><ol>{indice}</ol><a class="ind-tr" href="#trilhas">Trilhas de leitura por papel</a></div></div>
+<h3>Índice</h3><ol>{indice}</ol><a class="ind-tr" href="#sumario">Sumário com as páginas</a></div></div>
 <script>{js}</script>
 </body>
 </html>"""

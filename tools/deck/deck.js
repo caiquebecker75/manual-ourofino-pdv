@@ -35,7 +35,7 @@
     barra.style.width = ((i + 1) / total * 100) + "%";
     $$(".indice a").forEach(function (a) { a.classList.toggle("atual", a.getAttribute("data-cap") === s.getAttribute("data-cap")); });
     if (origem !== "hash") history.replaceState(null, "", "#" + (s.id || "s" + (i + 1)));
-    guarda("ourofino-v4-slide", String(i));
+    guarda("ourofino-v5-slide", String(i));
   }
 
   function ir(i) {
@@ -112,9 +112,9 @@
 
   /* revisão */
   var rev = d.querySelector("[data-rev]");
-  function setRev(on) { b.classList.toggle("revisao", on); rev.setAttribute("aria-pressed", on ? "true" : "false"); guarda("ourofino-v4-rev", on ? "1" : "0"); }
+  function setRev(on) { b.classList.toggle("revisao", on); rev.setAttribute("aria-pressed", on ? "true" : "false"); guarda("ourofino-v5-rev", on ? "1" : "0"); }
   rev.addEventListener("click", function () { setRev(!b.classList.contains("revisao")); });
-  if (/[?&]revisao=1/.test(location.search) || guarda("ourofino-v4-rev") === "1") setRev(true);
+  if (/[?&]revisao=1/.test(location.search) || guarda("ourofino-v5-rev") === "1") setRev(true);
 
   /* PDF */
   $$("[data-pdf]").forEach(function (x) { x.addEventListener("click", function () { $$("details").forEach(function (dd) { dd.open = true; }); window.print(); }); });
@@ -160,8 +160,44 @@
   });
   atualizaPlacar();
 
+  /* teste final: uma pergunta por vez */
+  $$("[data-quiz]").forEach(function (q) {
+    var itens = $$(".qz-item", q), dots = $$(".qz-dots i", q), n = q.querySelector("[data-qz-n]"),
+        prox = q.querySelector("[data-qz-prox]"), fim = q.querySelector(".qz-fim"), lista = q.querySelector(".qz-lista"), i = 0;
+    function mostra(k) {
+      i = k; itens.forEach(function (it, j) { it.classList.toggle("atual", j === k); });
+      dots.forEach(function (dd, j) { dd.classList.toggle("atual", j === k); });
+      if (n) n.textContent = k + 1; prox.hidden = !itens[k].querySelector("[data-teste]").classList.contains("feito");
+    }
+    itens.forEach(function (it, j) {
+      $$(".op", it).forEach(function (op) { op.addEventListener("click", function () {
+        setTimeout(function () {
+          var t = it.querySelector("[data-teste]"); dots[j].classList.add("feito"); if (t.classList.contains("acertou")) dots[j].classList.add("ok");
+          prox.hidden = false; prox.firstChild.textContent = j === itens.length - 1 ? "Ver meu resultado" : "Próxima pergunta";
+        }, 0);
+      }); });
+    });
+    prox.addEventListener("click", function () {
+      if (i < itens.length - 1) { mostra(i + 1); return; }
+      var certas = itens.filter(function (it) { return it.querySelector(".acertou"); }).length;
+      q.querySelector("[data-qz-certas]").textContent = certas;
+      dots.forEach(function (dd) { dd.classList.remove("atual"); });
+      lista.hidden = true; prox.hidden = true; fim.hidden = false; q.classList.add("terminou");
+    });
+    q.querySelector("[data-qz-refaz]").addEventListener("click", function () {
+      itens.forEach(function (it) {
+        var t = it.querySelector("[data-teste]"); t.classList.remove("feito", "acertou");
+        $$(".op", it).forEach(function (o) { o.disabled = false; o.classList.remove("certa", "errada", "apagada"); });
+        var e = it.querySelector(".teste-exp"); if (e) e.hidden = true;
+      });
+      dots.forEach(function (dd) { dd.classList.remove("feito", "ok"); });
+      lista.hidden = false; fim.hidden = true; q.classList.remove("terminou"); prox.firstChild.textContent = "Próxima pergunta"; mostra(0);
+    });
+    mostra(0);
+  });
+
   /* checklist */
-  var CK = "ourofino-v4-checklist", est = {};
+  var CK = "ourofino-v5-checklist", est = {};
   try { est = JSON.parse(guarda(CK) || "{}") || {}; } catch (e) { est = {}; }
   var chks = $$(".chk input");
   function contaChk() {
