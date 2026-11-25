@@ -1,0 +1,565 @@
+"""Guia Ourofino Pet v6 · diagramação de livro: cada slide tem composição própria.
+Texto em conteudo-v6/*.md (um bloco === por slide, com @layout). Rodar da raiz:
+    python3 tools/v6/livro.py   ->  index.html
+Fotos do ensaio: assets/ia/v6-*.png (geradas por tools/v6/ensaio.py) -> assets/img/v6/*.webp"""
+import html, os, re, sys
+AQUI = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(os.path.dirname(AQUI))
+sys.path.insert(0, os.path.join(ROOT, "tools", "deck")); sys.path.insert(0, os.path.join(ROOT, "tools"))
+import build_deck as B
+from icones import icone, I as ICONES, CSS as CSS_ICONES
+
+C = os.path.join(ROOT, "conteudo-v6"); IMG = "assets/img/"; V6 = "assets/img/v6/"
+esc = lambda s: html.escape(s or "", quote=True)
+inl = B.inline
+
+# ------------------------------------------------------------------ fotos do ensaio
+def prepara_fotos():
+    from PIL import Image
+    src = os.path.join(ROOT, "assets/ia"); dst = os.path.join(ROOT, V6); os.makedirs(dst, exist_ok=True)
+    for f in sorted(os.listdir(src)):
+        if not (f.startswith("v6-") and f.endswith(".png")): continue
+        nome = f[:-4]; a = os.path.join(src, f); b = os.path.join(dst, nome + ".webp")
+        if os.path.exists(b) and os.path.getmtime(b) > os.path.getmtime(a): continue
+        im = Image.open(a).convert("RGB"); w, h = im.size
+        alvo = 1800 if w >= h else 1200
+        g = im.resize((alvo, round(h * alvo / w)), Image.LANCZOS) if w > alvo or w < alvo else im
+        g.save(b, quality=84, method=6)
+        im.resize((900, round(h * 900 / w)), Image.LANCZOS).save(os.path.join(dst, nome + "-900.webp"), quality=80, method=6)
+
+def ft(nome, cls="ft", pos="50% 50%", alt="", sizes="100vw"):
+    """foto do ensaio v6 ou foto de loja (F-...)"""
+    if nome.startswith("F-"):
+        return B.img_fig(nome, alt, cls).replace("<img ", f'<img style="object-position:{pos}" ', 1)
+    p = os.path.join(ROOT, V6 + nome + ".webp")
+    if not os.path.exists(p):
+        return f'<span class="{cls} falta" style="object-position:{pos}">foto {esc(nome)}</span>'
+    from PIL import Image
+    w, h = Image.open(p).size
+    return (f'<img class="{cls}" src="{V6}{nome}.webp" srcset="{V6}{nome}-900.webp 900w, {V6}{nome}.webp {w}w" sizes="{sizes}" '
+            f'width="{w}" height="{h}" style="object-position:{pos}" alt="{esc(alt)}" loading="lazy" decoding="async">')
+
+def sera(pose, cls="sera"):
+    return B.recorte("serafina-" + pose, cls, "Serafina")
+
+# ------------------------------------------------------------------ peças comuns
+CAPS = {}
+
+def rh(n, claro=False):
+    m = CAPS.get(n, {}); t = m.get("titulo", "")
+    dir_ = f"{n} · {esc(t)}" if 1 <= n <= 9 else esc(t)
+    return f'<header class="rh"><span>Guia de execução no PDV</span><span>{dir_}</span></header>'
+
+def folio():
+    return '<footer class="fo"><b data-pagina></b></footer>'
+
+def h2(t, cls="h2"):
+    return f'<h2 class="{cls}">{inl(t)}</h2>' if t else ""
+
+def kick(t, cls="kick"):
+    return f'<span class="{cls}">{esc(t)}</span>' if t else ""
+
+def txt(corpo, cls="txt"):
+    return f'<div class="{cls}">{B.md(corpo)}</div>'
+
+def nota_sf(mk, cls="sf-nota"):
+    if not mk.get("dica"): return ""
+    return (f'<aside class="{cls}"><span class="sf-av" style="background-image:url({IMG}serafina-explica.webp)" aria-hidden="true"></span>'
+            f'<div><b>Dica da Serafina</b><p>{inl(mk["dica"][0])}</p></div></aside>')
+
+def lembre(mk, cls="lb"):
+    return f'<p class="{cls}"><b>Lembre-se.</b> {inl(mk["lembre"][0])}</p>' if mk.get("lembre") else ""
+
+def fonte(mk, cls="nf"):
+    return f'<p class="{cls}"><sup>1</sup> Fonte: {inl(mk["fonte"][0])}</p>' if mk.get("fonte") else ""
+
+def pratica(mk, cls="np"):
+    return f'<p class="{cls}"><b>Na prática.</b> {inl(mk["na-pratica"][0])}</p>' if mk.get("na-pratica") else ""
+
+def legenda(mk, n, k, cls="leg"):
+    return f'<p class="{cls}"><b>Fig. {n}.{k}</b> {inl(mk["legenda"][0])}</p>' if mk.get("legenda") else ""
+
+def itens(corpo):
+    out = []
+    for l in corpo:
+        l = re.sub(r"^\d+\.\s*", "", l.strip())
+        if not l: continue
+        mm = re.match(r"\*\*(.+?)\*\*\s*·\s*(.*)", l)
+        if mm: out.append((mm.group(1), mm.group(2)))
+    return out
+
+def mais_menos(corpo):
+    bons = [l.strip()[1:].strip() for l in corpo if l.strip().startswith("+")]
+    maus = [l.strip()[1:].strip() for l in corpo if l.strip().startswith("-")]
+    return bons, maus
+
+def ics(mk):
+    return [x.split()[0] for x in mk.get("icone", [])]
+
+def ic(nome, cls="ic-s"):
+    return f'<span class="{cls}">{icone(nome)}</span>' if nome in ICONES else ""
+
+def validar(notas):
+    return B.validar_html(notas)
+
+def pagina(x, cls, inner, tema="papel", sem_rh=False):
+    n = x["n"]
+    return (f'<section class="slide lv {cls} t-{tema}" id="{x["sid"]}" data-cap="{n:02d}" data-cap-nome="{esc(B.cap_nome(CAPS[n]))}">'
+            f'{"" if sem_rh else rh(n)}{inner}{folio()}{validar(x["notas"])}</section>')
+
+# ------------------------------------------------------------------ capas
+CAPAS = {
+    1: dict(foto="v6-c01", pos="30% 50%", lado="dir", cor="escuro", fundo="#EDECEA", numero="gigante"),
+    2: dict(foto="v6-c02", pos="50% 50%", lado="topo-esq", cor="escuro", fundo="#18A83A", numero="linha"),
+    3: dict(foto="v6-c03", pos="50% 50%", lado="topo-esq", cor="claro", fundo="#0A76B9", numero="contorno"),
+    4: dict(foto="v6-c04", pos="50% 70%", lado="topo-centro", cor="escuro", fundo="#3FD6EF", numero="linha"),
+    5: dict(foto="v6-c05", pos="50% 50%", lado="esq", cor="escuro", fundo="#F2F1EE", numero="filete"),
+    6: dict(foto="v6-c06", pos="50% 70%", lado="topo-esq", cor="claro", fundo="#0B1F45", numero="gigante"),
+    7: dict(foto="v6-c07", pos="50% 50%", lado="esq", cor="claro", fundo="#3a3530", numero="filete"),
+    8: dict(foto="v6-c08", pos="50% 50%", lado="esq", cor="escuro", fundo="#18A83A", numero="contorno"),
+    9: dict(foto="v6-c09", pos="50% 50%", lado="esq", cor="claro", fundo="#0A76B9", numero="gigante"),
+}
+
+def capa_cap(m):
+    n = m["n"]; c = CAPAS[n]
+    bts = ""
+    if m.get("botoes"):
+        bts = '<nav class="cc-bts">' + "".join(f'<a class="bt" href="#cap{n:02d}-{b.split("|")[1].strip()}">{esc(b.split("|")[0].strip())}{icone("seta")}</a>' for b in m["botoes"]) + "</nav>"
+    num = f'<span class="cc-num">{n:02d}</span>'
+    t = (f'<div class="cc-t z">{num if c["numero"] != "gigante" else ""}<span class="cc-cap">Capítulo {n} · {esc(m.get("parte", ""))}</span>'
+         f'{kick(m.get("manuscrito", ""), "cc-kick")}<h2 class="cc-tit">{inl(m["titulo"])}</h2>'
+         f'<p class="cc-abre">{inl(m.get("abertura", ""))}</p>{bts}</div>')
+    gig = f'<span class="cc-gig z" aria-hidden="true">{n:02d}</span>' if c["numero"] == "gigante" else ""
+    return (f'<section class="slide lv capa cap-{n:02d} lado-{c["lado"]} cor-{c["cor"]} num-{c["numero"]}" id="cap{n:02d}" data-cap="{n:02d}" '
+            f'data-cap-nome="{esc(B.cap_nome(m))}" style="--fundo:{c["fundo"]}"><div class="cc-f z zf">{ft(c["foto"], "ft", c["pos"], m["titulo"])}</div>{gig}{t}</section>')
+
+def capa_guia():
+    return (f'<section class="slide lv capa-guia" id="inicio" data-cap="00" data-cap-nome="Guia de execução no PDV" style="--fundo:#0B1F45">'
+            f'<div class="cg-f z zf">{ft("v6-capa", "ft", "70% 50%", "Golden retriever e gato branco")}</div>'
+            f'<div class="cg-t z"><img class="cg-logo" src="assets/marca/logo-negativo.svg" alt="Ourofino Saúde Animal" width="320" height="54">'
+            f'<span class="cg-kick">seu guia dentro da loja</span><h1>Guia de execução no ponto de venda</h1>'
+            f'<p>Da preparação da visita à prateleira ideal. Para promotores, vendedores do distribuidor e equipes de loja da Ourofino Pet.</p>'
+            f'<div class="cg-bts"><a class="bt" href="#cap00">Começar {icone("seta")}</a><a class="bt claro" href="#sumario">Sumário</a>'
+            f'<button type="button" class="bt claro" data-pdf>Baixar PDF</button></div>'
+            f'<span class="cg-ver">Versão 6 · novembro de 2026 · em validação com a Ourofino</span></div></section>')
+
+def prefacio(m):
+    """capa da abertura: o nome da Serafina gigante, ela na frente das letras"""
+    return (f'<section class="slide lv prefacio t-navy" id="cap00" data-cap="00" data-cap-nome="{esc(B.cap_nome(m))}">'
+            f'{B.animais_geo("geo pf-geo z")}<span class="pf-nome z" aria-hidden="true">Serafina</span>'
+            f'<div class="pf-sera z">{sera("acena", "pf-img")}</div>'
+            f'<span class="pf-kick z">prazer,</span>'
+            f'<div class="pf-t z"><span class="pf-cap">00 · Abertura</span><p>{inl(m.get("abertura", ""))}</p></div></section>')
+
+def sumario():
+    def item(n):
+        m = CAPS[n]; d = f"cap{n:02d}"
+        return (f'<li><a href="#{d}"><span class="sm-n">{n}</span><span class="sm-t">{inl(m["titulo"])}</span>'
+                f'<i class="sm-dots"></i><span class="sm-p">{{{{PG:{d}}}}}</span></a></li>')
+    ap = [("cap10", "Considerações finais"), ("cap10-2", "Checklist da visita"), ("cap10-3", "Teste final")]
+    aps = "".join(f'<li><a href="#{d}"><span class="sm-t">{t}</span><i class="sm-dots"></i><span class="sm-p">{{{{PG:{d}}}}}</span></a></li>' for d, t in ap)
+    x = dict(n=0, sid="sumario", notas=[])
+    inner = (f'<div class="sm-f z zf">{ft("v6-sumario", "ft", "50% 60%", "Border collie olhando para cima")}</div>'
+             f'<div class="sm-q z">{kick("o que tem aqui")}<h2 class="h2 sm-h">Sumário</h2>'
+             f'<ol class="sm-l">{"".join(item(n) for n in range(1, 10))}</ol>'
+             f'<div class="sm-fecha"><b>Para fechar</b><ol>{aps}</ol></div></div>')
+    return pagina(x, "L-sumario", inner, sem_rh=True)
+
+# ------------------------------------------------------------------ layouts dos slides
+def L_carta(x):
+    mk, corpo = x["mk"], x["corpo"]
+    inner = (f'<span class="ca-aspas z" aria-hidden="true">“</span>'
+             f'<div class="ca-q z">{kick("uma carta antes de começar")}{h2(x["titulo"])}<div class="txt col2 capitular">{B.md(corpo)}</div>'
+             f'<p class="ca-ass">Serafina<small>promotora da Ourofino Pet há oito anos</small></p></div>'
+             f'<figure class="ca-ret z"><div class="ca-folha">{sera("explica", "ca-img")}</div></figure>')
+    return pagina(x, "L-carta", inner)
+
+def L_legenda(x):
+    it = itens(x["corpo"]); I = ics(x["mk"])
+    lis = "".join(f'<li>{ic(I[i] if i < len(I) else "", "lg-ic")}<b>{inl(t)}</b><p>{inl(d)}</p></li>' for i, (t, d) in enumerate(it))
+    inner = (f'<div class="lg-lado z">{kick("antes da primeira página")}{h2(x["titulo"])}'
+             f'<p class="lead">Seis coisas que ajudam a tirar o melhor do guia, no celular, no treinamento ou no papel.</p>'
+             f'<div class="lg-sera">{sera("tablet", "lg-img")}</div></div><ul class="lg-l z">{lis}</ul>')
+    return pagina(x, "L-legenda", inner, "papel")
+
+def L_lista_foto(x):
+    mk = x["mk"]; it = itens(x["corpo"])
+    lis = "".join(f'<li><span class="lf-n">{i + 1}</span><p><b>{inl(t)}.</b> {inl(d)}</p></li>' for i, (t, d) in enumerate(it))
+    inner = (f'<figure class="lf-f z zf">{ft(mk["foto"][0], "ft", "50% 50%", "Kit da visita")}{legenda(mk, x["n"], x["k"], "leg sobre")}</figure>'
+             f'<div class="lf-q z">{kick("antes de sair")}{h2(x["titulo"])}<ol class="lf-l">{lis}</ol></div>{nota_sf(mk, "sf-nota lf-sf z")}')
+    return pagina(x, "L-lista-foto", inner)
+
+def L_trilha(x):
+    it = itens(x["corpo"]); I = ics(x["mk"])
+    cols = [96, 446, 796, 1146]
+    pos = [(cols[i], 0) for i in range(4)] + [(cols[3 - i], 1) for i in range(4)]
+    passos = ""
+    for i, (t, d) in enumerate(it):
+        xx, row = pos[i]
+        passos += (f'<li class="tr-p r{row}" style="left:{xx}px"><span class="tr-n">{i + 1}</span>{ic(I[i] if i < len(I) else "", "tr-ic")}'
+                   f'<b>{inl(t)}</b><p>{inl(d)}</p></li>')
+    svg = ('<svg class="tr-svg z" viewBox="0 0 1600 900" aria-hidden="true"><path d="M128 312 H1400 A145 145 0 0 1 1400 602 H128" '
+           'fill="none" stroke="#10AD31" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round"/></svg>')
+    inner = f'{svg}<div class="tr-cab z">{kick("na loja")}{h2(x["titulo"])}</div><ol class="tr-l z">{passos}</ol>'
+    return pagina(x, "L-trilha", inner, "n1")
+
+def L_roteiro(x):
+    falas = ""
+    for l in x["corpo"]:
+        if ":" not in l: continue
+        q, _, f = l.partition(":"); qq = q.strip()
+        eu = qq.lower() in ("você", "voce")
+        falas += f'<div class="rt-f{" eu" if eu else ""}"><span>{esc(qq[:1].upper() + qq[1:])}</span><p>{inl(f.strip())}</p></div>'
+    inner = (f'<div class="rt-q z">{kick("roteiro da chegada")}{h2(x["titulo"])}<div class="rt-l">{falas}</div>{lembre(x["mk"], "lb rt-lb")}</div>'
+             f'<div class="rt-sera z"><div class="rt-painel"></div>{sera("tablet", "rt-img")}</div>')
+    return pagina(x, "L-roteiro", inner)
+
+def L_faixa_foto(x):
+    mk = x["mk"]; it = itens(x["corpo"]); I = ics(mk)
+    lis = "".join(f'<li><span class="ff-n">{i + 1}</span><b>{inl(t)}</b><p>{inl(d)}</p></li>' for i, (t, d) in enumerate(it))
+    q = mk["lembre"][0] if mk.get("lembre") else ""
+    inner = (f'<figure class="ff-f z zf">{ft(mk["foto"][0], "ft", "50% 55%", "Promotora fotografando a prateleira")}</figure>'
+             f'<div class="ff-cab z">{kick("depois da visita")}{h2(x["titulo"])}</div>'
+             f'<blockquote class="ff-cit z">{inl(q)}</blockquote><ol class="ff-l z">{lis}</ol>')
+    return pagina(x, "L-faixa-foto", inner, sem_rh=True)
+
+def L_numero(x):
+    mk = x["mk"]; dado = mk["dado"][0]; num = re.search(r"\d+(?:,\d+)?\s?%", dado).group(0)
+    inner = (f'<div class="nu-n z" aria-hidden="true">{esc(num.replace(" ", ""))}</div>'
+             f'<p class="nu-d z">{inl(dado)}<sup>1</sup></p>'
+             f'<div class="nu-q z">{kick("por que importa")}{h2(x["titulo"])}{txt(x["corpo"])}</div>{fonte(mk, "nf nu-nf z")}')
+    return pagina(x, "L-numero", inner, "navy")
+
+def L_cadeia(x):
+    mk = x["mk"]
+    nos = [("fabrica", "Ourofino", "fabrica o produto"), ("caminhao", "Distribuidor", "compra, estoca e entrega"),
+           ("loja", "Loja", "expõe, orienta e vende"), ("casa", "Tutor", "leva para casa e cuida do pet")]
+    setas = [("abastece", ""), ("sell-in", "v"), ("sell-out", "a")]
+    h = ""
+    for i, (icn, t, s) in enumerate(nos):
+        h += f'<li class="cd-no"><span class="cd-ic">{icone(icn)}</span><b>{t}</b><small>{s}</small></li>'
+        if i < 3: h += f'<li class="cd-seta {setas[i][1]}" aria-hidden="true"><span>{setas[i][0]}</span></li>'
+    inner = (f'<div class="cd-cab z">{kick("o caminho do produto")}{h2(x["titulo"])}</div><div class="cd-txt z">{B.md(x["corpo"])}</div>'
+             f'<div class="cd-faixa z"><ol class="cd-l">{h}</ol>{pratica(mk, "np cd-np")}</div>')
+    return pagina(x, "L-cadeia", inner)
+
+def L_dicionario(x):
+    ents = ""
+    for l in x["corpo"]:
+        mm = re.match(r"\*\*(.+?)\*\*\s*(?:_(.+?)_)?\s*·\s*(.*)", l.strip())
+        if mm: ents += f'<div class="dc-e"><dt><b>{inl(mm.group(1))}</b>{f"<i>{esc(mm.group(2))}</i>" if mm.group(2) else ""}</dt><dd>{inl(mm.group(3))}</dd></div>'
+    inner = (f'<span class="dc-aa z" aria-hidden="true">Aa</span><div class="dc-cab z">{kick("pequeno dicionário do trade")}{h2(x["titulo"])}</div>'
+             f'<dl class="dc-l z">{ents}</dl>')
+    return pagina(x, "L-dicionario", inner)
+
+def L_waffle(x):
+    mk = x["mk"]; partes = [(int(p.split("|")[0]), p.split("|")[1].strip()) for p in mk["parte"]]
+    cores = ["#072047", "#007CC1", "#20D5F2", "#C9CED6", "#10AD31"]
+    cel = ""; cum = 0; legs = ""
+    for i, (v, t) in enumerate(partes):
+        cel += f'<i style="background:{cores[i]}"></i>' * v
+        legs += f'<li style="left:{cum}%;width:{max(v, 11)}%"><b style="color:{cores[i] if i not in (2, 3) else "#072047"}">{v}</b><span>{esc(t)}</span></li>'
+        cum += v
+    inner = (f'<div class="wf-cab z">{kick("o custo da falta")}{h2(x["titulo"])}</div><div class="wf-txt z">{txt(x["corpo"])}{fonte(mk)}</div>'
+             f'<p class="wf-d z">{inl(mk["dado"][0])}<sup>1</sup></p><div class="wf-g z" aria-hidden="true">{cel}</div><ol class="wf-leg z">{legs}</ol>')
+    return pagina(x, "L-waffle", inner)
+
+def L_quatro(x):
+    mk = x["mk"]; it = itens(x["corpo"]); I = ics(mk)
+    it = [(re.sub(r"^\d+\.\s*", "", t), d) for t, d in it]
+    lis = "".join(f'<li><span class="qt-n">{i + 1}</span>{ic(I[i] if i < len(I) else "", "qt-ic")}<b>{inl(t)}</b><p>{inl(d)}</p></li>' for i, (t, d) in enumerate(it))
+    inner = (f'<figure class="qt-f z zf">{ft(mk["foto"][0], "ft", "50% 50%", "Mãos alinhando caixas na prateleira")}</figure>'
+             f'<div class="qt-cab z">{kick("na gôndola")}{h2(x["titulo"])}{nota_sf(mk, "sf-nota qt-sf")}</div><ol class="qt-l z">{lis}</ol>')
+    return pagina(x, "L-quatro", inner, sem_rh=True)
+
+def L_diagrama_lateral(x):
+    mk = x["mk"]; fid = mk["fig"][0].split()[0]
+    inner = (f'<div class="dl-q z">{kick("validade")}{h2(x["titulo"])}{txt(x["corpo"])}{fonte(mk)}</div>'
+             f'<figure class="dl-f z"><div class="dg-caixa">{B.diagrama(fid)}</div><p class="leg"><b>Fig. {x["n"]}.{x["k"]}</b> Ao repor, a caixa que vence antes vai para a frente.</p></figure>')
+    return pagina(x, "L-diagrama-lateral", inner, "n1")
+
+def L_diagrama_dado(x):
+    mk = x["mk"]; fid = mk["fig"][0].split()[0]; nn, nt = [s.strip() for s in mk["numero"][0].split("|")]
+    inner = (f'<figure class="dd-f z"><div class="dg-caixa">{B.diagrama(fid)}</div></figure>'
+             f'<div class="dd-q z">{kick("frente e bloco")}{h2(x["titulo"])}{txt(x["corpo"])}'
+             f'<p class="dd-n"><b>+{esc(nn)}</b><span>{esc(nt)}<sup>1</sup></span></p>{fonte(mk)}</div>')
+    return pagina(x, "L-diagrama-dado", inner)
+
+def L_alturas(x):
+    mk = x["mk"]; fid = mk["fig"][0].split()[0]
+    faixas = [("alta", "acima de 1,60 m", "vista, mas pede esforço", 140, 250), ("quente", "1,20 m a 1,60 m", "onde o olhar cai primeiro", 250, 430),
+              ("media", "0,80 m a 1,20 m", "ao alcance da mão", 430, 590), ("baixa", "abaixo de 0,80 m", "o tutor precisa se abaixar", 590, 800)]
+    fx = "".join(f'<div class="al-fx {c}" style="top:{a}px;height:{b - a}px"><b>{t}</b><small>{s}</small></div>' for c, t, s, a, b in faixas)
+    inner = (f'<div class="al-q z">{kick("as três alturas")}{h2(x["titulo"])}{txt(x["corpo"])}{fonte(mk)}</div>'
+             f'<div class="al-regua z" aria-hidden="true">{fx}<span class="al-chao">chão</span></div>'
+             f'<figure class="al-f z zf">{ft(fid, "ft", "50% 50%", "Gôndola com as três alturas")}</figure>')
+    return pagina(x, "L-alturas", inner)
+
+def L_comparador_cheio(x):
+    mk = x["mk"]; f = [y.split()[0] for y in mk["fig"]]
+    inner = (f'<div class="cc-comp z zf">{B.visual_fig(f, x["titulo"])}</div>'
+             f'<div class="cc-cx z">{kick("arraste para comparar")}<h3>{inl(x["titulo"])}</h3>{txt(x["corpo"])}{lembre(mk)}</div>')
+    return pagina(x, "L-comparador-cheio", inner, sem_rh=True)
+
+def L_catalogo(x):
+    its = ""
+    for i, l in enumerate([l for l in x["corpo"] if "|" in l]):
+        esq, _, d = l.partition("|"); pp = esq.split(); fid = pp[0]; pos = " ".join(pp[1:]) or "50% 50%"
+        mm = re.match(r"\s*\*\*(.+?)\*\*\s*·\s*(.*)", d)
+        its += (f'<li><div class="ct-img">{ft(fid, "ft", pos, mm.group(1))}</div><div><span class="ct-n">{i + 1}</span>'
+                f'<b>{inl(mm.group(1))}</b><p>{inl(mm.group(2))}</p></div></li>')
+    inner = (f'<div class="ct-cab z">{kick("materiais de prateleira")}{h2(x["titulo"])}'
+             f'<p class="lead ct-lead">Cada peça tem um lugar e uma função. Longe do produto, nenhuma delas funciona.</p></div><ul class="ct-l z">{its}</ul>')
+    return pagina(x, "L-catalogo", inner)
+
+def L_filme(x):
+    its = ""; caps = ""
+    for i, l in enumerate([l for l in x["corpo"] if "|" in l]):
+        esq, _, d = l.partition("|"); pp = esq.split(); fid = pp[0]; pos = " ".join(pp[1:]) or "50% 50%"
+        mm = re.match(r"\s*\*\*(.+?)\*\*\s*·\s*(.*)", d)
+        its += f'<div class="fm-q"><span class="fm-n">{i + 7}</span>{ft(fid, "ft", pos, mm.group(1))}</div>'
+        caps += f'<li><b>{inl(mm.group(1))}</b><p>{inl(mm.group(2))}</p></li>'
+    inner = (f'<div class="fm-cab z">{kick("fora da prateleira")}{h2(x["titulo"])}</div>'
+             f'<div class="fm-tira z zf">{its}</div><ol class="fm-l z">{caps}</ol>')
+    return pagina(x, "L-filme", inner)
+
+def L_erro(x):
+    j = " ".join(l.strip() for l in x["corpo"])
+    mm = re.match(r"\*\*O que acontece:\*\*(.*?)\*\*Faça assim:\*\*(.*)", j, re.S)
+    a, b = mm.group(1).strip(), mm.group(2).strip()
+    inner = (f'<div class="er-sera z">{sera("atencao")}</div>'
+             f'<div class="er-q z"><span class="er-k">erro comum</span>{h2(x["titulo"])}'
+             f'<div class="er-a"><b>{icone("errado")}O que acontece</b><p>{inl(a)}</p></div>'
+             f'<div class="er-b"><b>{icone("certo")}Faça assim</b><p>{inl(b)}</p></div></div>{lembre(x["mk"], "lb er-lb z")}')
+    return pagina(x, "L-erro", inner, "n1")
+
+def L_definicoes(x):
+    mk = x["mk"]; it = itens(x["corpo"])
+    defs = "".join(f'<div class="df-d"><span class="df-g">{"termo do trade"}</span><b>{inl(t)}</b><p>{inl(d)}</p></div>' for t, d in it[:2])
+    notas = "".join(f'<div class="df-n"><span class="kick">{esc(t.lower())}</span><p>{inl(d)}</p></div>' for t, d in it[2:])
+    inner = (f'<div class="df-cab z">{kick("cruzar")}{h2(x["titulo"])}</div><div class="df-defs z">{defs}</div><div class="df-notas z">{notas}</div>'
+             f'<figure class="df-f z zf">{ft(mk["foto"][0], "ft", "50% 50%", "Gato cheirando sacos de areia")}{legenda(mk, x["n"], x["k"], "leg sobre")}</figure>')
+    return pagina(x, "L-definicoes", inner, sem_rh=False)
+
+def L_mapa(x):
+    mk = x["mk"]; fid = mk["fig"][0].split()[0]
+    inner = (f'<div class="mp-q z">{kick("onde cruzar")}{h2(x["titulo"])}{txt(x["corpo"])}{fonte(mk)}</div>'
+             f'<figure class="mp-f z"><div class="dg-caixa">{B.diagrama(fid)}</div></figure>')
+    return pagina(x, "L-mapa", inner, "n1")
+
+def L_foto_painel(x):
+    mk = x["mk"]; fid = mk["fig"][0].split()[0]
+    inner = (f'<figure class="fp-f z zf">{ft(fid, "ft", "70% 50%", x["titulo"])}</figure>'
+             f'<div class="fp-p z"><span class="er-k">erro comum</span>{h2(x["titulo"])}{txt(x["corpo"])}{lembre(mk)}</div>')
+    return pagina(x, "L-foto-painel", inner, sem_rh=True)
+
+def L_comparador_quadro(x):
+    mk = x["mk"]; f = [y.split()[0] for y in mk["fig"]]; nn, nt = [s.strip() for s in mk["numero"][0].split("|")]
+    inner = (f'<div class="cq-q z">{kick("certo e errado")}{h2(x["titulo"])}{txt(x["corpo"])}'
+             f'<p class="dd-n"><b>+{esc(nn)}</b><span>{esc(nt)}<sup>1</sup></span></p>{fonte(mk)}</div>'
+             f'<div class="cq-comp z">{B.visual_fig(f, x["titulo"])}</div>')
+    return pagina(x, "L-comparador-quadro", inner)
+
+def L_escada(x):
+    mk = x["mk"]; it = itens(x["corpo"]); I = ics(mk)
+    lis = "".join(f'<li style="--h:{250 + i * 52}px"><span class="es-n">{i + 1}</span>{ic(I[i] if i < len(I) else "", "es-ic")}<b>{inl(t)}</b><p>{inl(d)}</p></li>' for i, (t, d) in enumerate(it))
+    inner = f'<div class="es-cab z">{kick("passo a passo")}{h2(x["titulo"])}</div>{nota_sf(mk, "sf-nota es-sf z")}<ol class="es-l z">{lis}</ol>'
+    return pagina(x, "L-escada", inner)
+
+def L_etiqueta(x):
+    mk = x["mk"]; it = itens(x["corpo"])
+    lis = "".join(f'<li><span class="et-n">{i + 1}</span><b>{inl(t)}</b><p>{inl(d)}</p></li>' for i, (t, d) in enumerate(it))
+    inner = (f'<figure class="et-f z zf">{ft(mk["foto"][0], "ft", "35% 50%", "Tutora com cão no balcão do petshop")}</figure>'
+             f'<div class="et-q z">{kick("na casa dos outros")}{h2(x["titulo"])}<ol class="et-l">{lis}</ol></div>')
+    return pagina(x, "L-etiqueta", inner, sem_rh=True)
+
+def L_citacoes(x):
+    mk = x["mk"]; it = itens(x["corpo"]); I = ics(mk)
+    cols = ""
+    for i, (t, d) in enumerate(it):
+        mm = re.match(r'"([^"]+)"\s*(.*)', d)
+        q, resto = (mm.group(1), mm.group(2)) if mm else ("", d)
+        cols += f'<div class="cz-c"><span class="cz-a" aria-hidden="true">“</span><blockquote>{esc(q)}</blockquote><b>{ic(I[i] if i < len(I) else "", "cz-ic")}{inl(t)}</b><p>{inl(resto)}</p></div>'
+    inner = f'<div class="cz-cab z">{kick("o que o lojista diz")}{h2(x["titulo"])}</div>{nota_sf(mk, "sf-nota cz-sf z")}<div class="cz-l z">{cols}</div>'
+    return pagina(x, "L-citacoes", inner)
+
+def L_tabela_foto(x):
+    mk = x["mk"]
+    inner = (f'<div class="tf-q z">{kick("quem decide")}{h2(x["titulo"])}<div class="tf-t">{B.md(x["corpo"])}</div>{lembre(mk)}</div>'
+             f'<figure class="tf-f z zf">{ft(mk["foto"][0], "ft", "50% 40%", "Veterinária com gato no colo")}{legenda(mk, x["n"], x["k"], "leg sobre")}</figure>')
+    return pagina(x, "L-tabela-foto", inner)
+
+def L_sempre_nunca(x):
+    bons, maus = mais_menos(x["corpo"])
+    lb = lambda L, i: "".join(f'<li>{icone(i)}<span>{inl(y)}</span></li>' for y in L)
+    inner = (f'<div class="sn-cab z">{kick("postura em campo")}{h2(x["titulo"])}</div>'
+             f'<div class="sn-c sn-s z"><h3>Sempre</h3><ul>{lb(bons, "certo")}</ul></div>'
+             f'<div class="sn-c sn-n z"><h3>Nunca</h3><ul>{lb(maus, "errado")}</ul></div>{lembre(x["mk"], "lb sn-lb z")}')
+    return pagina(x, "L-sempre-nunca", inner)
+
+def L_cbv(x):
+    mk = x["mk"]
+    deg = [("C", "Característica", "o que o produto é", mk["c"][0]), ("B", "Benefício", "o que muda para o pet e o tutor", mk["b"][0]),
+           ("V", "Vantagem", "por que escolher este", mk["v"][0])]
+    h = "".join(f'<li class="cb-d d{i}"><span class="cb-l">{l}</span><b>{t}</b><small>{s}</small><p>{inl(e)}</p>{"<span class=cb-e>e daí?</span>" if i < 2 else ""}</li>' for i, (l, t, s, e) in enumerate(deg))
+    inner = (f'<div class="cb-q z">{kick("como falar")}{h2(x["titulo"])}{txt(x["corpo"])}{pratica(mk)}</div>'
+             f'<figure class="cb-f z zf">{ft(mk["foto"][0], "ft", "50% 50%", "Cão pegando petisco da mão")}</figure><ol class="cb-esc z">{h}</ol>')
+    return pagina(x, "L-cbv", inner, sem_rh=True)
+
+def prods(corpo):
+    out = []
+    for l in corpo:
+        if l.count("|") < 4: continue
+        fid, nome, tag, desc, frase = [y.strip() for y in l.split("|", 4)]
+        out.append((fid, re.sub(r"[*]", "", nome), tag, desc, frase))
+    return out
+
+def L_produtos4(x):
+    lis = "".join(f'<li><div class="p4-img">{B.img_fig(fid, nome)}</div><span class="p4-tag">{esc(tag)}</span><b>{esc(nome)}</b><p>{inl(desc)}</p>'
+                  f'<p class="p4-fr"><span>No balcão</span>{inl(fr)}</p></li>' for fid, nome, tag, desc, fr in prods(x["corpo"]))
+    inner = f'<div class="p4-cab z">{kick("produtos heróis")}{h2(x["titulo"])}<p class="lead">Os quatro que protegem o pet de parasitas.</p></div><ul class="p4-l z">{lis}</ul>'
+    return pagina(x, "L-produtos4", inner, "n1")
+
+def L_produtos_linhas(x):
+    mk = x["mk"]
+    lis = "".join(f'<li><div class="pl-img">{B.img_fig(fid, nome)}</div><div class="pl-t"><span class="p4-tag">{esc(tag)}</span><b>{esc(nome)}</b><p>{inl(desc)}</p></div>'
+                  f'<blockquote class="pl-fr"><span>No balcão</span>{inl(fr)}</blockquote></li>' for fid, nome, tag, desc, fr in prods(x["corpo"]))
+    inner = (f'<figure class="pl-f z zf">{ft(mk["foto"][0], "ft", "86% 50%", "Filhote no tapete higiênico")}{legenda(mk, x["n"], x["k"], "leg sobre")}</figure>'
+             f'<div class="pl-q z">{kick("produtos heróis")}{h2(x["titulo"])}<ul class="pl-l">{lis}</ul></div>')
+    return pagina(x, "L-produtos-linhas", inner, sem_rh=True)
+
+def L_pode_nao(x):
+    mk = x["mk"]; bons, maus = mais_menos(x["corpo"])
+    lb = lambda L, i: "".join(f'<li>{icone(i)}<span>{inl(y)}</span></li>' for y in L)
+    inner = (f'<figure class="pn-f z zf">{ft(mk["foto"][0], "ft", "50% 60%", "Gato olhando para a câmera")}</figure>'
+             f'<div class="pn-q z">{kick("o limite da conversa")}{h2(x["titulo"])}<div class="pn-g"><div class="pn-c ok"><h3>Pode</h3><ul>{lb(bons, "certo")}</ul></div>'
+             f'<div class="pn-c no"><h3>Não pode</h3><ul>{lb(maus, "errado")}</ul></div></div>{lembre(mk)}</div>')
+    return pagina(x, "L-pode-nao", inner, sem_rh=True)
+
+def L_figura_pinos(x):
+    mk = x["mk"]; fid = mk["fig"][0].split()[0]; rot = B.V3.rotulos(fid)
+    inner = (f'<div class="fq-q z">{kick("a prateleira ideal")}{h2(x["titulo"])}{txt(x["corpo"])}'
+             f'<p class="leg"><b>Fig. {x["n"]}.{x["k"]}</b> Os pontos mostram o que cada bloco resolve.</p></div>'
+             f'<figure class="fq-f z zf"><div class="foto-q">{B.img_fig(fid, x["titulo"])}<div class="rot">{rot}</div>'
+             f'<button class="rot-btn" type="button">Ocultar marcações</button></div></figure>')
+    return pagina(x, "L-figura-pinos", inner, "n1", sem_rh=True)
+
+def L_regras(x):
+    mk = x["mk"]; it = itens(x["corpo"])
+    lis = "".join(f'<li><span class="rg-n">{i + 1}</span><b>{inl(t)}</b><p>{inl(d)}</p></li>' for i, (t, d) in enumerate(it))
+    inner = (f'<figure class="rg-f z zf">{ft(mk["foto"][0], "ft", "50% 50%", "Cão passeando de coleira")}{nota_sf(mk, "sf-nota rg-sf")}</figure>'
+             f'<div class="rg-q z">{kick("cinco regras")}{h2(x["titulo"])}<ol class="rg-l">{lis}</ol></div>')
+    return pagina(x, "L-regras", inner, sem_rh=True)
+
+def L_epilogo(x):
+    corpo = [l for l in x["corpo"] if l.strip()]
+    prim = re.split(r"(?<=[.:])\s", corpo[0], 1)
+    cit = prim[0]; resto = [prim[1]] + corpo[1:] if len(prim) > 1 else corpo[1:]
+    inner = (f'<div class="ep-q z">{kick("para fechar")}{h2(x["titulo"])}<blockquote class="ep-cit">{inl(cit)}</blockquote>'
+             f'<div class="txt">{B.md(resto)}</div><p class="ca-ass">Serafina<small>até a próxima loja</small></p></div>'
+             f'<div class="ep-sera z">{sera("joinha", "ep-img")}</div>{B.animais_geo("geo ep-geo z")}')
+    return pagina(x, "L-epilogo", inner, "navy")
+
+def L_reuso(x, tipo):
+    """checklist e teste: aproveita a marcação da v5 e troca o cabeçalho"""
+    s = B.slide(CAPS[x["n"]], x["k"], tipo, x["titulo"], x["linhas"], x["notas"])
+    s = re.sub(r'<header class="cab">.*?</footer>', rh(x["n"]) + folio(), s, count=1, flags=re.S)
+    s = s.replace('class="slide s-', 'class="slide lv L-' + tipo + ' s-', 1).replace(f'id="cap{x["n"]:02d}-{x["k"]}"', f'id="{x["sid"]}"', 1)
+    return s
+
+def L_contracapa(x):
+    mk = x["mk"]
+    return (f'<section class="slide lv contracapa" id="fim" data-cap="10" data-cap-nome="{esc(B.cap_nome(CAPS[10]))}" style="--fundo:#0B1F45">'
+            f'<div class="cg-f z zf">{ft(mk["foto"][0], "ft", "70% 50%", "Filhotes de cão e gato dormindo juntos")}</div>'
+            f'<div class="cg-t z"><img class="cg-logo" src="assets/marca/logo-negativo.svg" alt="Ourofino Saúde Animal" width="320" height="54">'
+            f'<span class="cg-kick">obrigada pela visita</span><h1>{inl(x["titulo"])}</h1>{B.md(x["corpo"])}'
+            f'<div class="cg-bts"><a class="bt" href="#inicio">Voltar ao início</a><a class="bt claro" href="#cap10-2">Checklist</a>'
+            f'<button type="button" class="bt claro" data-pdf>Baixar PDF</button></div>'
+            f'<span class="cg-ver">Guia de execução no PDV · Ourofino Pet · versão 6, novembro de 2026</span></div></section>')
+
+LAYOUTS = {k[2:]: v for k, v in globals().items() if k.startswith("L_")}
+
+# ------------------------------------------------------------------ montagem
+ORDEM = [f"cap{n:02d}.md" for n in range(10)] + ["fechamento.md"]
+
+def ler():
+    caps = []
+    for a in ORDEM:
+        meta, body = B.front(open(os.path.join(C, a), encoding="utf-8").read())
+        meta["n"] = int(meta["cap"]); meta["body"] = body; caps.append(meta); CAPS[meta["n"]] = meta
+    return caps
+
+def capitulo(m):
+    n = m["n"]; out = []
+    if n == 0: out.append(prefacio(m))
+    elif m.get("capa") != "nao": out.append(capa_cap(m))
+    lista = []
+    for tipo, tit, linhas in B.slides_do(m["body"]):
+        if tipo == "validar":
+            if lista: lista[-1][3].append(" ".join(l.strip() for l in linhas if l.strip()))
+            continue
+        lista.append([tipo, tit, linhas, []])
+    for k, (tipo, tit, linhas, notas) in enumerate(lista, 1):
+        mk, corpo = B.separa(linhas)
+        sid = f"cap{n:02d}" if (k == 1 and m.get("capa") == "nao") else f"cap{n:02d}-{k}"
+        x = dict(n=n, k=k, tipo=tipo, titulo=tit, mk=mk, corpo=corpo, notas=notas, sid=sid, linhas=linhas)
+        lay = (mk.get("layout") or [""])[0]
+        if lay in ("checklist", "quiz"): out.append(L_reuso(x, lay))
+        elif lay in LAYOUTS: out.append(LAYOUTS[lay](x))
+        else: raise SystemExit(f"layout desconhecido: {lay} em cap{n} slide {k}")
+    if n == 0: out.append(sumario())
+    return "".join(out)
+
+def montar():
+    prepara_fotos()
+    caps = ler()
+    corpo = capa_guia() + "".join(capitulo(m) for m in caps)
+    ids = re.findall(r'<section class="slide[^"]*"[^>]*?id="([^"]+)"', corpo)
+    corpo = re.sub(r"\{\{PG:([\w-]+)\}\}", lambda x: str(ids.index(x.group(1)) + 1) if x.group(1) in ids else "", corpo)
+    k = [0]
+    def par(mm):
+        k[0] += 1; return mm.group(0).replace('class="slide ', f'class="slide {"pg-par" if k[0] % 2 == 0 else "pg-impar"} ', 1)
+    corpo = re.sub(r'<section class="slide [^"]*"', par, corpo)
+    nval = corpo.count('class="validar"')
+    css = (open(os.path.join(ROOT, "tools/deck/estrutura.css"), encoding="utf-8").read() + CSS_ICONES
+           + open(os.path.join(ROOT, "tools/deck/visual.css"), encoding="utf-8").read()
+           + open(os.path.join(AQUI, "livro.css"), encoding="utf-8").read())
+    js = open(os.path.join(ROOT, "tools/deck/deck.js"), encoding="utf-8").read()
+    indice = "".join(f'<li><a href="#cap{m["n"]:02d}" data-cap="{m["n"]:02d}"><span>{m["n"] if 1 <= m["n"] <= 9 else ""}</span>{inl(m["titulo"])}</a></li>' for m in caps)
+    return f"""<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guia de Execução no PDV · Ourofino Pet</title>
+<meta name="description" content="Guia de execução no ponto de venda da Ourofino Pet, para promotores, vendedores do distribuidor e equipes de loja.">
+<meta name="theme-color" content="#072047">
+<link rel="icon" href="assets/marca/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>{css}</style>
+</head>
+<body>
+<div class="rolo"><main class="palco">
+{corpo}
+</main></div>
+<div class="prog"><i></i></div>
+<nav class="nav" aria-label="Navegação do guia">
+<img class="nav-logo" src="assets/marca/logo-negativo.svg" alt="Ourofino" width="130" height="22">
+<button type="button" data-abre-indice title="Índice">{icone("checklist", "nav-ic")}<span class="nav-r">Índice</span></button>
+<span class="nav-cap" data-cap-txt></span>
+<button type="button" data-rev aria-pressed="false" title="Mostrar as {nval} notas para a Ourofino validar"><span class="nav-r">Revisão</span><span class="nav-c">R</span></button>
+<button type="button" data-pdf title="Baixar PDF"><span class="nav-r">PDF</span><span class="nav-c">PDF</span></button>
+<span class="nav-cont" data-cont></span>
+<button type="button" class="seta-bt" data-ant aria-label="Slide anterior">{icone("seta", "seta-v")}</button>
+<button type="button" class="seta-bt" data-prox aria-label="Próximo slide">{icone("seta")}</button>
+</nav>
+<div class="indice" id="indice" hidden><div class="fecha-fundo" data-fecha></div><div class="indice-painel"><button type="button" class="ind-x" data-fecha aria-label="Fechar">×</button>
+<h3>Índice</h3><ol>{indice}</ol><a class="ind-tr" href="#sumario">Sumário com as páginas</a></div></div>
+<script>{js}</script>
+</body>
+</html>"""
+
+if __name__ == "__main__":
+    out = montar()
+    open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8").write(out)
+    print("index.html", len(out) // 1024, "KB", out.count('<section class="slide'), "slides")

@@ -16,6 +16,22 @@ No git, cada versão também tem uma tag (`git checkout <tag> -- .` restaura os 
 | 2026-11-24 | v3 | `2026-11-24_v3/` | `v3` | Visual refeito no estilo do guia de referência mostrado na reunião (detalhes abaixo). |
 | 2026-11-24 | v4 | `2026-11-24_v4/` | `v4` | Guia em formato de slides, conteúdo reescrito na ordem do guia de referência, marca oficial Ourofino (detalhes abaixo). |
 | 2026-11-24 | v5 | `2026-11-24_v5/` | `v5` | A v4 condensada em 49 slides, o mesmo número de páginas do guia de referência (detalhes abaixo). |
+| 2026-11-24 | v6 | `2026-11-24_v6/` | `v6` | Ensaio fotográfico novo e diagramação de livro, com uma composição diferente em cada slide (detalhes abaixo). |
+
+## v6 · o que mudou em relação à v5
+
+Pedido do Caique em 24/11: as imagens dos animais ficaram péssimas, os slides não estavam bonitos nem bem acabados; cada slide deve ser diferente do outro e visualmente incrível, como um livro com diagramação muito legal.
+
+- **Fotos:** ensaio novo de 22 fotos gerado no ChatGPT, todas no mesmo estúdio e com a mesma luz. Os pets ficam em fundos nas cores da Ourofino (azul-marinho, verde, azul, ciano, cinza e branco), com sombra real no chão e espaço planejado para o título. Entram sangradas, sem recorte. O ensaio inclui ainda cenas de loja e de casa (kit da visita, foto da gôndola, tutora no balcão, veterinária, filhote no tapete, cão no passeio). Lista e prompts em `tools/v6/ensaio.py`; originais em `assets/ia/v6-*.png` (fora do git); páginas usam `assets/img/v6/`.
+- **Diagramação:** cada um dos 49 slides tem composição própria (`@layout` no conteúdo), com recursos de livro:
+  - cabeço com o nome do capítulo e fólio no canto externo, alternando página par e ímpar;
+  - capitular, carta assinada pela Serafina, citação em destaque, legenda de figura numerada e nota de rodapé para a fonte dos dados;
+  - sumário com pontilhado e páginas, glossário como página de dicionário, roteiro da chegada em formato de diálogo;
+  - trilha dos oito passos, gráfico de unidades da ruptura, régua das alturas da gôndola, escada do ponto extra, degraus do CBV;
+  - catálogo e tira de fotos dos materiais, produtos em cartões e em linhas, "Sempre" e "Nunca" em letras grandes.
+- **Capas:** foto sangrada diferente em cada capítulo, com o número em quatro estilos (gigante, contorno, linha, filete) e o texto no espaço vazio da foto. A abertura traz o nome da Serafina gigante com ela na frente das letras.
+- **Conteúdo:** o mesmo da v5, com ajustes pequenos para a nova página (por exemplo, o dado completo da ruptura: 31, 26, 19, 15 e 9 a cada 100 compradores).
+- **Gerador:** `python3 tools/v6/livro.py`, com texto em `conteudo-v6/` e estilo em `tools/v6/livro.css`. O motor (navegação, celular, PDF, revisão, checklist e teste) continua em `tools/deck/`.
 
 ## v5 · o que mudou em relação à v4
 

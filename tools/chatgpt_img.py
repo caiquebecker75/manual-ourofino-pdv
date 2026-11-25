@@ -20,6 +20,12 @@ REGRAS = {
             "Fundo branco infinito liso e limpo (#FFFFFF), sem sombra pesada, para recorte. Sem coleira com marca, sem roupa, sem acessório. "
             "Animal anatomicamente perfeito (quatro patas, número certo de dedos, orelhas e olhos simétricos). "
             "Nada de aparência de ilustração, 3D ou IA. Sem texto, sem marca d'água."),
+    "editorial": ("Fotografia editorial de animal de estimação para um livro impresso de marca de saúde animal, no padrão de revista de design: "
+                  "câmera de médio formato, lente 80 mm, f/5.6, uma luz grande e suave de janela vinda de um lado, sombra de contato natural no chão, "
+                  "pelo com textura e fios individuais nítidos, olhos vivos com reflexo da luz, expressão natural e calma, leve grão de filme, cor fiel. "
+                  "Animal anatomicamente perfeito (quatro patas, dedos certos, orelhas e olhos simétricos), sem coleira com marca, sem roupa. "
+                  "Nada de aparência de ilustração, 3D, render ou imagem de IA; nada de pele plastificada nem brilho exagerado. "
+                  "Sem texto, sem logotipo, sem marca d'água."),
     "foto": ("Fotografia realista de verdade feita por fotógrafo de varejo: luz, sombra, reflexo e textura físicas, lente de câmera profissional, "
              "nada de aparência de render 3D, ilustração ou imagem de IA. Mantenha EXATAMENTE a forma, as cores e os logotipos das embalagens "
              "e peças das imagens de referência. Não escreva nenhum texto novo: se um texto não puder sair perfeito, deixe a área lisa em vez de inventar letras. "

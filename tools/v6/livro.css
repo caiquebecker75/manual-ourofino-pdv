@@ -1,0 +1,648 @@
+
+/* ================================================================
+   Guia Ourofino Pet v6 · diagramação de livro
+   Cada slide é uma página com composição própria (classe L-<layout>).
+   Grade: 1600 x 900, margens de 96 px, cabeço no alto, fólio no canto externo.
+   ================================================================ */
+.lv{background:#fff;color:var(--navy);font:400 22px/1.55 var(--f-txt);overflow:hidden}
+.lv.t-n1{background:#F1F2F3}
+.lv.t-navy{background:var(--navy);color:#fff}
+.lv .z{position:absolute}
+.lv .zf{overflow:hidden;margin:0}
+.lv figure{margin:0}
+
+/* cabeço e fólio, como num livro */
+.rh{position:absolute;left:96px;right:96px;top:38px;display:flex;justify-content:space-between;font-size:13px;letter-spacing:.02em;color:#6B7585;z-index:6}
+.t-navy .rh{color:rgba(255,255,255,.55)}
+.fo{position:absolute;bottom:30px;font:400 20px/1 var(--f-tit);z-index:6}
+.fo b{font-weight:400}
+.pg-par .fo{left:96px}.pg-impar .fo{right:96px}
+
+/* tipografia */
+.h2{font:400 60px/1.04 var(--f-tit);letter-spacing:-.015em;margin:0 0 26px;text-wrap:balance}
+.kick{display:block;font:700 34px/1 var(--f-mao);color:var(--verde);margin:0 0 12px;transform:rotate(-1.5deg);transform-origin:left}
+.lead{font-size:24px;line-height:1.5;margin:0 0 20px;color:#3A4A63}
+.txt p{margin:0 0 .8em}
+.txt p:last-child{margin-bottom:0}
+.col2{columns:2;column-gap:52px}
+.col2 p{break-inside:avoid}
+.capitular>p:first-child::first-letter{float:left;font:400 122px/.8 var(--f-tit);color:var(--verde);padding:12px 14px 0 0}
+.leg{font-size:15px;line-height:1.45;color:#556173;margin:14px 0 0}
+.leg b{font-weight:600;color:var(--navy);margin-right:6px}
+.leg.sobre{position:absolute;left:24px;bottom:24px;max-width:430px;margin:0;background:#fff;padding:12px 16px;border-radius:0 16px 16px 16px;z-index:3}
+.nf{font-size:13.5px;line-height:1.45;color:#6B7585;margin:18px 0 0;max-width:62ch}
+.t-navy .nf{color:rgba(255,255,255,.55)}
+.lv sup{font-size:.55em;line-height:0;vertical-align:super}
+.lb{font-size:19px;line-height:1.5;margin:20px 0 0;font-style:italic;color:#3A4A63}
+.lb b{font-style:normal;font-weight:600;color:#0A7F23;margin-right:4px}
+.np{font-size:18.5px;line-height:1.5;margin:20px 0 0;padding-top:14px;border-top:2px solid var(--verde);max-width:54ch}
+.np b{font-weight:600}
+.ft{display:block;width:100%;height:100%;object-fit:cover}
+.falta{display:grid;place-items:center;background:#DADDE2;color:#7a8291;font-size:14px}
+.ic-s .ic,.lg-ic .ic,.tr-ic .ic,.qt-ic .ic,.es-ic .ic,.cz-ic .ic{width:100%;height:100%}
+
+/* dica da Serafina como nota de margem */
+.sf-nota{display:grid;grid-template-columns:70px 1fr;gap:16px;align-items:center;background:#fff;color:var(--navy);padding:16px 22px 16px 16px;border-radius:0 24px 24px 24px;box-shadow:inset 0 0 0 2px var(--verde);font-size:16.5px;line-height:1.45}
+.sf-nota b{display:block;font:700 27px/1 var(--f-mao);color:#0A7F23;margin-bottom:4px}
+.sf-nota p{margin:0}
+.sf-av{width:70px;height:70px;border-radius:50%;background-color:#E6F5E9;background-size:230% auto;background-position:52% 3%;background-repeat:no-repeat}
+
+/* ---------------- capa do guia e contracapa: foto sangrada, texto no espaço vazio da foto */
+.capa-guia,.contracapa{background:var(--fundo);color:#fff}
+.capa-guia .cg-f,.contracapa .cg-f{inset:0}
+.cg-t{left:110px;top:92px;width:640px;z-index:3}
+.cg-logo{display:block;width:250px;height:auto;margin-bottom:72px}
+.cg-kick{display:block;font:700 44px/1 var(--f-mao);color:var(--verde);transform:rotate(-2deg);transform-origin:left;margin-bottom:16px}
+.capa-guia h1,.contracapa h1{font:400 96px/.97 var(--f-tit);letter-spacing:-.028em;margin:0 0 28px}
+.capa-guia p,.contracapa p{font-size:22px;line-height:1.5;color:rgba(255,255,255,.84);max-width:33ch;margin:0 0 36px}
+.cg-bts{display:flex;gap:14px;flex-wrap:wrap}
+.cg-ver{display:block;margin-top:44px;font-size:14px;color:rgba(255,255,255,.5)}
+
+/* ---------------- capas de capítulo */
+.capa{background:var(--fundo)}
+.capa .cc-f{inset:0}
+.capa.cor-claro{color:#fff}.capa.cor-escuro{color:var(--navy)}
+.capa .cc-t{z-index:3;width:600px}
+.cc-num{display:block;font:400 120px/.8 var(--f-tit);letter-spacing:-.03em;margin-bottom:30px}
+.num-contorno .cc-num{color:transparent;-webkit-text-stroke:2px currentColor;font-size:180px}
+.num-linha .cc-num{display:inline-block;font-size:34px;padding-bottom:12px;border-bottom:3px solid currentColor;margin-bottom:40px}
+.num-filete .cc-num{font-size:110px;color:var(--verde)}
+.cc-gig{font:400 600px/.8 var(--f-tit);letter-spacing:-.06em;z-index:1;pointer-events:none}
+.cc-cap{display:block;font-size:17px;letter-spacing:.02em;opacity:.8;margin-bottom:10px}
+.cc-kick{display:block;font:700 46px/1 var(--f-mao);margin:0 0 14px;transform:rotate(-2deg);transform-origin:left}
+.cc-tit{font:400 86px/.98 var(--f-tit);letter-spacing:-.022em;margin:0 0 24px;text-wrap:balance}
+.cc-abre{font-size:21.5px;line-height:1.5;margin:0;max-width:36ch;opacity:.92}
+.cc-bts{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.cc-bts .bt{background:var(--navy);color:#fff;font-size:18px;padding:14px 22px}
+.cc-bts .bt .ic{--tr:#fff;--ac:var(--verde);width:22px;height:22px}
+.lado-dir .cc-t{right:110px;top:150px}
+.lado-esq .cc-t{left:110px;top:150px}
+.lado-topo-esq .cc-t{left:110px;top:96px;width:820px}
+.lado-topo-centro .cc-t{left:300px;right:300px;width:auto;top:84px;text-align:center}
+.lado-topo-centro .cc-abre{margin:0 auto}
+.lado-topo-centro .cc-kick{transform-origin:center}
+/* ajustes de cada capa */
+.cap-01 .cc-gig{right:60px;top:-90px;color:#E2E0DB}
+.cap-01 .cc-kick{color:#0A7F23}
+.cap-02 .cc-tit{font-size:120px}.cap-02 .cc-kick{color:#fff}.cap-02 .cc-abre{max-width:44ch}
+.cap-03 .cc-kick{color:var(--ciano)}
+.cap-04 .cc-kick{color:var(--azul)}.cap-04 .cc-tit{font-size:104px}
+.cap-05 .cc-kick{color:var(--azul)}
+.cap-06 .cc-gig{right:70px;top:-70px;color:var(--verde)}.cap-06 .cc-kick{color:var(--verde)}
+.cap-07 .cc-kick{color:var(--verde)}
+.cap-08 .cc-kick{color:#fff}
+.cap-09 .cc-gig{left:60px;bottom:-110px;color:rgba(255,255,255,.14)}.cap-09 .cc-kick{color:var(--ciano)}.cap-09 .cc-t{top:120px}
+
+/* ---------------- abertura: o nome da Serafina gigante, ela na frente das letras */
+.prefacio .pf-nome{left:46px;top:150px;font:400 340px/1 var(--f-tit);letter-spacing:-.045em;color:#fff;white-space:nowrap;z-index:1}
+.prefacio .pf-kick{left:66px;top:96px;font:700 76px/1 var(--f-mao);color:var(--verde);transform:rotate(-4deg);z-index:3}
+.prefacio .pf-sera{right:250px;bottom:0;height:880px;z-index:2}
+.pf-img{height:100%;width:auto}
+.prefacio .pf-t{left:96px;bottom:90px;width:560px;z-index:3}
+.pf-cap{display:block;font-size:15px;color:rgba(255,255,255,.55);margin-bottom:12px}
+.pf-t p{font-size:22px;line-height:1.55;margin:0;color:rgba(255,255,255,.88)}
+.prefacio .pf-geo{right:56px;top:-200px;width:150px}
+
+/* ---------------- carta da Serafina */
+.L-carta .ca-aspas{left:50px;top:20px;font:400 460px/1 var(--f-tit);color:#E8F5EA;z-index:0}
+.L-carta .ca-q{left:96px;top:110px;width:900px;z-index:2}
+.L-carta .txt{font-size:21.5px;line-height:1.62}
+.ca-ass{font:700 58px/1 var(--f-mao);color:#0A7F23;margin:30px 0 0}
+.ca-ass small{display:block;font:400 15px/1.4 var(--f-txt);color:#556173;margin-top:8px}
+.L-carta .ca-ret{right:96px;top:110px;width:420px;height:700px}
+.ca-folha{width:100%;height:100%;background:var(--verde);border-radius:210px 210px 210px 0;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.ca-img{height:96%;width:auto}
+
+/* ---------------- como usar: coluna navy + legenda em duas colunas */
+.L-legenda .lg-lado{left:0;top:0;bottom:0;width:560px;background:var(--navy);color:#fff;padding:118px 70px 0 96px;box-sizing:border-box}
+.L-legenda .rh span:first-child{color:rgba(255,255,255,.55)}
+.L-legenda.pg-par .fo{color:#fff}
+.L-legenda .lead{color:rgba(255,255,255,.8);font-size:21px}
+.lg-sera{position:absolute;left:96px;bottom:0;height:360px}.lg-img{height:100%;width:auto}
+.lg-l{left:640px;right:96px;top:120px;bottom:96px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);gap:0 56px}
+.lg-l li{position:relative;border-top:1px solid #D5DAE1;padding:24px 0 0 70px}
+.lg-ic{position:absolute;left:0;top:26px;width:48px;height:48px}
+.lg-l b{display:block;font:400 28px/1.15 var(--f-tit);margin-bottom:8px}
+.lg-l p{font-size:17.5px;line-height:1.5;margin:0;color:#3A4A63}
+
+/* ---------------- sumário com pontilhado */
+.L-sumario .sm-f{left:0;top:0;bottom:0;width:520px}
+.sm-q{left:620px;right:96px;top:80px}
+.sm-h{font-size:88px;margin-bottom:20px}
+.sm-l,.sm-fecha ol{list-style:none;margin:0;padding:0}
+.sm-l a,.sm-fecha a{display:flex;align-items:baseline;gap:16px;color:inherit;text-decoration:none;padding:9px 0}
+.sm-n{width:42px;flex:none;font:400 34px/1 var(--f-tit);color:var(--verde)}
+.sm-t{font:400 27px/1.2 var(--f-tit)}
+.sm-dots{flex:1;min-width:30px;border-bottom:2px dotted #B8C0CC;transform:translateY(-6px)}
+.sm-p{font-size:17px;color:#556173;font-variant-numeric:tabular-nums}
+.sm-l a:hover .sm-t,.sm-fecha a:hover .sm-t{color:var(--azul)}
+.sm-fecha{margin-top:18px;padding-top:14px;border-top:2px solid var(--navy);display:grid;grid-template-columns:180px 1fr;gap:12px}
+.sm-fecha b{font:700 32px/1 var(--f-mao);color:#0A7F23;padding-top:6px}
+.sm-fecha a{padding:4px 0}.sm-fecha .sm-t{font:500 19px/1.3 var(--f-txt)}
+
+/* ---------------- lista com foto sangrada (antes de sair) */
+.L-lista-foto .lf-f{left:0;top:0;bottom:0;width:700px}
+.lf-q{left:790px;right:96px;top:104px}
+.L-lista-foto .h2{font-size:54px}
+.lf-l{list-style:none;margin:0;padding:0}
+.lf-l li{display:grid;grid-template-columns:62px 1fr;padding:12px 0;border-top:1px solid #DDE2E8}
+.lf-n{font:400 44px/1 var(--f-tit);color:var(--verde)}
+.lf-l p{margin:0;font-size:18px;line-height:1.5;color:#3A4A63}
+.lf-l p b{color:var(--navy);font-weight:600}
+.lf-sf{left:40px;bottom:40px;width:620px;z-index:4}
+.L-lista-foto .leg.sobre{top:24px;bottom:auto}
+
+/* ---------------- trilha dos oito passos */
+.L-trilha .tr-svg{left:0;top:0;width:1600px;height:900px;z-index:0}
+.tr-cab{left:96px;top:100px;width:1200px}
+.L-trilha .h2{font-size:54px}
+.tr-l{inset:0;list-style:none;margin:0;padding:0}
+.tr-p{position:absolute;width:300px}
+.tr-p.r0{top:280px}.tr-p.r1{top:570px}
+.tr-n{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--navy);color:#fff;font:400 30px/1 var(--f-tit);margin-bottom:14px;position:relative;z-index:2;box-shadow:0 0 0 8px #F1F2F3}
+.tr-ic{position:absolute;left:84px;top:12px;width:42px;height:42px}
+.tr-p b{display:block;font-weight:600;font-size:20px;line-height:1.25;margin-bottom:6px}
+.tr-p p{margin:0;font-size:16.5px;line-height:1.45;color:#3A4A63}
+
+/* ---------------- roteiro da chegada */
+.rt-q{left:96px;top:104px;width:980px}
+.rt-l{display:grid;gap:18px;margin-top:8px}
+.rt-f{display:grid;grid-template-columns:140px 1fr;gap:24px;align-items:baseline}
+.rt-f span{font-size:14.5px;font-weight:600;color:var(--azul);text-align:right}
+.rt-f.eu span{color:#0A7F23}
+.rt-f p{margin:0;font:400 27px/1.32 var(--f-tit)}
+.rt-f:not(.eu) p{font:italic 400 21px/1.45 var(--f-txt);color:#3A4A63}
+.rt-lb{padding-left:164px;margin-top:30px}
+.L-roteiro .rt-sera{right:0;top:0;bottom:0;width:470px}
+.rt-painel{position:absolute;inset:0 0 0 90px;background:var(--azul);border-radius:0 0 0 0}
+.rt-img{position:absolute;bottom:0;right:70px;height:800px;width:auto}
+.L-roteiro .rh{right:500px}
+
+/* ---------------- foto em faixa + passos sobre a borda (depois da visita) */
+.L-faixa-foto .ff-f{left:0;right:0;top:0;height:360px}
+.ff-l{left:96px;right:96px;top:326px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:44px;z-index:3}
+.ff-n{display:grid;place-items:center;width:68px;height:68px;border-radius:0 34px 34px 34px;background:var(--verde);color:var(--navy);font:400 32px/1 var(--f-tit);margin-bottom:14px}
+.ff-l b{display:block;font-weight:600;font-size:20px;line-height:1.25;margin-bottom:6px}
+.ff-l p{margin:0;font-size:16.5px;line-height:1.45;color:#3A4A63}
+.ff-cab{left:96px;top:626px;width:720px}
+.ff-cab .h2{margin:0}
+.ff-cit{left:900px;right:96px;top:640px;margin:0;padding-left:56px;font:400 30px/1.28 var(--f-tit)}
+.ff-cit::before{content:"“";position:absolute;left:0;top:-14px;font-size:96px;line-height:1;color:var(--verde)}
+
+/* ---------------- número manchete (76%) */
+.nu-n{left:56px;top:70px;font:400 420px/1 var(--f-tit);letter-spacing:-.06em;color:var(--verde)}
+.nu-d{left:96px;top:540px;width:640px;margin:0;font:400 30px/1.3 var(--f-tit)}
+.nu-q{left:900px;right:96px;top:112px}
+.L-numero .h2{font-size:48px}
+.L-numero .txt{font-size:19.5px;color:rgba(255,255,255,.86)}
+.L-numero .kick{color:var(--ciano)}
+.nu-nf{left:96px;top:690px;width:640px}
+
+/* ---------------- cadeia: o caminho do produto */
+.cd-cab{left:96px;top:104px;width:660px}
+.cd-txt{left:830px;right:96px;top:128px;font-size:19.5px;color:#3A4A63}
+.cd-txt p{margin:0 0 .8em}
+.cd-faixa{left:0;right:0;bottom:0;height:390px;background:#F1F2F3;padding:52px 96px 0;box-sizing:border-box}
+.cd-l{list-style:none;margin:0;padding:0;display:flex;align-items:flex-start}
+.cd-no{width:230px;flex:none;text-align:center}
+.cd-ic{display:grid;place-items:center;width:112px;height:112px;margin:0 auto 14px;border-radius:50%;background:#fff}
+.cd-ic .ic{width:58px;height:58px}
+.cd-no b{display:block;font:400 30px/1.1 var(--f-tit)}
+.cd-no small{display:block;font-size:15.5px;line-height:1.35;color:#556173;margin-top:4px}
+.cd-seta{flex:1;position:relative;height:112px}
+.cd-seta::before{content:"";position:absolute;left:8px;right:16px;top:55px;height:3px;background:#B8C0CC}
+.cd-seta::after{content:"";position:absolute;right:12px;top:49px;width:12px;height:12px;border-top:3px solid #B8C0CC;border-right:3px solid #B8C0CC;transform:rotate(45deg)}
+.cd-seta span{position:absolute;left:50%;top:16px;transform:translateX(-50%);font-size:14.5px;font-weight:600;color:#556173;white-space:nowrap}
+.cd-seta.v::before{background:var(--verde)}.cd-seta.v::after{border-color:var(--verde)}
+.cd-seta.a::before{background:var(--azul)}.cd-seta.a::after{border-color:var(--azul)}
+.cd-seta.v span,.cd-seta.a span{color:#fff;padding:5px 12px;border-radius:0 14px 14px 14px}
+.cd-seta.v span{background:#0A7F23}.cd-seta.a span{background:var(--azul)}
+.cd-np{margin:30px auto 0;border:0;padding:0;text-align:center;max-width:80ch;font-size:17.5px}
+
+/* ---------------- dicionário */
+.dc-aa{right:30px;top:10px;font:400 540px/1 var(--f-tit);color:#F1F2F3;z-index:0;letter-spacing:-.04em}
+.dc-cab{left:96px;top:104px;width:980px;z-index:2}
+.dc-l{left:96px;right:96px;top:330px;margin:0;columns:2;column-gap:84px;column-rule:1px solid #D5DAE1;z-index:2}
+.dc-e{break-inside:avoid;padding:0 0 28px}
+.dc-e dt b{font:400 38px/1.1 var(--f-tit);margin-right:12px}
+.dc-e dt i{font-size:16px;color:#556173}
+.dc-e dd{margin:6px 0 0;font-size:19px;line-height:1.5;color:#3A4A63}
+
+/* ---------------- gráfico de unidades (ruptura) */
+.wf-cab{left:96px;top:104px;width:640px}
+.L-waffle .h2{font-size:50px}
+.wf-txt{left:820px;right:96px;top:122px;font-size:18.5px;color:#3A4A63}
+.wf-d{left:96px;top:462px;margin:0;font:400 28px/1.2 var(--f-tit)}
+.wf-g{left:96px;top:512px;width:1408px;height:194px;display:grid;grid-template-rows:repeat(4,1fr);grid-auto-flow:column;grid-auto-columns:1fr;gap:6px}
+.wf-g i{display:block;border-radius:0 9px 9px 9px}
+.wf-leg{left:96px;width:1408px;top:724px;height:110px;list-style:none;margin:0;padding:0}
+.wf-leg li{position:absolute;top:0;padding-right:18px;box-sizing:border-box}
+.wf-leg b{display:block;font:400 44px/1 var(--f-tit)}
+.wf-leg span{display:block;font-size:15px;line-height:1.35;margin-top:4px;color:#3A4A63}
+
+/* ---------------- os quatro básicos */
+.L-quatro .qt-f{right:0;top:0;width:800px;height:530px}
+.qt-cab{left:96px;top:96px;width:610px}
+.qt-cab .sf-nota{margin-top:20px}
+.qt-l{left:96px;right:96px;top:590px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
+.qt-l li{position:relative;border-top:3px solid var(--navy)}
+.qt-n{display:block;font:400 72px/1 var(--f-tit);color:var(--verde);margin:12px 0 8px}
+.qt-ic{position:absolute;right:0;top:24px;width:44px;height:44px}
+.qt-l b{display:block;font-weight:600;font-size:21px;line-height:1.25;margin-bottom:6px}
+.qt-l p{margin:0;font-size:16.5px;line-height:1.45;color:#3A4A63}
+
+/* ---------------- diagrama com coluna de texto (FIFO) */
+.dl-q{left:96px;top:104px;width:500px;font-size:18px;color:#3A4A63}
+.L-diagrama-lateral .h2{font-size:48px;color:var(--navy)}
+.dl-f{left:660px;right:96px;top:104px;bottom:96px;background:#fff;border-radius:0 44px 44px 44px;padding:50px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
+
+/* ---------------- diagrama + número (frente e blocagem) */
+.dd-f{left:96px;top:104px;width:820px;bottom:96px;background:#F1F2F3;border-radius:44px 0 44px 44px;padding:40px;box-sizing:border-box;display:flex;align-items:center}
+.dd-q{left:980px;right:96px;top:104px;font-size:17.5px;color:#3A4A63}
+.L-diagrama-dado .h2{font-size:44px;color:var(--navy)}
+.dd-n{display:flex;align-items:baseline;gap:14px;margin:22px 0 0;padding-top:16px;border-top:2px solid var(--verde)}
+.dd-n b{font:400 76px/1 var(--f-tit);color:var(--verde);flex:none;letter-spacing:-.03em}
+.dd-n span{font-size:15.5px;line-height:1.4;color:var(--navy)}
+
+/* ---------------- alturas: régua + foto */
+.al-q{left:96px;top:104px;width:560px;font-size:18.5px;color:#3A4A63}
+.L-alturas .h2{font-size:52px;color:var(--navy)}
+.al-regua{left:716px;top:0;width:250px;height:900px}
+.al-fx{position:absolute;left:0;right:0;padding:14px 18px;box-sizing:border-box;border-top:1px solid rgba(7,32,71,.2)}
+.al-fx b{display:block;font:400 22px/1.1 var(--f-tit)}
+.al-fx small{display:block;font-size:14px;line-height:1.3;margin-top:4px;color:#3A4A63}
+.al-fx.alta,.al-fx.media{background:#F1F2F3}.al-fx.baixa{background:#E3E6EA}
+.al-fx.quente{background:var(--verde);color:var(--navy)}.al-fx.quente small{color:var(--navy)}
+.al-chao{position:absolute;left:0;top:812px;font-size:13px;color:#556173;border-top:2px solid var(--navy);width:100%;padding-top:6px}
+.al-f{left:1010px;right:0;top:0;bottom:0}
+.L-alturas .rh{right:620px}
+
+/* ---------------- comparador sangrado */
+.L-comparador-cheio .cc-comp{inset:0}
+.L-comparador-cheio .comp,.L-comparador-cheio .comp-quadro{width:100%;height:100%}
+.cc-cx{left:56px;bottom:56px;width:560px;background:#fff;padding:30px 34px;border-radius:0 36px 36px 36px;z-index:7;font-size:16.5px;line-height:1.5}
+.cc-cx h3{font:400 38px/1.06 var(--f-tit);margin:0 0 14px}
+.cc-cx .kick{font-size:28px}
+.cc-cx .lb{font-size:15.5px;margin-top:14px}
+.L-comparador-cheio .fo{color:#fff}
+.L-comparador-cheio .comp-tag{top:32px;font-size:18px}
+
+/* ---------------- catálogo de materiais */
+.ct-cab{left:96px;top:100px;width:1408px;display:grid;grid-template-columns:auto 1fr;column-gap:64px;align-items:end}
+.ct-cab .kick{grid-column:1/-1}
+.ct-cab .h2{margin:0}
+.ct-lead{margin:0 0 8px;font-size:20px;max-width:42ch}
+.ct-l{left:96px;right:96px;top:300px;bottom:92px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:30px 48px}
+.ct-l li{display:grid;grid-template-columns:170px 1fr;gap:22px;align-items:start;min-height:0}
+.ct-img{width:170px;height:220px;border-radius:0 30px 30px 30px;overflow:hidden;background:#F1F2F3}
+.ct-n{display:block;font:400 19px/1 var(--f-tit);color:var(--verde);margin:4px 0 8px}
+.ct-l b{display:block;font:400 28px/1.05 var(--f-tit);margin-bottom:8px}
+.ct-l p{margin:0;font-size:16px;line-height:1.45;color:#3A4A63}
+
+/* ---------------- filme: cinco fotos verticais lado a lado */
+.fm-cab{left:96px;top:96px;width:1300px}
+.L-filme .h2{margin:0}
+.fm-tira{left:0;right:0;top:250px;height:400px;display:grid;grid-template-columns:repeat(5,1fr)}
+.fm-q{position:relative;overflow:hidden}
+.fm-q+.fm-q{box-shadow:inset 3px 0 0 #fff}
+.fm-n{position:absolute;left:18px;top:14px;z-index:2;font:400 28px/1 var(--f-tit);color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.45)}
+.fm-l{left:0;right:0;top:676px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr)}
+.fm-l li{padding:0 26px}
+.fm-l li:first-child{padding-left:44px}
+.fm-l b{display:block;font:400 25px/1.1 var(--f-tit);margin-bottom:6px}
+.fm-l p{margin:0;font-size:15.5px;line-height:1.42;color:#3A4A63}
+
+/* ---------------- erro comum */
+.er-sera{left:60px;bottom:0;height:820px}.er-sera .sera{height:100%;width:auto}
+.er-q{left:540px;right:96px;top:110px;display:grid;grid-template-columns:1fr 1fr;column-gap:52px;font-size:19.5px}
+.er-q>.er-k,.er-q>.h2{grid-column:1/-1}
+.er-k{display:block;font:700 42px/1 var(--f-mao);color:#C2392D;margin-bottom:10px;transform:rotate(-2deg);transform-origin:left}
+.L-erro .h2{font-size:56px}
+.er-a b,.er-b b{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:600;margin-bottom:8px}
+.er-a b .ic,.er-b b .ic{width:30px;height:30px}
+.er-a b{color:#C2392D}.er-b b{color:#0A7F23}
+.er-a p,.er-b p{margin:0;line-height:1.55}
+.er-b{padding-left:52px;border-left:1px solid #CBD1D9;margin-left:-26px}
+.er-lb{left:540px;right:96px;bottom:90px;margin:0;padding-top:18px;border-top:2px solid var(--navy)}
+
+/* ---------------- definições (cross) */
+.df-cab{left:96px;top:104px;width:950px}
+.df-defs{left:96px;top:300px;width:950px;display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.df-g{display:block;font-size:14px;color:#556173;font-style:italic;margin-bottom:6px}
+.df-d b{display:block;font:400 40px/1.05 var(--f-tit);margin-bottom:12px}
+.df-d p{margin:0;font-size:19px;line-height:1.5;color:#3A4A63}
+.df-notas{left:96px;top:610px;width:950px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.df-n{background:#F1F2F3;border-radius:0 26px 26px 26px;padding:20px 24px}
+.df-n .kick{font-size:29px;margin-bottom:6px}
+.df-n p{margin:0;font-size:16.5px;line-height:1.45}
+.df-f{left:1110px;right:0;top:0;bottom:0}
+.L-definicoes .rh{right:560px}
+
+/* ---------------- mapa do cross */
+.mp-q{left:96px;top:104px;width:430px;font-size:18px;color:#3A4A63}
+.L-mapa .h2{font-size:50px;color:var(--navy)}
+.mp-f{left:580px;right:96px;top:96px;bottom:84px;background:#fff;border-radius:0 44px 44px 44px;padding:30px 36px;box-sizing:border-box;overflow:hidden}
+
+/* ---------------- foto com painel (carnaval) */
+.L-foto-painel .fp-f{inset:0}
+.fp-p{left:0;top:0;bottom:0;width:650px;background:#fff;padding:104px 70px 0 96px;box-sizing:border-box;border-radius:0 0 300px 0;font-size:19px;color:#3A4A63}
+.fp-p .h2{color:var(--navy)}
+.L-foto-painel.pg-impar .fo{color:#fff}
+
+/* ---------------- comparador em meia página */
+.cq-q{left:96px;top:104px;width:560px;font-size:18.5px;color:#3A4A63}
+.L-comparador-quadro .h2{font-size:50px;color:var(--navy)}
+.cq-comp{left:720px;right:0;top:0;bottom:0}
+.cq-comp .comp{width:100%;height:100%}
+.L-comparador-quadro .rh{right:auto;width:560px}
+.L-comparador-quadro.pg-impar .fo{color:#fff}
+
+/* ---------------- escada (ponto extra) */
+.es-cab{left:96px;top:104px;width:760px}
+.es-sf{right:96px;top:120px;width:540px}
+.es-l{left:96px;right:96px;bottom:0;height:500px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;align-items:end}
+.es-l li{height:var(--h);background:#F1F2F3;border-radius:0 30px 0 0;padding:20px 22px 0;box-sizing:border-box;position:relative;box-shadow:inset 0 5px 0 var(--verde)}
+.es-l li:last-child{background:var(--navy);color:#fff}
+.es-l li:last-child p{color:rgba(255,255,255,.85)}
+.es-n{display:block;font:400 54px/1 var(--f-tit);color:var(--verde);margin:6px 0 8px}
+.es-ic{position:absolute;right:20px;top:26px;width:40px;height:40px}
+.es-l li:last-child .es-ic .ic{--tr:#fff}
+.es-l b{display:block;font-weight:600;font-size:19px;line-height:1.25;margin-bottom:6px}
+.es-l p{margin:0;font-size:15.5px;line-height:1.42;color:#3A4A63}
+.L-escada.pg-impar .fo{color:#fff}
+
+/* ---------------- etiqueta (você é convidado) */
+.L-etiqueta .et-f{left:0;top:0;bottom:0;width:540px}
+.et-q{left:620px;right:96px;top:92px}
+.L-etiqueta .h2{font-size:56px}
+.et-l{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:26px 50px}
+.et-l li{display:grid;grid-template-columns:46px 1fr;column-gap:6px}
+.et-n{grid-row:1/span 2;font:400 40px/1 var(--f-tit);color:var(--verde)}
+.et-l b{font-weight:600;font-size:19.5px;line-height:1.25}
+.et-l p{grid-column:2;margin:4px 0 0;font-size:16px;line-height:1.45;color:#3A4A63}
+.L-etiqueta.pg-par .fo{color:#fff}
+
+/* ---------------- citações (três pilares) */
+.cz-cab{left:96px;top:104px;width:760px}
+.cz-sf{right:96px;top:116px;width:560px}
+.cz-l{left:96px;right:96px;top:350px;display:grid;grid-template-columns:repeat(3,1fr)}
+.cz-c{padding:0 42px;border-left:1px solid #D5DAE1}
+.cz-c:first-child{padding-left:0;border-left:0}
+.cz-a{display:block;font:400 140px/.7 var(--f-tit);color:var(--verde);height:66px}
+.cz-c blockquote{margin:0 0 22px;font:400 36px/1.16 var(--f-tit)}
+.cz-c b{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:600;margin-bottom:6px;color:var(--azul)}
+.cz-ic{display:inline-block;width:30px;height:30px}
+.cz-c p{margin:0;font-size:17px;line-height:1.5;color:#3A4A63}
+
+/* ---------------- tabela + foto (quem decide) */
+.tf-q{left:96px;top:104px;width:1000px}
+.tf-t .tab{font-size:19px;line-height:1.4}
+.tf-t .tab th{font-size:15px;padding:0 18px 12px 0}
+.tf-t .tab td{padding:15px 18px 15px 0}
+.tf-t .tab tr:nth-child(odd) td{background:none}
+.tf-f{left:1160px;right:0;top:0;bottom:0}
+.L-tabela-foto .rh{right:480px}
+.L-tabela-foto.pg-impar .fo{color:#fff}
+
+/* ---------------- sempre e nunca */
+.sn-cab{left:96px;top:104px;width:900px}
+.sn-c{top:292px;width:620px}
+.sn-s{left:96px}.sn-n{left:884px}
+.sn-c h3{font:400 112px/.9 var(--f-tit);margin:0 0 20px;letter-spacing:-.035em}
+.sn-s h3{color:var(--verde)}
+.sn-c ul{list-style:none;margin:0;padding:0}
+.sn-c li{display:grid;grid-template-columns:38px 1fr;gap:12px;padding:13px 0;border-top:1px solid #D5DAE1;font-size:20px;line-height:1.4}
+.sn-c li .ic{width:28px;height:28px;margin-top:3px}
+.sn-lb{left:96px;right:96px;bottom:84px}
+.L-sempre-nunca::after{content:"";position:absolute;left:800px;top:300px;height:400px;width:2px;background:#D5DAE1}
+
+/* ---------------- CBV em degraus */
+.cb-q{left:96px;top:96px;width:700px;font-size:19px;color:#3A4A63}
+.L-cbv .h2{font-size:50px;color:var(--navy)}
+.cb-f{right:0;top:0;width:720px;height:440px}
+.cb-esc{left:96px;right:96px;bottom:84px;height:330px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:end}
+.cb-d{position:relative;padding:24px 28px 22px 150px;box-sizing:border-box;border-radius:0 32px 32px 32px;background:#F1F2F3}
+.cb-d.d0{height:230px}.cb-d.d1{height:280px;background:#E2F3E5}.cb-d.d2{height:330px;background:var(--navy);color:#fff}
+.cb-l{position:absolute;left:26px;top:10px;font:400 150px/1 var(--f-tit);color:var(--verde)}
+.cb-d b{display:block;font:400 30px/1.1 var(--f-tit)}
+.cb-d small{display:block;font-size:14.5px;opacity:.75;margin:4px 0 10px}
+.cb-d p{margin:0;font-size:18px;line-height:1.4;font-style:italic}
+.cb-e{position:absolute;right:-34px;top:-40px;font:700 30px/1 var(--f-mao);color:var(--azul);transform:rotate(-7deg);z-index:2}
+
+/* ---------------- produtos em cartões */
+.p4-cab{left:96px;top:96px;width:1408px;display:flex;align-items:baseline;gap:40px;flex-wrap:wrap}
+.p4-cab .kick{width:100%}
+.p4-cab .h2,.p4-cab .lead{margin:0}
+.p4-cab .lead{font-size:20px}
+.p4-l{left:96px;right:96px;top:250px;bottom:92px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.p4-l li{background:#fff;border-radius:0 36px 36px 36px;padding:22px 24px;display:flex;flex-direction:column}
+.p4-img{height:196px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.p4-img img{max-height:100%;max-width:100%;width:auto;height:auto;filter:drop-shadow(0 14px 16px rgba(7,32,71,.15))}
+.p4-tag{align-self:flex-start;font-size:13px;font-weight:600;background:var(--azul);color:#fff;padding:4px 11px;border-radius:0 11px 11px 11px;margin-bottom:8px}
+.p4-l b{font:400 32px/1.05 var(--f-tit);margin-bottom:8px}
+.p4-l p{margin:0 0 10px;font-size:15.5px;line-height:1.45}
+.p4-fr{margin:auto 0 0!important;padding-top:12px;border-top:3px solid var(--verde);font-style:italic}
+.p4-fr span{display:block;font-style:normal;font-weight:600;font-size:13px;color:#0A7F23;margin-bottom:2px}
+
+/* ---------------- produtos em linhas + foto */
+.L-produtos-linhas .pl-f{left:0;top:0;bottom:0;width:480px}
+.pl-q{left:560px;right:96px;top:92px}
+.pl-l{list-style:none;margin:0;padding:0}
+.pl-l li{display:grid;grid-template-columns:140px 1fr 300px;gap:30px;align-items:center;padding:16px 0;border-top:1px solid #D5DAE1}
+.pl-img{height:136px;display:flex;align-items:center;justify-content:center}
+.pl-img img{max-height:100%;max-width:100%;width:auto;height:auto;filter:drop-shadow(0 12px 14px rgba(7,32,71,.14))}
+.pl-t b{display:block;font:400 30px/1.05 var(--f-tit);margin:4px 0 6px}
+.pl-t p{margin:0;font-size:15.5px;line-height:1.45;color:#3A4A63}
+.pl-fr{margin:0;font:400 20px/1.3 var(--f-tit)}
+.pl-fr span{display:block;font:600 13px/1 var(--f-txt);color:#0A7F23;margin-bottom:6px}
+.L-produtos-linhas.pg-par .fo{color:#fff}
+
+/* ---------------- pode e não pode */
+.L-pode-nao .pn-f{left:0;top:0;bottom:0;width:440px}
+.pn-q{left:520px;right:96px;top:92px}
+.L-pode-nao .h2{font-size:52px}
+.pn-g{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.pn-c h3{font:400 42px/1 var(--f-tit);margin:0 0 12px}
+.pn-c.ok h3{color:#0A7F23}.pn-c.no h3{color:#C2392D}
+.pn-c ul{list-style:none;margin:0;padding:0}
+.pn-c li{display:grid;grid-template-columns:32px 1fr;gap:10px;padding:12px 0;border-top:1px solid #D5DAE1;font-size:17.5px;line-height:1.4}
+.pn-c li .ic{width:26px;height:26px;margin-top:2px}
+.L-pode-nao.pg-par .fo{color:#fff}
+
+/* ---------------- figura com marcações (prateleira ideal) */
+.fq-q{left:96px;top:104px;width:520px;font-size:19px;color:#3A4A63}
+.L-figura-pinos .h2{color:var(--navy)}
+.fq-f{left:700px;right:0;top:0;bottom:0}
+.fq-f .foto-q{width:100%;height:100%}
+.fq-f .foto-q>img{width:100%;height:100%;object-fit:cover}
+.L-figura-pinos.pg-impar .fo{color:#fff}
+
+/* ---------------- cinco regras + foto */
+.L-regras .rg-f{left:0;top:0;bottom:0;width:500px}
+.rg-sf{position:absolute;left:28px;right:28px;bottom:28px}
+.rg-q{left:580px;right:96px;top:92px}
+.rg-l{list-style:none;margin:0;padding:0}
+.rg-l li{display:grid;grid-template-columns:64px 290px 1fr;gap:22px;align-items:baseline;padding:16px 0;border-top:1px solid #D5DAE1}
+.rg-n{font:400 50px/1 var(--f-tit);color:var(--verde)}
+.rg-l b{font:400 26px/1.15 var(--f-tit)}
+.rg-l p{margin:0;font-size:16.5px;line-height:1.45;color:#3A4A63}
+.L-regras.pg-par .fo{color:#fff}
+
+/* ---------------- epílogo */
+.ep-q{left:96px;top:110px;width:820px}
+.L-epilogo .h2{font-size:44px}
+.ep-cit{margin:0 0 26px;font:400 40px/1.24 var(--f-tit)}
+.ep-cit::before{content:"“";color:var(--verde)}
+.L-epilogo .txt{font-size:21px;color:rgba(255,255,255,.84);max-width:48ch}
+.L-epilogo .ca-ass{color:var(--verde)}
+.L-epilogo .ca-ass small{color:rgba(255,255,255,.6)}
+.ep-sera{right:200px;bottom:0;height:840px}.ep-img{height:100%;width:auto}
+.ep-geo{right:56px;top:-200px;width:150px}
+
+/* ---------------- checklist e teste aproveitados da v5 */
+.L-checklist,.L-quiz{font-size:22px}
+.L-checklist .ck-cab{top:96px}
+.L-checklist .tit,.L-quiz .tit{font:400 60px/1.04 var(--f-tit)}
+.L-quiz .qz-q{top:100px}
+
+/* =================== celular (retrato): uma coluna, foto em cima =================== */
+@media screen{
+.retrato .lv{padding:18px 20px 40px!important;font-size:16.5px;display:flex;flex-direction:column;min-height:100svh;box-sizing:border-box}
+.retrato .lv .z{position:relative!important;inset:auto!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:auto!important;height:auto!important;transform:none!important;margin:0 0 18px;padding:0;border-radius:0;box-shadow:none}
+.retrato .lv .zf{margin:-18px -20px 20px!important;height:62vw!important;flex:none}
+.retrato .lv .zf .ft{height:100%}
+.retrato .lv .rh{position:static;margin-bottom:12px;font-size:11px;order:-1}
+.retrato .lv .fo{display:none}
+.retrato .lv .h2{font-size:28px!important;margin-bottom:14px}
+.retrato .lv .kick{font-size:24px}
+.retrato .lv .lead{font-size:17px}
+.retrato .lv .txt{font-size:16.5px!important}
+.retrato .lv .col2{columns:1}
+.retrato .capitular>p:first-child::first-letter{font-size:64px}
+.retrato .tr-svg,.retrato .dc-aa,.retrato .ca-aspas,.retrato .pf-geo,.retrato .ep-geo,.retrato .cc-gig,.retrato .cb-e{display:none!important}
+.retrato .lg-l,.retrato .ct-l,.retrato .fm-l,.retrato .qt-l,.retrato .ff-l,.retrato .es-l,.retrato .et-l,.retrato .cz-l,.retrato .p4-l,.retrato .pn-g,.retrato .df-defs,.retrato .df-notas,.retrato .er-q,.retrato .cb-esc,.retrato .cd-l{display:block!important}
+.retrato .lv li,.retrato .tr-p{position:relative!important;left:auto!important;top:auto!important;width:auto!important;height:auto!important;margin:0 0 16px}
+.retrato .lg-l li{padding-left:60px}
+.retrato .tr-n{width:44px;height:44px;font-size:22px;box-shadow:none}
+.retrato .tr-ic{left:58px;top:4px;width:34px;height:34px}
+.retrato .ct-l li{grid-template-columns:110px 1fr}
+.retrato .ct-img{width:110px;height:140px}
+.retrato .fm-tira{display:grid!important;grid-template-columns:repeat(5,1fr);height:44vw!important}
+.retrato .fm-l li{padding:0!important}
+.retrato .es-l li{height:auto!important;padding:16px 18px 18px;border-radius:0 24px 24px 24px}
+.retrato .cz-c{padding:0!important;border:0!important;margin-bottom:20px}
+.retrato .cz-c blockquote{font-size:24px}
+.retrato .sn-c h3{font-size:56px}
+.retrato .cb-d{height:auto!important;padding:20px 20px 20px 96px;margin-bottom:14px}
+.retrato .cb-l{font-size:80px;left:20px}
+.retrato .p4-l li{margin-bottom:14px}
+.retrato .pl-l li{grid-template-columns:90px 1fr;gap:16px}
+.retrato .pl-fr{grid-column:1/-1}
+.retrato .pl-img{height:100px}
+.retrato .rg-l li{grid-template-columns:44px 1fr}
+.retrato .rg-l li p{grid-column:2}
+.retrato .rg-n{font-size:34px}
+.retrato .sf-nota{grid-template-columns:52px 1fr;font-size:15px}
+.retrato .sf-av{width:52px;height:52px}
+.retrato .nu-n{font-size:150px!important}
+.retrato .nu-d{font-size:21px}
+.retrato .wf-g{height:120px!important;display:grid!important}
+.retrato .wf-leg{height:auto!important;display:block}
+.retrato .wf-leg li{position:static!important;width:auto!important;display:flex;gap:10px;align-items:baseline;margin:0 0 6px}
+.retrato .wf-leg b{font-size:26px}
+.retrato .al-regua{height:auto!important}
+.retrato .al-fx{position:static!important;height:auto!important}
+.retrato .al-chao{position:static!important}
+.retrato .cd-faixa{margin:0 -20px;padding:24px 20px!important}
+.retrato .cd-no{width:auto;display:grid;grid-template-columns:64px 1fr;text-align:left;column-gap:14px;align-items:center}
+.retrato .cd-ic{width:56px;height:56px;margin:0;grid-row:1/span 2}.retrato .cd-ic .ic{width:32px;height:32px}
+.retrato .cd-no b{font-size:20px}
+.retrato .cd-seta{height:36px;margin:4px 0 4px 26px}
+.retrato .cd-seta::before{left:0;right:auto;top:0;bottom:0;width:3px;height:auto}
+.retrato .cd-seta::after{display:none}
+.retrato .cd-seta span{left:20px;top:8px;transform:none}
+.retrato .dc-l{columns:1}
+.retrato .er-sera,.retrato .rt-sera,.retrato .ep-sera{height:260px!important;align-self:flex-end;order:5}
+.retrato .er-sera .sera,.retrato .rt-img,.retrato .ep-img{height:260px!important;position:static!important}
+.retrato .rt-painel{display:none}
+.retrato .rt-f{grid-template-columns:1fr;gap:2px}.retrato .rt-f span{text-align:left}.retrato .rt-f p{font-size:19px}
+.retrato .rt-lb{padding-left:0}
+.retrato .er-b{padding-left:0;border:0;margin:14px 0 0}
+.retrato .ff-cit{padding-left:40px;font-size:21px}
+.retrato .ca-ret{height:300px!important}
+.retrato .ca-folha{border-radius:150px 150px 150px 0}
+.retrato .lg-lado{margin:-18px -20px 20px!important;padding:24px 20px!important}
+.retrato .lg-sera{position:static;height:200px;margin-top:10px}
+.retrato .sm-f{display:none}
+.retrato .sm-t{font-size:18px}.retrato .sm-n{font-size:24px;width:30px}
+.retrato .sm-fecha{grid-template-columns:1fr}
+.retrato .tf-t{overflow-x:auto}.retrato .tf-t .tab{font-size:14px;min-width:560px}
+.retrato .pn-c{margin-bottom:16px}
+.retrato .fp-p{padding:0!important;background:none}
+.retrato .cc-cx{padding:0}
+.retrato .L-comparador-cheio .cc-comp{margin:-18px -20px 20px!important;height:70vw!important}
+.retrato .cq-comp{margin:0 -20px 20px!important;height:70vw!important}
+.retrato .dl-f,.retrato .dd-f,.retrato .mp-f{padding:16px!important;margin:0 -8px 18px!important}
+.retrato .fq-f{height:100vw!important}
+/* capas no celular */
+.retrato .capa,.retrato .capa-guia,.retrato .contracapa,.retrato .prefacio{padding:0!important;background:var(--fundo,var(--navy))}
+.retrato .capa .cc-f,.retrato .capa-guia .cg-f,.retrato .contracapa .cg-f{margin:0!important;height:64vw!important}
+.retrato .capa .cc-t,.retrato .cg-t{padding:24px 22px 40px!important;margin:0}
+.retrato .cc-num{font-size:60px!important;margin-bottom:12px}
+.retrato .num-linha .cc-num{font-size:22px!important}
+.retrato .cc-tit{font-size:36px!important}.retrato .cc-kick{font-size:30px}.retrato .cc-abre{font-size:16.5px}
+.retrato .cc-bts .bt{font-size:15px;padding:11px 16px}
+.retrato .capa-guia h1,.retrato .contracapa h1{font-size:40px}.retrato .cg-logo{width:180px;margin-bottom:24px}
+.retrato .capa-guia p,.retrato .contracapa p{font-size:16.5px}
+.retrato .prefacio .pf-nome{font-size:88px!important;padding:24px 20px 0;margin:0}
+.retrato .prefacio .pf-kick{font-size:40px;padding:20px 20px 0;margin:0}
+.retrato .prefacio .pf-sera{height:340px!important;align-self:center;order:3}
+.retrato .prefacio .pf-t{padding:0 20px 30px}
+}
+
+/* ajustes da revisão 1 */
+.L-sumario .sm-fecha{position:static;left:auto;right:auto;bottom:auto}
+.L-sumario .sm-fecha ol{position:static;display:block}
+.L-sumario .sm-fecha a{border:0;font-size:inherit}
+.ct-cab{grid-template-columns:1fr 440px}
+.ct-cab .h2{font-size:54px}
+.prefacio .pf-nome{font-size:280px;top:170px}
+.prefacio .pf-sera{right:110px}
+.lv.s-quiz{background:var(--navy);color:#fff}
+.L-mapa .mp-f{display:flex;flex-direction:column;justify-content:center}
+.L-mapa .dg-svg{max-height:500px;width:auto;max-width:100%;margin:0 auto}
+.L-mapa .dg-leg{font-size:13px;gap:6px 24px;margin-top:10px}
+.L-mapa .leg-lista{gap:4px;padding-top:8px}
+.L-mapa .leg-lista li{font-size:13px}
+.L-sumario .sm-l a{padding:8px 0}
+.L-sumario .sm-q{top:70px}
+.L-sumario .sm-h{font-size:80px;margin-bottom:14px}
+.L-mapa .mp-f svg{width:76%!important;height:auto;display:block;margin:0 auto}
+.L-mapa .dg-leg{grid-template-columns:1fr 1fr 1fr!important}
+.L-mapa .leg-lista{grid-template-columns:1fr 1fr 1fr!important}
+.cb-esc{gap:44px}
+.cb-e{right:-40px;top:-30px;font-size:26px}
+@media screen{
+.retrato .prefacio .pf-nome{font-size:72px!important}
+.retrato .wf-d,.retrato .nu-d{font-size:20px!important}
+.retrato .ff-cit,.retrato .ep-cit{font-size:21px!important}
+.retrato .dc-e dt b{font-size:26px}
+.retrato .lv .rh span:first-child{display:none}
+}
+@media screen{
+.retrato .ct-cab,.retrato .p4-cab{display:block!important}
+.retrato .ct-l b,.retrato .p4-l b,.retrato .pl-t b{font-size:22px}
+.retrato .fm-l b{font-size:20px}
+.retrato .df-d b{font-size:26px}
+.retrato .cz-sf,.retrato .es-sf{margin-bottom:18px}
+}
+.df-d p{font-size:20.5px}
+.df-notas{top:560px}
+.df-n p{font-size:17.5px}
+.tf-t .tab{font-size:22px}
+.tf-t .tab th{font-size:16px}
+.tf-t .tab td{padding:20px 18px 20px 0}
+.L-tabela-foto .lb{margin-top:28px;font-size:20px}
+.pn-f .ft{object-position:50% 88%}
+.carregando .slide{transition:none!important}
+@media screen{.retrato .cz-a{font-size:72px;height:30px}}

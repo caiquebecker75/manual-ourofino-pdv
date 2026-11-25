@@ -90,6 +90,7 @@
       for (var i = 0; i < 14 && e.scrollHeight > e.clientHeight + 2; i++) { f -= 0.03; e.style.setProperty("--fit", f.toFixed(2)); }
     });
   }
+  de.classList.add("carregando"); setTimeout(function () { de.classList.remove("carregando"); }, 300);
   modo(); ajusta();
   if (d.fonts && d.fonts.ready) d.fonts.ready.then(ajusta);
   addEventListener("beforeprint", function () { de.classList.add("paisagem"); de.classList.remove("retrato"); ajusta(); });
