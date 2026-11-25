@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Cronograma de aprovação e pacotes por etapa do Guia de Execução no PDV (Ourofino Pet).
+"""Cronograma de aprovação e apresentação de cada etapa do Guia de Execução no PDV (Ourofino Pet).
 
 Roda depois do livro.py, sempre a partir do index.html já construído:
     python3 tools/v6/livro.py
-    python3 tools/v6/etapas.py                    # pacotes + miniaturas + cronograma
-    python3 tools/v6/etapas.py --sem-miniaturas   # só o HTML (mantém as miniaturas que já existem)
-    python3 tools/v6/etapas.py --perfil /tmp/x    # pasta de perfil do Chrome headless (padrão: temporária)
+    python3 tools/v6/etapas.py
 
 Gera:
-    aprovacao/etapa-N/index.html    o guia recortado, com as páginas na numeração do guia completo
-    aprovacao/miniaturas/pNN.webp   uma miniatura por página do guia completo (Chrome headless + PyMuPDF)
-    cronograma/index.html           documento para a Ourofino aprovar etapa por etapa
+    apresentacao/etapa-N/index.html  só as telas da etapa, em formato de apresentação (tela cheia, uma por vez),
+                                     para as etapas marcadas com apresentacao=True em ETAPAS
+    cronograma/index.html            documento para acompanhar a aprovação etapa por etapa, com o link de cada apresentação
+
+Para liberar a etapa seguinte: em ETAPAS, ponha apresentacao=True nela (e situacao="aprovada" na que recebeu o check).
 
 As fronteiras das etapas saem do data-cap de cada slide (capítulos), não de posições fixas:
 se o guia ganhar ou perder páginas, as páginas de cada etapa são recalculadas.
@@ -24,7 +24,7 @@ HOJE = dt.date.today()
 # caps: data-cap dos slides ("FIM" = o último capítulo do guia, o fechamento)
 ETAPAS = [
     dict(n=1, nome="Abertura e a visita", caps=["00", "01"], cor="#10AD31", tinta="#072047",
-         envio="2026-11-26", retorno="2026-12-02", check="2026-12-03",
+         envio="2026-11-26", retorno="2026-12-02", check="2026-12-03", apresentacao=True,
          conferir=["Se a Serafina representa bem o time de campo: nome, jeito e uniforme.",
                    "Se a ordem da visita (antes, os oito passos na loja e o depois) é a que vocês cobram em campo.",
                    "Se a conversa da chegada soa como o promotor de vocês fala com o balconista.",
@@ -195,169 +195,7 @@ def monta_etapas(guia):
         print(f"  etapa {e['n']} · {e['nome']}: páginas {e['de']} a {e['ate']} ({len(e['slides'])} slides, {nn} nota{'' if nn == 1 else 's'})")
 
 
-# ---------------------------------------------------------------- miniaturas
-def porta_livre():
-    with socket.socket() as so:
-        so.bind(("127.0.0.1", 0)); return so.getsockname()[1]
-
-
-def miniaturas(total, perfil=None, largura=480):
-    import fitz
-    from PIL import Image
-    chrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-    if not os.path.exists(chrome): print("  Chrome não encontrado: miniaturas mantidas"); return
-    tmp = tempfile.mkdtemp(prefix="etapas-")
-    perfil = perfil or os.path.join(tmp, "perfil")
-    pdf = os.path.join(tmp, "guia.pdf")
-    porta = porta_livre()
-    srv = subprocess.Popen([sys.executable, "-m", "http.server", str(porta), "--bind", "127.0.0.1", "--directory", R],
-                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    try:
-        time.sleep(1.0)
-        ch = subprocess.Popen([chrome, "--headless=new", "--disable-gpu", "--no-first-run", f"--user-data-dir={perfil}",
-                               "--run-all-compositor-stages-before-draw", "--virtual-time-budget=25000",
-                               "--no-pdf-header-footer", f"--print-to-pdf={pdf}",
-                               f"http://127.0.0.1:{porta}/index.html?mini={int(time.time())}"],
-                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        t0 = time.time()
-        while time.time() - t0 < 180:
-            if ch.poll() is not None: break
-            if os.path.exists(pdf) and os.path.getsize(pdf) > 0:
-                time.sleep(3); break
-            time.sleep(1)
-        if ch.poll() is None: ch.kill()
-    finally:
-        srv.terminate()
-    if not (os.path.exists(pdf) and os.path.getsize(pdf) > 0):
-        print("  o Chrome não gerou o PDF: miniaturas mantidas"); return
-    d = fitz.open(pdf)
-    if d.page_count != total:
-        print(f"  aviso: o PDF tem {d.page_count} páginas e o guia tem {total} slides")
-    out = os.path.join(R, "aprovacao", "miniaturas"); os.makedirs(out, exist_ok=True)
-    for f in os.listdir(out):
-        if re.match(r"p\d+\.webp$", f): os.remove(os.path.join(out, f))
-    for i, pg in enumerate(d, 1):
-        z = largura * 2 / pg.rect.width
-        pm = pg.get_pixmap(matrix=fitz.Matrix(z, z))
-        im = Image.frombytes("RGB", (pm.width, pm.height), pm.samples)
-        im = im.resize((largura, round(pm.height * largura / pm.width)), Image.LANCZOS)
-        im.save(os.path.join(out, nome_mini(i)), "WEBP", quality=80, method=6)
-    print(f"  {d.page_count} miniaturas em aprovacao/miniaturas/")
-    shutil.rmtree(tmp, ignore_errors=True)
-
-
-def nome_mini(pg): return f"p{pg:02d}.webp"
-
-
-# ---------------------------------------------------------------- pacotes por etapa
-CSS_PACOTE = r"""
-/* ===== pacote de aprovação (gerado por tools/v6/etapas.py) ===== */
-.ap-barra{position:fixed;top:0;left:0;right:0;height:40px;z-index:40;display:flex;align-items:center;gap:14px;padding:0 14px;background:#06182f;color:rgba(255,255,255,.82);font:500 13.5px/1 var(--f-txt);border-bottom:1px solid rgba(32,213,242,.28)}
-.ap-barra a{color:inherit;text-decoration:none;white-space:nowrap}
-.ap-volta{display:inline-flex;align-items:center;gap:7px;font-weight:600;height:28px;padding:0 13px 0 10px;border-radius:0 14px 14px 14px;background:var(--verde);color:var(--navy)!important}
-.ap-volta:hover{background:#13c238}
-.ap-et{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ap-et b{color:#fff;font-weight:600}
-.ap-et i{font:700 19px/1 var(--f-mao);color:var(--ciano);font-style:normal;margin-left:4px}
-.ap-guia{opacity:.7}.ap-guia:hover{opacity:1}
-@media (max-width:640px){.ap-nm,.ap-guia-l{display:none}.ap-barra{gap:10px}}
-@media (max-width:400px){.ap-et i{display:none}}
-@media screen{
- .paisagem .rolo{top:40px}
- .retrato .rolo{position:fixed;top:40px;left:0;right:0;bottom:0;height:auto;margin:0}
- .retrato .slide,.retrato .lv{min-height:calc(100svh - 104px)}
-}
-@media print{.ap-barra{display:none!important}}
-.indice a.fora{opacity:.5}
-.indice .ap-ind-n{margin:14px 0 4px;font-size:13px;line-height:1.45;color:#6B7585}
-.indice .ap-ind{display:block;font:700 22px/1.1 var(--f-mao);color:var(--verde);margin:-6px 0 12px}
-
-/* slide de abertura da etapa */
-.ap-slide{background:#fff}
-.ap-l{left:0;top:0;bottom:0;width:640px;background:var(--navy);color:#fff;padding:84px 96px 70px 96px;box-sizing:border-box;display:flex;flex-direction:column}
-.ap-slide .ap-kick{font:700 36px/1 var(--f-mao);color:var(--ciano);transform:rotate(-1.5deg);transform-origin:left;margin:0 0 6px}
-.ap-slide .ap-n{display:flex;align-items:baseline;gap:14px;margin:0;font-family:var(--f-tit)}
-.ap-n span{font:400 30px/1 var(--f-tit);color:rgba(255,255,255,.7)}
-.ap-n b{font:400 200px/.9 var(--f-tit);color:var(--verde);font-weight:400}
-.ap-n small{font:500 22px/1 var(--f-txt);color:rgba(255,255,255,.7)}
-.ap-tit{font:400 54px/1.06 var(--f-tit);margin:18px 0 14px;max-width:11ch}
-.ap-slide .ap-pg{font-size:19px;line-height:1.4;margin:0;color:rgba(255,255,255,.78)}
-.ap-pg b{color:#fff;font-weight:600}
-.ap-datas{margin:auto 0 0;padding:0;list-style:none;display:grid;gap:0;position:relative}
-.ap-datas li{display:grid;grid-template-columns:26px 1fr auto;align-items:center;gap:14px;padding:11px 0;border-top:1px solid rgba(255,255,255,.14);font-size:16px}
-.ap-datas li:last-child{border-bottom:1px solid rgba(255,255,255,.14)}
-.ap-datas i{width:14px;height:14px;border-radius:50%;background:var(--verde);justify-self:center}
-.ap-datas li:nth-child(2) i{background:transparent;box-shadow:inset 0 0 0 3px var(--ciano)}
-.ap-datas li:nth-child(3) i{border-radius:3px;transform:rotate(45deg);background:#fff}
-.ap-datas span{color:rgba(255,255,255,.72)}
-.ap-datas b{font-weight:600;white-space:nowrap}
-.ap-geo{position:absolute;right:0;top:0;bottom:0;width:58px;overflow:hidden}
-.ap-geo svg{width:100%;height:100%}
-.ap-geo .b{fill:var(--azul)}.ap-geo .a{fill:var(--verde)}
-.ap-r{left:720px;right:96px;top:96px;bottom:84px;display:flex;flex-direction:column}
-.ap-h{font:400 46px/1.1 var(--f-tit);margin:0 0 18px;color:var(--navy)}
-.ap-h3{font:600 15px/1 var(--f-txt);letter-spacing:.12em;text-transform:uppercase;color:#0A7F23;margin:38px 0 16px}
-.ap-caps{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--navy)}
-.ap-caps a{display:grid;grid-template-columns:40px 1fr auto;gap:14px;align-items:center;padding:15px 0;border-bottom:1px solid #D5D9DF;color:var(--navy);text-decoration:none;font-size:21px;line-height:1.3}
-.ap-caps a:hover .ap-cn{color:var(--azul)}
-.ap-caps .ap-num{width:36px;height:36px;border-radius:50%;background:var(--verde);color:var(--navy);display:grid;place-items:center;font:400 18px/1 var(--f-tit)}
-.ap-caps .ap-num.vazio{background:#E7EAEE}
-.ap-caps em{font-style:normal;font-size:15px;color:#5B677A;white-space:nowrap}
-.ap-conf{list-style:none;margin:0;padding:0;display:grid;gap:14px}
-.ap-conf li{display:grid;grid-template-columns:28px 1fr;gap:12px;font-size:19px;line-height:1.42;color:#24344F}
-.ap-conf li::before{content:"";width:20px;height:20px;margin-top:3px;border-radius:0 7px 7px 7px;box-shadow:inset 0 0 0 2px var(--verde)}
-.ap-slide .ap-nota{margin:auto 0 0;padding:16px 20px;background:#F1F2F3;border-radius:0 16px 16px 16px;font-size:16.5px;line-height:1.45;color:#3A4A63}
-.ap-nota b{color:var(--navy);font-weight:600}
-.ap-r-mark{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--amarelo);color:var(--navy);font:700 12px/1 var(--f-txt);vertical-align:2px}
-
-/* slide final: como aprovar */
-.ap-q{left:96px;top:92px;width:760px;bottom:80px;display:flex;flex-direction:column}
-.ap-q .kick{margin-bottom:10px}
-.ap-q .h2{font:400 56px/1.06 var(--f-tit);margin:0 0 30px}
-.ap-passos{list-style:none;margin:0;padding:0;display:grid;gap:30px;counter-reset:p}
-.ap-passos li{display:grid;grid-template-columns:58px 1fr;gap:18px;align-items:start}
-.ap-passos li>span{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font:400 26px/1 var(--f-tit);background:var(--verde);color:var(--navy)}
-.ap-passos li:nth-child(2)>span{background:var(--azul);color:#fff}
-.ap-passos li:nth-child(3)>span{background:var(--navy);color:#fff}
-.ap-passos b{display:block;font:600 23px/1.25 var(--f-txt);margin:6px 0 6px}
-.ap-slide .ap-passos p{margin:0;font-size:18.5px;line-height:1.48;color:#3A4A63}
-.ap-q .bt{align-self:flex-start;margin-top:auto}
-.ap-v{left:930px;right:96px;top:92px;bottom:80px;background:var(--amarelo);color:#3a2d00;border-radius:0 28px 28px 28px;padding:30px 34px;box-sizing:border-box;overflow:hidden;font-size:calc(19px * var(--fit,1))}
-.ap-v h3{font:400 1.75em/1.12 var(--f-tit);color:var(--navy);margin:0 0 .35em}
-.ap-slide .ap-v>p{margin:0 0 1em;font-size:.95em;line-height:1.45}
-.ap-v ol{list-style:none;margin:0;padding:0;display:grid;gap:.85em}
-.ap-v li{display:grid;grid-template-columns:auto 1fr;gap:.75em;line-height:1.45}
-.ap-v li a{align-self:start;background:var(--navy);color:#fff;text-decoration:none;font:600 .8em/1 var(--f-txt);padding:.45em .65em;border-radius:0 .7em .7em .7em;white-space:nowrap;margin-top:.1em}
-.ap-v .ap-vazio{font-size:1.05em;line-height:1.5}
-
-@media screen{
- .retrato .ap-l{margin:-18px -20px 22px!important;padding:26px 20px 22px!important;display:block}
- .retrato .ap-slide .ap-kick{font-size:26px}
- .retrato .ap-n b{font-size:110px}
- .retrato .ap-n span{font-size:22px}
- .retrato .ap-n small{font-size:16px}
- .retrato .ap-tit{font-size:34px;margin:12px 0 10px}
- .retrato .ap-slide .ap-pg{font-size:15.5px;margin-bottom:18px}
- .retrato .ap-datas li{font-size:14.5px;grid-template-columns:20px 1fr auto;gap:10px}
- .retrato .ap-geo{display:none}
- .retrato .ap-h{font-size:28px}
- .retrato .ap-h3{margin-top:22px}
- .retrato .ap-caps a{padding:11px 0;font-size:16px;grid-template-columns:34px 1fr auto;gap:10px}
- .retrato .ap-caps .ap-num{width:30px;height:30px;font-size:15px}
- .retrato .ap-caps em{font-size:13px}
- .retrato .ap-conf li{font-size:15.5px}
- .retrato .ap-h3{font-size:13px}
- .retrato .ap-slide .ap-nota{margin-top:20px;font-size:14.5px}
- .retrato .ap-q .h2{font-size:30px;margin-bottom:18px}
- .retrato .ap-passos li{grid-template-columns:44px 1fr;gap:12px}
- .retrato .ap-passos li>span{width:40px;height:40px;font-size:20px}
- .retrato .ap-passos b{font-size:17px}
- .retrato .ap-slide .ap-passos p{font-size:15px}
- .retrato .ap-q .bt{margin-top:20px}
- .retrato .ap-v{padding:20px 18px!important;border-radius:0 20px 20px 20px!important;font-size:15px!important}
-}
-"""
-
+# ---------------------------------------------------------------- apresentação de cada etapa
 GEO = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="448.5 -9.1 126.5 1339.7" preserveAspectRatio="xMidYMin slice">{}</svg>')
 
 
@@ -370,94 +208,225 @@ def geo_paths():
         return ""
 
 
-def slide_abertura(e, n_tot):
-    caps = "".join(
-        f'<li><a href="#{g["id"]}"><span class="ap-num{"" if g["num"] else " vazio"}">{g["num"]}</span>'
-        f'<span class="ap-cn">{esc(g["nome"])}</span><em>{"p. " + str(g["de"]) if g["de"] == g["ate"] else "p. %d a %d" % (g["de"], g["ate"])}</em></a></li>'
-        for g in e["grupos"])
+def link_apres(e): return f"../apresentacao/etapa-{e['n']}/"
+def pgs(g): return "p. %d" % g["de"] if g["de"] == g["ate"] else "p. %d a %d" % (g["de"], g["ate"])
+
+SETA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+TELA = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" '
+        'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+MARCAS = ('<div class="pr-marcas"><img src="../../assets/marca/logo-negativo.svg" alt="Ourofino Saúde Animal" width="200" height="34">'
+          '<i></i><img src="../../cronograma/75lab-logo-branco.svg" alt="75 LAB" width="50" height="36"></div>')
+
+
+def pr_capa(e, n_tot):
+    return (f'<section class="slide lv pr-capa" id="apresentacao" data-cap="E" data-cap-nome="Etapa {e["n"]} de {n_tot} · {esc(e["nome"])}">'
+            f'<figure class="pr-cf z zf"><img src="../../assets/img/v6/v6-c08.webp" srcset="../../assets/img/v6/v6-c08-900.webp 900w, ../../assets/img/v6/v6-c08.webp 1800w" '
+            f'sizes="60vw" width="1800" height="1200" alt="Filhote de labrador chocolate"></figure>'
+            f'<div class="pr-cp z">{MARCAS}<span class="pr-k">apresentação para aprovação</span>'
+            f'<p class="pr-et"><span>etapa</span><b>{e["n"]}</b><small>de {n_tot}</small></p>'
+            f'<h1 class="pr-h1">{esc(e["nome"])}</h1><p class="pr-sub">Guia de Execução no PDV · Ourofino Pet</p>'
+            f'<p class="pr-dt"><b>{dsem(e["envio"])}/{D(e["envio"]).year}</b><span>páginas {e["de"]} a {e["ate"]} do guia</span></p>'
+            f'<div class="pr-geo" aria-hidden="true">{GEO.format(geo_paths())}</div></div></section>\n')
+
+
+def pr_onde(e, n_tot):
+    nos = [(f"Etapa {x['n']}", x["envio"]) for x in ETAPAS] + [(f["nome"], f["envio"]) for f in FINAIS] + [("Entrega", ENTREGA)]
+    k_at = ETAPAS.index(e)
+    tr = "".join(f'<li class="{"feito" if k < k_at else "agora" if k == k_at else ""}"><i></i><b>{esc(t)}</b><span>{dm(d)}</span></li>'
+                 for k, (t, d) in enumerate(nos))
+    caps = "".join(f'<li><span class="pr-cn{"" if g["num"] else " vazio"}">{g["num"]}</span><b>{esc(g["nome"])}</b><em>{pgs(g)}</em></li>' for g in e["grupos"])
     conf = "".join(f"<li>{esc(c)}</li>" for c in e["conferir"])
+    return (f'<section class="slide lv pr-onde" id="onde-estamos" data-cap="E" data-cap-nome="Onde estamos">'
+            f'<div class="pr-oc z"><span class="kick">onde estamos</span><h2 class="h2">Etapa {e["n"]} de {n_tot}, a caminho da entrega em {dm(ENTREGA)}</h2></div>'
+            f'<ol class="pr-tr z">{tr}</ol>'
+            f'<div class="pr-ob z"><h3>Nesta etapa</h3><ol class="pr-caps">{caps}</ol></div>'
+            f'<div class="pr-oq z"><h3>O que pedimos para conferir</h3><ul class="pr-conf">{conf}</ul></div></section>\n')
+
+
+def pr_validar(e):
+    if not e["notas"]: return ""
     nn = len(e["notas"])
-    nota_r = (f'O botão <span class="ap-r-mark">R</span> lá embaixo mostra, em amarelo, os <b>{nn} pontos para a Ourofino validar</b> nas próprias páginas.'
-              if nn else "Esta etapa não tem pontos abertos para validar.")
-    ret = f'até {dsem(e["retorno"])}'
-    return (f'<section class="slide pg-impar lv ap-slide ap-abre" id="etapa" data-cap="E" data-cap-nome="Etapa {e["n"]} de {n_tot} · para aprovação">'
-            f'<div class="ap-l z"><p class="ap-kick">para aprovação</p>'
-            f'<p class="ap-n"><span>etapa</span><b>{e["n"]}</b><small>de {n_tot}</small></p>'
-            f'<h1 class="ap-tit">{esc(e["nome"])}</h1>'
-            f'<p class="ap-pg">Páginas <b>{e["de"]} a {e["ate"]}</b> do guia completo · {len(e["slides"])} páginas</p>'
-            f'<ul class="ap-datas"><li><i></i><span>Envio da 75 LAB</span><b>{dsem(e["envio"])}</b></li>'
-            f'<li><i></i><span>Retorno da Ourofino</span><b>{ret}</b></li>'
-            f'<li><i></i><span>Check no touchpoint</span><b>{dsem(e["check"])}</b></li></ul>'
-            f'<div class="ap-geo" aria-hidden="true">{GEO.format(geo_paths())}</div></div>'
-            f'<div class="ap-r z"><h2 class="ap-h">Nesta etapa</h2><ol class="ap-caps">{caps}</ol>'
-            f'<h3 class="ap-h3">O que conferir</h3><ul class="ap-conf">{conf}</ul>'
-            f'<p class="ap-nota">Os números das páginas são os mesmos do guia completo: anote a página em cada ajuste. {nota_r}</p></div>'
+    its = "".join(f'<li><a class="pr-vp" href="#{n["id"]}">p. {n["pg"]}</a><div><b>{esc(n["titulo"])}</b><p>{esc(n["texto"])}</p></div></li>' for n in e["notas"])
+    return (f'<section class="slide lv pr-val" id="validar" data-cap="E" data-cap-nome="Para a Ourofino validar">'
+            f'<div class="pr-vq z"><span class="kick">para a Ourofino validar</span><h2 class="h2">{nn} {"ponto que depende" if nn == 1 else "pontos que dependem"} de vocês</h2>'
+            f'<p class="lead">Responda junto com o retorno da etapa. Clique no número para voltar à página.</p></div>'
+            f'<div class="pr-vs z" aria-hidden="true"><img src="../../assets/img/serafina-pensa.webp" alt=""></div>'
+            f'<ol class="pr-vl z" data-fit>{its}</ol></section>\n')
+
+
+def pr_proximos(e, n_tot):
+    i = ETAPAS.index(e); px = ETAPAS[i + 1] if i + 1 < len(ETAPAS) else None
+    passos = [(f"até {dsem(e['retorno'])}", "Retorno da Ourofino",
+               "<p>Aprovada, aprovada com ajustes ou refazer, com a página de cada ajuste. O formulário está no cronograma, no cartão desta etapa.</p>"),
+              (dsem(e["check"]), "Touchpoint",
+               f"<p>Check da etapa {e['n']}" + (f" e apresentação da etapa {px['n']}: {esc(px['nome'])}, páginas {px['de']} a {px['ate']}.</p>" if px else ".</p>"))]
+    if px and px["precisa"]:
+        passos.append((f"até {dsem(px['precisa'][0][0])}", f"Precisamos da Ourofino para a etapa {px['n']}",
+                       "<ul>" + "".join(f"<li>{esc(t)}</li>" for _, t in px["precisa"]) + "</ul>"))
+    ps = "".join(f'<li><time>{t}</time><b>{esc(b)}</b>{c}</li>' for t, b, c in passos)
+    return (f'<section class="slide lv pr-prox" id="proximos" data-cap="E" data-cap-nome="Próximos passos">'
+            f'<div class="pr-pq z"><span class="kick">próximos passos</span><h2 class="h2">Até o próximo touchpoint</h2></div>'
+            f'<ol class="pr-ps z">{ps}</ol>'
+            f'<div class="pr-link z"><span>acompanhe no cronograma</span><a href="../../cronograma/#etapa-{e["n"]}">projetos.75lab.com.br/manual-ourofino-pdv/cronograma</a>{MARCAS}</div>'
             f'</section>\n')
 
 
-def slide_aprovar(e, n_tot):
-    if e["notas"]:
-        itens = "".join(f'<li><a href="#{n["id"]}">p. {n["pg"]}</a><span>{esc(n["texto"])}</span></li>' for n in e["notas"])
-        v = (f'<h3>Para a Ourofino validar</h3><p>{len(e["notas"])} {"ponto" if len(e["notas"]) == 1 else "pontos"} desta etapa. '
-             f'Responda junto com o retorno.</p><ol>{itens}</ol>')
-    else:
-        v = '<h3>Para a Ourofino validar</h3><p class="ap-vazio">Esta etapa não tem pontos abertos. Basta conferir as páginas.</p>'
-    return (f'<section class="slide pg-par lv ap-slide ap-fim t-papel" id="aprovar" data-cap="E" data-cap-nome="Etapa {e["n"]} de {n_tot} · como aprovar">'
-            f'<div class="ap-q z"><span class="kick">para fechar a etapa</span><h2 class="h2">Como aprovar esta etapa</h2>'
-            f'<ol class="ap-passos">'
-            f'<li><span>1</span><div><b>Passe por todas as páginas</b><p>No computador, use as setas ou o teclado. No celular, role a tela para baixo.</p></div></li>'
-            f'<li><span>2</span><div><b>Anote a página de cada ajuste</b><p>O número aparece no canto da página e no contador lá embaixo, igual ao do guia completo.</p></div></li>'
-            f'<li><span>3</span><div><b>Responda no cronograma</b><p>Abra “Dar o retorno desta etapa”, marque Aprovada, Aprovada com ajustes ou Refazer e toque em Copiar retorno. Depois é só colar no e-mail ou no WhatsApp.</p></div></li>'
-            f'</ol><a class="bt" href="../../cronograma/#retorno-{e["n"]}">Dar o retorno no cronograma</a></div>'
-            f'<div class="ap-v z" data-fit>{v}</div></section>\n')
+CSS_APRES = r"""
+/* ===== apresentação de etapa (gerada por tools/v6/etapas.py) ===== */
+.apresentacao .rolo{inset:0!important}
+.paisagem body.apresentacao{background:#06182f}
+.apresentacao .validar{display:none!important}
+.apresentacao .prog{bottom:0;height:4px;background:rgba(255,255,255,.08)}
+.apresentacao [data-fora]{cursor:default}
+.pr-ctl{position:fixed;right:18px;bottom:18px;z-index:40;display:flex;align-items:center;gap:6px;padding:6px;border-radius:30px;background:rgba(6,24,47,.86);color:#fff;font:500 14px/1 var(--f-txt);opacity:0;transition:opacity .35s;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)}
+.pr-ctl.on,.pr-ctl:hover,.pr-ctl:focus-within{opacity:1}
+.pr-ctl button{border:0;background:rgba(255,255,255,.12);color:#fff;width:40px;height:40px;border-radius:50%;cursor:pointer;display:grid;place-items:center;padding:0}
+.pr-ctl button:hover{background:rgba(255,255,255,.26)}
+.pr-ctl svg{width:20px;height:20px}
+.pr-ctl [data-ant] svg{transform:scaleX(-1)}
+.pr-ctl [data-cont]{min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+.pr-gire{display:none}
+@media (orientation:portrait) and (max-width:760px){.pr-gire{display:block;position:fixed;left:50%;top:16px;transform:translateX(-50%);margin:0;padding:9px 16px;border-radius:20px;background:rgba(255,255,255,.12);color:#fff;font:500 13px/1 var(--f-txt);white-space:nowrap}}
+@media print{.pr-ctl,.pr-gire{display:none!important}}
+
+.pr-marcas{display:flex;align-items:center;gap:20px}
+.pr-marcas img:first-child{height:32px;width:auto}
+.pr-marcas i{width:1px;height:34px;background:rgba(255,255,255,.3)}
+.pr-marcas img:last-child{height:34px;width:auto}
+
+/* capa */
+.pr-capa{background:var(--navy);color:#fff}
+.pr-capa .pr-cf{left:760px;right:0;top:0;bottom:0}
+.pr-cf img{display:block;width:100%;height:100%;object-fit:cover;object-position:74% 50%}
+.pr-cp{left:0;top:0;bottom:0;width:760px;padding:84px 130px 80px 96px;box-sizing:border-box;display:flex;flex-direction:column}
+.pr-cp .pr-marcas{margin-bottom:auto}
+.pr-k{display:block;font:700 36px/1 var(--f-mao);color:var(--ciano);transform:rotate(-1.5deg);transform-origin:left;margin:0 0 4px}
+.pr-capa .pr-et{display:flex;align-items:baseline;gap:16px;margin:0}
+.pr-et span{font:400 32px/1 var(--f-tit);color:rgba(255,255,255,.72)}
+.pr-et b{font:400 230px/.86 var(--f-tit);color:var(--verde);font-weight:400}
+.pr-et small{font:500 24px/1 var(--f-txt);color:rgba(255,255,255,.72)}
+.pr-h1{font:400 66px/1.03 var(--f-tit);letter-spacing:-.015em;margin:16px 0 12px}
+.pr-capa .pr-sub{margin:0;font-size:20px;color:rgba(255,255,255,.8)}
+.pr-capa .pr-dt{margin:36px 0 0;padding-top:20px;border-top:1px solid rgba(255,255,255,.18);display:flex;gap:20px;align-items:baseline;font-size:18px;color:rgba(255,255,255,.72)}
+.pr-dt b{font:400 28px/1 var(--f-tit);color:#fff;font-weight:400}
+.pr-geo{position:absolute;right:0;top:0;bottom:0;width:58px;overflow:hidden}
+.pr-geo svg{width:100%;height:100%}.pr-geo .b{fill:var(--azul)}.pr-geo .a{fill:var(--verde)}
+
+/* onde estamos */
+.pr-onde{background:#F5F4EF}
+.pr-oc{left:96px;top:92px;width:1400px}
+.pr-onde .h2{font-size:54px;margin:0}
+.pr-tr{left:96px;right:96px;top:268px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(8,1fr)}
+.pr-tr li{position:relative;padding-top:46px;text-align:center}
+.pr-tr li::before{content:"";position:absolute;left:0;right:0;top:16px;height:4px;background:#D5DAE1}
+.pr-tr li:first-child::before{left:50%}.pr-tr li:last-child::before{right:50%}
+.pr-tr li.feito::before{background:var(--verde)}
+.pr-tr li.agora::before{background:linear-gradient(90deg,var(--verde) 50%,#D5DAE1 50%)}
+.pr-tr li:first-child.agora::before{background:#D5DAE1}
+.pr-tr i{position:absolute;left:50%;top:6px;width:24px;height:24px;margin-left:-12px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 4px #C9D1DB}
+.pr-tr .feito i{background:var(--verde);box-shadow:none}
+.pr-tr .agora i{top:-4px;width:44px;height:44px;margin-left:-22px;background:var(--verde);box-shadow:0 0 0 9px rgba(16,173,49,.18)}
+.pr-tr b{display:block;font:600 17px/1.25 var(--f-txt);color:var(--navy)}
+.pr-tr span{display:block;font-size:15px;color:#5B677A;margin-top:3px}
+.pr-tr .agora b{color:#0A7F23}
+.pr-tr .agora::after{content:"esta etapa";position:absolute;left:50%;top:-42px;transform:translateX(-50%) rotate(-3deg);font:700 26px/1 var(--f-mao);color:#0A7F23;white-space:nowrap}
+.pr-ob{left:96px;top:440px;width:660px}.pr-oq{left:840px;right:96px;top:440px}
+.pr-ob h3,.pr-oq h3{font:600 14px/1 var(--f-txt);letter-spacing:.12em;text-transform:uppercase;color:#0A7F23;margin:0 0 16px}
+.pr-caps{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--navy)}
+.pr-caps li{display:grid;grid-template-columns:48px 1fr auto;gap:16px;align-items:center;padding:24px 0;border-bottom:1px solid #D5D9DF}
+.pr-cn{width:42px;height:42px;border-radius:50%;background:var(--verde);color:var(--navy);display:grid;place-items:center;font:400 21px/1 var(--f-tit)}
+.pr-cn.vazio{background:#E2E6EB}
+.pr-caps b{font:400 28px/1.2 var(--f-tit);font-weight:400}
+.pr-caps em{font-style:normal;font-size:16px;color:#5B677A;white-space:nowrap}
+.pr-conf{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.pr-conf li{display:grid;grid-template-columns:32px 1fr;gap:12px;font-size:22px;line-height:1.42;color:#24344F}
+.pr-conf li::before{content:"";width:22px;height:22px;margin-top:4px;border-radius:0 7px 7px 7px;box-shadow:inset 0 0 0 2.5px var(--verde)}
+
+/* para validar */
+.pr-val{background:#fff}
+.pr-vq{left:96px;top:92px;width:450px}
+.pr-val .h2{font-size:52px}
+.pr-vs{left:120px;bottom:0;width:330px;height:420px}
+.pr-vs img{position:absolute;left:0;bottom:0;height:420px;width:auto}
+.pr-vl{left:600px;right:96px;top:92px;bottom:72px;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;justify-content:center;gap:14px;font-size:calc(17px * var(--fit,1));overflow:hidden}
+.pr-vl li{display:grid;grid-template-columns:auto 1fr;gap:18px;background:var(--amarelo);border-radius:0 22px 22px 22px;padding:16px 24px 18px}
+.pr-vp{align-self:start;background:var(--navy);color:#fff;text-decoration:none;font:600 .85em/1 var(--f-txt);padding:.55em .75em;border-radius:0 .8em .8em .8em;white-space:nowrap;margin-top:.15em}
+.pr-vl b{display:block;font:400 1.2em/1.2 var(--f-tit);font-weight:400;color:var(--navy);margin-bottom:4px}
+.pr-vl p{margin:0;line-height:1.45;color:#3a2d00}
+
+/* próximos passos */
+.pr-prox{background:var(--navy);color:#fff}
+.pr-pq{left:96px;top:92px;width:1200px}
+.pr-prox .kick{color:var(--ciano)}
+.pr-prox .h2{font-size:58px;color:#fff;margin:0}
+.pr-ps{left:96px;right:96px;top:268px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.pr-ps>li{background:rgba(255,255,255,.06);border-radius:0 28px 28px 28px;padding:30px 32px 32px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.12)}
+.pr-ps time{display:block;font:400 34px/1 var(--f-tit);color:var(--verde);margin-bottom:16px}
+.pr-ps b{display:block;font:600 21px/1.25 var(--f-txt);margin-bottom:8px}
+.pr-ps p{margin:0;font-size:17.5px;line-height:1.5;color:rgba(255,255,255,.82)}
+.pr-ps ul{margin:4px 0 0;padding:0 0 0 20px;font-size:17.5px;line-height:1.5;color:rgba(255,255,255,.82)}
+.pr-ps ul li{margin-bottom:6px}
+.pr-link{left:96px;right:96px;bottom:84px;display:flex;align-items:center;gap:22px;padding-top:26px;border-top:1px solid rgba(255,255,255,.16)}
+.pr-link>span{font:700 30px/1 var(--f-mao);color:var(--ciano)}
+.pr-link a{color:#fff;font:400 24px/1.2 var(--f-tit);text-decoration:none;border-bottom:2px solid var(--verde)}
+.pr-link .pr-marcas{margin-left:auto}
+"""
+
+JS_APRES = r"""
+(function () {
+  var d = document, de = d.documentElement, c = d.querySelector("[data-ctl]"), t = null, bt = d.querySelector("[data-tela]");
+  function mostra() { c.classList.add("on"); clearTimeout(t); t = setTimeout(function () { c.classList.remove("on"); }, 2600); }
+  addEventListener("mousemove", mostra); addEventListener("touchstart", mostra, { passive: true }); addEventListener("keydown", mostra); mostra();
+  var pode = de.requestFullscreen || de.webkitRequestFullscreen;
+  function tela() {
+    if (d.fullscreenElement || d.webkitFullscreenElement) (d.exitFullscreen || d.webkitExitFullscreen).call(d);
+    else if (pode) pode.call(de);
+  }
+  if (!pode) bt.hidden = true; else bt.addEventListener("click", tela);
+  addEventListener("keydown", function (e) { if ((e.key === "f" || e.key === "F") && !e.target.closest("input, textarea")) tela(); });
+  /* clique na tela avança, fora de links e botões */
+  d.querySelector(".palco").addEventListener("click", function (e) {
+    if (e.target.closest("a, button, input, label, textarea, summary, [data-fora]")) return;
+    d.querySelector("[data-prox]").click();
+  });
+})();
+"""
 
 
-def pacote(e, guia, n_tot):
-    corpo = slide_abertura(e, n_tot)
+def apresentacao(e, guia, n_tot):
+    corpo = pr_capa(e, n_tot) + pr_onde(e, n_tot)
     for s in e["slides"]:
         corpo += s["html"].replace('<section class="slide ', f'<section data-pg="{s["pg"]}" class="slide ', 1)
-    corpo += slide_aprovar(e, n_tot)
+    corpo += pr_validar(e) + pr_proximos(e, n_tot)
     ids = set(re.findall(r'\bid="([^"]+)"', corpo))
-    head, cauda = guia["head"], guia["cauda"]
-
-    def links(t):
-        def troca(m):
-            alvo = m.group(1)
-            if alvo in ids: return m.group(0)
-            return f'href="../../#{alvo}" target="_blank" rel="noopener"'
-        return re.sub(r'href="#([^"]+)"', troca, t)
-
-    def assets(t): return re.sub(r'(?<![\w./-])assets/', '../../assets/', t)
-
-    corpo = assets(links(corpo))
-    cauda = assets(links(cauda))
-    cauda = re.sub(r'(<a href="\.\./\.\./#[^"]+" target="_blank" rel="noopener")( data-cap="[^"]*")', r'\1 class="fora"\2', cauda)
-    cauda = cauda.replace("<h3>Índice</h3>", f'<h3>Índice</h3><span class="ap-ind">nesta etapa: {esc(e["nome"])}</span>', 1)
-    cauda = re.sub(r'</ol>(<a class="ind-tr")', r'</ol><p class="ap-ind-n">Em cinza, os capítulos de outras etapas: eles abrem no guia completo, numa nova aba.</p>\1', cauda, 1)
-    head = assets(head)
-    head = re.sub(r"<title>[^<]*</title>", f"<title>Etapa {e['n']} de {n_tot} · Guia de Execução no PDV · Ourofino Pet</title>", head, 1)
-    head = head.replace("</head>", f'<meta name="robots" content="noindex">\n<style>{CSS_PACOTE}</style>\n</head>', 1)
-    barra = (f'<div class="ap-barra"><a class="ap-volta" href="../../cronograma/#etapa-{e["n"]}">← <span>Cronograma</span></a>'
-             f'<span class="ap-et"><b>Etapa {e["n"]} de {n_tot}</b><span class="ap-nm"> · {esc(e["nome"])}</span> <i>para aprovação</i></span>'
-             f'<a class="ap-guia" href="../../" target="_blank" rel="noopener"><span class="ap-guia-l">Guia completo </span>↗</a></div>\n')
-    head = head.replace('<body>\n<div class="rolo">', '<body class="pacote">\n' + barra + '<div class="rolo">', 1)
-    if 'class="pacote"' not in head: sys.exit("não achei <body> seguido de .rolo no index.html")
-    nn = len(e["notas"])
-    trocas = [
-        ('if (p) p.textContent = i + 1;', 'if (p) p.textContent = s.getAttribute("data-pg") || "";'),
-        ('cont.textContent = (i + 1) + " / " + total;',
-         'cont.textContent = (s.getAttribute("data-pg") ? "p. " + s.getAttribute("data-pg") + " · " : "") + (i + 1) + "/" + total;'),
-        ('livreH = innerHeight - 64', 'livreH = innerHeight - 104'),
-    ]
-    for a, b in trocas:
-        if a not in cauda: sys.exit(f"o motor mudou: não achei {a!r}")
-        cauda = cauda.replace(a, b, 1)
-    cauda = re.sub(r'title="Mostrar as \d+ notas para a Ourofino validar"',
-                   f'title="Mostrar {"as " + str(nn) + " notas" if nn != 1 else "a nota"} desta etapa para a Ourofino validar"', cauda, 1)
-    out = os.path.join(R, "aprovacao", f"etapa-{e['n']}")
+    # capítulo de outra etapa: o link fica parado, a apresentação não sai da etapa
+    corpo = re.sub(r'href="#([^"]+)"', lambda m: m.group(0) if m.group(1) in ids else 'data-fora="1"', corpo)
+    assets = lambda t: re.sub(r'(?<![\w./-])assets/', '../../assets/', t)
+    corpo = assets(corpo)
+    head = assets(guia["head"])
+    head = re.sub(r"<title>[^<]*</title>", f"<title>Etapa {e['n']} de {n_tot} · apresentação · Guia de Execução no PDV · Ourofino Pet</title>", head, 1)
+    head = head.replace("</head>", f'<meta name="robots" content="noindex">\n<style>{CSS_APRES}</style>\n</head>', 1)
+    head = head.replace("<body>", '<body class="apresentacao">', 1)
+    if 'class="apresentacao"' not in head: sys.exit("não achei <body> no index.html")
+    js = open(os.path.join(R, "tools", "deck", "deck.js"), encoding="utf-8").read()
+    for a, b in [("pais = r >= 1.05 && innerWidth >= 760", "pais = true"),
+                 ("livreH = innerHeight - 64", "livreH = innerHeight"),
+                 ("if (p) p.textContent = i + 1;", 'if (p) p.textContent = s.getAttribute("data-pg") || "";'),
+                 ('guarda("ourofino-v5-slide", String(i));', "")]:
+        if a not in js: sys.exit(f"o motor mudou: não achei {a!r}")
+        js = js.replace(a, b, 1)
+    cauda = ('</main></div>\n<div class="prog"><i></i></div>\n'
+             f'<div class="pr-ctl" data-ctl><button type="button" data-ant aria-label="Tela anterior">{SETA}</button><span data-cont></span>'
+             f'<button type="button" data-prox aria-label="Próxima tela">{SETA}</button>'
+             f'<button type="button" data-tela aria-label="Tela cheia" title="Tela cheia (F)">{TELA}</button></div>\n'
+             '<span data-cap-txt hidden></span><button type="button" data-rev hidden></button>\n'
+             '<p class="pr-gire" aria-hidden="true">Gire o celular para ver maior</p>\n'
+             f'<script>{js}</script>\n<script>{JS_APRES}</script>\n</body>\n</html>\n')
+    out = os.path.join(R, "apresentacao", f"etapa-{e['n']}")
     os.makedirs(out, exist_ok=True)
     with open(os.path.join(out, "index.html"), "w", encoding="utf-8") as f:
-        f.write(head + "\n" + assets(links(guia["prefixo"])) + corpo + cauda)
+        f.write(head + guia["prefixo"] + corpo + cauda)
+    print(f"  apresentacao/etapa-{e['n']}/: {corpo.count('<section ')} telas")
 
 
 # ---------------------------------------------------------------- cronograma
@@ -551,14 +520,15 @@ def eventos():
 def card_etapa(e, n_tot):
     caps = "".join(f'<li><span class="ec-n{"" if g["num"] else " vazio"}">{g["num"]}</span><span>{esc(g["nome"])}</span>'
                    f'<em>{"p. " + str(g["de"]) if g["de"] == g["ate"] else "p. %d a %d" % (g["de"], g["ate"])}</em></li>' for g in e["grupos"])
-    pkg = f"../aprovacao/etapa-{e['n']}/"
+    ap = link_apres(e) if e.get("apresentacao") else None
     datas = (f'<ol class="ed"><li><i class="ed-e"></i><span>Envio da 75 LAB</span><b>{dsem(e["envio"])}</b></li>'
              f'<li><i class="ed-r"></i><span>Retorno da Ourofino</span><b>até {dsem(e["retorno"])}</b>'
              f'{"<small>" + esc(e["nota_retorno"]) + "</small>" if e.get("nota_retorno") else ""}</li>'
              f'<li><i class="ed-c"></i><span>Check no touchpoint</span><b>{dsem(e["check"])}</b></li></ol>')
     conf = "".join(f"<li>{esc(c)}</li>" for c in e["conferir"])
     if e["notas"]:
-        val = "".join(f'<li><a href="{pkg}#{n["id"]}">p. {n["pg"]}</a><span>{esc(n["texto"])}</span></li>' for n in e["notas"])
+        val = "".join((f'<li><a href="{ap}#{n["id"]}">p. {n["pg"]}</a>' if ap else f'<li><span class="ev-p">p. {n["pg"]}</span>') +
+                      f'<span>{esc(n["texto"])}</span></li>' for n in e["notas"])
         val = f'<ul class="ev">{val}</ul>'
     else:
         val = '<p class="ev-vazio">Nenhum ponto aberto nesta etapa.</p>'
@@ -566,18 +536,22 @@ def card_etapa(e, n_tot):
     if e["precisa"]:
         prec = ('<section class="eb eb-prec"><h4>Precisamos da Ourofino</h4><ul class="ep">' +
                 "".join(f'<li><b>até {dsem(d)}</b><span>{esc(t)}</span></li>' for d, t in e["precisa"]) + "</ul></section>")
-    th = "".join(f'<a class="th" href="{pkg}#{s["id"]}"><span class="th-i"><img src="../aprovacao/miniaturas/{nome_mini(s["pg"])}" '
-                 f'width="480" height="270" loading="lazy" alt=""></span><span class="th-p">p. {s["pg"]}</span>'
-                 f'<span class="th-t">{esc(s["titulo"])}</span></a>' for s in e["slides"])
+    if e.get("situacao"): sit = e["situacao"]
+    elif ap: sit = "apresentação pronta" if HOJE < D(e["envio"]) else "em aprovação"
+    else: sit = f"apresentação em {dm(e['envio'])}"
+    if ap:
+        acao = (f'<div class="et-ac"><a class="btn" href="{ap}">Abrir a apresentação da etapa {e["n"]} <span aria-hidden="true">→</span></a>'
+                f'<span class="et-dica">tela cheia com a tecla F · setas para passar</span></div>')
+    else:
+        acao = f'<div class="et-ac"><p class="et-espera"><i></i>A apresentação desta etapa entra aqui na {dsem(e["envio"])}, no touchpoint.</p></div>'
     return (f'<article class="et" id="etapa-{e["n"]}" style="--c:{e["cor"]};--t:{e["tinta"]}" data-envio="{e["envio"]}" data-check="{e["check"]}">'
             f'<header class="et-cab"><div class="et-num"><span>etapa</span><b>{e["n"]}</b><small>de {n_tot}</small></div>'
-            f'<div class="et-tt"><p class="et-pg">páginas {e["de"]} a {e["ate"]} · {len(e["slides"])} páginas</p><h3>{esc(e["nome"])}</h3></div>'
+            f'<div class="et-tt"><p class="et-pg">páginas {e["de"]} a {e["ate"]} · {len(e["slides"])} páginas</p><h3>{esc(e["nome"])}</h3><span class="et-sit{" on" if ap else ""}">{esc(sit)}</span></div>'
             f'<ul class="ec">{caps}</ul><span class="et-agora" hidden>nesta semana</span></header>'
             f'{datas}'
             f'<div class="eg{" eg3" if prec else ""}"><section class="eb"><h4>O que conferir</h4><ul class="eo">{conf}</ul></section>'
             f'<section class="eb eb-val"><h4>Para a Ourofino validar <span>{len(e["notas"])}</span></h4>{val}</section>{prec}</div>'
-            f'<div class="et-th"><div class="et-th-cab"><h4>As páginas desta etapa</h4><span>toque numa página para abrir</span></div><div class="ths">{th}</div></div>'
-            f'<div class="et-ac"><a class="btn" href="{pkg}">Abrir a etapa para aprovar <span aria-hidden="true">→</span></a></div>'
+            f'{acao}'
             f'{bloco_retorno(e)}</article>')
 
 
@@ -822,7 +796,7 @@ h1,h2,h3{font-family:var(--f-tit);font-weight:400;margin:0;letter-spacing:-.005e
 .ed-c{border-radius:2px!important;transform:rotate(45deg);background:var(--navy);width:11px!important;height:11px!important}
 .ed-m{background:var(--verde);box-shadow:0 0 0 3px rgba(16,173,49,.25)}
 .eg{display:grid;gap:12px;padding:18px 20px 4px}
-.eb h4,.et-th-cab h4,.fc h4{font:600 12.5px/1.2 var(--f-txt);letter-spacing:.11em;text-transform:uppercase;color:var(--verde-esc);margin:0 0 10px}
+.eb h4,.fc h4{font:600 12.5px/1.2 var(--f-txt);letter-spacing:.11em;text-transform:uppercase;color:var(--verde-esc);margin:0 0 10px}
 .eb{background:#F7F8F9;border-radius:0 20px 20px 20px;padding:16px 16px 14px}
 .eb h4 span{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--amarelo);color:var(--navy);margin-left:6px;letter-spacing:0;vertical-align:1px}
 .eb-val{background:#FFF8DA}
@@ -835,6 +809,12 @@ h1,h2,h3{font-family:var(--f-tit);font-weight:400;margin:0;letter-spacing:-.005e
 .ev a{align-self:start;background:var(--navy);color:#fff;text-decoration:none;font-size:12px;font-weight:600;line-height:1;padding:6px 8px;border-radius:0 9px 9px 9px;white-space:nowrap;margin-top:1px}
 .ev a:hover{background:var(--azul)}
 .ev-vazio{margin:0;font-size:14.5px;color:#3a2d00}
+.ev .ev-p{align-self:start;background:rgba(7,32,71,.12);color:var(--navy);font-size:12px;font-weight:600;line-height:1;padding:6px 8px;border-radius:0 9px 9px 9px;white-space:nowrap;margin-top:1px}
+.et-sit{display:inline-block;margin-top:8px;font:600 12px/1 var(--f-txt);letter-spacing:.04em;padding:6px 10px;border-radius:0 10px 10px 10px;background:#E7EAEE;color:var(--cinza)}
+.et-sit.on{background:var(--verde);color:var(--navy)}
+.et-dica{align-self:center;font-size:13px;color:var(--cinza)}
+.et-espera{display:flex;align-items:center;gap:10px;margin:0;font-size:14.5px;color:var(--cinza)}
+.et-espera i{flex:none;width:10px;height:10px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--cinza)}
 .ep{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .ep li{display:grid;gap:2px;font-size:14.5px;line-height:1.4}
 .ep b{font-weight:600;color:var(--azul);font-size:13px}
@@ -852,22 +832,7 @@ h1,h2,h3{font-family:var(--f-tit);font-weight:400;margin:0;letter-spacing:-.005e
  .eg{grid-template-columns:1fr 1fr;padding:18px 32px 4px;gap:14px}
  .eg3{grid-template-columns:1.05fr 1.15fr .8fr}
 }
-
-/* miniaturas */
-.et-th{padding:20px 0 6px}
-.et-th-cab{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:0 20px}
-.et-th-cab span{font-size:12.5px;color:var(--cinza)}
-.ths{display:grid;grid-auto-flow:column;grid-auto-columns:62%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 20px 14px;scroll-padding:0 20px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
-.th{scroll-snap-align:start;text-decoration:none;color:var(--navy);display:grid;gap:6px;align-content:start}
-.th-i{display:block;border-radius:0 12px 12px 12px;overflow:hidden;box-shadow:0 0 0 1px var(--linha),0 12px 22px -16px rgba(7,32,71,.5);background:#E9ECEF;aspect-ratio:16/9;transition:transform .25s ease,box-shadow .25s ease}
-.th-i img{width:100%;height:100%;object-fit:cover}
-.th:hover .th-i{transform:translateY(-3px);box-shadow:0 0 0 2px var(--c),0 18px 28px -18px rgba(7,32,71,.6)}
-.th-p{font:600 12px/1 var(--f-txt);color:var(--cinza)}
-.th-t{font-size:13.5px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-@media (min-width:640px){.ths{grid-auto-columns:40%}}
 @media (min-width:900px){
- .et-th{padding:24px 32px 6px}.et-th-cab{padding:0}
- .ths{grid-auto-flow:row;grid-template-columns:repeat(4,1fr);grid-auto-columns:auto;overflow:visible;padding:4px 0 10px;gap:18px 16px}
 }
 
 /* ações */
@@ -976,7 +941,6 @@ textarea:focus,select:focus{outline:2px solid var(--ciano);outline-offset:1px;bo
  .rt,.et-ac,.agora{display:none!important}
  .gantt{display:block!important;break-inside:avoid}.tl{display:none!important}.js .gb{transform:none!important}
  .et{break-inside:avoid-page;box-shadow:0 0 0 1px var(--linha)}
- .ths{grid-auto-flow:row!important;grid-template-columns:repeat(6,1fr)!important;overflow:visible!important}
 }
 """
 
@@ -1120,9 +1084,9 @@ def cronograma(guia):
 <section class="sec w" id="como">
   <div class="sec-cab"><span class="mao">como funciona</span><h2>Uma etapa por semana</h2></div>
   <ol class="passos">
-    <li><span>1</span><div><small>quinta</small><b>A 75 LAB envia a etapa</b><p>Você recebe o link só com as páginas daquela etapa, na mesma numeração do guia completo.</p></div></li>
+    <li><span>1</span><div><small>quinta, no touchpoint</small><b>A 75 LAB apresenta a etapa</b><p>Passamos as telas da etapa juntos. O link da apresentação fica no cartão da etapa, aqui no cronograma.</p></div></li>
     <li><span>2</span><div><small>até a quarta seguinte</small><b>A Ourofino responde</b><p>Marque Aprovada, Aprovada com ajustes ou Refazer, anote os ajustes por página e copie o retorno para o e-mail ou o WhatsApp.</p></div></li>
-    <li><span>3</span><div><small>quinta, no touchpoint</small><b>Check e próxima etapa</b><p>Fechamos os ajustes juntos, a etapa ganha o check e a próxima já sai no mesmo dia.</p></div></li>
+    <li><span>3</span><div><small>quinta, no touchpoint</small><b>Check e próxima etapa</b><p>Fechamos os ajustes juntos, a etapa ganha o check e a próxima é apresentada no mesmo dia.</p></div></li>
   </ol>
 </section>
 
@@ -1136,7 +1100,7 @@ def cronograma(guia):
 
 <section class="sec w" id="etapas">
   <div class="sec-cab"><span class="mao">as {n_tot} etapas</span><h2>O que entra em cada etapa</h2>
-    <p>Cada etapa tem o seu link para aprovar, as páginas que entram, o que vale conferir e os {nnotas} pontos que dependem de uma confirmação da Ourofino.</p></div>
+    <p>Cada etapa ganha a sua apresentação no dia em que é mostrada, e o link entra no cartão dela. Aqui ficam os capítulos, o que vale conferir e os {nnotas} pontos que dependem de uma confirmação da Ourofino.</p></div>
   <div class="ets">{etapas_html}</div>
 </section>
 
@@ -1175,18 +1139,13 @@ def cronograma(guia):
 # ---------------------------------------------------------------- principal
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--sem-miniaturas", action="store_true", help="não refaz as miniaturas")
-    ap.add_argument("--perfil", help="pasta de perfil do Chrome headless")
-    a = ap.parse_args()
+    ap.parse_args()
     TIT_MD.update(titulos_md())
     guia = le_guia()
     print(f"guia: {len(guia['slides'])} slides · {guia['versao']}")
     monta_etapas(guia)
-    for e in ETAPAS: pacote(e, guia, len(ETAPAS))
-    print(f"  {len(ETAPAS)} pacotes em aprovacao/etapa-N/")
-    if not a.sem_miniaturas: miniaturas(len(guia["slides"]), a.perfil)
-    falta = [s["pg"] for s in guia["slides"] if not os.path.exists(os.path.join(R, "aprovacao", "miniaturas", nome_mini(s["pg"])))]
-    if falta: print("  aviso: sem miniatura para as páginas", falta)
+    for e in ETAPAS:
+        if e.get("apresentacao"): apresentacao(e, guia, len(ETAPAS))
     cronograma(guia)
     print("  cronograma/index.html")
 
