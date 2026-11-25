@@ -37,7 +37,7 @@ P-ENZICLIM | **EnziClim** | Ambiente | Microrganismos vivos que agem contra odor
 P-PLENIPIL | **Plenipil** | Cães | Tablete mastigável com ômega 3 (EPA e DHA), vitamina A, biotina e selênio, para pele e pelo. Fica com os suplementos de cão. | "O cão come como petisco, com ômega 3 e outros nutrientes para a pele e o pelo."
 
 === comparar | O que você pode e o que não pode dizer
-@layout pode_nao
+@layout baloes
 @foto v6-gato-olhar
 + Contar o que o produto é, com as palavras da embalagem e do material oficial
 + Explicar o benefício e a vantagem como estão no CBV aprovado

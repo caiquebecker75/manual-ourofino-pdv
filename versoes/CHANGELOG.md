@@ -19,6 +19,28 @@ No git, cada versão também tem uma tag (`git checkout <tag> -- .` restaura os 
 | 2026-11-24 | v6 | `2026-11-24_v6/` | `v6` | Ensaio fotográfico novo e diagramação de livro, com uma composição diferente em cada slide (detalhes abaixo). |
 | 2026-11-25 | v7 | `2026-11-25_v7/` | `v7` | Capítulo novo com os 10 produtos de cada categoria em fichas CBV: 58 slides (detalhes abaixo). |
 | 2026-11-25 | v8 | `2026-11-25_v8/` | `v8` | Capas novas, revisão de texto sobre texto, texto mais explicado, clínica e categoria, slides do cap. 1 mais lúdicos e FIFO animado: 60 slides (detalhes abaixo). |
+| 2026-11-25 | v9 | `2026-11-25_v9/` | `v9` | Mais 14 slides lúdicos (álbum, estrada, convite, placas, prateleira desenhada e outros) e o guia dividido em 5 etapas para a Ourofino aprovar, com cronograma (detalhes abaixo). |
+
+## v9 · o que mudou em relação à v8
+
+Pedidos do Caique em 25/11: deixar os outros slides mais lúdicos, como a chegada e os oito passos, e montar um cronograma com a entrega quebrada por etapas, já com o material separado para a cliente aprovar.
+
+- **14 slides de texto viraram brincadeira visual:**
+  - Antes de sair: o kit da visita com cada peça escrita à mão na foto, e os cinco passos numa prancheta que vai ticando.
+  - Depois da visita: os quatro passos chegam como lembretes na tela de um celular.
+  - 76%: o número pendurado num wobbler que balança na beira da prateleira.
+  - O caminho do produto: uma estrada com a fábrica, o distribuidor, a loja e a casa do tutor, placas de sell-in e sell-out, um caminhão que anda e a sacola indo para casa.
+  - As palavras do trade: seis figurinhas de álbum.
+  - O básico: quatro carimbos batidos em ordem.
+  - Ruptura: os 100 compradores viraram bonequinhos.
+  - Dois tipos de cross: desenho do wobbler que muda de corredor, o par Top Dog e Herbalvet, e o teste da frase como frase de completar.
+  - Você é convidado na loja: as regras da casa num convite tirado do envelope.
+  - Três frases: a gerente fala em balões, com a dica da Serafina no balcão.
+  - Quem decide: três fachadas de loja (petshop, petshop com clínica, clínica com petshop) e quem responde por cada decisão.
+  - Postura em campo: placas de trânsito de "sempre" e de "proibido".
+  - Pode e não pode dizer: balões de fala certos e errados, com o gato perguntando "posso falar isso?".
+  - Cinco regras da prateleira ideal: farmácia desenhada com as cinco regras marcadas.
+- **Aprovação por etapas:** cronograma em `cronograma/` e o guia recortado em cinco pacotes em `aprovacao/etapa-1` a `etapa-5`, com os mesmos números de página do guia completo.
 
 ## v8 · o que mudou em relação à v7
 

@@ -22,7 +22,7 @@ A maior parte das faltas nasce dentro da loja: pedido mal calculado ou caixa esq
 @icone prateleira
 
 === cards | O básico: 4 coisas para conferir
-@layout quatro
+@layout carimbos
 @foto v6-maos-prateleira
 **1. Disponível** · O produto está na prateleira, sem buraco. A falta se chama ruptura: o tutor não acha e leva outra marca.
 **2. Limpo** · Embalagem sem poeira, sem amassado e sem etiqueta velha por cima. Caixa suja parece produto parado.

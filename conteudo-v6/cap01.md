@@ -13,7 +13,7 @@ tempo: 6 min
 ---
 
 === passos | Antes de sair: prepare cada loja da rota
-@layout lista_foto
+@layout prancheta
 @foto v6-kit
 @legenda O kit da visita: celular carregado, fita dupla face, flanela, bloco, crachá e etiquetas.
 1. **Revise o histórico** · Abra as fotos e as anotações da última visita. Veja o que a loja tem da Ourofino Pet e o que parou de comprar.
@@ -66,7 +66,7 @@ você: "Obrigada. Onde eu deixo a bolsa e as caixas?"
 Confirmar como o promotor se apresenta: como "promotora da Ourofino Pet" ou como empresa contratada (distribuidor ou agência) que trabalha com os produtos Ourofino Pet.
 
 === passos | Depois: o registro prepara a próxima visita
-@layout faixa_foto
+@layout notificacoes
 @foto v6-celular-gondola
 1. **Registre no mesmo dia** · Ainda no carro ou no ponto de ônibus, anote faltas, preços e o que combinou, loja por loja.
 2. **Anexe as fotos** · Antes e depois, do mesmo ângulo, com nome da loja e data. Apague as que mostram pessoas.

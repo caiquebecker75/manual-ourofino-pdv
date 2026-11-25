@@ -9,7 +9,7 @@ tempo: 5 min
 ---
 
 === cards | Dois tipos de cross e como achar o seu
-@layout definicoes
+@layout cruzar
 @foto v6-gato-racao
 @legenda Quem compra areia tem gato em casa: o lugar certo para lembrar do Banni 3.
 **Cross merchandising** · Material de um produto em outra área da loja, onde está o tutor que precisa dele. Wobbler do Banni 3 na ração de gato, apontando para o balcão.
@@ -20,6 +20,7 @@ tempo: 5 min
 @icone conversa
 @icone lupa
 @icone balao
+@frase Quem compra [areia] tem [gato] em casa.
 
 === figura | O mapa dos cruzamentos
 @layout mapa

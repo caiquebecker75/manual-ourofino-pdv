@@ -34,7 +34,7 @@ Use a foto como referência de ordem. Na sua loja, adapte ao número de pratelei
 A Ourofino tem planograma ou recomendação oficial de exposição para a farmácia? Se tiver, a foto e as regras seguem esse material.
 
 === cards | As cinco regras da prateleira ideal
-@layout regras
+@layout prateleira_regras
 @foto v6-cao-passeio
 **Agrupe por necessidade** · Produtos para o mesmo problema do animal ficam juntos, como tudo o que protege o cão de pulga e carrapato.
 **Zona quente para o que mais sai** · A faixa na altura dos olhos fica com o que o tutor mais procura e com a campanha do momento.
