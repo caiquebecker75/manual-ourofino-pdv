@@ -3,7 +3,7 @@ cap: 3
 parte: Na gôndola
 titulo: O básico da gôndola
 manuscrito: na gôndola
-abertura: Antes de qualquer material ou ponto extra, a prateleira precisa estar em ordem. É o que o tutor vê primeiro e o que mais pesa na escolha.
+abertura: O básico é a prateleira com produto, limpa, com preço e na validade. Vem antes de qualquer material: é o que o tutor vê primeiro e o que mais pesa na escolha.
 publico: Promotor, vendedor do distribuidor e balconista
 tempo: 7 min
 ---
@@ -21,18 +21,18 @@ A maior parte das faltas nasce dentro da loja: pedido mal calculado ou caixa esq
 @fonte Gruen, Corsten e Bharadwaj, "Retail Out-of-Stocks", estudo da FMI, GMA e CIES com 71 mil consumidores em 29 países, 2002.
 @icone prateleira
 
-=== cards | Os quatro básicos, nesta ordem
+=== cards | O básico: 4 coisas para conferir
 @layout quatro
 @foto v6-maos-prateleira
-**1. Disponível** · O produto está na prateleira, na quantidade certa. Quando falta, o nome disso é ruptura.
+**1. Disponível** · O produto está na prateleira, sem buraco. A falta se chama ruptura: o tutor não acha e leva outra marca.
 **2. Limpo** · Embalagem sem poeira, sem amassado e sem etiqueta velha por cima. Caixa suja parece produto parado.
 **3. Com preço** · Etiqueta embaixo do produto certo, legível de longe. Sem preço, o tutor precisa perguntar, e nem sempre há quem responda.
-**4. Na validade** · Nada vencido na prateleira, e o que vence antes fica na frente.
+**4. Na validade** · Nada vencido à venda. O que vence antes vai na frente, para sair primeiro.
 @icone caixa
 @icone folha
 @icone etiqueta
 @icone calendario
-@dica Confira os quatro sempre nesta ordem. Se o tempo acabar no meio da visita, o mais importante já ficou pronto.
+@dica Faça antes de qualquer material: o tutor vê a prateleira primeiro. Siga a ordem: se o tempo acabar, o principal já está feito.
 
 === figura | FIFO: a validade mais curta vai na frente
 @layout diagrama_lateral
@@ -43,10 +43,10 @@ Se a caixa nova fica na frente, a antiga vai para o fundo e vence lá. Produto v
 
 === figura | Frente e blocagem: a marca vista de longe
 @layout diagrama_dado
-@numero 28% | mais vezes a marca foi notada quando as frentes dobraram
+@numero 28% | mais vezes a marca foi notada com o dobro de frentes
 @fig D-BLOCAGEM
-**Frente** é cada caixa virada para o corredor, com o nome à vista. **Blocagem** é juntar a mesma linha num bloco só, de cima para baixo, em vez de espalhar caixas pela gôndola.
-Um bloco é mais fácil de achar do que cinco caixas soltas. Num teste que rastreou o olhar dos compradores, dobrar as frentes fez a marca ser notada 28% mais vezes.
+**Frente** é cada caixa virada para o corredor, com o nome à vista. **Blocagem** é juntar as caixas da mesma linha de produto num bloco só, de cima para baixo, em vez de espalhar caixas pela gôndola.
+Um bloco é mais fácil de achar do que cinco caixas soltas. Num teste que rastreou o olhar dos compradores, com o dobro de frentes a marca foi notada 28% mais vezes.
 @fonte Chandon, Hutchinson, Bradlow e Young, "Does In-Store Marketing Work?", Journal of Marketing, 2009.
 
 === figura | As três alturas da gôndola

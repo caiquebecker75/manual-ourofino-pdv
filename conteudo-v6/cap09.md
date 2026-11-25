@@ -11,7 +11,7 @@ tempo: 12 min
 === fichas | Como ler as fichas
 @layout fichas_guia
 @exemplo wellpet | WellPET | Cães | heroi | Comprimido palatável de fluralaner contra pulga e carrapato. | O cão aceita como petisco, e o tutor dá sem briga. | Um comprimido protege por até 45 dias.
-Cada produto ganha uma ficha com as três frases do CBV que você aprendeu no capítulo 8. Leia de cima para baixo: o que o produto é, o que muda para o pet e o tutor, e por que escolher este.
+Cada produto ganha uma ficha com as três frases do CBV que você aprendeu no capítulo 8. Leia de cima para baixo: o que o produto é, o que muda para o pet e o tutor, e por que escolher este. Os nomes difíceis da primeira frase, como fluralaner, são as substâncias do produto. Servem para conferir a embalagem e a receita.
 As categorias seguem o site da Ourofino Pet. Três delas têm menos de dez produtos no portfólio, e aí entram todos. Os testes de diagnóstico Conclue ficam na clínica e não aparecem aqui.
 @cat Prevenção e proteção | 6 | cap09-2
 @cat Suplementos | 10 | cap09-3

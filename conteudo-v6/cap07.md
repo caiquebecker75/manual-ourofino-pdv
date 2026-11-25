@@ -24,11 +24,11 @@ tempo: 6 min
 @icone conversa
 @icone estrela
 
-=== cards | Os três pilares da relação com a loja
+=== cards | Três frases que você quer ouvir da loja
 @layout citacoes
 **Confiança** · "O que você combina, acontece." Volte no dia marcado e traga o material prometido. Prometa só o que depende de você. Entrega, preço e prazo vão para o supervisor.
 **Rapidez de resposta** · "Quando eu pergunto, você volta." Não sabe? Diga que não sabe, marque o dia e volte com a resposta oficial, mesmo que seja para dizer que ainda está vendo.
-**Reconhecimento** · "Vale a pena receber você." Cada visita deixa algo útil. Lembre o nome das pessoas e elogie o fato: "a higiene ficou fácil de achar" diz mais que "tá tudo lindo".
+**Reconhecimento** · "Vale a pena receber você." Cada visita deixa algo útil. Lembre o nome das pessoas e elogie algo concreto: "a higiene ficou fácil de achar" diz mais que "tá tudo lindo".
 @icone escudo
 @icone relogio
 @icone coracao
@@ -54,7 +54,7 @@ A Ourofino tem um estudo próprio sobre o decisor de cada tipo de PDV. Substitui
 + Uniforme limpo e crachá à vista desde a porta
 + Celular só para foto, registro e consulta ao guia
 + Foto só da gôndola, sem cliente nem funcionário no quadro
-+ Escada da loja para o alto, e caixa pesada com ajuda
++ Subir só na escada da loja e pedir ajuda com caixa pesada
 - Entrar no estoque ou no depósito sem autorização
 - Discutir com funcionário ou com cliente, por qualquer motivo
 - Falar da marca concorrente, bem ou mal

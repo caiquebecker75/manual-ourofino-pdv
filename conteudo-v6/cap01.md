@@ -18,7 +18,7 @@ tempo: 6 min
 @legenda O kit da visita: celular carregado, fita dupla face, flanela, bloco, crachá e etiquetas.
 1. **Revise o histórico** · Abra as fotos e as anotações da última visita. Veja o que a loja tem da Ourofino Pet e o que parou de comprar.
 2. **Liste as pendências** · O que você prometeu levar ou responder e o que ficou sem solução: falta, preço, material quebrado.
-3. **Defina um objetivo** · Uma prioridade que caiba numa frase e apareça na foto de depois. "Banni 3 com preço" serve. "Dar uma geral" não serve.
+3. **Defina um objetivo** · Uma meta curta, que dê para ver na foto do fim da visita. "Banni 3 com preço" serve. "Dar uma geral" não, porque ninguém consegue conferir.
 4. **Separe o material** · Só as peças desta loja e da campanha atual, sem dobra nem sujeira. Leve fita dupla face, flanela, caneta e bloco.
 5. **Monte a rota** · A ordem das lojas, o tempo em cada uma e o horário em que cada loja prefere receber você.
 @icone calendario
@@ -34,10 +34,10 @@ Confirmar a que histórico o promotor e o vendedor têm acesso hoje (pedidos do 
 === passos | Na loja: oito passos, sempre nesta ordem
 @layout trilha
 1. **Chegue e se apresente** · Espere o atendimento acabar. Diga nome, empresa, o que veio fazer e quanto tempo leva.
-2. **Leia a loja** · Antes de mexer, dê uma volta: farmácia, ração, higiene, caixa e, com licença, o estoque.
+2. **Olhe a loja toda** · Antes de mexer, dê uma volta: farmácia (remédios), ração, higiene, caixa e, com licença, o estoque.
 3. **Fotografe antes** · A prateleira inteira, de frente, a dois passos de distância, sem pessoas na foto.
-4. **Corrija o básico** · Nesta ordem: produto em falta, limpeza, preço, validade e frente.
-5. **Execute a prioridade** · Material novo, ponto extra ou cross, só com a prateleira em ordem.
+4. **Corrija o básico** · Falta, limpeza, preço e validade, em ordem. Depois, caixas viradas para o corredor.
+5. **Faça o objetivo do dia** · Material novo ou produto em outro ponto da loja, só com a prateleira em ordem.
 6. **Converse com a equipe** · Num momento sem cliente, passe uma informação útil ao balconista. Uma por visita basta.
 7. **Fotografe depois** · Do mesmo lugar, na mesma altura e no mesmo ângulo da foto de antes.
 8. **Encerre com o responsável** · Conte o que fez, o que ficou pendente e quando volta. Agradeça.

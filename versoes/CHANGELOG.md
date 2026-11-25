@@ -18,6 +18,18 @@ No git, cada versão também tem uma tag (`git checkout <tag> -- .` restaura os 
 | 2026-11-24 | v5 | `2026-11-24_v5/` | `v5` | A v4 condensada em 49 slides, o mesmo número de páginas do guia de referência (detalhes abaixo). |
 | 2026-11-24 | v6 | `2026-11-24_v6/` | `v6` | Ensaio fotográfico novo e diagramação de livro, com uma composição diferente em cada slide (detalhes abaixo). |
 | 2026-11-25 | v7 | `2026-11-25_v7/` | `v7` | Capítulo novo com os 10 produtos de cada categoria em fichas CBV: 58 slides (detalhes abaixo). |
+| 2026-11-25 | v8 | `2026-11-25_v8/` | `v8` | Capas novas, revisão de texto sobre texto, texto mais explicado, clínica e categoria, slides do cap. 1 mais lúdicos e FIFO animado: 60 slides (detalhes abaixo). |
+
+## v8 · o que mudou em relação à v7
+
+Pedidos do Caique em 25/11, todos na mesma rodada.
+
+- **Capas dos capítulos refeitas:** cada capa virou uma abertura de livro. O texto fica num painel de cor sólida (azul-marinho, papel, verde ou azul) e a foto ocupa o outro lado, com o bicho inteiro e nada escrito por cima. O painel traz o número grande, o nome da parte, o tempo de leitura, o título, a abertura e o "Neste capítulo" com as páginas de cada slide.
+- **Texto sobre texto:** varredura automática no PDF (computador) e na página (celular e tablet em pé). Saíram os números e letras gigantes que ficavam atrás do texto (o "01" e o "10" das capas, o "Aa" do dicionário, as aspas gigantes da carta). Legendas de foto não encostam mais no número da página nem no cabeço. No comparador do ponto extra, as etiquetas ficaram do lado esquerdo dos pinos e não são mais cortadas pela linha. No mapa dos cruzamentos, os pinos 4 e 5 saíram de cima do rótulo. No celular, a tabela de quem decide vira cartões e o mapa e as marcações da prateleira não são mais cortados.
+- **Texto mais explicado:** 29 trechos reescritos para quem começa do zero. "Os quatro básicos" virou "O básico: 4 coisas para conferir", com o porquê de cada item; termos como wobbler, spot on, gôndola, ponto extra, frente e blocagem ganharam explicação no lugar onde aparecem pela primeira vez; títulos vagos ficaram diretos.
+- **Capítulo 1 mais lúdico:** "A chegada, palavra por palavra" virou conversa em balões com a cena da Serafina cumprimentando o balconista atrás do balcão; os balões entram um por vez. "Os oito passos" virou tabuleiro de jogo, com caminho, casas coloridas, início e chegada.
+- **FIFO animado:** a caixa da frente sai com o tutor, as outras andam para a frente e o lote novo entra por trás, em ciclo.
+- **Duas páginas novas (os pontos que estavam parciais no de-para com o guia de referência):** "Na clínica: o caminho do tutor" (cap. 4), com planta de clínica, caminho de chegada e de saída animado e os pontos de material; e "Pense na categoria inteira" (abre o cap. 10), com o que o tutor e a loja ganham e como falar disso com balconista, gerente e tutor. Foto nova do shih-tzu na cesta.
 
 ## v7 · o que mudou em relação à v6
 

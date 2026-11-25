@@ -26,7 +26,7 @@ Quando não souber a resposta, diga que vai ver e volte no dia combinado. Eu fa�
 - Esperei a pausa e me apresentei
 - Dei uma volta pela loja antes de mexer
 - Fotografei a prateleira antes
-- Corrigi falta, limpeza, preço, validade e frente
+- Corrigi o básico e virei as caixas para o corredor
 - Instalei o material junto do produto, na espécie certa
 - Passei uma informação útil ao balconista
 - Fotografei depois, do mesmo lugar

@@ -110,30 +110,30 @@ def pagina(x, cls, inner, tema="papel", sem_rh=False):
 
 # ------------------------------------------------------------------ capas
 CAPAS = {
-    1: dict(foto="v6-c01", pos="30% 50%", lado="dir", cor="escuro", fundo="#EDECEA", numero="gigante"),
-    2: dict(foto="v6-c02", pos="50% 50%", lado="topo-esq", cor="escuro", fundo="#18A83A", numero="linha"),
-    3: dict(foto="v6-c03", pos="50% 50%", lado="topo-esq", cor="claro", fundo="#0A76B9", numero="contorno"),
-    4: dict(foto="v6-c04", pos="50% 70%", lado="topo-centro", cor="escuro", fundo="#3FD6EF", numero="linha"),
-    5: dict(foto="v6-c05", pos="50% 50%", lado="esq", cor="escuro", fundo="#F2F1EE", numero="filete"),
-    6: dict(foto="v6-c06", pos="50% 70%", lado="topo-esq", cor="claro", fundo="#0B1F45", numero="gigante"),
-    7: dict(foto="v6-c07", pos="50% 50%", lado="esq", cor="claro", fundo="#3a3530", numero="filete"),
-    8: dict(foto="v6-c08", pos="50% 50%", lado="esq", cor="escuro", fundo="#18A83A", numero="contorno"),
-    9: dict(foto="v6-c-portfolio", pos="100% 100%", lado="esq", cor="escuro", fundo="#D0D0D4", numero="linha"),
-    10: dict(foto="v6-c09", pos="50% 50%", lado="esq", cor="claro", fundo="#0A76B9", numero="gigante"),
+    # painel: lado do texto; tema: cor do painel; pos: janela da foto (o bicho fica inteiro do outro lado)
+    1: dict(foto="v6-c01", pos="8% 50%", painel="dir", tema="navy"),
+    2: dict(foto="v6-c02", pos="100% 50%", painel="esq", tema="papel"),
+    3: dict(foto="v6-c03", pos="90% 50%", painel="dir", tema="navy"),
+    4: dict(foto="v6-c04", pos="96% 50%", painel="esq", tema="papel"),
+    5: dict(foto="v6-c05", pos="92% 50%", painel="dir", tema="verde"),
+    6: dict(foto="v6-c06", pos="96% 70%", painel="esq", tema="papel"),
+    7: dict(foto="v6-c07", pos="80% 50%", painel="dir", tema="navy"),
+    8: dict(foto="v6-c08", pos="75% 50%", painel="esq", tema="papel"),
+    9: dict(foto="v6-c-portfolio", pos="88% 50%", painel="dir", tema="azul"),
+    10: dict(foto="v6-c09", pos="85% 50%", painel="esq", tema="navy"),
 }
 
-def capa_cap(m):
+def capa_cap(m, toc=()):
+    """abertura de capítulo como num livro: painel de cor com número, título, abertura e o que tem no capítulo; foto do outro lado"""
     n = m["n"]; c = CAPAS[n]
-    bts = ""
-    if m.get("botoes"):
-        bts = '<nav class="cc-bts">' + "".join(f'<a class="bt" href="#cap{n:02d}-{b.split("|")[1].strip()}">{esc(b.split("|")[0].strip())}{icone("seta")}</a>' for b in m["botoes"]) + "</nav>"
-    num = f'<span class="cc-num">{n:02d}</span>'
-    t = (f'<div class="cc-t z">{num if c["numero"] != "gigante" else ""}<span class="cc-cap">Capítulo {n} · {esc(m.get("parte", ""))}</span>'
-         f'{kick(m.get("manuscrito", ""), "cc-kick")}<h2 class="cc-tit">{inl(m["titulo"])}</h2>'
-         f'<p class="cc-abre">{inl(m.get("abertura", ""))}</p>{bts}</div>')
-    gig = f'<span class="cc-gig z" aria-hidden="true">{n:02d}</span>' if c["numero"] == "gigante" else ""
-    return (f'<section class="slide lv capa cap-{n:02d} lado-{c["lado"]} cor-{c["cor"]} num-{c["numero"]}" id="cap{n:02d}" data-cap="{n:02d}" '
-            f'data-cap-nome="{esc(B.cap_nome(m))}" style="--fundo:{c["fundo"]}"><div class="cc-f z zf">{ft(c["foto"], "ft", c["pos"], m["titulo"])}</div>{gig}{t}</section>')
+    itens = "".join(f'<li><a href="#{sid}"><span class="cv-it">{inl(t)}</span><i class="sm-dots"></i><span class="sm-p">{{{{PG:{sid}}}}}</span></a></li>' for sid, t in toc)
+    tempo = f'<span class="cv-tempo">{esc(m["tempo"])} de leitura</span>' if m.get("tempo") else ""
+    painel = (f'<div class="cv-p z"><div class="cv-top"><span class="cv-num">{n:02d}</span><span class="cv-rot">Capítulo {n}<b>{esc(m.get("parte", ""))}</b></span>{tempo}</div>'
+              f'{kick(m.get("manuscrito", ""), "cv-kick")}<h2 class="cv-tit">{inl(m["titulo"])}</h2><p class="cv-abre">{inl(m.get("abertura", ""))}</p>'
+              f'<nav class="cv-toc" aria-label="Neste capítulo"><b>Neste capítulo</b><ol>{itens}</ol></nav></div>')
+    longo = " cv-longo" if len(toc) > 5 else ""
+    return (f'<section class="slide lv capa cv cap-{n:02d} cv-{c["painel"]} cv-t-{c["tema"]}{longo}" id="cap{n:02d}" data-cap="{n:02d}" '
+            f'data-cap-nome="{esc(B.cap_nome(m))}"><figure class="cv-f z zf">{ft(c["foto"], "ft", c["pos"], m["titulo"])}</figure>{painel}</section>')
 
 def capa_guia():
     return (f'<section class="slide lv capa-guia" id="inicio" data-cap="00" data-cap-nome="Guia de execução no PDV" style="--fundo:#0B1F45">'
@@ -143,7 +143,7 @@ def capa_guia():
             f'<p>Da preparação da visita à prateleira ideal. Para promotores, vendedores do distribuidor e equipes de loja da Ourofino Pet.</p>'
             f'<div class="cg-bts"><a class="bt" href="#cap00">Começar {icone("seta")}</a><a class="bt claro" href="#sumario">Sumário</a>'
             f'<button type="button" class="bt claro" data-pdf>Baixar PDF</button></div>'
-            f'<span class="cg-ver">Versão 7 · novembro de 2026 · em validação com a Ourofino</span></div></section>')
+            f'<span class="cg-ver">Versão 8 · novembro de 2026 · em validação com a Ourofino</span></div></section>')
 
 def prefacio(m):
     """capa da abertura: o nome da Serafina gigante, ela na frente das letras"""
@@ -193,29 +193,39 @@ def L_lista_foto(x):
     return pagina(x, "L-lista-foto", inner)
 
 def L_trilha(x):
+    """os oito passos como tabuleiro de jogo: caminho largo, casas coloridas, início e chegada"""
     it = itens(x["corpo"]); I = ics(x["mk"])
-    cols = [96, 446, 796, 1146]
+    cols = [150, 500, 850, 1200]
     pos = [(cols[i], 0) for i in range(4)] + [(cols[3 - i], 1) for i in range(4)]
+    cores = ["verde", "azul", "ciano", "navy"] * 2
     passos = ""
     for i, (t, d) in enumerate(it):
         xx, row = pos[i]
-        passos += (f'<li class="tr-p r{row}" style="left:{xx}px"><span class="tr-n">{i + 1}</span>{ic(I[i] if i < len(I) else "", "tr-ic")}'
+        passos += (f'<li class="tb-casa r{row} c-{cores[i]}" style="left:{xx}px;--i:{i}"><span class="tb-bola">{ic(I[i] if i < len(I) else "", "tb-ic")}<span class="tb-n">{i + 1}</span></span>'
                    f'<b>{inl(t)}</b><p>{inl(d)}</p></li>')
-    svg = ('<svg class="tr-svg z" viewBox="0 0 1600 900" aria-hidden="true"><path d="M128 312 H1400 A145 145 0 0 1 1400 602 H128" '
-           'fill="none" stroke="#10AD31" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round"/></svg>')
-    inner = f'{svg}<div class="tr-cab z">{kick("na loja")}{h2(x["titulo"])}</div><ol class="tr-l z">{passos}</ol>'
-    return pagina(x, "L-trilha", inner, "n1")
+    caminho = "M96 330 H1300 A155 155 0 0 1 1300 640 H96"
+    svg = (f'<svg class="tb-svg z" viewBox="0 0 1600 900" aria-hidden="true">'
+           f'<path class="tb-rua" d="{caminho}" fill="none" stroke="#E2F4F8" stroke-width="64" stroke-linecap="round"/>'
+           f'<path class="tb-tra" d="{caminho}" fill="none" stroke="#fff" stroke-width="5" stroke-dasharray="18 22" stroke-linecap="round"/></svg>')
+    inicio = f'<span class="tb-ini z"><i></i>entrada<br>da loja</span><span class="tb-fim z"><i></i>até a<br>próxima visita</span>'
+    inner = f'{svg}{inicio}<div class="tr-cab z">{kick("na loja")}{h2(x["titulo"])}</div><ol class="tb-l z">{passos}</ol>'
+    return pagina(x, "L-trilha L-tabuleiro", inner, "papel")
 
 def L_roteiro(x):
-    falas = ""
+    """a chegada como conversa em balões, com a cena da Serafina cumprimentando o balconista"""
+    falas = ""; k = 0
     for l in x["corpo"]:
         if ":" not in l: continue
         q, _, f = l.partition(":"); qq = q.strip()
         eu = qq.lower() in ("você", "voce")
-        falas += f'<div class="rt-f{" eu" if eu else ""}"><span>{esc(qq[:1].upper() + qq[1:])}</span><p>{inl(f.strip())}</p></div>'
-    inner = (f'<div class="rt-q z">{kick("roteiro da chegada")}{h2(x["titulo"])}<div class="rt-l">{falas}</div>{lembre(x["mk"], "lb rt-lb")}</div>'
-             f'<div class="rt-sera z"><div class="rt-painel"></div>{sera("tablet", "rt-img")}</div>')
-    return pagina(x, "L-roteiro", inner)
+        quem = "Você" if eu else qq[:1].upper() + qq[1:]
+        falas += (f'<div class="bl{" eu" if eu else ""}" style="--k:{k}"><span class="bl-av" aria-hidden="true"></span>'
+                  f'<div class="bl-b"><span class="bl-q">{esc(quem)}</span><p>{inl(f.strip().strip(chr(34)).strip("“”"))}</p></div></div>')
+        k += 1
+    nota = f'<p class="rt-post z"><b>Lembre-se</b>{inl(x["mk"]["lembre"][0])}</p>' if x["mk"].get("lembre") else ""
+    inner = (f'<div class="rt-cena z"><span class="rt-sol"></span>{B.recorte("cena-chegada-sem-fundo", "rt-cimg", "Serafina cumprimenta o balconista")}<span class="rt-balcao"><i></i></span><span class="rt-piso"></span></div>'
+             f'<div class="rt-cab z">{kick("roteiro da chegada")}{h2(x["titulo"])}</div><div class="rt-chat z">{falas}</div>{nota}')
+    return pagina(x, "L-roteiro L-chat", inner)
 
 def L_faixa_foto(x):
     mk = x["mk"]; it = itens(x["corpo"]); I = ics(mk)
@@ -386,9 +396,20 @@ def L_citacoes(x):
     inner = f'<div class="cz-cab z">{kick("o que o lojista diz")}{h2(x["titulo"])}</div>{nota_sf(mk, "sf-nota cz-sf z")}<div class="cz-l z">{cols}</div>'
     return pagina(x, "L-citacoes", inner)
 
+def rotula_tabela(h):
+    """põe o nome da coluna em cada célula (data-th), para a tabela virar cartões no celular"""
+    ths = [re.sub(r"<.*?>", "", t).strip() for t in re.findall(r"<th[^>]*>(.*?)</th>", h, flags=re.S)]
+    def linha(m):
+        k = [0]
+        def cel(c):
+            i = k[0]; k[0] += 1
+            return f'<td data-th="{esc(ths[i]) if i < len(ths) else ""}"' if i else '<td class="tf-rot"'
+        return re.sub(r"<td", cel, m.group(0))
+    return re.sub(r"<tr>.*?</tr>", linha, h, flags=re.S)
+
 def L_tabela_foto(x):
     mk = x["mk"]
-    inner = (f'<div class="tf-q z">{kick("quem decide")}{h2(x["titulo"])}<div class="tf-t">{B.md(x["corpo"])}</div>{lembre(mk)}</div>'
+    inner = (f'<div class="tf-q z">{kick("quem decide")}{h2(x["titulo"])}<div class="tf-t">{rotula_tabela(B.md(x["corpo"]))}</div>{lembre(mk)}</div>'
              f'<figure class="tf-f z zf">{ft(mk["foto"][0], "ft", "50% 40%", "Veterinária com gato no colo")}{legenda(mk, x["n"], x["k"], "leg sobre")}</figure>')
     return pagina(x, "L-tabela-foto", inner)
 
@@ -478,7 +499,73 @@ def L_contracapa(x):
             f'<span class="cg-kick">obrigada pela visita</span><h1>{inl(x["titulo"])}</h1>{B.md(x["corpo"])}'
             f'<div class="cg-bts"><a class="bt" href="#inicio">Voltar ao início</a><a class="bt claro" href="#cap{FIM:02d}-2">Checklist</a>'
             f'<button type="button" class="bt claro" data-pdf>Baixar PDF</button></div>'
-            f'<span class="cg-ver">Guia de execução no PDV · Ourofino Pet · versão 7, novembro de 2026</span></div></section>')
+            f'<span class="cg-ver">Guia de execução no PDV · Ourofino Pet · versão 8, novembro de 2026</span></div></section>')
+
+# ------------------------------------------------------------------ v8: planta da clínica e categoria
+def planta_clinica_svg():
+    N, V, CZ, LN = "#072047", "#10AD31", "#7A8597", "#C9CFD8"
+    t = lambda x, y, txt, cls="pc-z", anc="middle": f'<text x="{x}" y="{y}" class="{cls}" text-anchor="{anc}">{txt}</text>'
+    o = ['<svg class="pc-svg" viewBox="0 0 860 600" role="img" aria-label="Planta de uma clínica veterinária com petshop: recepção e farmácia na entrada, sala de espera no meio, consultórios ao fundo e área de petshop">']
+    o.append(f'<rect x="20" y="20" width="820" height="540" rx="6" fill="#FBFAF7" stroke="{N}" stroke-width="6"/>')
+    # consultórios
+    for i, x0 in enumerate((20, 300, 580)):
+        w = 280 if i < 2 else 260
+        o.append(f'<rect x="{x0}" y="20" width="{w}" height="170" fill="#EEF1F5" stroke="{N}" stroke-width="3"/>')
+        o.append(t(x0 + w / 2, 100, f"Consultório {i + 1}", "pc-z"))
+        o.append(f'<rect x="{x0 + w / 2 - 34}" y="186" width="68" height="8" fill="#FBFAF7"/><path d="M{x0 + w / 2 - 34} 190 a68 68 0 0 1 68 -68" fill="none" stroke="{LN}" stroke-width="2"/>')
+    # recepção e farmácia
+    o.append(f'<rect x="32" y="232" width="26" height="300" fill="#DDE7D9" stroke="{N}" stroke-width="2"/>')
+    for k in range(6): o.append(f'<rect x="36" y="{240 + k * 48}" width="18" height="38" rx="2" fill="{["#10AD31", "#007CC1", "#20D5F2"][k % 3]}" opacity=".85"/>')
+    o.append(f'<path d="M110 286 h120 v24 h-96 v130 h-24 z" fill="#fff" stroke="{N}" stroke-width="3"/>')
+    o.append(t(84, 552, "FARMÁCIA", "pc-r", "start")); o.append(t(176, 272, "RECEPÇÃO", "pc-r"))
+    # sala de espera
+    o.append(t(560, 236, "SALA DE ESPERA", "pc-r"))
+    for fila in (270, 330):
+        for k in range(7): o.append(f'<rect x="{350 + k * 58}" y="{fila}" width="40" height="34" rx="8" fill="#fff" stroke="{LN}" stroke-width="2"/>')
+    o.append(f'<rect x="832" y="250" width="8" height="90" fill="{V}"/>')
+    # petshop
+    o.append(f'<rect x="520" y="430" width="300" height="20" fill="#E9EDF2" stroke="{N}" stroke-width="2"/><rect x="520" y="512" width="300" height="20" fill="#E9EDF2" stroke="{N}" stroke-width="2"/>')
+    o.append(t(640, 482, "PETSHOP · ração e acessórios", "pc-r"))
+    # entrada
+    o.append(f'<rect x="300" y="554" width="120" height="12" fill="#FBFAF7"/>')
+    o.append(t(360, 590, "ENTRADA", "pc-r"))
+    # caminho do tutor
+    ida = "M330 572 V430 L262 362 L520 300 L440 200"
+    volta = "M440 200 L404 300 L262 404 L92 470 L300 532 L390 572"
+    cam = ida + " " + volta.replace("M", "L", 1)
+    o.append(f'<path d="{ida}" fill="none" stroke="{V}" stroke-width="3.5" stroke-dasharray="3 10" stroke-linecap="round" stroke-linejoin="round"/>')
+    o.append(f'<path d="{volta}" fill="none" stroke="#007CC1" stroke-width="3.5" stroke-dasharray="3 10" stroke-linecap="round" stroke-linejoin="round"/>')
+    o.append(t(560, 588, "— chegada", "pc-k1", "start").replace("— ", "")); o.append(t(660, 588, "saída", "pc-k2", "start"))
+    o.append(f'<path d="M538 583 h16" stroke="{V}" stroke-width="4" stroke-dasharray="3 5"/><path d="M638 583 h16" stroke="#007CC1" stroke-width="4" stroke-dasharray="3 5"/>')
+    o.append(f'<g class="pc-tutor"><circle r="13" fill="{V}" stroke="#fff" stroke-width="4"/><animateMotion dur="9s" repeatCount="indefinite" path="{cam}" rotate="0"/></g>')
+    # pinos
+    def pino(x, y, n, cor=V):
+        return f'<g class="pc-pino"><circle cx="{x}" cy="{y}" r="19" fill="{cor}" stroke="#fff" stroke-width="4"/><text x="{x}" y="{y + 6}" text-anchor="middle" class="pc-n">{n}</text></g>'
+    o += [pino(176, 330, 1), pino(806, 296, 2), pino(46, 470, 3), pino(800, 482, 4), pino(440, 64, "✕", N)]
+    o.append('</svg>')
+    return "".join(o)
+
+def L_planta_clinica(x):
+    mk = x["mk"]
+    pts = []
+    for pnt in mk.get("ponto", []):
+        n, nome, d = [y.strip() for y in pnt.split("|", 2)]
+        cls = " nao" if n.lower() == "x" else ""
+        pts.append(f'<li class="pc-i{cls}"><span>{"✕" if cls else n}</span><p><b>{esc(nome)}.</b> {inl(d)}</p></li>')
+    inner = (f'<div class="pc-q z">{kick("na clínica")}{h2(x["titulo"])}{txt(x["corpo"])}<ol class="pc-l">{"".join(pts)}</ol>{lembre(mk)}</div>'
+             f'<figure class="pc-f z">{planta_clinica_svg()}{legenda(mk, x["n"], x["k"])}</figure>')
+    return pagina(x, "L-planta-clinica", inner, "n1")
+
+def L_categoria(x):
+    mk = x["mk"]
+    lst = lambda L: "".join(f'<li>{icone("certo")}<span>{inl(y)}</span></li>' for y in L)
+    falas = "".join(f'<li><b>{esc(a.split("|")[0].strip())}</b><span>{inl(a.split("|", 1)[1].strip())}</span></li>' for a in mk.get("fala", []))
+    inner = (f'<div class="ca2-q z">{kick("uma semente")}{h2(x["titulo"])}{txt(x["corpo"])}'
+             f'<h3 class="ca2-h">Como falar disso na loja</h3><ul class="ca2-falas">{falas}</ul>{pratica(mk)}</div>'
+             f'<figure class="ca2-f z zf">{ft(mk["foto"][0], "ft", "50% 40%", "Shih-tzu sentado numa cesta de compras")}</figure>'
+             f'<div class="ca2-p z"><div><h3>O tutor ganha</h3><ul>{lst(mk.get("tutor", []))}</ul></div>'
+             f'<div><h3>A loja ganha</h3><ul>{lst(mk.get("loja", []))}</ul></div></div>')
+    return pagina(x, "L-categoria", inner)
 
 # ------------------------------------------------------------------ capítulo 9: os 10 de cada categoria (fichas CBV)
 PK = "assets/img/pk/"
@@ -631,14 +718,15 @@ def ler():
 
 def capitulo(m):
     n = m["n"]; out = []
-    if n == 0: out.append(prefacio(m))
-    elif m.get("capa") != "nao": out.append(capa_cap(m))
     lista = []
     for tipo, tit, linhas in B.slides_do(m["body"]):
         if tipo == "validar":
             if lista: lista[-1][3].append(" ".join(l.strip() for l in linhas if l.strip()))
             continue
         lista.append([tipo, tit, linhas, []])
+    if n == 0: out.append(prefacio(m))
+    elif m.get("capa") != "nao":
+        out.append(capa_cap(m, [(f"cap{n:02d}-{k}", it[1]) for k, it in enumerate(lista, 1)]))
     for k, (tipo, tit, linhas, notas) in enumerate(lista, 1):
         mk, corpo = B.separa(linhas)
         sid = f"cap{n:02d}" if (k == 1 and m.get("capa") == "nao") else f"cap{n:02d}-{k}"

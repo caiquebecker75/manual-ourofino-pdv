@@ -133,8 +133,8 @@ ROTULOS = {  # (âncora, título, detalhe, cor do ponto, posição do texto)
                            ("concorrente", "Concorrente ao lado", "na mesma altura", "", "abaixo"),
                            ("vermifugo", "Vermífugos", "Top Dog por faixa de peso", "", "acima"),
                            ("suplementos", "Suplementos", "pele e pelo juntos", "", "abaixo")],
-    "F-PONTO-EXTRA-ERRADO": [("buraco", "Buraco na gôndola", "o produto saiu do ponto natural", "x", "acima"), ("display", "Display cheio", "", "", "dir")],
-    "F-PONTO-EXTRA-CERTO": [("buraco", "Gôndola cheia", "o ponto natural continua abastecido", "ok", "acima"), ("display", "Estoque extra no display", "", "", "dir")],
+    "F-PONTO-EXTRA-ERRADO": [("buraco", "Buraco na gôndola", "o produto saiu do ponto natural", "x", "esq"), ("display", "Display cheio", "", "", "esq")],
+    "F-PONTO-EXTRA-CERTO": [("buraco", "Gôndola cheia", "o ponto natural continua abastecido", "ok", "esq"), ("display", "Estoque extra no display", "", "", "esq")],
 }
 def rotulos(fid):
     nome = fonte(fid)

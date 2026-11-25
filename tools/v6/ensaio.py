@@ -53,6 +53,8 @@ FOTOS = [
    "Um gato de pelo longo branco e creme enrolado numa toalha felpuda azul-clara depois do banho, só a cabeça e uma pata para fora, pelo ainda um pouco úmido, olhando para a câmera com cara de paciência. Fica na metade de baixo do quadro vertical. Vertical."),
   ("v6-piso-limpo", "retrato", "editorial",
    "Um filhote de labrador amarelo deitado de barriga num piso de porcelanato claro e brilhante, recém-limpo, olhando para a câmera, ao lado de um borrifador branco sem rótulo e de um pano de microfibra verde dobrado. Sala clara de apartamento, luz de janela suave, reflexo leve no piso. O filhote fica na metade de baixo do quadro. Vertical."),
+  ("v6-cesta", "paisagem", "editorial", CHAPA.format(cor="azul médio (#007CC1)") +
+   "Um shih-tzu branco e caramelo sentado dentro de uma cesta de compras de arame cromado, de mercado, apoiada no chão, olhando para a câmera com a cabeça um pouco inclinada. A cesta não tem produtos nem marcas. O conjunto fica no centro do quadro, inteiro, com sombra suave no chão; a parte de cima fica vazia. Horizontal."),
   ("v6-cao-idoso", "retrato", "editorial", CHAPA.format(cor="verde vivo (#10AD31)") +
    "Retrato de um cão idoso sem raça definida, pelo preto com o focinho e as sobrancelhas grisalhos, sentado, olhar calmo e atento para a câmera. Corpo inteiro na metade de baixo do quadro vertical, com sombra suave no chão. Vertical."),
 ]

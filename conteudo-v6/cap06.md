@@ -29,7 +29,7 @@ No certo, a gôndola continua cheia, e o display recebe só o estoque que sobrou
 @icone display
 @icone camera
 @icone conversa
-@dica Produto que fica atrás do balcão não vai para ponto extra no autosserviço. Ali, o ponto extra vira material que leva o tutor a pedir no balcão.
+@dica Produto que fica atrás do balcão não vai para display onde o tutor se serve sozinho. Nesse caso, use material que leve o tutor a pedir no balcão.
 
 === validar
 Confirmar quais produtos heróis podem ficar no autosserviço em cada tipo de loja e quais ficam só atrás do balcão.

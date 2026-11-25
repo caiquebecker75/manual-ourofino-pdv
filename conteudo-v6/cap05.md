@@ -3,7 +3,7 @@ cap: 5
 parte: Na loja toda
 titulo: Cross merchandising e cross selling
 manuscrito: cruzar
-abertura: Cross quer dizer cruzar. Você leva a lembrança de um produto até onde o tutor está ou junta dois produtos que resolvem a mesma necessidade.
+abertura: Cross quer dizer cruzar. Você põe o material de um produto na área onde está o tutor que precisa dele, ou junta dois produtos que resolvem a mesma necessidade.
 publico: Promotor, vendedor do distribuidor e balconista
 tempo: 5 min
 ---

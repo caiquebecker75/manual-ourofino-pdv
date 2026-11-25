@@ -10,7 +10,7 @@ tempo: 2 min
 
 === serafina | Para que serve este guia
 @layout carta
-No meu primeiro mês, colei um wobbler na porta do consultório porque ninguém tinha me dito onde ele ia. O veterinário tirou no mesmo dia, e com razão.
+No meu primeiro mês, colei um wobbler, a plaquinha que balança na prateleira, na porta do consultório. Ninguém me disse onde ele ia. O veterinário tirou no mesmo dia, e com razão.
 Este guia junta o que eu queria ter aprendido antes: o que fazer em cada visita, na mesma ordem, e o porquê de cada regra. Quem entende o porquê decide bem em qualquer loja, mesmo sem ninguém por perto.
 @pose explica
 
@@ -24,7 +24,7 @@ A Serafina e a história dela são ficção criada para o guia, a partir de situ
 **Em papel** · O botão PDF gera um arquivo com uma página por slide, para imprimir ou mandar pelo WhatsApp.
 **Dica da Serafina** · A faixa verde no pé do slide traz o que eu aprendi na prática e ninguém ensina.
 **Erro comum** · Quando eu apareço de mão levantada, vem um erro que eu vejo toda semana nas lojas.
-**Teste final** · No fim, nove situações de loja, uma por capítulo. Pode errar à vontade: cada resposta explica o porquê.
+**Teste final** · No fim, dez situações de loja, uma por capítulo. Pode errar à vontade: cada resposta explica o porquê.
 @icone tablet
 @icone display
 @icone cartaz

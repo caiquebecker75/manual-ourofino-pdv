@@ -6,7 +6,7 @@ Guia interativo de execução no ponto de venda para promotores, vendedores do d
 
 Abre no celular e no computador. O botão **PDF** gera a versão impressa em A4 paisagem. O botão **Revisão** mostra as notas que aguardam validação da Ourofino.
 
-## O que tem dentro (versão 7, 58 páginas diagramadas como livro)
+## O que tem dentro (versão 8, 60 páginas diagramadas como livro)
 
 - Abertura com a Serafina, a promotora ilustrada que acompanha o guia, e sumário com as páginas.
 - Dez capítulos, cada um com capa própria: contato no PDV, trade marketing, básico da gôndola, materiais de PDV, cross, ponto natural e ponto extra, relacionamento e postura, CBV e produtos heróis, os 10 de cada categoria, prateleira ideal.

@@ -3,7 +3,7 @@ cap: 8
 parte: O produto
 titulo: CBV e produtos heróis
 manuscrito: como falar
-abertura: Sete produtos da Ourofino Pet vêm antes de tudo na visita. Para cada um, você sabe o que ele é, onde fica e a frase que o balconista vai repetir para o tutor.
+abertura: Os produtos heróis são os sete da Ourofino Pet que vêm antes de tudo na visita. De cada um, você sabe o que é, onde fica e a frase que o balconista repete ao tutor.
 publico: Promotor, vendedor do distribuidor e balconista
 tempo: 7 min
 ---
@@ -15,13 +15,13 @@ tempo: 7 min
 @b O cão aceita como petisco, e o tutor dá sem briga.
 @v Um comprimido protege por até 45 dias.
 @fig D-CBV
-Comece pelo que o produto é. Depois pergunte "e daí?" até chegar ao que muda para o pet e para o tutor: essa é a frase que o balconista vai repetir. Feche com o motivo para escolher este produto.
+Característica é o que o produto é. Pergunte "e daí?" até chegar ao benefício, o que muda para o pet e o tutor: é a frase que o balconista repete. Vantagem é o motivo para escolher este produto.
 @na-pratica Fale de produto com o balconista e deixe o caso de cada animal para o veterinário.
 
 === produtos | Prevenção e proteção
 @layout produtos4
 P-WELLPET | **WellPET** | Cães | Comprimido palatável contra pulga e carrapato, com até 45 dias de proteção. Fica na farmácia, com os antiparasitários de cão. | "É um comprimido que o cão aceita como petisco e que protege por até 45 dias."
-P-BANNI3 | **Banni 3** | Gatos | Spot on aplicado na nuca, contra vermes redondos e chatos, pulgas, piolhos e sarnas. Fica na farmácia, na área de gato. | "Para gato que não aceita comprimido: aplica na nuca e junta várias proteções num produto só."
+P-BANNI3 | **Banni 3** | Gatos | Spot on, líquido pingado na pele da nuca, contra vermes redondos e chatos, pulgas, piolhos e sarnas. Fica na farmácia, na área de gato. | "Para gato que não aceita comprimido: aplica na nuca e junta várias proteções num produto só."
 P-TOPDOG | **Top Dog** | Cães | Vermífugo em comprimido palatável, contra vermes redondos e chatos e indicado também para giardíase. Fica com os vermífugos de cão. | "Tem sabor que o cão gosta e também é indicado para giárdia."
 P-LEEVRE | **Leevre** | Cães | Coleira que auxilia no controle de pulga e carrapato e na repelência ao mosquito transmissor da leishmaniose. Em dois tamanhos, por porte. | "Ajuda no controle de pulga e carrapato e também a repelir o mosquito da leishmaniose."
 

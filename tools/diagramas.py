@@ -43,24 +43,28 @@ def visita():
     return "".join(h)
 
 def fifo():
-    caixas = [("03/2027", "vence primeiro", VERDE), ("05/2027", "", "#5BC06E"), ("08/2027", "", "#9AD7A6"), ("11/2027", "lote novo", "#D3EDD8")]
+    """FIFO animado: o tutor leva a caixa da frente, as outras andam e o lote novo entra por trás"""
+    caixas = [("03/2027", VERDE), ("05/2027", "#5BC06E"), ("08/2027", "#9AD7A6"), ("11/2027", "#D3EDD8"), ("02/2028", "#EAF6EC")]
     w, hh = 760, 300
-    s = [f'<svg class="dg-svg" viewBox="0 0 {w} {hh}" role="img" aria-label="FIFO: produto que vence antes fica na frente">']
+    s = [f'<svg class="dg-svg dg-fifo-anim" viewBox="0 0 {w} {hh}" role="img" aria-label="FIFO: o produto que vence antes fica na frente e sai primeiro; o lote novo entra por trás">']
     s.append(f'<rect x="60" y="196" width="640" height="10" rx="2" fill="{NAVY}"/>')
     s.append(f'<rect x="60" y="206" width="640" height="26" fill="#EEF0F3" stroke="{LINHA}"/>')
-    s.append(f'<text x="64" y="224" font-size="12" fill="{CINZA}" font-family="IBM Plex Mono, monospace">FRENTE · corredor</text>')
-    s.append(f'<text x="696" y="224" font-size="12" fill="{CINZA}" text-anchor="end" font-family="IBM Plex Mono, monospace">FUNDO</text>')
-    for i, (d, lab, c) in enumerate(caixas):
-        x = 80 + i * 150
+    s.append(f'<text x="64" y="224" font-size="12" fill="{CINZA}" font-family="Poppins, sans-serif">FRENTE · corredor</text>')
+    s.append(f'<text x="696" y="224" font-size="12" fill="{CINZA}" text-anchor="end" font-family="Poppins, sans-serif">FUNDO</text>')
+    s.append(f'<text x="139" y="70" font-size="14" font-weight="700" text-anchor="middle" fill="{VERDE}" font-family="Poppins, sans-serif">vence primeiro</text>')
+    s.append(f'<text x="589" y="70" font-size="14" font-weight="700" text-anchor="middle" fill="{NAVY}" font-family="Poppins, sans-serif">lote novo</text>')
+    for i, (d, c) in enumerate(caixas):
+        x = 80 + min(i, 3) * 150
+        s.append(f'<g class="ff-b ff-b{i + 1}">')
         s.append(f'<rect x="{x}" y="86" width="118" height="110" rx="6" fill="{c}" stroke="{NAVY}" stroke-width="1.6"/>')
         s.append(f'<rect x="{x + 16}" y="120" width="86" height="34" rx="4" fill="#fff" stroke="{NAVY}" stroke-width="1.2"/>')
-        s.append(f'<text x="{x + 59}" y="134" font-size="10" text-anchor="middle" fill="{CINZA}" font-family="IBM Plex Mono, monospace">VALIDADE</text>')
-        s.append(f'<text x="{x + 59}" y="149" font-size="14" font-weight="600" text-anchor="middle" fill="{NAVY}" font-family="Figtree, sans-serif">{d}</text>')
-        if lab: s.append(f'<text x="{x + 59}" y="74" font-size="14" font-weight="700" text-anchor="middle" fill="{VERDE if i == 0 else NAVY}" font-family="Figtree, sans-serif">{lab}</text>')
-    s.append(f'<path d="M748 140 h-40" stroke="{NAVY}" stroke-width="2" marker-end="url(#ponta)"/>')
-    s.append(f'<path d="M66 140 h-40" stroke="{VERDE}" stroke-width="2.4" marker-end="url(#pontav)"/>')
-    s.append(f'<text x="20" y="270" font-size="15" fill="{VERDE}" font-weight="700" font-family="Figtree, sans-serif">← o tutor pega da frente</text>')
-    s.append(f'<text x="740" y="270" font-size="15" fill="{NAVY}" font-weight="700" text-anchor="end" font-family="Figtree, sans-serif">a reposição entra por trás ←</text>')
+        s.append(f'<text x="{x + 59}" y="134" font-size="10" text-anchor="middle" fill="{CINZA}" font-family="Poppins, sans-serif">VALIDADE</text>')
+        s.append(f'<text x="{x + 59}" y="149" font-size="14" font-weight="600" text-anchor="middle" fill="{NAVY}" font-family="Poppins, sans-serif">{d}</text>')
+        s.append('</g>')
+    s.append(f'<g class="ff-sai"><path d="M66 140 h-40" stroke="{VERDE}" stroke-width="2.4" marker-end="url(#pontav)"/></g>')
+    s.append(f'<g class="ff-entra"><path d="M748 140 h-40" stroke="{NAVY}" stroke-width="2" marker-end="url(#ponta)"/></g>')
+    s.append(f'<text class="ff-t1" x="20" y="270" font-size="15" fill="{VERDE}" font-weight="700" font-family="Poppins, sans-serif">← o tutor leva a da frente</text>')
+    s.append(f'<text class="ff-t2" x="740" y="270" font-size="15" fill="{NAVY}" font-weight="700" text-anchor="end" font-family="Poppins, sans-serif">o lote novo entra por trás ←</text>')
     s.append(f'<defs><marker id="ponta" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="{NAVY}"/></marker>'
              f'<marker id="pontav" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="{VERDE}"/></marker></defs>')
     s.append('</svg>')
@@ -128,7 +132,7 @@ AREAS = {
     "racao_gato": (190, 60, 110, 150, "Ração de gato"),
     "acessorios": (190, 240, 160, 70, "Acessórios"),
     "higiene_pet": (330, 60, 130, 80, "Higiene e beleza"),
-    "higiene_amb": (330, 160, 150, 60, "Higiene do ambiente"),
+    "higiene_amb": (330, 160, 150, 60, "Higiene ambiente"),
     "banho": (760, 60, 170, 170, "Banho e tosa"),
     "consultorio": (760, 260, 170, 130, "Consultório"),
     "espera": (760, 420, 170, 110, "Espera"),
@@ -161,14 +165,14 @@ def planta(setas=False):
         rotas = [("1", [(150, 282), (150, 446), (497, 446), (497, 334), (516, 334)], VERDE, "sm", ""),
                  ("2", [(342, 314), (342, 424), (482, 424), (482, 348), (516, 348)], VERDE, "sm", ""),
                  ("3", [(296, 214), (296, 232), (505, 232), (505, 316), (516, 316)], VERDE, "sm", ""),
-                 ("4", [(484, 196), (700, 196), (700, 296)], AZUL, "ss", ' stroke-dasharray="7 6"')]
+                 ("4", [(500, 196), (700, 196), (700, 296)], AZUL, "ss", ' stroke-dasharray="7 6"')]
         for num, pts, cor, mk, dash in rotas:
             s.append(f'<path d="{rota(pts)}" fill="none" stroke="{cor}" stroke-width="2.6" stroke-linejoin="round"{dash} marker-end="url(#{mk})"/>')
             x, y = pts[0]
             s.append(f'<circle cx="{x}" cy="{y}" r="13" fill="{cor}" stroke="#fff" stroke-width="2.5"/>'
                      f'<text x="{x}" y="{y + 4.5}" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" font-family="Figtree, sans-serif">{num}</text>')
-        s.append(f'<circle cx="478" cy="152" r="13" fill="{AZUL}" stroke="#fff" stroke-width="2.5"/>'
-                 f'<text x="478" y="156.5" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" font-family="Figtree, sans-serif">5</text>')
+        s.append(f'<circle cx="500" cy="150" r="13" fill="{AZUL}" stroke="#fff" stroke-width="2.5"/>'
+                 f'<text x="500" y="154.5" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" font-family="Figtree, sans-serif">5</text>')
     s.append('</svg>')
     leg = ""
     if setas:
