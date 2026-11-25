@@ -14,6 +14,29 @@ No git, cada versão também tem uma tag (`git checkout <tag> -- .` restaura os 
 | 2026-11-24 | v1 | `2026-11-24_v1_pre-reuniao-bianca.html` | `v1-pre-reuniao` | Versão entregue antes da 1ª rodada de feedback da cliente (reunião de 19/11). 15 capítulos, paleta creme + verde-floresta + lima, atlas de produtos, PDF em formato livro. |
 | 2026-11-24 | v2 | `2026-11-24_v2/` | `v2` | Reestruturação pedida na reunião de 19/11 (detalhes abaixo). Imagens 3D feitas no Blender. |
 | 2026-11-24 | v3 | `2026-11-24_v3/` | `v3` | Visual refeito no estilo do guia de referência mostrado na reunião (detalhes abaixo). |
+| 2026-11-24 | v4 | `2026-11-24_v4/` | `v4` | Guia em formato de slides, conteúdo reescrito na ordem do guia de referência, marca oficial Ourofino (detalhes abaixo). |
+
+## v4 · o que mudou em relação à v3
+
+Pedido do Caique em 24/11, depois de ver a v3: formato de slide (não landing page), ícones animados, capa diferente por capítulo, texto mais explicativo e mais profundo, ilustração sem fundo, nada de layout com cara de IA, seguir o guia de marca da Ourofino, seguir a ordem do PDF de referência e apresentar a Serafina.
+
+- **Formato:** deck de 348 slides. No computador, palco 16:9 com setas, teclado e índice; no celular, uma tela vertical por slide; PDF com um slide por página.
+- **Ordem:** a do guia de referência (Elanco) mostrado na reunião, com os ajustes da cliente: Serafina, objetivo, contato no PDV, fundamentos, gôndola, materiais, cross, ponto extra, relacionamento, postura, loja e quem decide, CBV, heróis por categoria, prateleira ideal e considerações finais. Depois vêm o checklist, o glossário e o teste final.
+- **Conteúdo:** reescrito do zero em slides. Cada conceito traz o que é, o mecanismo, como fazer e um exemplo de loja pet. Os dados têm fonte verificada e as notas a validar (64) ficam no modo Revisão.
+- **Marca:** segue o Guia de aplicação de marca Ourofino Saúde Animal v2.0, de 2026.
+  - Cores sólidas oficiais.
+  - Títulos em Young Serif, no lugar da Roca One, que é paga; texto em Poppins, a mesma que o site da Ourofino usa no lugar da Gilroy.
+  - Logos oficiais em vetor e a faixa de animais geométricos da contracapa oficial.
+  - A forma de "folha" com um canto reto em botões, balões e máscaras.
+- **Imagens:**
+  - pack de 41 fotos reais de shooting de cães e gatos (Unsplash/Pexels, licença comercial gratuita; créditos em `Downloads/ourofino-fotos/CREDITOS.csv`), recortadas sem fundo;
+  - a Serafina ilustrada em 8 poses, sem fundo;
+  - 3 cenas ilustradas recortadas;
+  - as fotos de loja do ChatGPT com embalagens reais.
+- **Capas:** uma diferente por capítulo, em 8 composições (foto lateral, pet recortado sobre o número, gato espiando, foto na forma de folha, dupla, faixa geométrica, tipográfica, Serafina).
+- **Ícones:** 45 ícones próprios animados, que se desenham quando o slide entra e têm um movimento contínuo sutil.
+- **Anti-clichê:** lista de padrões de layout com cara de IA em `tools/deck/NAO-FAZER.md`.
+- **Gerador:** `python3 tools/deck/build_deck.py`, com texto em `conteudo-v4/`.
 
 ## v3 · o que mudou em relação à v2
 

@@ -149,7 +149,12 @@ def planta(setas=False):
         dash = ' stroke-dasharray="5 4"' if k in ("entrada", "vitrine") else ""
         s.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="6" fill="{cores[k]}" stroke="{NAVY}" stroke-width="1.4"{dash}/>')
         s.append(f'<text x="{x + w / 2}" y="{y + h / 2 + 5}" font-size="15" font-weight="600" text-anchor="middle" fill="{NAVY}" font-family="Figtree, sans-serif">{nome}</text>')
-    s.append(f'<text x="625" y="292" font-size="11" text-anchor="middle" fill="{VERDE}" font-weight="700" font-family="IBM Plex Mono, monospace">ATRÁS DO BALCÃO</text>')
+    s.append(f'<text x="625" y="292" font-size="11" text-anchor="middle" fill="{VERDE}" font-weight="700" font-family="Poppins, sans-serif">atrás do balcão</text>')
+    if not setas:
+        # caminho do tutor: entra, passa pela ração e pelos corredores e chega ao balcão
+        s.append(f'<defs><marker id="mt" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto"><path d="M0 0 L14 7 L0 14 z" fill="{NAVY}"/></marker></defs>')
+        s.append(f'<path d="{rota([(100, 462), (100, 330), (172, 330), (172, 225), (318, 225), (318, 330), (470, 330), (470, 415), (512, 415)], 18)}" fill="none" stroke="{NAVY}" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round" marker-end="url(#mt)"/>')
+        s.append(f'<text x="182" y="352" font-size="14" font-weight="700" fill="{NAVY}" font-family="Poppins, sans-serif">caminho do tutor</text>')
     if setas:
         s.append(f'<defs><marker id="sm" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 z" fill="{VERDE}"/></marker>'
                  f'<marker id="ss" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 z" fill="{AZUL}"/></marker></defs>')

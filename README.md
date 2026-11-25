@@ -6,7 +6,7 @@ Guia interativo de execução no ponto de venda para promotores, vendedores do d
 
 Abre no celular e no computador. O botão **PDF** gera a versão impressa em A4 paisagem. O botão **Revisão** mostra as notas que aguardam validação da Ourofino.
 
-## O que tem dentro (versão 3)
+## O que tem dentro (versão 4, em slides)
 
 - 13 capítulos em seis partes: entender o trade e a loja, a visita, a gôndola, materiais e cross, produtos e postura.
 - Glossário A a Z com busca, checklist da visita que fica salvo no celular e teste final com dez situações de loja.
@@ -16,15 +16,15 @@ Abre no celular e no computador. O botão **PDF** gera a versão impressa em A4 
 
 ## Como editar
 
-O texto fica em `conteudo/capNN.md` (formato em `conteudo/_ESPEC.md`). Depois de editar:
+O texto fica em `conteudo-v4/capNN.md`, um bloco `===` por slide (formato em `conteudo-v4/_ESPEC.md`). Depois de editar:
 
 ```bash
-python3 tools/build.py
+python3 tools/deck/build_deck.py
 ```
 
 O comando gera o `index.html`. Não edite o `index.html` à mão.
 
-- Estilo: `tools/guia.css` · interações: `tools/guia.js` · diagramas: `tools/diagramas.py`
+- Motor de slides: `tools/deck/` (estrutura.css, visual.css, deck.js, icones.py) · diagramas: `tools/diagramas.py`
 - Cenas 3D: `tools/render/loja2.py` (Blender 5) → `python3 tools/pos.py --todos` gera as imagens em `assets/img/`
 
 ## Versões anteriores

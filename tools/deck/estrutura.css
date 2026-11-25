@@ -1,0 +1,63 @@
+/* estrutura do deck (independente da marca): palco 16:9 no computador, telas verticais no celular */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer}
+
+/* barra de navegação fixa */
+.nav{position:fixed;left:0;right:0;bottom:0;height:64px;z-index:30;display:flex;align-items:center;gap:10px;padding:0 18px;background:var(--nav-bg);color:var(--nav-tx)}
+.nav-logo{height:22px;width:auto}
+.nav-cap{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px;opacity:.85}
+.nav-cont{font-variant-numeric:tabular-nums;font-size:14px;opacity:.75;min-width:68px;text-align:right}
+.nav button{flex:none;white-space:nowrap;border:0;background:none;height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:22px;padding:0 12px;color:inherit}
+.nav button:hover{background:rgba(255,255,255,.1)}
+.nav .seta-bt{background:rgba(255,255,255,.12)}
+.nav [data-rev][aria-pressed="true"]{background:var(--amarelo);color:var(--navy)}
+.nav .nav-r{display:none}
+@media (min-width:900px){.nav .nav-r{display:inline}}
+.prog{position:fixed;left:0;right:0;bottom:64px;height:3px;z-index:31;background:rgba(7,32,71,.12)}
+.prog i{display:block;height:100%;width:0;background:var(--verde);transition:width .35s}
+
+/* ---------- modo paisagem: palco escalado, um slide por vez */
+.paisagem body{overflow:hidden;background:var(--fundo-palco)}
+.paisagem .rolo{position:fixed;inset:0 0 64px 0;overflow:hidden}
+.paisagem .palco{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform:translate(-50%,-50%) scale(var(--esc,1));transform-origin:center}
+.paisagem .slide{position:absolute;inset:0;width:1600px;height:900px;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility 0s linear .45s,transform .45s cubic-bezier(.2,.7,.2,1);transform:translateX(28px)}
+.paisagem .slide.antes{transform:translateX(-28px)}
+.paisagem .slide.ativo{opacity:1;visibility:visible;transform:none;transition:opacity .45s ease,visibility 0s,transform .55s cubic-bezier(.2,.7,.2,1)}
+
+/* ---------- modo retrato: cada slide é uma tela; rolagem com encaixe */
+.retrato body{background:var(--fundo-palco)}
+.retrato .rolo{height:100svh;overflow-y:auto;scroll-snap-type:y mandatory;padding-bottom:64px}
+.retrato .palco{width:100%}
+.retrato .slide{position:relative;min-height:calc(100svh - 64px);scroll-snap-align:start;overflow:hidden}
+
+/* animação de entrada dos elementos marcados */
+.js .slide [data-e]{opacity:0;transform:translateY(14px)}
+.js .slide.viu [data-e]{animation:entra .7s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--e,0) * .09s + .12s)}
+@keyframes entra{to{opacity:1;transform:none}}
+@media screen{.retrato .js .slide [data-e],.js.retrato .slide [data-e]{opacity:1;transform:none;animation:none}}
+@media (prefers-reduced-motion:reduce){.js .slide [data-e]{opacity:1;transform:none;animation:none!important}.paisagem .slide{transition:none}}
+
+/* índice */
+.indice{position:fixed;inset:0;z-index:60;background:rgba(7,32,71,.55)}
+.indice-painel{position:absolute;inset:0 auto 0 0;width:min(560px,94vw);background:var(--papel);overflow-y:auto;padding:28px 30px 40px;animation:entraEsq .3s cubic-bezier(.2,.7,.2,1)}
+@keyframes entraEsq{from{transform:translateX(-24px);opacity:0}}
+
+/* impressão: um slide por página, 16:9 */
+@page{size:1600px 900px;margin:0}
+@media print{
+  .nav,.prog,.indice{display:none!important}
+  html,body{height:auto;overflow:visible!important;background:#fff}
+  .rolo{position:static!important;display:block!important;height:auto!important;overflow:visible!important;padding:0!important}
+  .palco{position:static!important;left:auto!important;top:auto!important;transform:none!important;width:1600px!important;height:auto!important}
+  .slide{position:relative!important;inset:auto!important;width:1600px!important;height:900px!important;min-height:0!important;opacity:1!important;visibility:visible!important;transform:none!important;break-after:page;page-break-after:always}
+  .js .slide [data-e]{opacity:1!important;transform:none!important;animation:none!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+@media (max-width:760px){
+  .nav{gap:4px;padding:0 8px}
+  .nav-logo,.nav-cap,.seta-bt{display:none!important}
+  .nav-cont{flex:1;text-align:center}
+}
