@@ -41,7 +41,7 @@ Pedidos do Caique em 25/11: deixar os outros slides mais lúdicos, como a chegad
   - Pode e não pode dizer: balões de fala certos e errados, com o gato perguntando "posso falar isso?".
   - Cinco regras da prateleira ideal: farmácia desenhada com as cinco regras marcadas.
 - **Aprovação por etapas:** cronograma em `cronograma/` com as 5 etapas, a reta final, o que precisamos da Ourofino e o retorno de cada etapa.
-- **Apresentação da etapa 1** em `apresentacao/etapa-1/`: só as telas da etapa, em formato de apresentação (tela cheia, uma por vez), com abertura, "onde estamos", as 10 páginas, os 5 pontos para validar e os próximos passos. O link fica no cartão da etapa no cronograma; as próximas etapas ganham a apresentação delas no dia em que forem mostradas (`apresentacao=True` em ETAPAS no `tools/v6/etapas.py`). O cronograma não mostra mais as telas de cada etapa.
+- **Apresentação da etapa 1** em `apresentacao/etapa-1/`: só as 10 páginas do guia que entram na etapa, sem nenhuma tela a mais, em formato de apresentação (tela cheia, uma por vez). Datas, pontos para validar e próximos passos ficam só no cronograma. O link fica no cartão da etapa no cronograma; as próximas etapas ganham a apresentação delas no dia em que forem mostradas (`apresentacao=True` em ETAPAS no `tools/v6/etapas.py`). O cronograma não mostra mais as telas de cada etapa.
 
 ## v8 · o que mudou em relação à v7
 
